@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>gmall-parent</artifactId>
+        <groupId>com.zn</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>module-management-feign</artifactId>
+    <packaging>pom</packaging>
+    <description>管理通过Feign暴露服务的模块</description>
+    <modules>
+        <module>module-feign-api-activity</module>
+        <module>module-feign-api-cart</module>
+        <module>module-feign-api-item</module>
+        <module>module-feign-api-list</module>
+        <module>module-feign-api-order</module>
+        <module>module-feign-api-payment</module>
+        <module>module-feign-api-product</module>
+        <module>module-feign-api-user</module>
+    </modules>
+
+
+</project>
