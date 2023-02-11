@@ -1,7 +1,8 @@
 package com.zn.gmall.product.controller;
 
-import com.zn.gmall.model.product.BaseCategoryView;
-import com.zn.gmall.model.product.SkuInfo;
+import com.alibaba.fastjson.JSONObject;
+import com.zn.gmall.common.result.Result;
+import com.zn.gmall.model.product.*;
 import com.zn.gmall.product.service.api.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/product")
@@ -17,6 +20,82 @@ public class ProductApiController {
 
     @Resource
     private ManageService manageService;
+
+    /**
+     * 通过品牌Id 集合来查询数据
+     *
+     * @param tmId
+     * @return BaseTrademark
+     */
+    @GetMapping("inner/getTrademark/{tmId}")
+    public BaseTrademark getTrademark(@PathVariable("tmId") Long tmId) {
+        return manageService.getTrademarkByTmId(tmId);
+    }
+
+
+    @GetMapping("/inner/getAttrList/{skuId}")
+    public Result<List<BaseAttrInfo>> getBaseAttrInfoBySkuId(
+            @PathVariable("skuId") Long skuId) {
+
+        List<BaseAttrInfo> baseAttrInfoList =
+                manageService.getAttrInfoListBySkuId(skuId);
+
+        return Result.ok(baseAttrInfoList);
+    }
+
+    /**
+     * 获取全部分类信息
+     */
+    @GetMapping("getBaseCategoryList")
+    public Result getBaseCategoryList() {
+        List<JSONObject> list = manageService.getBaseCategoryList();
+        return Result.ok(list);
+    }
+
+
+    /**
+     * 通过skuId 集合来查询数据
+     *
+     * @param skuId
+     * @return
+     */
+    @GetMapping("inner/getAttrList/{skuId}")
+    public List<BaseAttrInfo> getAttrList(@PathVariable("skuId") Long skuId) {
+        return manageService.getAttrList(skuId);
+    }
+
+    /**
+     * 根据spuId 获取海报数据
+     *
+     * @param spuId
+     * @return List<SpuPoster>
+     */
+    @GetMapping("inner/findSpuPosterBySpuId/{spuId}")
+    public List<SpuPoster> findSpuPosterBySpuId(@PathVariable Long spuId) {
+        return manageService.findSpuPosterBySpuId(spuId);
+    }
+
+    /**
+     * 根据spuId 查询map 集合属性
+     *
+     * @param spuId
+     */
+    @GetMapping("inner/getSkuValueIdsMap/{spuId}")
+    public Map getSkuValueIdsMap(@PathVariable("spuId") Long spuId) {
+        return manageService.getSkuValueIdsMap(spuId);
+    }
+
+    /**
+     * 根据spuId，skuId 查询销售属性集合
+     *
+     * @param skuId
+     * @param spuId
+     * @return List<SpuSaleAttr>
+     */
+    @GetMapping("inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
+    public List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId) {
+        return manageService.getSpuSaleAttrListCheckBySku(skuId, spuId);
+    }
 
     /**
      * 根据skuId获取sku信息

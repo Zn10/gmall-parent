@@ -25,14 +25,14 @@ public class GmallCacheAspect {
     private RedissonClient redissonClient;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     //  定义一个环绕通知！
     @SneakyThrows
     @Around("@annotation(com.zn.gmall.common.cache.GmallCache)")
     public Object gmallCacheAspectMethod(ProceedingJoinPoint point) {
         //  定义一个对象
-        Object obj = new Object();
+        Object obj;
         /*
          业务逻辑！
          1. 必须先知道这个注解在哪些方法 || 必须要获取到方法上的注解
@@ -108,7 +108,7 @@ public class GmallCacheAspect {
     private Object getRedisData(String key, MethodSignature methodSignature) {
         //  在向缓存存储数据的时候，将数据变为Json 字符串了！
         //  通过这个key 获取到缓存的value
-        String strJson = (String) this.redisTemplate.opsForValue().get(key);
+        String strJson = this.redisTemplate.opsForValue().get(key);
         //  判断
         if (!StringUtils.isEmpty(strJson)) {
             //  将字符串转换为对应的数据类型！

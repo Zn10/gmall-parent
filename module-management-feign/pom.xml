@@ -23,5 +23,33 @@
         <module>module-feign-api-user</module>
     </modules>
 
+    <dependencies>
+
+        <!-- 数据实体类模块 -->
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-common-entity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-common-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 服务调用feign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
 
 </project>

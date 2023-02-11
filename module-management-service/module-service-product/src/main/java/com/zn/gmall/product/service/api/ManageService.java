@@ -1,14 +1,69 @@
 package com.zn.gmall.product.service.api;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zn.gmall.model.product.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface ManageService {
+
+    /**
+     * 通过品牌Id 来查询数据
+     *
+     * @param tmId
+     * @return BaseTrademark
+     */
+    BaseTrademark getTrademarkByTmId(Long tmId);
+
+
+    /**
+     * 获取全部分类信息
+     *
+     * @return List<JSONObject>
+     */
+    List<JSONObject> getBaseCategoryList();
+
+
+    /**
+     * 通过skuId 集合来查询数据
+     *
+     * @param skuId
+     * @return List<BaseAttrInfo>
+     */
+    List<BaseAttrInfo> getAttrList(Long skuId);
+
+
+    /**
+     * 根据spuid获取商品海报
+     *
+     * @param spuId
+     * @return List<SpuPoster>
+     */
+    List<SpuPoster> findSpuPosterBySpuId(Long spuId);
+
+
+    /**
+     * 根据spuId 查询map 集合属性
+     *
+     * @param spuId
+     */
+    Map getSkuValueIdsMap(Long spuId);
+
+
+    /**
+     * 根据spuId，skuId 查询销售属性集合
+     *
+     * @param skuId
+     * @param spuId
+     * @return List<SpuSaleAttr>
+     */
+    List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(Long skuId, Long spuId);
+
 
     /**
      * 获取sku价格
@@ -168,5 +223,13 @@ public interface ManageService {
      * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> getAttrInfoList(Long category1Id, Long category2Id, Long category3Id);
+
+    /**
+     * 根据 skuId 获取
+     *
+     * @param skuId
+     * @return
+     */
+    List<BaseAttrInfo> getAttrInfoListBySkuId(Long skuId);
 }
 
