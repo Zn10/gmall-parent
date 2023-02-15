@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * CommentInfo
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "商品评论")
 @Document("商品评论")

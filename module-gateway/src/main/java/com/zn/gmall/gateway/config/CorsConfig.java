@@ -13,10 +13,14 @@ public class CorsConfig {
 
         // cors跨域配置对象
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*"); //设置允许访问的网络
-        configuration.setAllowCredentials(true); // 设置是否从服务器获取cookie
-        configuration.addAllowedMethod("*"); // 设置请求方法 * 表示任意
-        configuration.addAllowedHeader("*"); // 所有请求头信息 * 表示任意
+        //设置允许访问的网络
+        configuration.addAllowedOrigin("*");
+        // 设置是否从服务器获取cookie
+        configuration.setAllowCredentials(true);
+        // 设置请求方法 * 表示任意
+        configuration.addAllowedMethod("*");
+        // 所有请求头信息 * 表示任意
+        configuration.addAllowedHeader("*");
 
         // 配置源对象
         UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
