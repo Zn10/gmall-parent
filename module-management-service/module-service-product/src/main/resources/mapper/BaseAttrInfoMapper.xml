@@ -62,17 +62,4 @@
     WHERE
     sav.sku_id = #{skuId}
     </select>
-    <select id="selectAttrInfoListAndValueBySkuId" resultMap="baseAttrInfoMap">
-    select bai.id,
-           bai.attr_name,
-           bai.category_id,
-           bai.category_level,
-           bav.id bav_id,
-           bav.value_name,
-           bav.attr_id
-    from gmall_product.base_attr_info bai
-        inner join gmall_product.base_attr_value bav on bai.id=bav.attr_id
-    inner join gmall_product.sku_attr_value skv on skv.value_id=bav.id
-    where skv.sku_id=#{skuId}
-</select>
 </mapper>

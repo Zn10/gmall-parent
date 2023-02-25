@@ -223,13 +223,5 @@ public interface ManageService {
      * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> getAttrInfoList(Long category1Id, Long category2Id, Long category3Id);
-
-    /**
-     * 根据 skuId 获取
-     *
-     * @param skuId
-     * @return
-     */
-    List<BaseAttrInfo> getAttrInfoListBySkuId(Long skuId);
 }
 

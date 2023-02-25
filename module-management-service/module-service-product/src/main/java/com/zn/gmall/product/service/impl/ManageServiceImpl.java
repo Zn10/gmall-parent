@@ -11,7 +11,6 @@ import com.zn.gmall.product.mapper.*;
 import com.zn.gmall.product.service.api.ManageService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -557,12 +556,6 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public List<BaseAttrInfo> getAttrInfoList(Long category1Id, Long category2Id, Long category3Id) {
         return baseAttrInfoMapper.selectBaseAttrInfoList(category1Id, category2Id, category3Id);
-    }
-
-    @Override
-    public List<BaseAttrInfo> getAttrInfoListBySkuId(Long skuId) {
-        return baseAttrInfoMapper
-                .selectAttrInfoListAndValueBySkuId(skuId);
     }
 }
 
