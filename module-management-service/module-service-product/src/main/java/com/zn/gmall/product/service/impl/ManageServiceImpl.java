@@ -25,6 +25,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+/**
+ * 商品汇总实现
+ */
 @Service("ManageService")
 public class ManageServiceImpl implements ManageService {
     @Resource
@@ -410,6 +413,11 @@ public class ManageServiceImpl implements ManageService {
         return spuImageMapper.selectList(queryWrapper);
     }
 
+    /**
+     * 保存商品数据
+     *
+     * @param spuInfo 商品SPU实例
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveSpuInfo(SpuInfo spuInfo) {
@@ -469,11 +477,23 @@ public class ManageServiceImpl implements ManageService {
         }
     }
 
+    /**
+     * 查询所有的销售属性数据
+     *
+     * @return List<BaseSaleAttr>
+     */
     @Override
     public List<BaseSaleAttr> getBaseSaleAttrList() {
         return baseSaleAttrMapper.selectList(null);
     }
 
+    /**
+     * spu分页查询
+     *
+     * @param pageParam 页码参数
+     * @param spuInfo   商品列表参数
+     * @return IPage<SpuInfo>
+     */
     @Override
     public IPage<SpuInfo> getSpuInfoPage(Page<SpuInfo> pageParam, SpuInfo spuInfo) {
         QueryWrapper<SpuInfo> queryWrapper = new QueryWrapper<>();
@@ -482,6 +502,12 @@ public class ManageServiceImpl implements ManageService {
         return spuInfoMapper.selectPage(pageParam, queryWrapper);
     }
 
+    /**
+     * 根据attrId 查询平台属性对象
+     *
+     * @param attrId 属性id
+     * @return BaseAttrInfo
+     */
     @Override
     public BaseAttrInfo getAttrInfo(Long attrId) {
         BaseAttrInfo baseAttrInfo = baseAttrInfoMapper.selectById(attrId);
@@ -493,7 +519,7 @@ public class ManageServiceImpl implements ManageService {
     /**
      * 根据属性id获取属性值
      *
-     * @param attrId
+     * @param attrId 属性id
      * @return List<BaseAttrValue>
      */
     private List<BaseAttrValue> getAttrValueList(Long attrId) {
@@ -502,6 +528,11 @@ public class ManageServiceImpl implements ManageService {
         return baseAttrValueMapper.selectList(queryWrapper);
     }
 
+    /**
+     * 保存平台属性方法
+     *
+     * @param baseAttrInfo 平台属性实例
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveAttrInfo(BaseAttrInfo baseAttrInfo) {
@@ -533,11 +564,22 @@ public class ManageServiceImpl implements ManageService {
         }
     }
 
+    /**
+     * 查询所有的一级分类信息
+     *
+     * @return List<BaseCategory1>
+     */
     @Override
     public List<BaseCategory1> getCategory1() {
         return baseCategory1Mapper.selectList(null);
     }
 
+    /**
+     * 根据一级分类Id 查询二级分类数据
+     *
+     * @param category1Id 一级分类Id
+     * @return List<BaseCategory2>
+     */
     @Override
     public List<BaseCategory2> getCategory2(Long category1Id) {
         QueryWrapper<BaseCategory2> queryWrapper = new QueryWrapper<>();
@@ -545,6 +587,12 @@ public class ManageServiceImpl implements ManageService {
         return baseCategory2Mapper.selectList(queryWrapper);
     }
 
+    /**
+     * 根据二级分类Id 查询三级分类数据
+     *
+     * @param category2Id 二级分类Id
+     * @return List<BaseCategory3>
+     */
     @Override
     public List<BaseCategory3> getCategory3(Long category2Id) {
         // select * from baseCategory3 where Category2Id = ?
@@ -553,6 +601,21 @@ public class ManageServiceImpl implements ManageService {
         return baseCategory3Mapper.selectList(queryWrapper);
     }
 
+    /**
+     * 根据分类Id 获取平台属性数据
+     * 接口说明：
+     * 1，平台属性可以挂在一级分类、二级分类和三级分类
+     * 2，查询一级分类下面的平台属性，传：category1Id，0，0；   取出该分类的平台属性
+     * 3，查询二级分类下面的平台属性，传：category1Id，category2Id，0；
+     * 取出对应一级分类下面的平台属性与二级分类对应的平台属性
+     * 4，查询三级分类下面的平台属性，传：category1Id，category2Id，category3Id；
+     * 取出对应一级分类、二级分类与三级分类对应的平台属性
+     *
+     * @param category1Id 一级分类Id
+     * @param category2Id 二级分类Id
+     * @param category3Id 三级分类Id
+     * @return List<BaseAttrInfo>
+     */
     @Override
     public List<BaseAttrInfo> getAttrInfoList(Long category1Id, Long category2Id, Long category3Id) {
         return baseAttrInfoMapper.selectBaseAttrInfoList(category1Id, category2Id, category3Id);

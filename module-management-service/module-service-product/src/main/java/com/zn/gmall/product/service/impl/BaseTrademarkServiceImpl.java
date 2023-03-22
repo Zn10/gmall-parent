@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zn.gmall.model.product.BaseTrademark;
 import com.zn.gmall.product.mapper.BaseTrademarkMapper;
 import com.zn.gmall.product.service.api.BaseTrademarkService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +17,12 @@ public class BaseTrademarkServiceImpl extends ServiceImpl<BaseTrademarkMapper, B
     @Resource
     private BaseTrademarkMapper baseTrademarkMapper;
 
+    /**
+     * Banner分页列表
+     *
+     * @param pageParam 页码参数
+     * @return IPage<BaseTrademark>
+     */
     @Override
     public IPage<BaseTrademark> getPage(Page<BaseTrademark> pageParam) {
         QueryWrapper<BaseTrademark> queryWrapper = new QueryWrapper<>();

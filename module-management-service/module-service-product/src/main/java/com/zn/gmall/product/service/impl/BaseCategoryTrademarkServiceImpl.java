@@ -8,7 +8,6 @@ import com.zn.gmall.model.product.CategoryTrademarkVo;
 import com.zn.gmall.product.mapper.BaseCategoryTrademarkMapper;
 import com.zn.gmall.product.mapper.BaseTrademarkMapper;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -16,6 +15,9 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 分类品牌实现
+ */
 @Service
 public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTrademarkMapper, BaseCategoryTrademark> implements BaseCategoryTrademarkService {
 
@@ -25,6 +27,12 @@ public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTr
     @Resource
     private BaseCategoryTrademarkMapper baseCategoryTrademarkMapper;
 
+    /**
+     * 根据三级分类获取品牌
+     *
+     * @param category3Id 三级分类id
+     * @return List<BaseTrademark>
+     */
     @Override
     public List<BaseTrademark> findTrademarkList(Long category3Id) {
         //  根据分类Id 获取到品牌Id 集合数据
@@ -44,6 +52,12 @@ public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTr
         return null;
     }
 
+    /**
+     * 删除关联
+     *
+     * @param category3Id 三级分类id
+     * @param trademarkId 关联id
+     */
     @Override
     public void remove(Long category3Id, Long trademarkId) {
         //  逻辑删除： 本质更新操作 is_deleted
@@ -55,6 +69,12 @@ public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTr
 
     }
 
+    /**
+     * 获取当前未被三级分类关联的所有品牌
+     *
+     * @param category3Id 三级分类id
+     * @return List<BaseTrademark>
+     */
     @Override
     public List<BaseTrademark> findCurrentTrademarkList(Long category3Id) {
         //  哪些是关联的品牌Id
@@ -77,6 +97,11 @@ public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTr
         return baseTrademarkMapper.selectList(null);
     }
 
+    /**
+     * 保存分类与品牌关联
+     *
+     * @param categoryTrademarkVo 封装分类与品牌VO
+     */
     @Override
     public void save(CategoryTrademarkVo categoryTrademarkVo) {
         /*

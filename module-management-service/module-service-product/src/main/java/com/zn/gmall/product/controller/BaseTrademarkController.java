@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+/**
+ * 品牌管理控制
+ */
 @Api("品牌管理接口")
 @RestController
 @RequestMapping("admin/product/baseTrademark")
@@ -19,6 +22,13 @@ public class BaseTrademarkController {
     @Resource
     private BaseTrademarkService baseTrademarkService;
 
+    /**
+     * Banner分页列表
+     *
+     * @param page  页码参数
+     * @param limit 页码参数
+     * @return IPage<BaseTrademark>
+     */
     @ApiOperation(value = "分页列表")
     @GetMapping("{page}/{limit}")
     public Result index(@PathVariable Long page,
@@ -29,6 +39,12 @@ public class BaseTrademarkController {
         return Result.ok(pageModel);
     }
 
+    /**
+     * 根据品牌id查询该品牌
+     *
+     * @param id 品牌id
+     * @return BaseTrademark
+     */
     @ApiOperation(value = "获取BaseTrademark")
     @GetMapping("get/{id}")
     public Result get(@PathVariable String id) {
@@ -36,6 +52,11 @@ public class BaseTrademarkController {
         return Result.ok(baseTrademark);
     }
 
+    /**
+     * 添加品牌
+     *
+     * @param banner 品牌实例
+     */
     @ApiOperation(value = "新增BaseTrademark")
     @PostMapping("save")
     public Result save(@RequestBody BaseTrademark banner) {
@@ -43,6 +64,11 @@ public class BaseTrademarkController {
         return Result.ok();
     }
 
+    /**
+     * 更新品牌
+     *
+     * @param banner 品牌实例
+     */
     @ApiOperation(value = "修改BaseTrademark")
     @PutMapping("update")
     public Result updateById(@RequestBody BaseTrademark banner) {
@@ -50,6 +76,11 @@ public class BaseTrademarkController {
         return Result.ok();
     }
 
+    /**
+     * 删除品牌
+     *
+     * @param id 品牌id
+     */
     @ApiOperation(value = "删除BaseTrademark")
     @DeleteMapping("remove/{id}")
     public Result remove(@PathVariable Long id) {

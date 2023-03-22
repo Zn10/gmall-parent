@@ -10,14 +10,14 @@
     -->
     <resultMap id="baseAttrInfoMap" type="com.zn.gmall.model.product.BaseAttrInfo" autoMapping="true">
         <!--id:表示主键 property：表示实体类的属性名 column：表示通过sql 执行以后查询出来的字段名-->
-        <id property="id" column="id"></id>
+        <id property="id" column="id"/>
         <!--result : 表示映射普通字段-->
         <!--<result property="" column=""></result>-->
         <!--mybatis 如何配置一对多-->
         <!--ofType : 返回的数据类型-->
         <collection property="attrValueList" ofType="com.zn.gmall.model.product.BaseAttrValue" autoMapping="true">
             <!--如果有字段重复则起别名-->
-            <id property="id" column="attr_value_id"></id>
+            <id property="id" column="attr_value_id"/>
         </collection>
     </resultMap>
     <!--id:表示方法名-->

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 商品列表控制
+ */
 @Api("spu商品接口")
 @RestController // @ResponseBody + @Controller
 @RequestMapping("admin/product")
@@ -21,9 +24,9 @@ public class SpuManageController {
     private ManageService manageService;
 
     /**
-     * 保存spu
+     * 保存商品数据
      *
-     * @param spuInfo
+     * @param spuInfo 商品SPU实例
      */
     @PostMapping("saveSpuInfo")
     public Result saveSpuInfo(@RequestBody SpuInfo spuInfo) {
@@ -32,7 +35,11 @@ public class SpuManageController {
         return Result.ok();
     }
 
-    // 销售属性http://api.gmall.com/admin/product/baseSaleAttrList
+    /**
+     * 查询所有的销售属性数据
+     *
+     * @return List<BaseSaleAttr>
+     */
     @GetMapping("baseSaleAttrList")
     public Result baseSaleAttrList() {
         // 查询所有的销售属性集合
@@ -41,11 +48,14 @@ public class SpuManageController {
         return Result.ok(baseSaleAttrList);
     }
 
-    // 根据查询条件封装控制器
-    // springMVC 的时候，有个叫对象属性传值 如果页面提交过来的参数与实体类的参数一致，
-    // 则可以使用实体类来接收数据
-    // http://api.gmall.com/admin/product/1/10?category3Id=61
-    // @RequestBody 作用 将前台传递过来的json{"category3Id":"61"}  字符串变为java 对象。
+    /**
+     * spu分页查询
+     *
+     * @param page    页码参数
+     * @param size    页码参数
+     * @param spuInfo 商品列表参数
+     * @return IPage<SpuInfo>
+     */
     @GetMapping("{page}/{size}")
     public Result getSpuInfoPage(@PathVariable Long page,
                                  @PathVariable Long size,

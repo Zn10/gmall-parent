@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 针对平台属性控制
+ */
 @Api(tags = "商品基础属性接口")
 @RestController
 @RequestMapping("admin/product")
@@ -58,6 +61,12 @@ public class BaseManageController {
         return Result.ok();
     }
 
+    /**
+     * 根据attrId 查询平台属性对象
+     *
+     * @param attrId 属性id
+     * @return BaseAttrInfo
+     */
     @ApiOperation("根据attrId 查询平台属性对象")
     @GetMapping("getAttrValueList/{attrId}")
     public Result<List<BaseAttrValue>> getAttrValueList(@PathVariable("attrId") Long attrId) {
@@ -69,8 +78,7 @@ public class BaseManageController {
     /**
      * 保存平台属性方法
      *
-     * @param baseAttrInfo
-     * @return
+     * @param baseAttrInfo 平台属性实例
      */
     @ApiOperation("保存平台属性")
     @PostMapping("saveAttrInfo")
@@ -96,7 +104,7 @@ public class BaseManageController {
     /**
      * 根据一级分类Id 查询二级分类数据
      *
-     * @param category1Id
+     * @param category1Id 一级分类Id
      * @return List<BaseCategory2>
      */
     @ApiOperation("根据一级分类Id 查询二级分类数据")
@@ -109,7 +117,7 @@ public class BaseManageController {
     /**
      * 根据二级分类Id 查询三级分类数据
      *
-     * @param category2Id
+     * @param category2Id 二级分类Id
      * @return List<BaseCategory3>
      */
     @ApiOperation("根据二级分类Id 查询三级分类数据")
@@ -122,9 +130,9 @@ public class BaseManageController {
     /**
      * 根据分类Id 获取平台属性数据
      *
-     * @param category1Id
-     * @param category2Id
-     * @param category3Id
+     * @param category1Id 一级分类Id
+     * @param category2Id 二级分类Id
+     * @param category3Id 三级分类Id
      * @return List<BaseAttrInfo>
      */
     @ApiOperation("根据分类Id 获取平台属性数据")

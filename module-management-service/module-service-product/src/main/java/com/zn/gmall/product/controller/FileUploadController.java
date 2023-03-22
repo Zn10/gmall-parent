@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
+/**
+ * SPU图片上传管理控制
+ */
 @RestController
 @RequestMapping("admin/product")
 public class FileUploadController {
@@ -34,7 +37,7 @@ public class FileUploadController {
     /**
      * 文件上传控制器
      *
-     * @param file
+     * @param file 文件信息
      * @return
      * @throws Exception
      */
@@ -67,7 +70,7 @@ public class FileUploadController {
         //  minioClient.putObject("asiatrip","asiaphotos.zip", "/home/user/Photos/asiaphotos.zip");
         minioClient.putObject(
                 PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(
-                        file.getInputStream(), file.getSize(), -1)
+                                file.getInputStream(), file.getSize(), -1)
                         .contentType(file.getContentType())
                         .build());
         //  System.out.println("/home/user/Photos/asiaphotos.zip is successfully uploaded as asiaphotos.zip to `asiatrip` bucket.");
