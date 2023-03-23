@@ -6,7 +6,7 @@ public interface ItemService {
     /**
      * 获取sku详情信息
      *
-     * @param skuId
+     * @param skuId 商品SKUID
      */
     Map<String, Object> getBySkuId(Long skuId);
 

@@ -1,14 +1,12 @@
 package com.zn.gmall.item.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.zn.gmall.common.result.Result;
 import com.zn.gmall.item.service.api.ItemService;
 import com.zn.gmall.list.client.ListFeignClient;
 import com.zn.gmall.model.product.BaseCategoryView;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.model.product.SpuSaleAttr;
 import com.zn.gmall.product.client.ProductFeignClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,40 +27,41 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     private ThreadPoolExecutor threadPoolExecutor;
 
-    @Autowired
+    @Resource
     private ListFeignClient listFeignClient;
 
+    /**
+     * 获取sku详情信息
+     *
+     * @param skuId 商品SKUID
+     */
     @Override
     public Map<String, Object> getBySkuId(Long skuId) {
 
         CompletableFuture<SkuInfo> futureSkuInfo = CompletableFuture.supplyAsync(() -> {
             // 第一步：根据 skuId 查询 SKU 基本信息和图片集合
-            SkuInfo skuInfo = productFeignClient.getSkuInfo(skuId).getData();
 
-            return skuInfo;
+            return productFeignClient.getSkuInfo(skuId).getData();
         }, threadPoolExecutor);
 
         CompletableFuture<BaseCategoryView> futureCategoryView = futureSkuInfo.thenApply((SkuInfo skuInfo) -> {
             // 第二步：根据 category3Id 查询面包屑功能所需要的分类信息
             Long category3Id = skuInfo.getCategory3Id();
-            BaseCategoryView categoryView = productFeignClient.getCategoryView(category3Id).getData();
 
-            return categoryView;
+            return productFeignClient.getCategoryView(category3Id).getData();
         });
 
         CompletableFuture<List<SpuSaleAttr>> futureSaleAttrList = futureSkuInfo.thenApply((SkuInfo skuInfo) -> {
             // 第四步：根据 skuId 和 spuId 查询 SPU 下的销售属性（经过 SKU 标记的）
             Long spuId = skuInfo.getSpuId();
-            List<SpuSaleAttr> saleAttrList = productFeignClient.getSpuSaleAttrListCheckBySku(skuId, spuId).getData();
 
-            return saleAttrList;
+            return productFeignClient.getSpuSaleAttrListCheckBySku(skuId, spuId).getData();
         });
 
         CompletableFuture<BigDecimal> futurePrice = CompletableFuture.supplyAsync(() -> {
             // 第三步：根据 skuId 查询价格
-            BigDecimal price = productFeignClient.getSkuPrice(skuId).getData();
 
-            return price;
+            return productFeignClient.getSkuPrice(skuId).getData();
         }, threadPoolExecutor);
 
         CompletableFuture<String> futureValueIdsJSON = futureSkuInfo.thenApply((SkuInfo skuInfo) -> {
@@ -70,17 +69,12 @@ public class ItemServiceImpl implements ItemService {
             Map<String, Object> valueIdsMap = productFeignClient.getSkuValueIdsMap(skuInfo.getSpuId()).getData();
 
             // ※由于前端程序的要求，valueIdsMap 必须转换为 JSON 字符串
-            String valuesIdsJSON = JSON.toJSONString(valueIdsMap);
 
-            return valuesIdsJSON;
+            return JSON.toJSONString(valueIdsMap);
         });
 
         // ※附加功能：在异步任务中给 service-list 发送请求执行商品热度值的累加
-        CompletableFuture.runAsync(()->{
-
-            listFeignClient.incrGoodsHotScore(skuId);
-
-        }, threadPoolExecutor);
+        CompletableFuture.runAsync(() -> listFeignClient.incrGoodsHotScore(skuId), threadPoolExecutor);
 
         Map<String, Object> finalDataMap = null;
 

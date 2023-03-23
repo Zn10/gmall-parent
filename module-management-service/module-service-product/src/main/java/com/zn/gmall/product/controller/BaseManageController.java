@@ -26,8 +26,8 @@ public class BaseManageController {
     /**
      * SKU分页列表
      *
-     * @param page
-     * @param limit
+     * @param page  页码页数
+     * @param limit 页码条数
      */
     @GetMapping("/list/{page}/{limit}")
     public Result index(
@@ -42,7 +42,7 @@ public class BaseManageController {
     /**
      * 商品上架
      *
-     * @param skuId
+     * @param skuId 商品SKUID
      */
     @GetMapping("onSale/{skuId}")
     public Result onSale(@PathVariable("skuId") Long skuId) {
@@ -53,7 +53,7 @@ public class BaseManageController {
     /**
      * 商品下架
      *
-     * @param skuId
+     * @param skuId 商品SKUID
      */
     @GetMapping("cancelSale/{skuId}")
     public Result cancelSale(@PathVariable("skuId") Long skuId) {

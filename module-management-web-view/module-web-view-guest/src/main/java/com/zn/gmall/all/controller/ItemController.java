@@ -30,7 +30,7 @@ public class ItemController {
 
         // 整个 Map 数据整体全部存入 Model，Map 的 Key 就是请求域中数据的属性名
         model.addAllAttributes(result.getData());
-        return "item/index1";
+        return "item/index";
     }
 
 }

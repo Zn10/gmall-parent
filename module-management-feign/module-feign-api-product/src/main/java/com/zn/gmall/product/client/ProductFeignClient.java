@@ -32,8 +32,8 @@ public interface ProductFeignClient {
     /**
      * 根据skuId获取sku信息
      *
-     * @param skuId
-     * @return
+     * @param skuId 商品SKUID
+     * @return SkuInfo
      */
     @GetMapping("/api/product/inner/getSkuInfo/{skuId}")
     Result<SkuInfo> getSkuInfo(@PathVariable("skuId") Long skuId);
@@ -42,8 +42,8 @@ public interface ProductFeignClient {
     /**
      * 通过三级分类id查询分类信息
      *
-     * @param category3Id
-     * @return
+     * @param category3Id 三级分类id
+     * @return BaseCategoryView
      */
     @GetMapping("/api/product/inner/getCategoryView/{category3Id}")
     Result<BaseCategoryView> getCategoryView(@PathVariable("category3Id") Long category3Id);
@@ -51,8 +51,8 @@ public interface ProductFeignClient {
     /**
      * 获取sku最新价格
      *
-     * @param skuId
-     * @return
+     * @param skuId 商品SKUID
+     * @return BigDecimal
      */
     @GetMapping("/api/product/inner/getSkuPrice/{skuId}")
     Result<BigDecimal> getSkuPrice(@PathVariable(value = "skuId") Long skuId);
@@ -60,9 +60,9 @@ public interface ProductFeignClient {
     /**
      * 根据spuId，skuId 查询销售属性集合
      *
-     * @param skuId
-     * @param spuId
-     * @return
+     * @param skuId 商品SKUID
+     * @param spuId 商品SPUID
+     * @return List<SpuSaleAttr>
      */
     @GetMapping("/api/product/inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
     Result<List<SpuSaleAttr>> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId);
@@ -70,7 +70,7 @@ public interface ProductFeignClient {
     /**
      * 根据spuId 查询map 集合属性
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      * @return
      */
     @GetMapping("/api/product/inner/getSkuValueIdsMap/{spuId}")

@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * <p>
+ * 商品SKU控制
+ * <p/>
+ */
 @Api(tags = "商品SKU接口")
 @RestController
 @RequestMapping("admin/product")
@@ -22,7 +27,7 @@ public class SkuManageController {
     /**
      * 保存sku
      *
-     * @param skuInfo
+     * @param skuInfo SKU实例
      */
     @PostMapping("saveSkuInfo")
     public Result saveSkuInfo(@RequestBody SkuInfo skuInfo) {
@@ -34,7 +39,7 @@ public class SkuManageController {
     /**
      * 根据spuId 查询销售属性集合
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      * @return List<SpuSaleAttr>
      */
     @GetMapping("spuSaleAttrList/{spuId}")
@@ -46,7 +51,7 @@ public class SkuManageController {
     /**
      * 根据spuId 查询spuImageList
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      * @return List<SpuImage>
      */
     @GetMapping("spuImageList/{spuId}")

@@ -13,7 +13,7 @@ public interface SkuSaleAttrValueMapper extends BaseMapper<SkuSaleAttrValue> {
     /**
      * 根据spuId 查询map 集合数据
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      */
     List<Map> selectSaleAttrValuesBySpu(Long spuId);
 

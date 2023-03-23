@@ -18,7 +18,7 @@ public interface ManageService {
     /**
      * 通过品牌Id 来查询数据
      *
-     * @param tmId
+     * @param tmId 品牌id
      * @return BaseTrademark
      */
     BaseTrademark getTrademarkByTmId(Long tmId);
@@ -35,7 +35,7 @@ public interface ManageService {
     /**
      * 通过skuId 集合来查询数据
      *
-     * @param skuId
+     * @param skuId 商品SKUid
      * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> getAttrList(Long skuId);
@@ -44,7 +44,7 @@ public interface ManageService {
     /**
      * 根据spuid获取商品海报
      *
-     * @param spuId
+     * @param spuId 商品SPUid
      * @return List<SpuPoster>
      */
     List<SpuPoster> findSpuPosterBySpuId(Long spuId);
@@ -53,7 +53,7 @@ public interface ManageService {
     /**
      * 根据spuId 查询map 集合属性
      *
-     * @param spuId
+     * @param spuId 商品SPUid
      */
     Map getSkuValueIdsMap(Long spuId);
 
@@ -61,8 +61,8 @@ public interface ManageService {
     /**
      * 根据spuId，skuId 查询销售属性集合
      *
-     * @param skuId
-     * @param spuId
+     * @param skuId 商品SKUid
+     * @param spuId 商品SPUid
      * @return List<SpuSaleAttr>
      */
     List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(Long skuId, Long spuId);
@@ -71,7 +71,7 @@ public interface ManageService {
     /**
      * 获取sku价格
      *
-     * @param skuId
+     * @param skuId 商品SKUid
      * @return BigDecimal
      */
     BigDecimal getSkuPrice(Long skuId);
@@ -80,7 +80,7 @@ public interface ManageService {
     /**
      * 通过三级分类id查询分类信息
      *
-     * @param category3Id
+     * @param category3Id 三级分类id
      * @return BaseCategoryView
      */
     BaseCategoryView getCategoryViewByCategory3Id(Long category3Id);
@@ -89,7 +89,7 @@ public interface ManageService {
     /**
      * 根据skuId 查询skuInfo
      *
-     * @param skuId
+     * @param skuId 商品SKUID
      */
     SkuInfo getSkuInfo(Long skuId);
 
@@ -97,7 +97,7 @@ public interface ManageService {
     /**
      * SKU分页列表
      *
-     * @param pageParam
+     * @param pageParam 页码参数
      * @return IPage<SkuInfo>
      */
     IPage<SkuInfo> getPage(Page<SkuInfo> pageParam);
@@ -105,14 +105,14 @@ public interface ManageService {
     /**
      * 商品上架
      *
-     * @param skuId
+     * @param skuId 商品SKUID
      */
     void onSale(Long skuId);
 
     /**
      * 商品下架
      *
-     * @param skuId
+     * @param skuId 商品SKUID
      */
     void cancelSale(Long skuId);
 
@@ -120,7 +120,7 @@ public interface ManageService {
     /**
      * 保存数据
      *
-     * @param skuInfo
+     * @param skuInfo SKU实例
      */
     void saveSkuInfo(SkuInfo skuInfo);
 
@@ -128,7 +128,7 @@ public interface ManageService {
     /**
      * 根据spuId 查询销售属性集合
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      * @return List<SpuSaleAttr>
      */
     List<SpuSaleAttr> getSpuSaleAttrList(Long spuId);
@@ -137,7 +137,7 @@ public interface ManageService {
     /**
      * 根据spuId 查询spuImageList
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      * @return List<SpuImage>
      */
     List<SpuImage> getSpuImageList(Long spuId);

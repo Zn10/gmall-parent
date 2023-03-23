@@ -12,5 +12,13 @@
     <artifactId>module-feign-api-item</artifactId>
     <description>商品详情服务的Feign接口</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-product</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

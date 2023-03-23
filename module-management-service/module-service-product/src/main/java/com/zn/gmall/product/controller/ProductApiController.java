@@ -23,7 +23,7 @@ public class ProductApiController {
     /**
      * 通过品牌Id 集合来查询数据
      *
-     * @param tmId
+     * @param tmId 品牌ID
      * @return BaseTrademark
      */
     @GetMapping("inner/getTrademark/{tmId}")
@@ -44,8 +44,8 @@ public class ProductApiController {
     /**
      * 通过skuId 集合来查询数据
      *
-     * @param skuId
-     * @return
+     * @param skuId 商品SKUID
+     * @return List<BaseAttrInfo>
      */
     @GetMapping("inner/getAttrList/{skuId}")
     public List<BaseAttrInfo> getAttrList(@PathVariable("skuId") Long skuId) {
@@ -55,7 +55,7 @@ public class ProductApiController {
     /**
      * 根据spuId 获取海报数据
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      * @return List<SpuPoster>
      */
     @GetMapping("inner/findSpuPosterBySpuId/{spuId}")
@@ -66,7 +66,7 @@ public class ProductApiController {
     /**
      * 根据spuId 查询map 集合属性
      *
-     * @param spuId
+     * @param spuId 商品SPUID
      */
     @GetMapping("inner/getSkuValueIdsMap/{spuId}")
     public Map getSkuValueIdsMap(@PathVariable("spuId") Long spuId) {
@@ -76,8 +76,8 @@ public class ProductApiController {
     /**
      * 根据spuId，skuId 查询销售属性集合
      *
-     * @param skuId
-     * @param spuId
+     * @param skuId 商品SKUID
+     * @param spuId 商品SPUID
      * @return List<SpuSaleAttr>
      */
     @GetMapping("inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
@@ -88,7 +88,7 @@ public class ProductApiController {
     /**
      * 根据skuId获取sku信息
      *
-     * @param skuId
+     * @param skuId 商品SKUID
      * @return SkuInfo
      */
     @GetMapping("inner/getSkuInfo/{skuId}")
@@ -100,7 +100,7 @@ public class ProductApiController {
     /**
      * 通过三级分类id查询分类信息
      *
-     * @param category3Id
+     * @param category3Id 三级分类id
      * @return BaseCategoryView
      */
     @GetMapping("inner/getCategoryView/{category3Id}")

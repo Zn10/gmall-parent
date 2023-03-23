@@ -15,15 +15,18 @@ public interface BaseAttrInfoMapper extends BaseMapper<BaseAttrInfo> {
     /**
      * 根据分类Id 查询平台属性集合对象
      *
-     * @param category1Id
-     * @param category2Id
-     * @param category3Id
+     * @param category1Id 一级分类id
+     * @param category2Id 二级分类id
+     * @param category3Id 三级分类id
      * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> selectBaseAttrInfoList(@Param("category1Id") Long category1Id, @Param("category2Id") Long category2Id, @Param("category3Id") Long category3Id);
 
     /**
-     * @param skuId
+     * 通过skuId 集合来查询数据
+     *
+     * @param skuId 商品SKUid
+     * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> selectBaseAttrInfoListBySkuId(@Param("skuId") Long skuId);
 

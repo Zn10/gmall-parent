@@ -87,12 +87,22 @@ public class ManageServiceImpl implements ManageService {
     @Resource
     private BaseTrademarkMapper baseTrademarkMapper;
 
+    /**
+     * 通过品牌Id 来查询数据
+     *
+     * @param tmId 品牌id
+     * @return BaseTrademark
+     */
     @Override
     public BaseTrademark getTrademarkByTmId(Long tmId) {
         return baseTrademarkMapper.selectById(tmId);
     }
 
-
+    /**
+     * 获取全部分类信息
+     *
+     * @return List<JSONObject>
+     */
     @Override
     @GmallCache(prefix = "category")
     public List<JSONObject> getBaseCategoryList() {
@@ -175,13 +185,24 @@ public class ManageServiceImpl implements ManageService {
         return skuInfo;
     }
 
+    /**
+     * 通过skuId 集合来查询数据
+     *
+     * @param skuId 商品SKUid
+     * @return List<BaseAttrInfo>
+     */
     @Override
     public List<BaseAttrInfo> getAttrList(Long skuId) {
 
         return baseAttrInfoMapper.selectBaseAttrInfoListBySkuId(skuId);
     }
 
-
+    /**
+     * 根据spuid获取商品海报
+     *
+     * @param spuId 商品SPUid
+     * @return List<SpuPoster>
+     */
     @Override
     public List<SpuPoster> findSpuPosterBySpuId(Long spuId) {
         QueryWrapper<SpuPoster> spuInfoQueryWrapper = new QueryWrapper<>();
@@ -189,6 +210,11 @@ public class ManageServiceImpl implements ManageService {
         return spuPosterMapper.selectList(spuInfoQueryWrapper);
     }
 
+    /**
+     * 根据spuId 查询map 集合属性
+     *
+     * @param spuId 商品SPUid
+     */
     @Override
     @GmallCache(prefix = "saleAttrValuesBySpu:")
     public Map getSkuValueIdsMap(Long spuId) {
@@ -205,6 +231,13 @@ public class ManageServiceImpl implements ManageService {
         return map;
     }
 
+    /**
+     * 根据spuId，skuId 查询销售属性集合
+     *
+     * @param skuId 商品SKUid
+     * @param spuId 商品SPUid
+     * @return List<SpuSaleAttr>
+     */
     @Override
     @GmallCache(prefix = "spuSaleAttrListCheckBySku:")
     public List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(Long skuId, Long spuId) {
@@ -214,7 +247,7 @@ public class ManageServiceImpl implements ManageService {
     /**
      * 获取sku价格
      *
-     * @param skuId
+     * @param skuId 商品SKUid
      * @return BigDecimal
      */
     @Override
@@ -243,13 +276,23 @@ public class ManageServiceImpl implements ManageService {
 
     }
 
-
+    /**
+     * 通过三级分类id查询分类信息
+     *
+     * @param category3Id 三级分类id
+     * @return BaseCategoryView
+     */
     @Override
     @GmallCache(prefix = "categoryViewByCategory3Id:")
     public BaseCategoryView getCategoryViewByCategory3Id(Long category3Id) {
         return baseCategoryViewMapper.selectById(category3Id);
     }
 
+    /**
+     * 根据skuId 查询skuInfo
+     *
+     * @param skuId 商品SKUID
+     */
     @Override
     @GmallCache(prefix = RedisConst.SKUKEY_PREFIX)
     public SkuInfo getSkuInfo(Long skuId) {
@@ -262,7 +305,7 @@ public class ManageServiceImpl implements ManageService {
         // 1、声明 SkuInfo 变量，用于接收查询结果
         SkuInfo skuInfo;
 
-        // 2、查询缓存
+        // 2、todo 查询缓存
         // [1]创建 SkuInfo 业务数据 Key 字符串
         String skuKey = RedisConst.SKUKEY_PREFIX + skuId + RedisConst.SKUKEY_SUFFIX;
 
@@ -337,6 +380,12 @@ public class ManageServiceImpl implements ManageService {
         return skuInfo;
     }
 
+    /**
+     * SKU分页列表
+     *
+     * @param pageParam 页码参数
+     * @return IPage<SkuInfo>
+     */
     @Override
     public IPage<SkuInfo> getPage(Page<SkuInfo> pageParam) {
         QueryWrapper<SkuInfo> queryWrapper = new QueryWrapper<>();
@@ -345,6 +394,11 @@ public class ManageServiceImpl implements ManageService {
         return skuInfoMapper.selectPage(pageParam, queryWrapper);
     }
 
+    /**
+     * 商品上架
+     *
+     * @param skuId 商品SKUID
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void onSale(Long skuId) {
@@ -355,6 +409,11 @@ public class ManageServiceImpl implements ManageService {
         skuInfoMapper.updateById(skuInfoUp);
     }
 
+    /**
+     * 商品下架
+     *
+     * @param skuId 商品SKUID
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void cancelSale(Long skuId) {
@@ -365,6 +424,11 @@ public class ManageServiceImpl implements ManageService {
         skuInfoMapper.updateById(skuInfoUp);
     }
 
+    /**
+     * 保存数据
+     *
+     * @param skuInfo SKU实例
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveSkuInfo(SkuInfo skuInfo) {
@@ -401,11 +465,23 @@ public class ManageServiceImpl implements ManageService {
         }
     }
 
+    /**
+     * 根据spuId 查询销售属性集合
+     *
+     * @param spuId 商品SPUID
+     * @return List<SpuSaleAttr>
+     */
     @Override
     public List<SpuSaleAttr> getSpuSaleAttrList(Long spuId) {
         return spuSaleAttrMapper.selectSpuSaleAttrList(spuId);
     }
 
+    /**
+     * 根据spuId 查询spuImageList
+     *
+     * @param spuId 商品SPUID
+     * @return List<SpuImage>
+     */
     @Override
     public List<SpuImage> getSpuImageList(Long spuId) {
         QueryWrapper<SpuImage> queryWrapper = new QueryWrapper<>();
