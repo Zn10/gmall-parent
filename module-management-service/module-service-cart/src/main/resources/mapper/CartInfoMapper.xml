@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zn.gmall.cart.mapper.CartInfoMapper">
+
+    <!-- void batchInsert(@Param("cartInfoListLogin") List<CartInfo> cartInfoList_login); -->
+    <insert id="batchInsert">
+        insert into gmall_order.cart_info(
+        user_id,
+        sku_id,
+        cart_price,
+        sku_num,
+        img_url,
+        sku_name,
+        is_checked) VALUES
+        <foreach collection="cartInfoListLogin" item="cartInfo" separator=",">
+            (
+            #{cartInfo.userId},
+            #{cartInfo.skuId},
+            #{cartInfo.cartPrice},
+            #{cartInfo.skuNum},
+            #{cartInfo.imgUrl},
+            #{cartInfo.skuName},
+            #{cartInfo.isChecked}
+            )
+        </foreach>
+    </insert>
+
+    <!--
+        void updateCartStatus(
+                @Param("userId") String userId,
+                @Param("skuId") Long skuId,
+                @Param("isChecked") Integer isChecked);
+     -->
+    <update id="updateCartStatus">
+        update gmall_order.cart_info set is_checked=#{isChecked}
+        where user_id=#{userId} and sku_id=#{skuId}
+    </update>
+
+</mapper>
