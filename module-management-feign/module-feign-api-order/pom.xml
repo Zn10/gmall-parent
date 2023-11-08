@@ -11,6 +11,24 @@
 
     <artifactId>module-feign-api-order</artifactId>
     <description>订单服务的Feign接口</description>
+    <packaging>jar</packaging>
+    <name>module-feign-api-order</name>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-product</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-cart</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-user</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
