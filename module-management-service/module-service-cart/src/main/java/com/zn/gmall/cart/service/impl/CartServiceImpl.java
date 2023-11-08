@@ -287,7 +287,7 @@ public class CartServiceImpl implements CartService {
         List<CartInfo> cartInfoList = operator.values(cartKey);
 
         // 3、对 cartInfoList 执行判空操作
-        if (CollectionUtils.isEmpty(cartInfoList)) {
+        if (!CollectionUtils.isEmpty(cartInfoList)) {
             cartInfoList = getCartListFromDBToCache(userId);
 
             // 考虑到从数据库查询之后仍然有可能查不到数据（用户登录后没有添加购物车直接进入购物车页面）
