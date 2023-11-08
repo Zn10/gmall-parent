@@ -106,6 +106,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public List<CartInfo> getCartList(String userId, String userTempId) {
 
         // 1、根据 userId 查询购物车中数据列表
@@ -393,6 +394,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void modifyCartCheckStatus(String userId, Long skuId, Integer isChecked) {
         // 1、数据库修改
         cartInfoMapper.updateCartStatus(userId, skuId, isChecked);
@@ -424,6 +426,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void removeCartItem(String userId, Long skuId) {
         // 1、到数据库删除
         cartInfoMapper
