@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>module-service-list</artifactId>
-    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>com.zn</groupId>

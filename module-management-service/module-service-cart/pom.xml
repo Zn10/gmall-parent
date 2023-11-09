@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>module-service-cart</artifactId>
-    <packaging>jar</packaging>
     <name>module-service-cart</name>
 
     <dependencies>
