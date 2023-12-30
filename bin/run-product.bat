@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [ไฟกๆฏ] ไฝฟ็”จJarๅ‘ฝไปค่ฟ่กProductๅทฅ็จใ€
+echo [ะลฯข] สนำรJarรüม๎ิหะะProductนคณฬกฃ
 echo.
 
 cd %~dp0

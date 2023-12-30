@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [ไฟกๆฏ] ไฝฟ็”จJarๅ‘ฝไปค่ฟ่กPaymentๅทฅ็จใ€
+echo [ะลฯข] สนำรJarรüม๎ิหะะPaymentนคณฬกฃ
 echo.
 
 cd %~dp0

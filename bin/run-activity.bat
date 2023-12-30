@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [ä¿¡æ¯] ä½¿ç”¨Jarå‘½ä»¤è¿è¡ŒActivityå·¥ç¨‹ã€‚
+echo [ÐÅÏ¢] Ê¹ÓÃJarÃüÁîÔËÐÐActivity¹¤³Ì¡£
 echo.
 
 cd %~dp0

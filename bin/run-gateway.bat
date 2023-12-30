@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [ไฟกๆฏ] ไฝฟ็”จJarๅ‘ฝไปค่ฟ่กGatewayๅทฅ็จใ€
+echo [ะลฯข] สนำรJarรüม๎ิหะะGatewayนคณฬกฃ
 echo.
 
 cd %~dp0
