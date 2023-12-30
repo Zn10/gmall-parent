@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [Д©║Ф│╞] Ф┴⌠Е▄┘WebЕ╥╔Г╗▀О╪▄Г■÷Ф┬░war/jarЕ▄┘Ф√┤Д╩╤Ц─┌
+echo [пео╒] ╢Р╟ЭWeb╧╓Ёлё╛иЗЁиwar/jar╟Энд╪Ч║ё
 echo.
 
 %~d0
