@@ -40,7 +40,7 @@ public class AuthGlobalFilter implements GlobalFilter {
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
-    @Value("${authUrls.urlValues}")
+    @Value("${authUrls.url}")
     private String authUrls;
 
     /**
