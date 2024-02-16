@@ -8,10 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(value = "com.zn.gmall")
 @SpringBootApplication
 @EnableDiscoveryClient
-public class ProductServiceMainType {
+public class ServiceProductApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProductServiceMainType.class, args);
+        SpringApplication.run(ServiceProductApplication.class, args);
     }
 
 }
