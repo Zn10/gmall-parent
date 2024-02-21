@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.result.ResultCodeEnum;
 import com.zn.gmall.common.util.IpUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -24,6 +23,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -35,10 +35,10 @@ import java.util.List;
 @Component
 public class AuthGlobalFilter implements GlobalFilter {
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
-    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Value("${authUrls.url}")
     private String authUrls;
@@ -169,8 +169,8 @@ public class AuthGlobalFilter implements GlobalFilter {
     /**
      * 根据响应对象和自定义的响应码生成响应结果
      *
-     * @param response
-     * @param resultCodeEnum
+     * @param response 响应对象
+     * @param resultCodeEnum 自定义响应码
      * @return
      */
     private Mono<Void> out(ServerHttpResponse response, ResultCodeEnum resultCodeEnum) {
@@ -199,8 +199,8 @@ public class AuthGlobalFilter implements GlobalFilter {
      * 4、如果从上面任何一个地方读取到了 token，那么就根据 token 访问 Redis
      * 5、从 Redis 中读取用户 id
      *
-     * @param request
-     * @return
+     * @param request 请求参数
+     * @return 返回token
      */
     private String getUserId(ServerHttpRequest request) {
 
@@ -269,8 +269,8 @@ public class AuthGlobalFilter implements GlobalFilter {
     /**
      * 读取用户的临时 id。
      *
-     * @param request
-     * @return
+     * @param request 请求参数
+     * @return userTempId
      */
     private String getUserTempId(ServerHttpRequest request) {
 
