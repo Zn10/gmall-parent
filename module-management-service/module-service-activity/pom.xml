@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>module-service-activity</artifactId>
 
-    <build>
+<!--    <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
@@ -25,6 +25,6 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>

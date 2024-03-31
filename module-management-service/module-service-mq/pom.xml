@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>module-service-mq</artifactId>
-    <build>
+<!--    <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
@@ -24,5 +24,5 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>
