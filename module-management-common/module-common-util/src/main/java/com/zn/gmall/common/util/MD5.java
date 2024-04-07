@@ -1,5 +1,7 @@
 package com.zn.gmall.common.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -8,12 +10,12 @@ import java.security.NoSuchAlgorithmException;
  * 基于MD5算法执行字符串加密
  * </p>
  */
+@Slf4j
 public final class MD5 {
 
     public static String encrypt(String strSrc) {
         try {
-            char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
-                    '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+            char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
             byte[] bytes = strSrc.getBytes();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(bytes);
@@ -27,7 +29,7 @@ public final class MD5 {
             }
             return new String(chars);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            log.error("exception message", e);
             throw new RuntimeException("MD5加密出错！！+" + e);
         }
     }

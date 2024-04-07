@@ -12,5 +12,4 @@
     <artifactId>module-feign-api-payment</artifactId>
     <description>支付服务的Feign接口</description>
 
-
 </project>

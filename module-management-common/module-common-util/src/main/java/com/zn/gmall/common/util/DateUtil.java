@@ -61,9 +61,6 @@ public class DateUtil {
      * @return
      */
     public static boolean dateCompare(Date beginDate, Date endDate) {
-        if (DateUtil.truncatedCompareTo(beginDate, endDate, Calendar.SECOND) == 1) {
-            return false;
-        }
-        return true;
+        return DateUtil.truncatedCompareTo(beginDate, endDate, Calendar.SECOND) != 1;
     }
 }

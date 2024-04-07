@@ -12,5 +12,4 @@
     <artifactId>module-feign-api-list</artifactId>
     <description>商品列表服务的Feign接口</description>
 
-
 </project>

@@ -12,5 +12,4 @@
     <artifactId>module-feign-api-user</artifactId>
     <description>会员服务的Feign接口</description>
 
-
 </project>

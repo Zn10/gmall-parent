@@ -11,6 +11,4 @@
 
     <artifactId>module-feign-api-activity</artifactId>
     <description>秒杀、促销活动服务的Feign接口</description>
-
-
 </project>

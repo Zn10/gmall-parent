@@ -1,5 +1,6 @@
 package com.zn.gmall.common.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,6 +18,7 @@ import java.io.IOException;
  * HTTP客户端工具类
  * </p>
  */
+@Slf4j
 public class HttpClientUtil {
 
     public static String doGet(String url) {
@@ -39,7 +41,7 @@ public class HttpClientUtil {
             }
             httpclient.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("exception message", e);
             return null;
         }
 
@@ -77,7 +79,7 @@ public class HttpClientUtil {
             }
             httpclient.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("exception message", e);
             return;
         }
 
