@@ -9,6 +9,7 @@ import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.model.product.*;
 import com.zn.gmall.product.mapper.*;
 import com.zn.gmall.product.service.api.ManageService;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 /**
  * 商品汇总实现
  */
+@Slf4j
 @Service("ManageService")
 public class ManageServiceImpl implements ManageService {
     @Resource
@@ -221,7 +223,7 @@ public class ManageServiceImpl implements ManageService {
         Map<Object, Object> map = new HashMap<>();
         // key = 125|123 ,value = 37
         List<Map> mapList = skuSaleAttrValueMapper.selectSaleAttrValuesBySpu(spuId);
-        if (mapList != null && mapList.size() > 0) {
+        if (mapList != null && !mapList.isEmpty()) {
             // 循环遍历
             for (Map skuMap : mapList) {
                 // key = 125|123 ,value = 37
@@ -266,7 +268,7 @@ public class ManageServiceImpl implements ManageService {
                 price = skuInfo.getPrice();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("exception message", e);
         } finally {
             //  解锁！
             lock.unlock();
@@ -370,7 +372,7 @@ public class ManageServiceImpl implements ManageService {
                             cacheValueTimeout,
                             TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("exception message", e);
         } finally {
 
             // 11、解开分布式锁
@@ -440,7 +442,7 @@ public class ManageServiceImpl implements ManageService {
      */
         skuInfoMapper.insert(skuInfo);
         List<SkuImage> skuImageList = skuInfo.getSkuImageList();
-        if (skuImageList != null && skuImageList.size() > 0) {
+        if (skuImageList != null && !skuImageList.isEmpty()) {
             // 循环遍历
             for (SkuImage skuImage : skuImageList) {
                 skuImage.setSkuId(skuInfo.getId());
@@ -630,7 +632,7 @@ public class ManageServiceImpl implements ManageService {
         baseAttrValueMapper.delete(queryWrapper);
         // 获取页面传递过来的所有平台属性值数据
         List<BaseAttrValue> attrValueList = baseAttrInfo.getAttrValueList();
-        if (attrValueList != null && attrValueList.size() > 0) {
+        if (attrValueList != null && !attrValueList.isEmpty()) {
             // 循环遍历
             for (BaseAttrValue baseAttrValue : attrValueList) {
                 // 获取平台属性Id 给attrId
