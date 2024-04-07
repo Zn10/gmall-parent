@@ -3,6 +3,7 @@ package com.zn.gmall.common.cache;
 import com.alibaba.fastjson.JSON;
 import com.zn.gmall.common.constant.RedisConst;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @Aspect
+@Slf4j
 public class GmallCacheAspect {
 
     @Autowired
@@ -85,7 +87,7 @@ public class GmallCacheAspect {
                         Thread.sleep(100);
                         return gmallCacheAspectMethod(point);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+
                     }
                 }
             } else {
@@ -93,7 +95,7 @@ public class GmallCacheAspect {
                 return obj;
             }
         } catch (Throwable throwable) {
-            throwable.printStackTrace();
+            log.error("exception message", throwable);
         }
         //  数据库兜底！
         return point.proceed(point.getArgs());
