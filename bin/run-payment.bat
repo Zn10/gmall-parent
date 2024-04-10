@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [��Ϣ] ʹ��Jar��������Payment���̡�
+echo Payment
 echo.
 
 cd %~dp0

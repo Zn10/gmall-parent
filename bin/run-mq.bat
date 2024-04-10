@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [��Ϣ] ʹ��Jar��������Mq���̡�
+echo Mq
 echo.
 
 cd %~dp0

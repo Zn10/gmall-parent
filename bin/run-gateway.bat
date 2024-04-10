@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [��Ϣ] ʹ��Jar��������Gateway���̡�
+echo Gateway
 echo.
 
 cd %~dp0
