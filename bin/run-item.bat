@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [��Ϣ] ʹ��Jar��������Item���̡�
+echo Item
 echo.
 
 cd %~dp0
