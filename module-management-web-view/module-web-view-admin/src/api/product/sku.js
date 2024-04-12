@@ -1,10 +1,12 @@
 import request from '@/utils/request'
 
+const api_name = '/admin/product'
+
 export default {
 
   getPageList(page, limit) {
     return request({
-      url: `/admin/product/list/${page}/${limit}`,
+      url: `${api_name}/list/${page}/${limit}`,
       method: 'get'
     })
   },
@@ -12,7 +14,7 @@ export default {
   // 保存Sku
   saveSkuInfo(skuForm) {
     return request({
-      url: '/admin/product/saveSkuInfo',
+      url: `${api_name}/saveSkuInfo`,
       method: 'post',
       data: skuForm
     })
@@ -21,7 +23,7 @@ export default {
   // 商品上架
   onSale(skuId) {
     return request({
-      url: `/admin/product/onSale/${skuId}`,
+      url: `${api_name}/onSale/${skuId}`,
       method: 'get'
     })
   },
@@ -29,14 +31,14 @@ export default {
   // 商品下架
   cancelSale(skuId) {
     return request({
-      url: `/admin/product/cancelSale/${skuId}`,
+      url: `${api_name}/cancelSale/${skuId}`,
       method: 'get'
     })
   },
 
   findSkuInfoByKeyword(keyword) {
     return request({
-      url: `/admin/product/findSkuInfoByKeyword/${keyword}`,
+      url: `${api_name}/findSkuInfoByKeyword/${keyword}`,
       method: 'get'
     })
   }
