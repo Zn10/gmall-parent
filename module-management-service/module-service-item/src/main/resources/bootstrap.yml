@@ -7,6 +7,7 @@ spring:
                 file-extension: yaml
                 prefix: ${spring.application.name}
                 server-addr: 192.168.200.128:8848
+                timeout: 50000
                 shared-configs:
                 -   data-id: common.yaml
             discovery:
