@@ -19,6 +19,7 @@ target/
 .settings
 .springBeans
 .vscode
+jrebel*.jar
 
 ### IntelliJ IDEA ###
 .idea
