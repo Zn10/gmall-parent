@@ -1,5 +1,7 @@
-package com.zn.gmall.model.activity;
+package com.zn.gmall.model.activity.vo;
 
+import com.zn.gmall.model.activity.ActivityRule;
+import com.zn.gmall.model.activity.ActivitySku;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

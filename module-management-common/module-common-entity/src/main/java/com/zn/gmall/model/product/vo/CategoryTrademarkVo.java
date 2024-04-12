@@ -1,6 +1,6 @@
 //
 //
-package com.zn.gmall.model.product;
+package com.zn.gmall.model.product.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

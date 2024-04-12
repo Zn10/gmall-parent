@@ -1,4 +1,4 @@
-package com.zn.gmall.model.item;
+package com.zn.gmall.model.item.vo;
 
 import com.zn.gmall.model.product.BaseCategoryView;
 import com.zn.gmall.model.product.SkuInfo;

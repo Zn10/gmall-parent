@@ -2,7 +2,7 @@ package com.zn.gmall.product.controller;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.BaseTrademark;
-import com.zn.gmall.model.product.CategoryTrademarkVo;
+import com.zn.gmall.model.product.vo.CategoryTrademarkVo;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

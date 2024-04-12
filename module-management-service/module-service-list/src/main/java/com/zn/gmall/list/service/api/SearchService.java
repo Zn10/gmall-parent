@@ -1,7 +1,7 @@
 package com.zn.gmall.list.service.api;
 
 import com.zn.gmall.model.list.SearchParam;
-import com.zn.gmall.model.list.SearchResponseVo;
+import com.zn.gmall.model.list.vo.SearchResponseVo;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 

@@ -1,4 +1,4 @@
-package com.zn.gmall.model.list;
+package com.zn.gmall.model.list.vo;
 
 import lombok.Data;
 

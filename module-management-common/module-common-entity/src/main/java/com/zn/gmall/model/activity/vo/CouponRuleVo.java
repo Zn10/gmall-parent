@@ -1,5 +1,6 @@
-package com.zn.gmall.model.activity;
+package com.zn.gmall.model.activity.vo;
 
+import com.zn.gmall.model.activity.CouponRange;
 import com.zn.gmall.model.enums.CouponRangeType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

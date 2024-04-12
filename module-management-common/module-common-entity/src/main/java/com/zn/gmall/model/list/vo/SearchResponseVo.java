@@ -1,5 +1,6 @@
-package com.zn.gmall.model.list;
+package com.zn.gmall.model.list.vo;
 
+import com.zn.gmall.model.list.Goods;
 import lombok.Data;
 
 import java.io.Serializable;

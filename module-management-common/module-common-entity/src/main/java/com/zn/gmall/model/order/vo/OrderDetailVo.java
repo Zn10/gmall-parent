@@ -1,6 +1,7 @@
-package com.zn.gmall.model.order;
+package com.zn.gmall.model.order.vo;
 
 import com.zn.gmall.model.activity.ActivityRule;
+import com.zn.gmall.model.order.OrderDetail;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

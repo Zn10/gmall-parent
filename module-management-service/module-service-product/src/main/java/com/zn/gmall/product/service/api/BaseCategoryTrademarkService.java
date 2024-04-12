@@ -3,7 +3,7 @@ package com.zn.gmall.product.service.api;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zn.gmall.model.product.BaseCategoryTrademark;
 import com.zn.gmall.model.product.BaseTrademark;
-import com.zn.gmall.model.product.CategoryTrademarkVo;
+import com.zn.gmall.model.product.vo.CategoryTrademarkVo;
 
 import java.util.List;
 

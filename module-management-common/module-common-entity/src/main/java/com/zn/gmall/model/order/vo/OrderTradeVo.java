@@ -1,4 +1,4 @@
-package com.zn.gmall.model.order;
+package com.zn.gmall.model.order.vo;
 
 import com.zn.gmall.model.activity.CouponInfo;
 import io.swagger.annotations.ApiModelProperty;

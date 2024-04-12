@@ -1,6 +1,7 @@
-package com.zn.gmall.model.cart;
+package com.zn.gmall.model.cart.vo;
 
 import com.zn.gmall.model.activity.ActivityRule;
+import com.zn.gmall.model.cart.CartInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

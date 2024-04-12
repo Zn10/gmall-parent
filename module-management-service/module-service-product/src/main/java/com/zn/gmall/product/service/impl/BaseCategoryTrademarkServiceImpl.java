@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zn.gmall.model.product.BaseCategoryTrademark;
 import com.zn.gmall.model.product.BaseTrademark;
-import com.zn.gmall.model.product.CategoryTrademarkVo;
+import com.zn.gmall.model.product.vo.CategoryTrademarkVo;
 import com.zn.gmall.product.mapper.BaseCategoryTrademarkMapper;
 import com.zn.gmall.product.mapper.BaseTrademarkMapper;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;

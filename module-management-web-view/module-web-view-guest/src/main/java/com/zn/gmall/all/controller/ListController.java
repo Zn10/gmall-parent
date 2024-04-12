@@ -3,7 +3,7 @@ package com.zn.gmall.all.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.list.client.ListFeignClient;
 import com.zn.gmall.model.list.SearchParam;
-import com.zn.gmall.model.list.SearchResponseVo;
+import com.zn.gmall.model.list.vo.SearchResponseVo;
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

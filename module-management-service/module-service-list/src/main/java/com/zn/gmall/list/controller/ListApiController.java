@@ -3,9 +3,7 @@ package com.zn.gmall.list.controller;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.list.service.api.SearchService;
 import com.zn.gmall.model.list.SearchParam;
-import com.zn.gmall.model.list.SearchResponseVo;
-import jdk.nashorn.internal.ir.annotations.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zn.gmall.model.list.vo.SearchResponseVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

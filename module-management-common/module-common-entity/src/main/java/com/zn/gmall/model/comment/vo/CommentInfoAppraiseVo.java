@@ -1,4 +1,4 @@
-package com.zn.gmall.model.comment;
+package com.zn.gmall.model.comment.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
