@@ -4,26 +4,26 @@
     <h4>优惠券信息</h4>
     <table class="table table-striped table-condenseda table-bordered" width="100%">
       <tbody>
-      <tr>
-        <th width="15%">优惠券名称</th>
-        <td width="35%"><b style="font-size: 14px">{{ couponInfo.couponName }}</b></td>
-        <th width="15%">优惠券类型</th>
-        <td width="35%">
-          {{ couponInfo.couponTypeString }}
-        </td>
-      </tr>
-      <tr>
-        <th>最多领用次数</th>
-        <td>{{ couponInfo.limitNum }}</td>
-        <th>每人限领次数</th>
-        <td>{{ couponInfo.perLimit }}</td>
-      </tr>
-      <tr>
-        <th>领取时间</th>
-        <td>{{ couponInfo.expireTime }}至{{ couponInfo.expireTime }}</td>
-        <th>过期时间</th>
-        <td>{{ couponInfo.expireTime }}</td>
-      </tr>
+        <tr>
+          <th width="15%">优惠券名称</th>
+          <td width="35%"><b style="font-size: 14px">{{ couponInfo.couponName }}</b></td>
+          <th width="15%">优惠券类型</th>
+          <td width="35%">
+            {{ couponInfo.couponTypeString }}
+          </td>
+        </tr>
+        <tr>
+          <th>最多领用次数</th>
+          <td>{{ couponInfo.limitNum }}</td>
+          <th>每人限领次数</th>
+          <td>{{ couponInfo.perLimit }}</td>
+        </tr>
+        <tr>
+          <th>领取时间</th>
+          <td>{{ couponInfo.expireTime }}至{{ couponInfo.expireTime }}</td>
+          <th>过期时间</th>
+          <td>{{ couponInfo.expireTime }}</td>
+        </tr>
       </tbody>
     </table>
 
@@ -66,7 +66,7 @@
     </el-form>
 
     <div v-if="couponInfo.rangeType == 'SPU'">
-      <el-dialog title="添加范围" :visible.sync="dialogSpduRangVisible" width="490px">
+      <el-dialog :visible.sync="dialogSpduRangVisible" title="添加范围" width="490px">
         <div style="margin-top: 20px;">
           <el-form :inline="true" class="demo-form-inline">
             <el-form-item>
@@ -164,7 +164,7 @@
     </div>
 
     <div v-if="couponInfo.rangeType == 'TRADEMARK'">
-      <el-dialog title="添加范围" :visible.sync="dialogTradeRangVisible" width="490px">
+      <el-dialog :visible.sync="dialogTradeRangVisible" title="添加范围" width="490px">
         <div style="margin-top: 20px;">
           <el-form :inline="true" class="demo-form-inline">
             <el-form-item>

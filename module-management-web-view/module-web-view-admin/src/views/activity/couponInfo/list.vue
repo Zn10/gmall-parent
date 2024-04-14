@@ -35,8 +35,8 @@
       <el-table-column prop="conditionAmount" label="规则">
         <template slot-scope="scope">
           {{ scope.row.couponType == 'CASH' ? '减金额' + scope.row.benefitAmount + '元' :
-              scope.row.couponType == 'DISCOUNT' ? '打' + scope.row.benefitDiscount + '折' :
-              scope.row.couponType == 'FULL_REDUCTION' ? '满' + scope.row.conditionAmount + '元减' + scope.row.benefitAmount + '元' : '满' + scope.row.conditionNum + '件打' + scope.row.benefitDiscount + '折' }}
+          scope.row.couponType == 'DISCOUNT' ? '打' + scope.row.benefitDiscount + '折' :
+          scope.row.couponType == 'FULL_REDUCTION' ? '满' + scope.row.conditionAmount + '元减' + scope.row.benefitAmount + '元' : '满' + scope.row.conditionNum + '件打' + scope.row.benefitDiscount + '折' }}
         </template>
       </el-table-column>
       <el-table-column prop="rangeTypeString" label="范围类型 "/>
@@ -46,12 +46,12 @@
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
           <router-link :to="'/activity/couponInfo/edit/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
+            <el-button type="primary" size="mini" icon="el-icon-edit"/>
           </router-link>
           <router-link :to="'/activity/couponInfo/rule/'+scope.row.id">
             <el-button type="" size="mini">规则</el-button>
           </router-link>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)"></el-button>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)"/>
         </template>
       </el-table-column>
     </el-table>
@@ -106,7 +106,7 @@ export default {
       this.fetchData(1)
     },
 
-    add(){
+    add() {
       this.$router.push({ path: '/activity/couponInfo/add' })
     },
 

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,7 @@ public class GmallCacheAspect {
     @Autowired
     private RedissonClient redissonClient;
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, String> redisTemplate;
 
     //  定义一个环绕通知！

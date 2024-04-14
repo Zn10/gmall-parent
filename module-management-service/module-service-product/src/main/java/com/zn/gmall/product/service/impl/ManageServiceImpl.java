@@ -84,7 +84,7 @@ public class ManageServiceImpl implements ManageService {
     @Autowired
     private RedissonClient redissonClient;
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, SkuInfo> redisTemplate;
 
     @Autowired

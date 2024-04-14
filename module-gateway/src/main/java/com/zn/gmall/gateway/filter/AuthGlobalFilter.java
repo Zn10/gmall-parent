@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -35,7 +36,7 @@ import java.util.List;
 @Component
 public class AuthGlobalFilter implements GlobalFilter {
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();

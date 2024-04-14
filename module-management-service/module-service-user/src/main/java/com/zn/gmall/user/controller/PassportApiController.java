@@ -31,7 +31,7 @@ public class PassportApiController {
     @Autowired
     private UserService userService;
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, String> redisTemplate;
 
     @GetMapping("/logout")
