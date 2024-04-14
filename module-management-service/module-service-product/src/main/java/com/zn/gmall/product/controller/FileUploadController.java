@@ -43,7 +43,7 @@ public class FileUploadController {
      */
     @ApiOperation("文件上传控制器")
     @PostMapping("fileUpload")
-    public Result fileUpload(MultipartFile file) throws Exception {
+    public Result<String> fileUpload(MultipartFile file) throws Exception {
         //  准备获取到上传的文件路径！
         String url;
 

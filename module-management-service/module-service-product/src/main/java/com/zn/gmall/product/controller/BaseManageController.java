@@ -30,7 +30,7 @@ public class BaseManageController {
      * @param limit 页码条数
      */
     @GetMapping("/list/{page}/{limit}")
-    public Result index(
+    public Result<IPage<SkuInfo>> index(
             @PathVariable Long page,
             @PathVariable Long limit) {
 
@@ -45,7 +45,7 @@ public class BaseManageController {
      * @param skuId 商品SKUID
      */
     @GetMapping("onSale/{skuId}")
-    public Result onSale(@PathVariable("skuId") Long skuId) {
+    public Result<String> onSale(@PathVariable("skuId") Long skuId) {
         manageService.onSale(skuId);
         return Result.ok();
     }
@@ -56,7 +56,7 @@ public class BaseManageController {
      * @param skuId 商品SKUID
      */
     @GetMapping("cancelSale/{skuId}")
-    public Result cancelSale(@PathVariable("skuId") Long skuId) {
+    public Result<String> cancelSale(@PathVariable("skuId") Long skuId) {
         manageService.cancelSale(skuId);
         return Result.ok();
     }
@@ -82,7 +82,7 @@ public class BaseManageController {
      */
     @ApiOperation("保存平台属性")
     @PostMapping("saveAttrInfo")
-    public Result saveAttrInfo(@RequestBody BaseAttrInfo baseAttrInfo) {
+    public Result<String> saveAttrInfo(@RequestBody BaseAttrInfo baseAttrInfo) {
         // 前台数据都被封装到该对象中baseAttrInfo
         manageService.saveAttrInfo(baseAttrInfo);
         return Result.ok();

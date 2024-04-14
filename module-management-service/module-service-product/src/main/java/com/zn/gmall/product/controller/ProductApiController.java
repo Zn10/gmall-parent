@@ -27,15 +27,16 @@ public class ProductApiController {
      * @return BaseTrademark
      */
     @GetMapping("inner/getTrademark/{tmId}")
-    public BaseTrademark getTrademark(@PathVariable("tmId") Long tmId) {
-        return manageService.getTrademarkByTmId(tmId);
+    public Result<BaseTrademark> getTrademark(@PathVariable("tmId") Long tmId) {
+        BaseTrademark baseTrademark = manageService.getTrademarkByTmId(tmId);
+        return Result.ok(baseTrademark);
     }
 
     /**
      * 获取全部分类信息
      */
     @GetMapping("getBaseCategoryList")
-    public Result getBaseCategoryList() {
+    public Result<List<JSONObject>> getBaseCategoryList() {
         List<JSONObject> list = manageService.getBaseCategoryList();
         return Result.ok(list);
     }
@@ -48,8 +49,9 @@ public class ProductApiController {
      * @return List<BaseAttrInfo>
      */
     @GetMapping("inner/getAttrList/{skuId}")
-    public List<BaseAttrInfo> getAttrList(@PathVariable("skuId") Long skuId) {
-        return manageService.getAttrList(skuId);
+    public Result<List<BaseAttrInfo>> getAttrList(@PathVariable("skuId") Long skuId) {
+        List<BaseAttrInfo> attrList = manageService.getAttrList(skuId);
+        return Result.ok(attrList);
     }
 
     /**
@@ -59,8 +61,9 @@ public class ProductApiController {
      * @return List<SpuPoster>
      */
     @GetMapping("inner/findSpuPosterBySpuId/{spuId}")
-    public List<SpuPoster> findSpuPosterBySpuId(@PathVariable Long spuId) {
-        return manageService.findSpuPosterBySpuId(spuId);
+    public Result<List<SpuPoster>> findSpuPosterBySpuId(@PathVariable Long spuId) {
+        List<SpuPoster> spuPosterBySpuId = manageService.findSpuPosterBySpuId(spuId);
+        return Result.ok(spuPosterBySpuId);
     }
 
     /**
@@ -81,8 +84,9 @@ public class ProductApiController {
      * @return List<SpuSaleAttr>
      */
     @GetMapping("inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
-    public List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId) {
-        return manageService.getSpuSaleAttrListCheckBySku(skuId, spuId);
+    public Result<List<SpuSaleAttr>> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId) {
+        List<SpuSaleAttr> spuSaleAttrListCheckBySku = manageService.getSpuSaleAttrListCheckBySku(skuId, spuId);
+        return Result.ok(spuSaleAttrListCheckBySku);
     }
 
     /**
@@ -92,9 +96,9 @@ public class ProductApiController {
      * @return SkuInfo
      */
     @GetMapping("inner/getSkuInfo/{skuId}")
-    public SkuInfo getAttrValueList(@PathVariable("skuId") Long skuId) {
+    public Result<SkuInfo> getAttrValueList(@PathVariable("skuId") Long skuId) {
         SkuInfo skuInfo = manageService.getSkuInfo(skuId);
-        return skuInfo;
+        return Result.ok(skuInfo);
     }
 
     /**
@@ -104,8 +108,9 @@ public class ProductApiController {
      * @return BaseCategoryView
      */
     @GetMapping("inner/getCategoryView/{category3Id}")
-    public BaseCategoryView getCategoryView(@PathVariable("category3Id") Long category3Id) {
-        return manageService.getCategoryViewByCategory3Id(category3Id);
+    public Result<BaseCategoryView> getCategoryView(@PathVariable("category3Id") Long category3Id) {
+        BaseCategoryView baseCategoryView = manageService.getCategoryViewByCategory3Id(category3Id);
+        return Result.ok(baseCategoryView);
     }
 }
 

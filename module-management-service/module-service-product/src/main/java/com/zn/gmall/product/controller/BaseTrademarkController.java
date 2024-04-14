@@ -31,7 +31,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "分页列表")
     @GetMapping("{page}/{limit}")
-    public Result index(@PathVariable Long page,
+    public Result<IPage<BaseTrademark>> index(@PathVariable Long page,
                         @PathVariable Long limit) {
 
         Page<BaseTrademark> pageParam = new Page<>(page, limit);
@@ -47,7 +47,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "获取BaseTrademark")
     @GetMapping("get/{id}")
-    public Result get(@PathVariable String id) {
+    public Result<BaseTrademark> get(@PathVariable String id) {
         BaseTrademark baseTrademark = baseTrademarkService.getById(id);
         return Result.ok(baseTrademark);
     }
@@ -59,7 +59,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "新增BaseTrademark")
     @PostMapping("save")
-    public Result save(@RequestBody BaseTrademark banner) {
+    public Result<String> save(@RequestBody BaseTrademark banner) {
         baseTrademarkService.save(banner);
         return Result.ok();
     }
@@ -71,7 +71,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "修改BaseTrademark")
     @PutMapping("update")
-    public Result updateById(@RequestBody BaseTrademark banner) {
+    public Result<String> updateById(@RequestBody BaseTrademark banner) {
         baseTrademarkService.updateById(banner);
         return Result.ok();
     }
@@ -83,7 +83,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "删除BaseTrademark")
     @DeleteMapping("remove/{id}")
-    public Result remove(@PathVariable Long id) {
+    public Result<String> remove(@PathVariable Long id) {
         baseTrademarkService.removeById(id);
         return Result.ok();
     }

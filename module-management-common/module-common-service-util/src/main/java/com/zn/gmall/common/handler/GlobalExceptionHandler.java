@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public Result error(Exception e) {
+    public Result<String> error(Exception e) {
         log.error("exception message", e);
         return Result.fail();
     }
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(GmallException.class)
     @ResponseBody
-    public Result error(GmallException e) {
+    public Result<String> error(GmallException e) {
         return Result.fail(e.getMessage());
     }
 }

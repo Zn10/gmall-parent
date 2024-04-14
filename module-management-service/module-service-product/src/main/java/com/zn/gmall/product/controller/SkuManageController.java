@@ -30,7 +30,7 @@ public class SkuManageController {
      * @param skuInfo SKU实例
      */
     @PostMapping("saveSkuInfo")
-    public Result saveSkuInfo(@RequestBody SkuInfo skuInfo) {
+    public Result<String> saveSkuInfo(@RequestBody SkuInfo skuInfo) {
         // 调用服务层
         manageService.saveSkuInfo(skuInfo);
         return Result.ok();
