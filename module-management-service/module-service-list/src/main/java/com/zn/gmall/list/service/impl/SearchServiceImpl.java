@@ -35,6 +35,8 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
@@ -52,16 +54,17 @@ import java.util.*;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-    @Resource
+    @Qualifier("productDegradeFeignClient")
+    @Autowired
     private ProductFeignClient productFeignClient;
 
-    @Resource
+    @Autowired
     private GoodsRepository goodsRepository;
 
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
 
-    @Resource
+    @Autowired
     private RestHighLevelClient highLevelClient;
 
     @Override

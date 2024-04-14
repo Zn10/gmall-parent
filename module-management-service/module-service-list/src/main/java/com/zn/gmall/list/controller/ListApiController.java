@@ -4,6 +4,7 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.list.service.api.SearchService;
 import com.zn.gmall.model.list.SearchParam;
 import com.zn.gmall.model.list.vo.SearchResponseVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,7 +18,7 @@ import java.io.IOException;
 @RequestMapping("/api/list")
 public class ListApiController {
 
-    @Resource
+    @Autowired
     private SearchService searchService;
 
     /**
@@ -27,7 +28,7 @@ public class ListApiController {
      * @throws IOException
      */
     @PostMapping("/do/search")
-    public Result list(@RequestBody SearchParam searchParam) throws Throwable {
+    public Result<SearchResponseVo> list(@RequestBody SearchParam searchParam) throws Throwable {
         SearchResponseVo response = searchService.search(searchParam);
         return Result.ok(response);
     }

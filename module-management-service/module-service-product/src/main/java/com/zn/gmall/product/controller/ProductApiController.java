@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.*;
 import com.zn.gmall.product.service.api.ManageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import java.util.Map;
 @RequestMapping("api/product")
 public class ProductApiController {
 
-    @Resource
+    @Autowired
     private ManageService manageService;
 
     /**

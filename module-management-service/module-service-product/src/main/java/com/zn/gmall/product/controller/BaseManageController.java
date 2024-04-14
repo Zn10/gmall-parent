@@ -7,6 +7,7 @@ import com.zn.gmall.model.product.*;
 import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequestMapping("admin/product")
 public class BaseManageController {
 
-    @Resource
+    @Autowired
     private ManageService manageService;
 
     /**

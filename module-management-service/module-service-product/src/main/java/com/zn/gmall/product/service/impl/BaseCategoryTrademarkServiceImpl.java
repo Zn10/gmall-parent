@@ -8,6 +8,7 @@ import com.zn.gmall.model.product.vo.CategoryTrademarkVo;
 import com.zn.gmall.product.mapper.BaseCategoryTrademarkMapper;
 import com.zn.gmall.product.mapper.BaseTrademarkMapper;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -21,10 +22,10 @@ import java.util.stream.Collectors;
 @Service
 public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTrademarkMapper, BaseCategoryTrademark> implements BaseCategoryTrademarkService {
 
-    @Resource
+    @Autowired
     private BaseTrademarkMapper baseTrademarkMapper;
 
-    @Resource
+    @Autowired
     private BaseCategoryTrademarkMapper baseCategoryTrademarkMapper;
 
     /**

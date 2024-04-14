@@ -9,6 +9,8 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.cart.CartInfo;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.product.client.ProductFeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,16 +35,17 @@ import java.util.stream.Collectors;
 @Transactional
 public class CartServiceImpl implements CartService {
 
-    @Resource
+    @Autowired
     private CartInfoMapper cartInfoMapper;
 
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
 
-    @Resource
+    @Qualifier("productDegradeFeignClient")
+    @Autowired
     private ProductFeignClient productFeignClient;
 
-    @Resource
+    @Autowired
     private CartAsyncService cartAsyncService;
 
     /**

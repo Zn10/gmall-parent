@@ -6,6 +6,7 @@ import com.zn.gmall.model.product.vo.CategoryTrademarkVo;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestMapping("admin/product/baseCategoryTrademark")
 public class BaseCategoryTrademarkController {
 
-    @Resource
+    @Autowired
     private BaseCategoryTrademarkService baseCategoryTrademarkService;
 
     /**

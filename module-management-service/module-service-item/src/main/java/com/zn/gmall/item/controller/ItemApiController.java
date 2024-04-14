@@ -2,6 +2,7 @@ package com.zn.gmall.item.controller;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.item.service.api.ItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/item")
 public class ItemApiController {
-    @Resource
+    @Autowired
     private ItemService itemService;
 
     /**
@@ -22,7 +23,7 @@ public class ItemApiController {
      * @param skuId 商品SKUID
      */
     @GetMapping("{skuId}")
-    public Result getItem(@PathVariable Long skuId) {
+    public Result<Map<String,Object>> getItem(@PathVariable Long skuId) {
         Map<String, Object> result = itemService.getBySkuId(skuId);
         return Result.ok(result);
     }

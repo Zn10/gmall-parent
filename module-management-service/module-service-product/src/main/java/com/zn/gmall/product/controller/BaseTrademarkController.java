@@ -7,6 +7,7 @@ import com.zn.gmall.model.product.BaseTrademark;
 import com.zn.gmall.product.service.api.BaseTrademarkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +20,7 @@ import javax.annotation.Resource;
 @RequestMapping("admin/product/baseTrademark")
 public class BaseTrademarkController {
 
-    @Resource
+    @Autowired
     private BaseTrademarkService baseTrademarkService;
 
     /**

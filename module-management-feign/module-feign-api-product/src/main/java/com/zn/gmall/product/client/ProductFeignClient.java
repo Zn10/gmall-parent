@@ -26,7 +26,7 @@ public interface ProductFeignClient {
      * @return
      */
     @GetMapping("/api/product/getBaseCategoryList")
-    Result getBaseCategoryList();
+    Result<Void> getBaseCategoryList();
 
 
     /**

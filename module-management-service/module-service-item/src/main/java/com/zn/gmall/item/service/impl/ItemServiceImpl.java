@@ -7,6 +7,8 @@ import com.zn.gmall.model.product.BaseCategoryView;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.model.product.SpuSaleAttr;
 import com.zn.gmall.product.client.ProductFeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,14 +22,16 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    @Resource
+    @Qualifier("productDegradeFeignClient")
+    @Autowired
     private ProductFeignClient productFeignClient;
 
 
-    @Resource
+    @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
 
-    @Resource
+    @Qualifier("listDegradeFeignClient")
+    @Autowired
     private ListFeignClient listFeignClient;
 
     /**

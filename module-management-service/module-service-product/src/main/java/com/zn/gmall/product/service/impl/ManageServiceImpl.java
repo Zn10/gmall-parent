@@ -12,6 +12,7 @@ import com.zn.gmall.product.service.api.ManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,61 +33,61 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service("ManageService")
 public class ManageServiceImpl implements ManageService {
-    @Resource
+    @Autowired
     private BaseCategory1Mapper baseCategory1Mapper;
 
-    @Resource
+    @Autowired
     private BaseCategory2Mapper baseCategory2Mapper;
 
-    @Resource
+    @Autowired
     private BaseCategory3Mapper baseCategory3Mapper;
 
-    @Resource
+    @Autowired
     private BaseAttrInfoMapper baseAttrInfoMapper;
 
-    @Resource
+    @Autowired
     private BaseAttrValueMapper baseAttrValueMapper;
 
-    @Resource
+    @Autowired
     private SpuInfoMapper spuInfoMapper;
 
-    @Resource
+    @Autowired
     private BaseSaleAttrMapper baseSaleAttrMapper;
 
-    @Resource
+    @Autowired
     private SpuImageMapper spuImageMapper;
 
-    @Resource
+    @Autowired
     private SpuSaleAttrMapper spuSaleAttrMapper;
 
-    @Resource
+    @Autowired
     private SpuSaleAttrValueMapper spuSaleAttrValueMapper;
 
-    @Resource
+    @Autowired
     private SpuPosterMapper spuPosterMapper;
 
-    @Resource
+    @Autowired
     private SkuInfoMapper skuInfoMapper;
 
-    @Resource
+    @Autowired
     private SkuImageMapper skuImageMapper;
 
-    @Resource
+    @Autowired
     private SkuSaleAttrValueMapper skuSaleAttrValueMapper;
 
-    @Resource
+    @Autowired
     private SkuAttrValueMapper skuAttrValueMapper;
 
-    @Resource
+    @Autowired
     private BaseCategoryViewMapper baseCategoryViewMapper;
 
-    @Resource
+    @Autowired
     private RedissonClient redissonClient;
 
-    @Resource
+    @Autowired
     private RedisTemplate<String, SkuInfo> redisTemplate;
 
-    @Resource
+    @Autowired
     private BaseTrademarkMapper baseTrademarkMapper;
 
     /**
