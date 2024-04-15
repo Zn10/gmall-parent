@@ -73,7 +73,7 @@ public class ProductApiController {
      * @param spuId 商品SPUID
      */
     @GetMapping("inner/getSkuValueIdsMap/{spuId}")
-    public Map getSkuValueIdsMap(@PathVariable("spuId") Long spuId) {
+    public Map<Object,Object> getSkuValueIdsMap(@PathVariable("spuId") Long spuId) {
         return manageService.getSkuValueIdsMap(spuId);
     }
 

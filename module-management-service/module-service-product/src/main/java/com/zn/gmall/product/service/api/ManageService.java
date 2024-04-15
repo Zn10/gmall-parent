@@ -55,7 +55,7 @@ public interface ManageService {
      *
      * @param spuId 商品SPUid
      */
-    Map getSkuValueIdsMap(Long spuId);
+    Map<Object,Object> getSkuValueIdsMap(Long spuId);
 
 
     /**

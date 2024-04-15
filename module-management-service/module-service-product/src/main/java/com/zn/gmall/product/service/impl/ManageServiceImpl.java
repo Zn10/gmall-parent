@@ -220,7 +220,7 @@ public class ManageServiceImpl implements ManageService {
      */
     @Override
     @GmallCache(prefix = "saleAttrValuesBySpu:")
-    public Map getSkuValueIdsMap(Long spuId) {
+    public Map<Object,Object> getSkuValueIdsMap(Long spuId) {
         Map<Object, Object> map = new HashMap<>();
         // key = 125|123 ,value = 37
         List<Map> mapList = skuSaleAttrValueMapper.selectSaleAttrValuesBySpu(spuId);
@@ -308,7 +308,7 @@ public class ManageServiceImpl implements ManageService {
         // 1、声明 SkuInfo 变量，用于接收查询结果
         SkuInfo skuInfo;
 
-        // 2、todo 查询缓存
+        // 2、查询缓存
         // [1]创建 SkuInfo 业务数据 Key 字符串
         String skuKey = RedisConst.SKUKEY_PREFIX + skuId + RedisConst.SKUKEY_SUFFIX;
 

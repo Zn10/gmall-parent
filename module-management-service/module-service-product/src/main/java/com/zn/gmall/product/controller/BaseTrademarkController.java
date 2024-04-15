@@ -60,7 +60,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "新增BaseTrademark")
     @PostMapping("save")
-    public Result<String> save(@RequestBody BaseTrademark banner) {
+    public Result<Void> save(@RequestBody BaseTrademark banner) {
         baseTrademarkService.save(banner);
         return Result.ok();
     }
@@ -72,7 +72,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "修改BaseTrademark")
     @PutMapping("update")
-    public Result<String> updateById(@RequestBody BaseTrademark banner) {
+    public Result<Void> updateById(@RequestBody BaseTrademark banner) {
         baseTrademarkService.updateById(banner);
         return Result.ok();
     }
@@ -84,7 +84,7 @@ public class BaseTrademarkController {
      */
     @ApiOperation(value = "删除BaseTrademark")
     @DeleteMapping("remove/{id}")
-    public Result<String> remove(@PathVariable Long id) {
+    public Result<Void> remove(@PathVariable Long id) {
         baseTrademarkService.removeById(id);
         return Result.ok();
     }

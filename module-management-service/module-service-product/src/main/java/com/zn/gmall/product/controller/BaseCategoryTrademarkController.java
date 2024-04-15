@@ -30,7 +30,7 @@ public class BaseCategoryTrademarkController {
      */
     @ApiOperation("保存分类与品牌关联")
     @PostMapping("save")
-    public Result<String> save(@RequestBody CategoryTrademarkVo categoryTrademarkVo) {
+    public Result<Void> save(@RequestBody CategoryTrademarkVo categoryTrademarkVo) {
         //  保存方法
         baseCategoryTrademarkService.save(categoryTrademarkVo);
         return Result.ok();
@@ -44,7 +44,7 @@ public class BaseCategoryTrademarkController {
      */
     @ApiOperation("删除关联")
     @DeleteMapping("remove/{category3Id}/{trademarkId}")
-    public Result<String> remove(@PathVariable Long category3Id, @PathVariable Long trademarkId) {
+    public Result<Void> remove(@PathVariable Long category3Id, @PathVariable Long trademarkId) {
         //  调用服务层方法
         baseCategoryTrademarkService.remove(category3Id, trademarkId);
         return Result.ok();

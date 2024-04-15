@@ -29,7 +29,7 @@ public class SpuManageController {
      * @param spuInfo 商品SPU实例
      */
     @PostMapping("saveSpuInfo")
-    public Result<String> saveSpuInfo(@RequestBody SpuInfo spuInfo) {
+    public Result<Void> saveSpuInfo(@RequestBody SpuInfo spuInfo) {
         // 调用服务层的保存方法
         manageService.saveSpuInfo(spuInfo);
         return Result.ok();
