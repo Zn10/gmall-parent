@@ -8,7 +8,7 @@ public enum CouponRangeType {
     CATAGORY("品类券" ),
     TRADEMARK("品牌券");
 
-    private String comment ;
+    private final String comment ;
 
     CouponRangeType(String comment ){
         this.comment=comment;

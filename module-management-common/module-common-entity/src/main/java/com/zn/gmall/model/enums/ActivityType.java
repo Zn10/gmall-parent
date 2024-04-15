@@ -7,7 +7,7 @@ public enum ActivityType {
     FULL_REDUCTION("满减"),
     FULL_DISCOUNT("满量打折" );
 
-    private String comment ;
+    private final String comment ;
 
     ActivityType(String comment ){
         this.comment=comment;

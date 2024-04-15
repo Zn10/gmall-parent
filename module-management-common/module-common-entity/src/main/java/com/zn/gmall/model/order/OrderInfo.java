@@ -12,6 +12,7 @@ import com.zn.gmall.model.order.vo.OrderDetailVo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "订单信息")
 @TableName("order_info")

@@ -9,7 +9,7 @@ public enum CouponType {
     CASH("现金卷"),
     DISCOUNT("折扣卷" );
 
-    private String comment ;
+    private final String comment ;
 
     CouponType(String comment ){
         this.comment=comment;

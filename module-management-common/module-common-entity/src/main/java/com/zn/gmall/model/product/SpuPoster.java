@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -14,6 +15,7 @@ import lombok.Data;
  *
 
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ApiModel(description = "SpuPoster")
 @TableName("spu_poster")

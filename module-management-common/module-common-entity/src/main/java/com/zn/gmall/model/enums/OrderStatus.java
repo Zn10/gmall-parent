@@ -1,5 +1,9 @@
 package com.zn.gmall.model.enums;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
 public enum OrderStatus {
     UNPAID("未支付"),
     PAID("已支付" ),
@@ -9,7 +13,7 @@ public enum OrderStatus {
     FINISHED("已完结") ,
     SPLIT("订单已拆分");
 
-    private String comment ;
+    private final String comment ;
     //  根据订单状态来呼气订单名称
     public static String getStatusNameByStatus(String status) {
         OrderStatus arrObj[] = OrderStatus.values();
@@ -25,11 +29,4 @@ public enum OrderStatus {
         this.comment=comment;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }

@@ -8,7 +8,7 @@ public enum CouponStatus {
     USE_RUN("使用中" ),
     USED("已使用");
     
-    private String comment ;
+    private final String comment ;
 
     CouponStatus(String comment ){
         this.comment=comment;
