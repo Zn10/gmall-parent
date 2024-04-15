@@ -15,7 +15,7 @@ public interface SkuSaleAttrValueMapper extends BaseMapper<SkuSaleAttrValue> {
      *
      * @param spuId 商品SPUID
      */
-    List<Map> selectSaleAttrValuesBySpu(Long spuId);
+    List<Map<Object,Object>> selectSaleAttrValuesBySpu(Long spuId);
 
 }
 

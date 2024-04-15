@@ -10,6 +10,7 @@ import com.zn.gmall.product.mapper.BaseTrademarkMapper;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -60,6 +61,7 @@ public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTr
      * @param trademarkId 关联id
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void remove(Long category3Id, Long trademarkId) {
         //  逻辑删除： 本质更新操作 is_deleted
         //  更新： update base_category_trademark set is_deleted = 1 where category3_id=? and trademark_id=?;
@@ -90,9 +92,7 @@ public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTr
             //  在所有的品牌Id 中将这些有关联的品牌Id 给过滤掉就可以！
             //  select * from base_trademark; 外面 baseTrademarkMapper.selectList(null) {1,2,3,5}
             //  返回数据
-            return baseTrademarkMapper.selectList(null).stream().filter(baseTrademark -> {
-                return !tradeMarkIdList.contains(baseTrademark.getId());
-            }).collect(Collectors.toList());
+            return baseTrademarkMapper.selectList(null).stream().filter(baseTrademark -> !tradeMarkIdList.contains(baseTrademark.getId())).collect(Collectors.toList());
         }
         //  如果说这个三级分类Id 下 没有任何品牌！ 则获取到所有的品牌数据！
         return baseTrademarkMapper.selectList(null);
@@ -104,6 +104,7 @@ public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTr
      * @param categoryTrademarkVo 封装分类与品牌VO
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(CategoryTrademarkVo categoryTrademarkVo) {
         /*
         private Long category3Id;

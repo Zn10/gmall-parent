@@ -133,41 +133,46 @@ public class ManageServiceImpl implements ManageService {
             // 循环获取二级分类数据
             Map<Long, List<BaseCategoryView>> category2Map = category2List1.stream().collect(Collectors.groupingBy(BaseCategoryView::getCategory2Id));
             // 声明二级分类对象集合
-            List<JSONObject> category2Child = new ArrayList<>();
-            // 循环遍历
-            for (Map.Entry<Long, List<BaseCategoryView>> entry2 : category2Map.entrySet()) {
-                // 获取二级分类Id
-                Long category2Id = entry2.getKey();
-                // 获取二级分类下的所有集合
-                List<BaseCategoryView> category3List = entry2.getValue();
-                // 声明二级分类对象
-                JSONObject category2 = new JSONObject();
-
-                category2.put("categoryId", category2Id);
-                category2.put("categoryName", category3List.get(0).getCategory2Name());
-                // 添加到二级分类集合
-                category2Child.add(category2);
-
-                List<JSONObject> category3Child = new ArrayList<>();
-
-                // 循环三级分类数据
-                category3List.forEach(category3View -> {
-                    JSONObject category3 = new JSONObject();
-                    category3.put("categoryId", category3View.getCategory3Id());
-                    category3.put("categoryName", category3View.getCategory3Name());
-
-                    category3Child.add(category3);
-                });
-
-                // 将三级数据放入二级里面
-                category2.put("categoryChild", category3Child);
-
-            }
+            List<JSONObject> category2Child = getJsonObjects(category2Map);
             // 将二级数据放入一级里面
             category1.put("categoryChild", category2Child);
             list.add(category1);
         }
         return list;
+    }
+
+    private static List<JSONObject> getJsonObjects(Map<Long, List<BaseCategoryView>> category2Map) {
+        List<JSONObject> category2Child = new ArrayList<>();
+        // 循环遍历
+        for (Map.Entry<Long, List<BaseCategoryView>> entry2 : category2Map.entrySet()) {
+            // 获取二级分类Id
+            Long category2Id = entry2.getKey();
+            // 获取二级分类下的所有集合
+            List<BaseCategoryView> category3List = entry2.getValue();
+            // 声明二级分类对象
+            JSONObject category2 = new JSONObject();
+
+            category2.put("categoryId", category2Id);
+            category2.put("categoryName", category3List.get(0).getCategory2Name());
+            // 添加到二级分类集合
+            category2Child.add(category2);
+
+            List<JSONObject> category3Child = new ArrayList<>();
+
+            // 循环三级分类数据
+            category3List.forEach(category3View -> {
+                JSONObject category3 = new JSONObject();
+                category3.put("categoryId", category3View.getCategory3Id());
+                category3.put("categoryName", category3View.getCategory3Name());
+
+                category3Child.add(category3);
+            });
+
+            // 将三级数据放入二级里面
+            category2.put("categoryChild", category3Child);
+
+        }
+        return category2Child;
     }
 
     private SkuInfo getSkuInfoFromDatabase(Long skuId) {
@@ -223,10 +228,10 @@ public class ManageServiceImpl implements ManageService {
     public Map<Object,Object> getSkuValueIdsMap(Long spuId) {
         Map<Object, Object> map = new HashMap<>();
         // key = 125|123 ,value = 37
-        List<Map> mapList = skuSaleAttrValueMapper.selectSaleAttrValuesBySpu(spuId);
+        List<Map<Object,Object>> mapList = skuSaleAttrValueMapper.selectSaleAttrValuesBySpu(spuId);
         if (mapList != null && !mapList.isEmpty()) {
             // 循环遍历
-            for (Map skuMap : mapList) {
+            for (Map<Object,Object> skuMap : mapList) {
                 // key = 125|123 ,value = 37
                 map.put(skuMap.get("value_ids"), skuMap.get("sku_id"));
             }
@@ -400,7 +405,7 @@ public class ManageServiceImpl implements ManageService {
     /**
      * 商品上架
      *
-     * @param skuId 商品SKUID
+     * @param skuId 商品SKUid
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -415,7 +420,7 @@ public class ManageServiceImpl implements ManageService {
     /**
      * 商品下架
      *
-     * @param skuId 商品SKUID
+     * @param skuId 商品SKUid
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -471,7 +476,7 @@ public class ManageServiceImpl implements ManageService {
     /**
      * 根据spuId 查询销售属性集合
      *
-     * @param spuId 商品SPUID
+     * @param spuId 商品SKUid
      * @return List<SpuSaleAttr>
      */
     @Override
@@ -482,7 +487,7 @@ public class ManageServiceImpl implements ManageService {
     /**
      * 根据spuId 查询spuImageList
      *
-     * @param spuId 商品SPUID
+     * @param spuId 商品SPUid
      * @return List<SpuImage>
      */
     @Override
@@ -516,7 +521,7 @@ public class ManageServiceImpl implements ManageService {
             for (SpuImage spuImage : spuImageList) {
                 //  需要将spuId 赋值
                 spuImage.setSpuId(spuInfo.getId());
-                //  保存spuImge
+                //  保存SpuImage
                 spuImageMapper.insert(spuImage);
             }
         }
