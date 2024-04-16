@@ -1,5 +1,6 @@
 package com.zn.gmall.product.client;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.*;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -26,7 +27,7 @@ public interface ProductFeignClient {
      * @return
      */
     @GetMapping("/api/product/getBaseCategoryList")
-    Result<Void> getBaseCategoryList();
+    Result<List<JSONObject>> getBaseCategoryList();
 
 
     /**

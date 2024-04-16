@@ -7,6 +7,7 @@ import com.zn.gmall.model.product.BaseCategoryView;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.model.product.SpuSaleAttr;
 import com.zn.gmall.product.client.ProductFeignClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 
+@Slf4j
 @Service
 public class ItemServiceImpl implements ItemService {
 
@@ -102,7 +104,7 @@ public class ItemServiceImpl implements ItemService {
             String valuesIdsJSON = futureValueIdsJSON.get();
             finalDataMap.put("valuesSkuJson", valuesIdsJSON);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("exception message", e);
         }
 
         return finalDataMap;

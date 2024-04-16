@@ -6,6 +6,7 @@ import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * SPU图片上传管理控制
  */
+@Slf4j
 @RestController
 @RequestMapping("admin/product")
 public class FileUploadController {
@@ -77,7 +80,7 @@ public class FileUploadController {
         //  文件上传之后的路径： http://39.99.159.121:9000/gmall/xxxxxx
         url = endpointUrl + "/" + bucketName + "/" + fileName;
 
-        System.out.println("url:\t" + url);
+        log.info("url:\t" + url);
         //  将文件上传之后的路径返回给页面！
         return Result.ok(url);
     }

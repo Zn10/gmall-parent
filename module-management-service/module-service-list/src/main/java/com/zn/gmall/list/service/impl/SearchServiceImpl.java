@@ -256,7 +256,7 @@ public class SearchServiceImpl implements SearchService {
             if (!StringUtils.isEmpty(attrString)) {
                 String[] split = attrString.split(":");
 
-                if (split != null && split.length == 3) {
+                if (split.length == 3) {
 
                     // 从参数字符串中解析出平台属性 id
                     String attrId = split[0];
@@ -290,7 +290,7 @@ public class SearchServiceImpl implements SearchService {
         String trademark = searchParam.getTrademark();
         if (!StringUtils.isEmpty(trademark)) {
             String[] split = trademark.split(":");
-            if (split != null && split.length == 2) {
+            if (split.length == 2) {
                 String tmId = split[0];
                 // 对应 DSL 中的结构：最外层 query -> bool -> filter
                 boolQueryBuilder.filter(
@@ -321,16 +321,17 @@ public class SearchServiceImpl implements SearchService {
                     break;
             }
 
+            assert orderFieldName != null;
             searchSourceBuilder.sort(
                     orderFieldName,
-                    "ASC".equals(orderDirection.toUpperCase()) ? SortOrder.ASC : SortOrder.DESC
+                    "ASC".equalsIgnoreCase(orderDirection) ? SortOrder.ASC : SortOrder.DESC
             );
         }
 
         // 第四步：封装分页数据（对应 DSL 语句中的 from、size 部分）
         Integer pageNo = searchParam.getPageNo();
         Integer pageSize = searchParam.getPageSize();
-        Integer from = (pageNo - 1) * pageSize;
+        int from = (pageNo - 1) * pageSize;
         searchSourceBuilder.from(from);
         searchSourceBuilder.size(pageSize);
 
@@ -407,11 +408,9 @@ public class SearchServiceImpl implements SearchService {
         // 获取内层 hits，这里就包含了我们要的商品数据
         SearchHit[] searchHitArr = outerHits.getHits();
 
-        for (int i = 0; i < searchHitArr.length; i++) {
+        for (SearchHit searchHit : searchHitArr) {
             // 2、解析常规数据
             // 获取每一个 SearchHit 对象，每一个 SearchHit 对象都对应一个 Goods 对象
-            SearchHit searchHit = searchHitArr[i];
-
             // 从 SearchHit 对象中获取查询结果数据
             String sourceJSONString = searchHit.getSourceAsString();
 

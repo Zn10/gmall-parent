@@ -31,8 +31,8 @@ public class ProductDegradeFeignClient implements ProductFeignClient {
     }
 
     @Override
-    public Result<Void> getBaseCategoryList() {
-        Result<Void> result = Result.fail();
+    public Result<List<JSONObject>> getBaseCategoryList() {
+        Result<List<JSONObject>> result = Result.fail();
         result.message("服务降级");
         return result;
     }
