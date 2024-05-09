@@ -62,7 +62,7 @@ public class SearchServiceImpl implements SearchService {
     private GoodsRepository goodsRepository;
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,String> redisTemplate;
 
     @Autowired
     private RestHighLevelClient highLevelClient;

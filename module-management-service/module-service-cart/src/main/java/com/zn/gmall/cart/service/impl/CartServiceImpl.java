@@ -39,7 +39,7 @@ public class CartServiceImpl implements CartService {
     private CartInfoMapper cartInfoMapper;
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,String> redisTemplate;
 
     @Qualifier("productDegradeFeignClient")
     @Autowired

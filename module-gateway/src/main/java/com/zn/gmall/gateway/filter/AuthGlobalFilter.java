@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.result.ResultCodeEnum;
 import com.zn.gmall.common.util.IpUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -37,7 +36,7 @@ import java.util.List;
 public class AuthGlobalFilter implements GlobalFilter {
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -170,7 +169,7 @@ public class AuthGlobalFilter implements GlobalFilter {
     /**
      * 根据响应对象和自定义的响应码生成响应结果
      *
-     * @param response 响应对象
+     * @param response       响应对象
      * @param resultCodeEnum 自定义响应码
      * @return
      */
