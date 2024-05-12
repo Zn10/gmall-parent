@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +67,7 @@ public class ListController {
         String trademark = searchParam.getTrademark();
         if (!StringUtils.isEmpty(trademark)) {
             String[] split = trademark.split(":");
-            if (split != null && split.length == 2) {
+            if (split.length == 2) {
                 return "品牌:" + split[1];
             }
         }
@@ -93,10 +92,9 @@ public class ListController {
 
         String[] props = searchParam.getProps();
         if (!ArrayUtils.isEmpty(props)) {
-            for (int i = 0; i < props.length; i++) {
-                String prop = props[i];
+            for (String prop : props) {
                 String[] split = prop.split(":");
-                if (split != null && split.length == 3) {
+                if (split.length == 3) {
                     String attrId = split[0];
                     String attrValue = split[1];
                     String attrName = split[2];
@@ -174,29 +172,29 @@ public class ListController {
         // 2、拼接分类参数
         Long category1Id = searchParam.getCategory1Id();
         if (category1Id != null) {
-            urlParamBuilder.append("&category1Id=" + category1Id);
+            urlParamBuilder.append("&category1Id=").append(category1Id);
         }
 
         Long category2Id = searchParam.getCategory2Id();
         if (category2Id != null) {
-            urlParamBuilder.append("&category2Id=" + category2Id);
+            urlParamBuilder.append("&category2Id=").append(category2Id);
         }
 
         Long category3Id = searchParam.getCategory3Id();
         if (category3Id != null) {
-            urlParamBuilder.append("&category3Id=" + category3Id);
+            urlParamBuilder.append("&category3Id=").append(category3Id);
         }
 
         // 3、拼接品牌参数
         String trademark = searchParam.getTrademark();
         if (!StringUtils.isEmpty(trademark)) {
-            urlParamBuilder.append("&trademark=" + trademark);
+            urlParamBuilder.append("&trademark=").append(trademark);
         }
 
         // 4、拼接关键词参数
         String keyword = searchParam.getKeyword();
         if (!StringUtils.isEmpty(keyword)) {
-            urlParamBuilder.append("&keyword=" + keyword);
+            urlParamBuilder.append("&keyword=").append(keyword);
         }
 
         // 5、拼接平台属性
@@ -206,9 +204,8 @@ public class ListController {
         // ※SearchParam 提供的是一个数组，所以我们需要遍历数组再拼接
         String[] props = searchParam.getProps();
         if (!ArrayUtils.isEmpty(props)) {
-            for (int i = 0; i < props.length; i++) {
-                String prop = props[i];
-                urlParamBuilder.append("&props=" + prop);
+            for (String prop : props) {
+                urlParamBuilder.append("&props=").append(prop);
             }
         }
 

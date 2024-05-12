@@ -39,7 +39,7 @@ public class CartServiceImpl implements CartService {
     private CartInfoMapper cartInfoMapper;
 
     @Resource
-    private RedisTemplate<String,String> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Qualifier("productDegradeFeignClient")
     @Autowired
@@ -82,7 +82,7 @@ public class CartServiceImpl implements CartService {
         // 3、如果 cartInfoList 包含有效数据则将有效数据存入 Redis 缓存
         if (!CollectionUtils.isEmpty(cartInfoList)) {
 
-            HashOperations operator = redisTemplate.opsForHash();
+            HashOperations<String, Object, Object> operator = redisTemplate.opsForHash();
 
             // 3、为了每一个 cartInfo 对象存入 Redis，作为 hash 结构中的 value 部分，需要遍历 cartInfoList
             for (CartInfo cartInfo : cartInfoList) {
@@ -149,7 +149,7 @@ public class CartServiceImpl implements CartService {
         }
 
         // 第三种情况：登录集合为空，未登录集合非空
-        if (CollectionUtils.isEmpty(cartInfoList_login) && !CollectionUtils.isEmpty(cartInfoList_not_login)) {
+        if (CollectionUtils.isEmpty(cartInfoList_login) && CollectionUtils.isEmpty(cartInfoList_not_login)) {
             return cartInfoList_not_login;
         }
 
@@ -178,7 +178,7 @@ public class CartServiceImpl implements CartService {
                             .collect(
                                     Collectors.toMap(
                                             // 给新 Map 提供 Key：
-                                            (CartInfo cartInfo) -> cartInfo.getSkuId(),
+                                            CartInfo::getSkuId,
 
                                             // 给新 Map 提供 Value：
                                             (CartInfo cartInfo) -> cartInfo)
@@ -245,7 +245,7 @@ public class CartServiceImpl implements CartService {
 
             // --------------------------- 把合并之后的数据重新写入 Redis ---------------------------
             // 1、获取 Redis 的 Hash 类型的操作器对象
-            HashOperations operator = redisTemplate.opsForHash();
+            HashOperations<String, Object, Object> operator = redisTemplate.opsForHash();
 
             // 2、删除正式用户对应的缓存数据
             // ※说明：写入合并后数据时，旧的数据都会被覆盖，所以不需要执行删除
@@ -387,7 +387,7 @@ public class CartServiceImpl implements CartService {
         // 原来如果无值：保存
         String cartKey = getCartKey(userId);
 
-        HashOperations operator = redisTemplate.opsForHash();
+        HashOperations<String, Object, Object> operator = redisTemplate.opsForHash();
 
         operator.put(cartKey, skuId.toString(), cartInfo);
 
@@ -407,14 +407,14 @@ public class CartServiceImpl implements CartService {
         String cartKey = getCartKey(userId);
 
         // [2]获取操作器对象
-        BoundHashOperations boundOperator = redisTemplate.boundHashOps(cartKey);
+        BoundHashOperations<String, Object, Object> boundOperator = redisTemplate.boundHashOps(cartKey);
 
         // [3]根据 skuId 从购物车数据中取出一条具体的购物项数据
         CartInfo cartInfo = (CartInfo) boundOperator.get(skuId.toString());
 
         // [4]做判空操作，如果 CartInfo 对象为空则当前方法停止执行
         if (cartInfo == null) {
-            return ;
+            return;
         }
 
         // [5]修改 CartInfo 对象的选中状态
@@ -443,7 +443,7 @@ public class CartServiceImpl implements CartService {
         String cartKey = getCartKey(userId);
 
         // [2]获取操作器对象
-        BoundHashOperations boundOperator = redisTemplate.boundHashOps(cartKey);
+        BoundHashOperations<String, Object, Object> boundOperator = redisTemplate.boundHashOps(cartKey);
 
         // [3]执行删除
         boundOperator.delete(skuId.toString());
