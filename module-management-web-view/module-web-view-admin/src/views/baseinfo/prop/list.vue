@@ -147,7 +147,7 @@ export default {
     getAttrInfoList(categoryId, categoryLevel) {
       this.categoryId = categoryId
       this.categoryLevel = categoryLevel
-      debugger
+      // debugger
       if (categoryLevel === 1) {
         this.category1Id = categoryId
         this.category2Id = 0

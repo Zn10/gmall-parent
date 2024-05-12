@@ -215,7 +215,7 @@ export default {
 
     // 获取品牌列表
     getTrademarkList() {
-      debugger
+      // debugger
       // 查询数据
       categoryTrademarkApi.findTrademarkList(this.category3Id).then(response => {
         this.trademarkList = response.data
@@ -282,7 +282,7 @@ export default {
 
     // 上传图片成功的回调
     onUploadSuccess(res, file) {
-      debugger
+      // debugger
       // 填充上传文件列表
       this.spuForm.spuImageList.push({
         imgName: file.name,
@@ -357,7 +357,7 @@ export default {
 
     // 上传图片成功的回调
     onUploadPosterSuccess(res, file) {
-      debugger
+      // debugger
       // 填充上传文件列表
       this.spuForm.spuPosterList.push({
         imgName: file.name,

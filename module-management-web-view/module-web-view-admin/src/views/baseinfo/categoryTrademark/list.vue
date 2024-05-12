@@ -165,7 +165,7 @@ export default {
       this.listLoading = true
       categoryTrademarkApi.findTrademarkList(this.category3Id).then(
         response => {
-          debugger
+          // debugger
           this.list = response.data
 
           // 数据加载并绑定成功

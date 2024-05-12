@@ -109,10 +109,10 @@ export default {
       console.log('翻页。。。' + page)
       // 异步获取远程数据（ajax）
       this.page = page
-      debugger
+      // debugger
       userInfoApi.getPageList(this.page, this.limit, this.searchObj).then(
         response => {
-          debugger
+          // debugger
           this.list = response.data.records
           this.total = response.data.total
 

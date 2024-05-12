@@ -42,7 +42,7 @@ export default {
   // 查找品牌
   getTrademarkList() {
     return request({
-      url: '/admin/product/baseTrademark/getTrademarkList',
+      url: `${api_name}/getTrademarkList`,
       method: 'get'
     })
   },

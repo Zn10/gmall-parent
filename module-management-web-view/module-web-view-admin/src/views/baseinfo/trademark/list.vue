@@ -42,9 +42,9 @@
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
           <router-link :to="'/baseinfo/trademark/edit/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
+            <el-button type="primary" size="mini" icon="el-icon-edit"/>
           </router-link>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)"></el-button>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)"/>
         </template>
       </el-table-column>
     </el-table>
@@ -99,7 +99,7 @@ export default {
       this.fetchData(1)
     },
 
-    add(){
+    add() {
       this.$router.push({ path: '/baseinfo/trademark/add' })
     },
 
@@ -111,7 +111,7 @@ export default {
 
       trademarkApi.getPageList(this.page, this.limit, this.searchObj).then(
         response => {
-          debugger
+          // debugger
           this.list = response.data.records
           this.total = response.data.total
 

@@ -337,7 +337,7 @@ export default {
         couponRangeList: couponRangeList,
         rangeDesc: rangeDesc
       }
-      debugger
+      // debugger
       api.saveCouponRule(ruleData).then(response => {
         this.$message.success(response.message)
         this.$router.push({ path: '/activity/couponInfo/list' })
@@ -355,7 +355,7 @@ export default {
 
     fetchRuleDataById(id) {
       api.findCouponRuleList(id).then(response => {
-        debugger
+        // debugger
         this.spuInfoList = response.data.spuInfoList || []
         this.category3List = response.data.category3List || []
         this.trademarkList = response.data.trademarkList || []
@@ -381,7 +381,7 @@ export default {
     },
 
     selectSpuData(item) {
-      debugger
+      // debugger
       this.spuInfoList.push(item)
       this.dialogSpduRangVisible = false
     },
@@ -391,7 +391,7 @@ export default {
     },
 
     selectCategory(categoryId = 1, categoryName = '') {
-      debugger
+      // debugger
       console.log(categoryId)
       this.category3List.push({
         id: categoryId,
