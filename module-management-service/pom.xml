@@ -26,6 +26,41 @@
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-list</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-user</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-cart</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-product</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-item</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-payment</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--依赖服务的工具类-->
         <dependency>
             <groupId>com.zn</groupId>
