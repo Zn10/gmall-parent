@@ -8,6 +8,7 @@ spring:
                 prefix: ${spring.application.name}
                 server-addr: gmall-nacos:8848
                 timeout: 50000
+                namespace: gmall
             discovery:
                 server-addr: gmall-nacos:8848
     profiles:

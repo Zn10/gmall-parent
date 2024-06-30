@@ -7,6 +7,7 @@ spring:
                 file-extension: yaml
                 prefix: ${spring.application.name}
                 server-addr: gmall-nacos:8848
+                namespace: gmall
                 timeout: 50000
                 shared-configs:
                 -   data-id: common.yaml
