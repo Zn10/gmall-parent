@@ -46,12 +46,14 @@ public class GwareServiceImpl implements GwareService {
     @Value("${order.split.url}")
     private String ORDER_URL;
 
+    @Override
     public Integer getStockBySkuId(String skuid) {
         Integer stock = wareSkuMapper.selectStockBySkuid(skuid);
 
         return stock;
     }
 
+    @Override
     public boolean hasStockBySkuId(String skuid, Integer num) {
         Integer stock = getStockBySkuId(skuid);
 
@@ -62,17 +64,20 @@ public class GwareServiceImpl implements GwareService {
     }
 
 
+    @Override
     public List<WareInfo> getWareInfoBySkuid(String skuid) {
         List<WareInfo> wareInfos = wareInfoMapper.selectWareInfoBySkuid(skuid);
         return wareInfos;
     }
 
+    @Override
     public List<WareInfo> getWareInfoList() {
         List<WareInfo> wareInfos = wareInfoMapper.selectList(null);
         return wareInfos;
     }
 
 
+    @Override
     public void addWareInfo() {
         WareInfo wareInfo = new WareInfo();
         wareInfo.setAddress("1123");
@@ -86,6 +91,7 @@ public class GwareServiceImpl implements GwareService {
         wareSkuMapper.insert(wareSku);
     }
 
+    @Override
     public Map<String, List<String>> getWareSkuMap(List<String> skuIdlist) {
         QueryWrapper<WareSku> queryWrapper = new QueryWrapper();
         queryWrapper.in("sku_id", skuIdlist);
@@ -120,10 +126,12 @@ public class GwareServiceImpl implements GwareService {
         return wareSkuMapList;
     }
 
+    @Override
     public void addWareSku(WareSku wareSku) {
         wareSkuMapper.insert(wareSku);
     }
 
+    @Override
     public List<WareSku> getWareSkuList() {
         List<WareSku> wareSkuList = wareSkuMapper.selectWareSkuAll();
         return wareSkuList;
@@ -144,6 +152,7 @@ public class GwareServiceImpl implements GwareService {
      * 出库操作  减库存和锁定库存，
      * @param taskExample
      */
+    @Override
     @Transactional
     public void deliveryStock(WareOrderTask taskExample) {
         String trackingNo = taskExample.getTrackingNo();
@@ -182,6 +191,7 @@ public class GwareServiceImpl implements GwareService {
 //        session.commit();
     }
 
+    @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<WareOrderTask> checkOrderSplit(WareOrderTask wareOrderTask) {
         List<WareOrderTaskDetail> details = wareOrderTask.getDetails();
@@ -218,7 +228,7 @@ public class GwareServiceImpl implements GwareService {
         return null;
     }
 
-
+    @Override
     public WareOrderTask saveWareOrderTask(WareOrderTask wareOrderTask) {
         wareOrderTask.setCreateTime(new Date());
 
@@ -255,6 +265,7 @@ public class GwareServiceImpl implements GwareService {
         this.sendMessage(MqConst.EXCHANGE_DIRECT_WARE_ORDER, MqConst.ROUTING_WARE_ORDER, JSON.toJSONString(map));
     }
 
+    @Override
     @Transactional
     public void lockStock(WareOrderTask wareOrderTask) {
         List<WareOrderTaskDetail> wareOrderTaskDetails = wareOrderTask.getDetails();
@@ -272,7 +283,7 @@ public class GwareServiceImpl implements GwareService {
             }
         }
 
-        if (comment.length() > 0) {   //库存超卖 记录日志，返回错误状态
+        if (!comment.isEmpty()) {   //库存超卖 记录日志，返回错误状态
             wareOrderTask.setTaskComment(comment);
             wareOrderTask.setTaskStatus(TaskStatus.OUT_OF_STOCK.name());
             updateStatusWareOrderTaskByOrderId(wareOrderTask.getOrderId(), TaskStatus.OUT_OF_STOCK);
@@ -296,6 +307,7 @@ public class GwareServiceImpl implements GwareService {
         return;
     }
 
+    @Override
     public List<WareOrderTask> getWareOrderTaskList(WareOrderTask wareOrderTask) {
         List<WareOrderTask> wareOrderTasks = null;
         if (wareOrderTask == null) {

@@ -12,6 +12,12 @@
     <artifactId>module-gateway</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.zn</groupId>
             <artifactId>module-common-util</artifactId>
