@@ -4,26 +4,26 @@
     <h4>活动信息</h4>
     <table class="table table-striped table-condenseda table-bordered" width="100%">
       <tbody>
-        <tr>
-          <th width="15%">活动标题</th>
-          <td width="35%"><b style="font-size: 14px">{{ activityInfo.activityName }}</b></td>
-          <th width="15%">活动时间</th>
-          <td width="35%">{{ activityInfo.startTime }}至{{ activityInfo.endTime }}</td>
-        </tr>
-        <tr>
-          <th>活动类型</th>
-          <td>{{ activityInfo.activityTypeString }}</td>
-          <th>创建时间</th>
-          <td>{{ activityInfo.createTime }}</td>
-        </tr>
-        <tr>
-          <th>活动描述</th>
-          <td colspan="3">{{ activityInfo.activityDesc }}</td>
-        </tr>
+      <tr>
+        <th width="15%">活动标题</th>
+        <td width="35%"><b style="font-size: 14px">{{ activityInfo.activityName }}</b></td>
+        <th width="15%">活动时间</th>
+        <td width="35%">{{ activityInfo.startTime }}至{{ activityInfo.endTime }}</td>
+      </tr>
+      <tr>
+        <th>活动类型</th>
+        <td>{{ activityInfo.activityTypeString }}</td>
+        <th>创建时间</th>
+        <td>{{ activityInfo.createTime }}</td>
+      </tr>
+      <tr>
+        <th>活动描述</th>
+        <td colspan="3">{{ activityInfo.activityDesc }}</td>
+      </tr>
       </tbody>
     </table>
 
-    <el-dialog :visible.sync="dialogRuleVisible" title="添加规则" width="490px">
+    <el-dialog title="添加规则" :visible.sync="dialogRuleVisible" width="490px">
       <el-form label-width="120px" >
         <el-form-item v-if="activityInfo.activityType == 'FULL_REDUCTION'" label="满减金额">
           <el-input v-model="activityRule.conditionAmount"/>
@@ -81,12 +81,12 @@
 
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.$index)"/>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.$index)"></el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-dialog :visible.sync="dialogRangVisible" title="添加活动范围" width="490px">
+    <el-dialog title="添加活动范围" :visible.sync="dialogRangVisible" width="490px">
       <div style="margin-top: 20px;">
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item>
@@ -148,7 +148,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog :visible.sync="dialogCouponVisible" title="添加活动范围" width="490px" @close="dialogCouponVisible = false">
+    <el-dialog title="添加活动范围" :visible.sync="dialogCouponVisible" width="490px" @close="dialogCouponVisible = false">
       <div style="margin-top: 20px;">
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item>

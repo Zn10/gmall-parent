@@ -43,7 +43,7 @@
       </el-table>
     </div>
 
-    <el-dialog :visible.sync="dialogVisible" title="添加品牌" width="40%" >
+    <el-dialog title="添加品牌" :visible.sync="dialogVisible" width="40%" >
       <el-form ref="flashPromotionForm" label-width="150px" size="small" style="padding-right: 40px;">
 
         <el-table
@@ -69,8 +69,8 @@
         </el-table>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button size="small" @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" size="small" @click="save()">确 定</el-button>
+        <el-button @click="dialogVisible = false" size="small">取 消</el-button>
+        <el-button type="primary" @click="save()" size="small">确 定</el-button>
       </span>
     </el-dialog>
   </div>
