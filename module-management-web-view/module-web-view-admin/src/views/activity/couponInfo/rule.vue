@@ -121,7 +121,7 @@
     </div>
 
     <div v-if="couponInfo.rangeType == 'CATAGORY'">
-      <el-dialog title="添加范围" :visible.sync="dialogCateRangVisible" width="490px">
+      <el-dialog :visible.sync="dialogCateRangVisible" title="添加范围" width="490px">
         <div style="margin-top: 20px;">
           <el-form :inline="true" class="demo-form-inline">
             <CategorySelector @listenOnCateSelect="selectCategory" />
