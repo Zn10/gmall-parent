@@ -5,7 +5,7 @@ spring:
     nacos:
       config:
         file-extension: yaml
-        prefix: ${spring.application.name}
+        prefix: ${spring.application.name}-@spring.active@.yml
         server-addr: gmall-nacos:8848
         timeout: 50000
         shared-configs:
@@ -13,4 +13,4 @@ spring:
       discovery:
         server-addr: gmall-nacos:8848
   profiles:
-    active: dev
+    active: @spring.active@
