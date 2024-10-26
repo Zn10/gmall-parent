@@ -8,6 +8,7 @@ spring:
         prefix: ${spring.application.name}-@spring.active@.yaml
         server-addr: gmall-nacos:8848
         timeout: 50000
+        namespace: gmall
         shared-configs:
           -   data-id: common.yaml
       discovery:

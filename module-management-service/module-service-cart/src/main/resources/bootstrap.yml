@@ -10,7 +10,7 @@ spring:
         namespace: gmall
         timeout: 50000
         shared-configs:
-          -   data-id: common.yaml
+        -   data-id: common.yaml
       discovery:
         server-addr: gmall-nacos:8848
   profiles:
