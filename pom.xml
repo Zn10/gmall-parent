@@ -7,7 +7,7 @@
     <groupId>com.zn</groupId>
     <artifactId>gmall-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <modules>
         <module>module-management-web-view</module>
         <module>module-management-feign</module>
