@@ -93,7 +93,7 @@ public class GwareServiceImpl implements GwareService {
 
     @Override
     public Map<String, List<String>> getWareSkuMap(List<String> skuIdlist) {
-        QueryWrapper<WareSku> queryWrapper = new QueryWrapper();
+        QueryWrapper<WareSku> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("sku_id", skuIdlist);
         List<WareSku> wareSkuList = wareSkuMapper.selectList(queryWrapper);
 
@@ -140,7 +140,7 @@ public class GwareServiceImpl implements GwareService {
     public WareOrderTask getWareOrderTask(String taskId) {
         WareOrderTask wareOrderTask = wareOrderTaskMapper.selectById(taskId);
 
-        QueryWrapper<WareOrderTaskDetail> queryWrapper = new QueryWrapper();
+        QueryWrapper<WareOrderTaskDetail> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("task_id", taskId);
         List<WareOrderTaskDetail> details = wareOrderTaskDetailMapper.selectList(queryWrapper);
         wareOrderTask.setDetails(details);
@@ -214,6 +214,7 @@ public class GwareServiceImpl implements GwareService {
             // http://order.gmall.com/orderSplit?orderId=xxx&wareSkuMap=xxx
             String resultJson = HttpclientUtil.doPost(ORDER_URL, map);
             List<WareOrderTask> wareOrderTaskList = JSON.parseArray(resultJson, WareOrderTask.class);
+            assert wareOrderTaskList != null;
             if (wareOrderTaskList.size() >= 2) {
                 for (WareOrderTask subOrderTask : wareOrderTaskList) {
                     subOrderTask.setTaskStatus(TaskStatus.DEDUCTED.name());
@@ -232,7 +233,7 @@ public class GwareServiceImpl implements GwareService {
     public WareOrderTask saveWareOrderTask(WareOrderTask wareOrderTask) {
         wareOrderTask.setCreateTime(new Date());
 
-        QueryWrapper<WareOrderTask> queryWrapper = new QueryWrapper();
+        QueryWrapper<WareOrderTask> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("order_id", wareOrderTask.getOrderId());
         WareOrderTask wareOrderTaskOrigin = wareOrderTaskMapper.selectOne(queryWrapper);
         if (wareOrderTaskOrigin != null) {
@@ -251,7 +252,7 @@ public class GwareServiceImpl implements GwareService {
     }
 
     public void updateStatusWareOrderTaskByOrderId(String orderId, TaskStatus taskStatus) {
-        QueryWrapper<WareOrderTask> queryWrapper = new QueryWrapper();
+        QueryWrapper<WareOrderTask> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("order_id", orderId);
         WareOrderTask wareOrderTask = new WareOrderTask();
         wareOrderTask.setTaskStatus(taskStatus.name());

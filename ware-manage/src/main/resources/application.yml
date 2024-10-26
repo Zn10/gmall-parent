@@ -2,7 +2,7 @@ spring:
   application:
     name: service-ware
   profiles:
-    active: dev
+    active: @spring.active@
 #  cloud:
 #    nacos:
 #      discovery:
