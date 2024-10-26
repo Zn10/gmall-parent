@@ -60,7 +60,7 @@ public class FileUploadController {
         // 检查存储桶是否已经存在
         boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
         if (isExist) {
-            System.out.println("Bucket already exists.");
+            log.info("Bucket already exists.");
         } else {
             // 创建一个名为asiatrip的存储桶，用于存储照片的zip文件。
             minioClient.makeBucket(MakeBucketArgs.builder()
@@ -80,7 +80,7 @@ public class FileUploadController {
         //  文件上传之后的路径： http://39.99.159.121:9000/gmall/xxxxxx
         url = endpointUrl + "/" + bucketName + "/" + fileName;
 
-        log.info("url:\t" + url);
+        log.info("url:\t{}", url);
         //  将文件上传之后的路径返回给页面！
         return Result.ok(url);
     }
