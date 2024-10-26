@@ -123,15 +123,6 @@
 
     <profiles>
         <profile>
-            <id>local</id>
-            <properties>
-                <spring.active>local</spring.active>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
             <id>dev</id>
             <properties>
                 <spring.active>dev</spring.active>
@@ -162,24 +153,6 @@
             <id>produce</id>
             <properties>
                 <spring.active>produce</spring.active>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>docker</id>
-            <properties>
-                <spring.active>docker</spring.active>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>lan</id>
-            <properties>
-                <spring.active>lan</spring.active>
             </properties>
             <activation>
                 <activeByDefault>false</activeByDefault>
