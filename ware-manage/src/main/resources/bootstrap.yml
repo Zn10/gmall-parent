@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: service-ware
+    cloud:
+        nacos:
+            config:
+                file-extension: yaml
+                prefix: ${spring.application.name}-@spring.active@.yaml
+                server-addr: gmall-nacos:8848
+                namespace: gmall
+                timeout: 50000
+                shared-configs:
+                -   data-id: common.yaml
+            discovery:
+                server-addr: gmall-nacos:8848
+    profiles:
+        active: @spring.active@
