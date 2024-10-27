@@ -22,8 +22,8 @@ public class GmallException extends RuntimeException {
     /**
      * 通过状态码和错误消息创建异常对象
      *
-     * @param message
-     * @param code
+     * @param message 错误消息提示
+     * @param code    状态码
      */
     public GmallException(String message, Integer code) {
         super(message);
@@ -33,7 +33,7 @@ public class GmallException extends RuntimeException {
     /**
      * 接收枚举类型对象
      *
-     * @param resultCodeEnum
+     * @param resultCodeEnum 枚举对象
      */
     public GmallException(ResultCodeEnum resultCodeEnum) {
         super(resultCodeEnum.getMessage());
@@ -42,9 +42,6 @@ public class GmallException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "GuliException{" +
-                "code=" + code +
-                ", message=" + this.getMessage() +
-                '}';
+        return "GuliException{" + "code=" + code + ", message=" + this.getMessage() + '}';
     }
 }

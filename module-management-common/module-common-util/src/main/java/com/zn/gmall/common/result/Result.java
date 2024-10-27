@@ -47,9 +47,9 @@ public class Result<T> {
     /**
      * 操作成功
      *
-     * @param data
-     * @param <T>
-     * @return
+     * @param data 任何数据
+     * @param <T> 泛型
+     * @return Result
      */
     public static <T> Result<T> ok(T data) {
         Result<T> result = build(data);
@@ -63,9 +63,9 @@ public class Result<T> {
     /**
      * 操作失败
      *
-     * @param data
-     * @param <T>
-     * @return
+     * @param data 任何数据
+     * @param <T> 泛型
+     * @return Result
      */
     public static <T> Result<T> fail(T data) {
         Result<T> result = build(data);
