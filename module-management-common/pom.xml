@@ -21,6 +21,7 @@
     </modules>
 
     <dependencies>
+        <!-- 仅限开发过程中使用，不参与部署，所以依赖范围是：provided -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -49,6 +50,7 @@
         </dependency>
 
         <!-- 服务调用feign -->
+        <!-- 仅限开发过程中使用，不参与部署，所以依赖范围是：provided -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
