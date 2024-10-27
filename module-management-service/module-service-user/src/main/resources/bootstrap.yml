@@ -5,6 +5,7 @@ spring:
         nacos:
             config:
                 file-extension: yaml
+                refresh-enabled: true
                 prefix: ${spring.application.name}-@spring.active@.yaml
                 server-addr: gmall-nacos:8848
                 namespace: gmall

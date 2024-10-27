@@ -4,6 +4,7 @@ spring:
     cloud:
         nacos:
             config:
+                refresh-enabled: true
                 file-extension: yaml
                 prefix: ${spring.application.name}-@spring.active@.yaml
                 server-addr: gmall-nacos:8848
