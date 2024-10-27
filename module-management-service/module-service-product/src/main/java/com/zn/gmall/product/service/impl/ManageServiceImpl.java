@@ -596,7 +596,9 @@ public class ManageServiceImpl implements ManageService {
     public BaseAttrInfo getAttrInfo(Long attrId) {
         BaseAttrInfo baseAttrInfo = baseAttrInfoMapper.selectById(attrId);
         // 查询到最新的平台属性值集合数据放入平台属性中！
-        baseAttrInfo.setAttrValueList(getAttrValueList(attrId));
+        if (baseAttrInfo != null) {
+            baseAttrInfo.setAttrValueList(getAttrValueList(attrId));
+        }
         return baseAttrInfo;
     }
 

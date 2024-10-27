@@ -72,7 +72,10 @@ public class BaseManageController {
     @GetMapping("getAttrValueList/{attrId}")
     public Result<List<BaseAttrValue>> getAttrValueList(@PathVariable("attrId") Long attrId) {
         BaseAttrInfo baseAttrInfo = manageService.getAttrInfo(attrId);
-        List<BaseAttrValue> baseAttrValueList = baseAttrInfo.getAttrValueList();
+        List<BaseAttrValue> baseAttrValueList = null;
+        if (baseAttrInfo != null) {
+            baseAttrValueList = baseAttrInfo.getAttrValueList();
+        }
         return Result.ok(baseAttrValueList);
     }
 
