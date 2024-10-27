@@ -15,9 +15,9 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({"com.zn.gmall"})
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages= {"com.zn.gmall"})
-public class ListServiceMainType {
+public class ServiceListApplication {
     public static void main(String[] args) {
 
-        SpringApplication.run(ListServiceMainType.class,args);
+        SpringApplication.run(ServiceListApplication.class,args);
     }
 }

@@ -157,7 +157,7 @@ public class SearchServiceImpl implements SearchService {
         String zSetMember = "skuId:" + skuId;
 
         // [3]基于上面两个设定，对 Redis 中对应热度值数据进行累加
-        ZSetOperations operator = redisTemplate.opsForZSet();
+        ZSetOperations<String, String> operator = redisTemplate.opsForZSet();
         Double plusResult = operator.incrementScore(hotScoreKey, zSetMember, 1);
 
         // 2、操作 ElasticSearch
