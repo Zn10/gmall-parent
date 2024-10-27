@@ -14,5 +14,6 @@ spring:
                 namespace: gmall
             discovery:
                 server-addr: gmall-nacos:8848
+                namespace: gmall
     profiles:
         active: @spring.active@
