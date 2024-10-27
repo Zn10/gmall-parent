@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace 定义接口的全路径-->
+<mapper namespace="com.zn.gmall.product.mapper.BaseAttrValueMapper">
+
+    <insert id="batchInsert" parameterType="java.util.List" >
+        insert into base_attr_value (attr_id,value_name) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.attrId},#{item.valueName})
+        </foreach>
+    </insert>
+</mapper>

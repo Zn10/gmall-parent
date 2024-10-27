@@ -225,13 +225,13 @@ public class ManageServiceImpl implements ManageService {
      */
     @Override
     @GmallCache(prefix = "saleAttrValuesBySpu:")
-    public Map<Object,Object> getSkuValueIdsMap(Long spuId) {
+    public Map<Object, Object> getSkuValueIdsMap(Long spuId) {
         Map<Object, Object> map = new HashMap<>();
         // key = 125|123 ,value = 37
-        List<Map<Object,Object>> mapList = skuSaleAttrValueMapper.selectSaleAttrValuesBySpu(spuId);
+        List<Map<Object, Object>> mapList = skuSaleAttrValueMapper.selectSaleAttrValuesBySpu(spuId);
         if (mapList != null && !mapList.isEmpty()) {
             // 循环遍历
-            for (Map<Object,Object> skuMap : mapList) {
+            for (Map<Object, Object> skuMap : mapList) {
                 // key = 125|123 ,value = 37
                 map.put(skuMap.get("value_ids"), skuMap.get("sku_id"));
             }
@@ -643,8 +643,9 @@ public class ManageServiceImpl implements ManageService {
             for (BaseAttrValue baseAttrValue : attrValueList) {
                 // 获取平台属性Id 给attrId
                 baseAttrValue.setAttrId(baseAttrInfo.getId());
-                baseAttrValueMapper.insert(baseAttrValue);
             }
+            // 批量新增
+            baseAttrValueMapper.batchInsert(attrValueList);
         }
     }
 
