@@ -512,51 +512,53 @@ public class ManageServiceImpl implements ManageService {
         spuSaleAttrValue;
         spuPoster
      */
-        spuInfoMapper.insert(spuInfo);
-        //  获取到spuImage 集合数据
-        List<SpuImage> spuImageList = spuInfo.getSpuImageList();
-        //  判断不为空
-        if (!CollectionUtils.isEmpty(spuImageList)) {
-            //  循环遍历
-            for (SpuImage spuImage : spuImageList) {
-                //  需要将spuId 赋值
-                spuImage.setSpuId(spuInfo.getId());
-                //  保存SpuImage
-                spuImageMapper.insert(spuImage);
+        if (spuInfo != null) {
+            spuInfoMapper.insert(spuInfo);
+            //  获取到spuImage 集合数据
+            List<SpuImage> spuImageList = spuInfo.getSpuImageList();
+            //  判断不为空
+            if (!CollectionUtils.isEmpty(spuImageList)) {
+                //  循环遍历
+                for (SpuImage spuImage : spuImageList) {
+                    //  需要将spuId 赋值
+                    spuImage.setSpuId(spuInfo.getId());
+                }
+                //  批量保存SpuImage
+                spuImageMapper.batchInsert(spuImageList);
             }
-        }
-        //  获取销售属性集合
-        List<SpuSaleAttr> spuSaleAttrList = spuInfo.getSpuSaleAttrList();
-        //  判断
-        if (!CollectionUtils.isEmpty(spuSaleAttrList)) {
-            //  循环遍历
-            for (SpuSaleAttr spuSaleAttr : spuSaleAttrList) {
-                //  需要将spuId 赋值
-                spuSaleAttr.setSpuId(spuInfo.getId());
-                spuSaleAttrMapper.insert(spuSaleAttr);
-                //  再此获取销售属性值集合
-                List<SpuSaleAttrValue> spuSaleAttrValueList = spuSaleAttr.getSpuSaleAttrValueList();
-                //  判断
-                if (!CollectionUtils.isEmpty(spuSaleAttrValueList)) {
-                    //  循环遍历
-                    for (SpuSaleAttrValue spuSaleAttrValue : spuSaleAttrValueList) {
-                        //   需要将spuId， sale_attr_name 赋值
-                        spuSaleAttrValue.setSpuId(spuInfo.getId());
-                        spuSaleAttrValue.setSaleAttrName(spuSaleAttr.getSaleAttrName());
-                        spuSaleAttrValueMapper.insert(spuSaleAttrValue);
+            //  获取销售属性集合
+            List<SpuSaleAttr> spuSaleAttrList = spuInfo.getSpuSaleAttrList();
+            //  判断
+            if (!CollectionUtils.isEmpty(spuSaleAttrList)) {
+                //  循环遍历
+                for (SpuSaleAttr spuSaleAttr : spuSaleAttrList) {
+                    //  需要将spuId 赋值
+                    spuSaleAttr.setSpuId(spuInfo.getId());
+                    //  再此获取销售属性值集合
+                    List<SpuSaleAttrValue> spuSaleAttrValueList = spuSaleAttr.getSpuSaleAttrValueList();
+                    //  判断
+                    if (!CollectionUtils.isEmpty(spuSaleAttrValueList)) {
+                        //  循环遍历
+                        for (SpuSaleAttrValue spuSaleAttrValue : spuSaleAttrValueList) {
+                            //   需要将spuId， sale_attr_name 赋值
+                            spuSaleAttrValue.setSpuId(spuInfo.getId());
+                            spuSaleAttrValue.setSaleAttrName(spuSaleAttr.getSaleAttrName());
+                        }
+                        spuSaleAttrValueMapper.batchInsert(spuSaleAttrValueList);
                     }
                 }
+                spuSaleAttrMapper.batchInsert(spuSaleAttrList);
             }
-        }
-        //  获取到posterList 集合数据
-        List<SpuPoster> spuPosterList = spuInfo.getSpuPosterList();
-        //  判断不为空
-        if (!CollectionUtils.isEmpty(spuPosterList)) {
-            for (SpuPoster spuPoster : spuPosterList) {
-                //  需要将spuId 赋值
-                spuPoster.setSpuId(spuInfo.getId());
-                //  保存spuPoster
-                spuPosterMapper.insert(spuPoster);
+            //  获取到posterList 集合数据
+            List<SpuPoster> spuPosterList = spuInfo.getSpuPosterList();
+            //  判断不为空
+            if (!CollectionUtils.isEmpty(spuPosterList)) {
+                for (SpuPoster spuPoster : spuPosterList) {
+                    //  需要将spuId 赋值
+                    spuPoster.setSpuId(spuInfo.getId());
+                    //  保存spuPoster
+                    spuPosterMapper.insert(spuPoster);
+                }
             }
         }
     }

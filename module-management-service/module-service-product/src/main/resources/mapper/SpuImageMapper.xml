@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace 定义接口的全路径-->
+<mapper namespace="com.zn.gmall.product.mapper.SpuImageMapper">
+
+    <insert id="batchInsert" parameterType="java.util.List" >
+        insert into spu_image (spu_id,img_name,img_url) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.spuId},#{item.imgName},${item.imgUrl})
+        </foreach>
+    </insert>
+</mapper>

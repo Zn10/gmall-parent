@@ -29,5 +29,10 @@ public interface SpuSaleAttrMapper extends BaseMapper<SpuSaleAttr> {
      */
     List<SpuSaleAttr> selectSpuSaleAttrListCheckBySku(@Param("skuId") Long skuId, @Param("spuId") Long spuId);
 
+    /**
+     *  批量插入spu销售属性值
+     * @param spuSaleAttrList spu销售属性值
+     */
+    void batchInsert(List<SpuSaleAttr> spuSaleAttrList);
 }
 
