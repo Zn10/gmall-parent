@@ -5,11 +5,13 @@ import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +21,7 @@ import java.util.logging.Logger;
 /**
  * SPU图片上传管理控制
  */
+@Api("图片上传管理控制")
 @Slf4j
 @RestController
 @RequestMapping("admin/product")
@@ -46,7 +49,11 @@ public class FileUploadController {
      */
     @ApiOperation("文件上传控制器")
     @PostMapping("fileUpload")
-    public Result<String> fileUpload(MultipartFile file) throws Exception {
+    public Result<String> fileUpload(@RequestPart("file") MultipartFile file) throws Exception {
+        if (file.isEmpty()) {
+            return Result.<String>fail().message("请不要上传空的文件！");
+        }
+
         //  准备获取到上传的文件路径！
         String url;
 
@@ -60,7 +67,7 @@ public class FileUploadController {
         // 检查存储桶是否已经存在
         boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
         if (isExist) {
-            log.info("Bucket already exists.");
+            log.info("文件桶已存在，桶名为:{}", bucketName);
         } else {
             // 创建一个名为asiatrip的存储桶，用于存储照片的zip文件。
             minioClient.makeBucket(MakeBucketArgs.builder()
