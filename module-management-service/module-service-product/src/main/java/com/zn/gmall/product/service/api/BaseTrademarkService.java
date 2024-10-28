@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zn.gmall.model.product.BaseTrademark;
 
+import java.util.List;
+
 /**
  * 品牌列表接口
  */
@@ -18,5 +20,11 @@ public interface BaseTrademarkService extends IService<BaseTrademark> {
      */
     IPage<BaseTrademark> getPage(Page<BaseTrademark> pageParam);
 
+    /**
+     * 品牌列表
+     *
+     * @return List<BaseTrademark>
+     */
+    List<BaseTrademark> getTrademarkList();
 }
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class BaseTrademarkServiceImpl extends ServiceImpl<BaseTrademarkMapper, BaseTrademark> implements BaseTrademarkService {
@@ -30,6 +31,16 @@ public class BaseTrademarkServiceImpl extends ServiceImpl<BaseTrademarkMapper, B
         queryWrapper.orderByAsc("id");
 
         return baseTrademarkMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    /**
+     * 查询所有品牌信息
+     *
+     * @return List<BaseTrademark>
+     */
+    @Override
+    public List<BaseTrademark> getTrademarkList() {
+        return baseTrademarkMapper.selectList(null);
     }
 }
 

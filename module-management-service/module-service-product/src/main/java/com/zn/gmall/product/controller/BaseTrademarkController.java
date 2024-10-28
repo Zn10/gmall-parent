@@ -3,6 +3,7 @@ package com.zn.gmall.product.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zn.gmall.common.result.Result;
+import com.zn.gmall.model.product.BaseCategory1;
 import com.zn.gmall.model.product.BaseTrademark;
 import com.zn.gmall.product.service.api.BaseTrademarkService;
 import io.swagger.annotations.Api;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 品牌管理控制
@@ -22,6 +24,18 @@ public class BaseTrademarkController {
 
     @Autowired
     private BaseTrademarkService baseTrademarkService;
+
+    /**
+     * 查询所有的品牌信息
+     *
+     * @return List<BaseTrademark>
+     */
+    @ApiOperation("查询所有的品牌信息")
+    @GetMapping("getTrademarkList")
+    public Result<List<BaseTrademark>> getTrademarkList() {
+        List<BaseTrademark> baseTrademarkList = baseTrademarkService.getTrademarkList();
+        return Result.ok(baseTrademarkList);
+    }
 
     /**
      * Banner分页列表
