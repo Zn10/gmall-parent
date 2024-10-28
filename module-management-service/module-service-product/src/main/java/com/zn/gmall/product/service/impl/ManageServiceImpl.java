@@ -528,14 +528,17 @@ public class ManageServiceImpl implements ManageService {
             }
             //  获取销售属性集合
             List<SpuSaleAttr> spuSaleAttrList = spuInfo.getSpuSaleAttrList();
+            List<SpuSaleAttrValue> spuSaleAttrValueList = null;
             //  判断
             if (!CollectionUtils.isEmpty(spuSaleAttrList)) {
                 //  循环遍历
                 for (SpuSaleAttr spuSaleAttr : spuSaleAttrList) {
                     //  需要将spuId 赋值
                     spuSaleAttr.setSpuId(spuInfo.getId());
+                    // 设置销售属性名称
+                    spuSaleAttr.setSaleAttrName(spuSaleAttr.getSaleAttrName());
                     //  再此获取销售属性值集合
-                    List<SpuSaleAttrValue> spuSaleAttrValueList = spuSaleAttr.getSpuSaleAttrValueList();
+                    spuSaleAttrValueList = spuSaleAttr.getSpuSaleAttrValueList();
                     //  判断
                     if (!CollectionUtils.isEmpty(spuSaleAttrValueList)) {
                         //  循环遍历
@@ -543,11 +546,16 @@ public class ManageServiceImpl implements ManageService {
                             //   需要将spuId， sale_attr_name 赋值
                             spuSaleAttrValue.setSpuId(spuInfo.getId());
                             spuSaleAttrValue.setSaleAttrName(spuSaleAttr.getSaleAttrName());
+                            spuSaleAttrValue.setSaleAttrValueName(spuSaleAttrValue.getSaleAttrValueName());
+                            spuSaleAttrValue.setBaseSaleAttrId(spuSaleAttr.getId());
                         }
-                        spuSaleAttrValueMapper.batchInsert(spuSaleAttrValueList);
                     }
                 }
                 spuSaleAttrMapper.batchInsert(spuSaleAttrList);
+            }
+            //  获取到spuSaleAttrValueList 集合数据
+            if (spuSaleAttrValueList != null) {
+                spuSaleAttrValueMapper.batchInsert(spuSaleAttrValueList);
             }
             //  获取到posterList 集合数据
             List<SpuPoster> spuPosterList = spuInfo.getSpuPosterList();
@@ -556,9 +564,11 @@ public class ManageServiceImpl implements ManageService {
                 for (SpuPoster spuPoster : spuPosterList) {
                     //  需要将spuId 赋值
                     spuPoster.setSpuId(spuInfo.getId());
-                    //  保存spuPoster
-                    spuPosterMapper.insert(spuPoster);
+                    spuPoster.setImgName(spuPoster.getImgName());
+                    spuPoster.setImgUrl(spuPoster.getImgUrl());
                 }
+                //  保存spuPoster
+                spuPosterMapper.batchInsert(spuPosterList);
             }
         }
     }
