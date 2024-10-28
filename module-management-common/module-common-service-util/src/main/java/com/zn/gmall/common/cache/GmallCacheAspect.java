@@ -88,7 +88,7 @@ public class GmallCacheAspect {
                         Thread.sleep(100);
                         return gmallCacheAspectMethod(point);
                     } catch (InterruptedException e) {
-
+                        e.printStackTrace();
                     }
                 }
             } else {

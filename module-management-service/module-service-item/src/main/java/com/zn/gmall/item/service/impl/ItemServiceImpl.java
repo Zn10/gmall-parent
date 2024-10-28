@@ -1,6 +1,8 @@
 package com.zn.gmall.item.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.zn.gmall.common.cache.GmallCache;
+import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.item.service.api.ItemService;
 import com.zn.gmall.list.client.ListFeignClient;
 import com.zn.gmall.model.product.BaseCategoryView;
@@ -42,6 +44,7 @@ public class ItemServiceImpl implements ItemService {
      * @param skuId 商品SKUID
      */
     @Override
+    @GmallCache(prefix = RedisConst.SKUKEY_PREFIX)
     public Map<String, Object> getBySkuId(Long skuId) {
 
         CompletableFuture<SkuInfo> futureSkuInfo = CompletableFuture.supplyAsync(() -> {
