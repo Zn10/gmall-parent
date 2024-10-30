@@ -240,7 +240,7 @@ public class AuthGlobalFilter implements GlobalFilter {
 
             // 根据这个 key 读取 Redis 缓存数据
             String userDataJSON
-                    = (String) redisTemplate.opsForValue().get(userKey);
+                    = redisTemplate.opsForValue().get(userKey);
 
             if (!StringUtils.isEmpty(userDataJSON)) {
                 // 解析 JSON 字符串
