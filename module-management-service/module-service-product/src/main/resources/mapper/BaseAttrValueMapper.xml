@@ -5,7 +5,7 @@
 
     <insert id="batchInsert" parameterType="java.util.List" >
         insert into base_attr_value (attr_id,value_name) values
-        <foreach collection="list" item="item" separator=",">
+        <foreach collection="attrValueList" item="item" separator=",">
             (#{item.attrId},#{item.valueName})
         </foreach>
     </insert>
