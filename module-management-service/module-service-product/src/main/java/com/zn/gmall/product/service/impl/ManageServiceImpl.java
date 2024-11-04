@@ -528,8 +528,13 @@ public class ManageServiceImpl implements ManageService {
     public BaseAttrInfo getAttrInfo(Long attrId) {
         BaseAttrInfo baseAttrInfo = baseAttrInfoMapper.selectById(attrId);
         // 查询到最新的平台属性值集合数据放入平台属性中！
+        // 判断平台属性不为空
         if (baseAttrInfo != null) {
-            baseAttrInfo.setAttrValueList(getAttrValueList(attrId));
+            List<BaseAttrValue> attrValueList = getAttrValueList(attrId);
+            // 判断平台属性值不为空
+            if (!CollectionUtils.isEmpty(attrValueList)) {
+                baseAttrInfo.setAttrValueList(attrValueList);
+            }
         }
         return baseAttrInfo;
     }
