@@ -48,7 +48,7 @@ export default {
   // 根据spuId获取图片列表
   getSpuImageList(spuId) {
     return request({
-      url: `${api_name}spuImageList/` + spuId,
+      url: `${api_name}/spuImageList/` + spuId,
       method: 'get'
     })
   },

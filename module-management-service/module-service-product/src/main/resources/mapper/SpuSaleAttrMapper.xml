@@ -25,7 +25,7 @@
         <include refid="spuSaleAttr"/>
         from spu_sale_attr sa inner join spu_sale_attr_value sv
         on sa.spu_id=sv.spu_id and sa.base_sale_attr_id=sv.base_sale_attr_id
-        where sa.spu_id=#{spu_id}
+        where sa.spu_id=#{spuId}
     </select>
     <select id="selectSpuSaleAttrListCheckBySku" resultMap="spuSaleAttrMap">
      SELECT sa.id ,sa.spu_id, sa.sale_attr_name,sa.base_sale_attr_id,
