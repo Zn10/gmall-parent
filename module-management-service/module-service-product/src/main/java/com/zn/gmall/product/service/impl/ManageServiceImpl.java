@@ -566,7 +566,7 @@ public class ManageServiceImpl implements ManageService {
         }
         // baseAttrValue 平台属性值
         // 修改：通过先删除{baseAttrValue}，在新增的方式！
-        // 删除条件：baseAttrValue.attrId = baseAttrInfo.id
+        // 删除条件：baseAttrValue.attrId = baseAttrInfo.id 逻辑删除
         QueryWrapper<BaseAttrValue> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("attr_id", baseAttrInfo.getId());
         baseAttrValueMapper.delete(queryWrapper);
