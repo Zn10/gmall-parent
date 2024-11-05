@@ -1,6 +1,7 @@
 package com.zn.gmall.user;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -13,10 +14,12 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan({"com.zn.gmall"})
 @EnableDiscoveryClient
+@Slf4j
 public class ServiceUserApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ServiceUserApplication.class, args);
+        log.info("用户服务启动成功");
     }
 
 }
