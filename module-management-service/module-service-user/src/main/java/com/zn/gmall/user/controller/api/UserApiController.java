@@ -1,7 +1,10 @@
 package com.zn.gmall.user.controller.api;
 
+import com.zn.gmall.common.result.Result;
+import com.zn.gmall.model.product.SpuSaleAttr;
 import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.user.service.api.UserAddressService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
 public class UserApiController {
 
     @Autowired
@@ -23,8 +27,13 @@ public class UserApiController {
      * @return
      */
     @GetMapping("inner/findUserAddressListByUserId/{userId}")
-    public List<UserAddress> findUserAddressListByUserId(@PathVariable("userId") String userId){
-        return userAddressService.findUserAddressListByUserId(userId);
+    public Result<List<UserAddress>> findUserAddressListByUserId(@PathVariable("userId") String userId){
+        log.info("获取用户地址，用户id：{}",userId);
+        if (userId == null){
+            return Result.<List<UserAddress>>fail().message("用户id不能为空");
+        }
+        List<UserAddress> userAddressList = userAddressService.findUserAddressListByUserId(userId);
+        return Result.ok(userAddressList);
     }
 
 }
