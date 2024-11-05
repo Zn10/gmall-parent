@@ -15,7 +15,9 @@ public class ItemDegradeFeignClient implements ItemFeignClient {
 
     @Override
     public Result<Map<String, Object>> getItem(Long skuId) {
-        return Result.fail();
+        Result<Map<String, Object>> result = Result.fail();
+        result.message("服务降级");
+        return result;
     }
 }
 

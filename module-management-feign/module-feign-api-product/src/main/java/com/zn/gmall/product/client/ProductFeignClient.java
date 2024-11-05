@@ -15,16 +15,28 @@ import java.util.Map;
 @FeignClient(value = "service-product", fallback = ProductDegradeFeignClient.class)
 public interface ProductFeignClient {
 
+    /**
+     * 根据品牌id查询品牌
+     *
+     * @param id 品牌id
+     * @return BaseTrademark
+     */
     @GetMapping("/admin/product/baseTrademark/get/{id}")
     Result<BaseTrademark> getTrademarkById(@PathVariable Long id);
 
+    /**
+     * 根据skuId查询平台属性集合
+     *
+     * @param skuId 商品SKUID
+     * @return List<BaseAttrInfo>
+     */
     @GetMapping("/api/product/inner/getAttrList/{skuId}")
     Result<List<BaseAttrInfo>> getBaseAttrInfoBySkuId(@PathVariable("skuId") Long skuId);
 
     /**
      * 获取全部分类信息
      *
-     * @return
+     * @return List<JSONObject>
      */
     @GetMapping("/api/product/getBaseCategoryList")
     Result<List<JSONObject>> getBaseCategoryList();
@@ -72,20 +84,25 @@ public interface ProductFeignClient {
      * 根据spuId 查询map 集合属性
      *
      * @param spuId 商品SPUID
-     * @return
+     * @return Map<String, Object>
      */
     @GetMapping("/api/product/inner/getSkuValueIdsMap/{spuId}")
     Result<Map<String, Object>> getSkuValueIdsMap(@PathVariable("spuId") Long spuId);
 
-    //  根据spuId 获取海报数据
+    /**
+     * 根据spuId 获取海报数据
+     *
+     * @param spuId 商品SPUID
+     * @return List<SpuPoster>
+     */
     @GetMapping("/api/product/inner/findSpuPosterBySpuId/{spuId}")
     Result<List<SpuPoster>> getSpuPosterBySpuId(@PathVariable Long spuId);
 
     /**
      * 通过skuId 集合来查询数据
      *
-     * @param skuId
-     * @return
+     * @param skuId 商品SKUID
+     * @return List<BaseAttrInfo>
      */
     @GetMapping("/api/product/inner/getAttrList/{skuId}")
     Result<List<BaseAttrInfo>> getAttrList(@PathVariable("skuId") Long skuId);

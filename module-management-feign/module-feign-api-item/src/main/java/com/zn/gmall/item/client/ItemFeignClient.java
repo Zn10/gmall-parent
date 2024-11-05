@@ -17,8 +17,9 @@ import java.util.Map;
 public interface ItemFeignClient {
 
     /**
-     * @param skuId
-     * @return
+     * 根据skuId查询商品信息
+     * @param skuId 商品SKUID
+     * @return Map<String, Object>
      */
     @GetMapping("/api/item/{skuId}")
     Result<Map<String, Object>> getItem(@PathVariable("skuId") Long skuId);

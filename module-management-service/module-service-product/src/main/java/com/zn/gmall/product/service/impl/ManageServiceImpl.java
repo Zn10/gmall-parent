@@ -201,7 +201,6 @@ public class ManageServiceImpl implements ManageService {
      */
     @Override
     public List<BaseAttrInfo> getAttrList(Long skuId) {
-
         return baseAttrInfoMapper.selectBaseAttrInfoListBySkuId(skuId);
     }
 
