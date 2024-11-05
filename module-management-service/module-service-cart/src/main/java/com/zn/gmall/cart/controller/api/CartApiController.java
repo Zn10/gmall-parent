@@ -1,4 +1,4 @@
-package com.zn.gmall.cart.controller;
+package com.zn.gmall.cart.controller.api;
 
 import com.zn.gmall.cart.service.api.CartService;
 import com.zn.gmall.common.result.Result;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/cart")
-public class CartController {
+public class CartApiController {
 
     @Autowired
     private CartService cartService;

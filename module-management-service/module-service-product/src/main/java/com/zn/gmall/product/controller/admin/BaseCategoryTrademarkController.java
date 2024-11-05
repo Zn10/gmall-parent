@@ -1,4 +1,4 @@
-package com.zn.gmall.product.controller;
+package com.zn.gmall.product.controller.admin;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.BaseTrademark;
@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

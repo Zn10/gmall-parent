@@ -1,4 +1,4 @@
-package com.zn.gmall.user.controller;
+package com.zn.gmall.user.controller.api;
 
 import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.user.service.api.UserAddressService;

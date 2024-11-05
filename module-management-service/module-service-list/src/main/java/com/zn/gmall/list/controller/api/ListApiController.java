@@ -1,4 +1,4 @@
-package com.zn.gmall.list.controller;
+package com.zn.gmall.list.controller.api;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.list.service.api.SearchService;
@@ -7,7 +7,6 @@ import com.zn.gmall.model.list.vo.SearchResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 
 /**

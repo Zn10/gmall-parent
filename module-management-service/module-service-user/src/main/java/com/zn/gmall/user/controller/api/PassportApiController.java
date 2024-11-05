@@ -1,4 +1,4 @@
-package com.zn.gmall.user.controller;
+package com.zn.gmall.user.controller.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.constant.RedisConst;
@@ -15,7 +15,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 

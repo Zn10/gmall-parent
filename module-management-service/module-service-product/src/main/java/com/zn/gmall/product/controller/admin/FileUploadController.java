@@ -1,4 +1,4 @@
-package com.zn.gmall.product.controller;
+package com.zn.gmall.product.controller.admin;
 
 import com.zn.gmall.common.result.Result;
 import io.minio.BucketExistsArgs;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
-import java.util.logging.Logger;
 
 /**
  * SPU图片上传管理控制

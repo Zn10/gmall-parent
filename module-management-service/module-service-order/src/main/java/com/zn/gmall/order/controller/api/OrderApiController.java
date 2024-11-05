@@ -1,4 +1,4 @@
-package com.zn.gmall.order.controller;
+package com.zn.gmall.order.controller.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

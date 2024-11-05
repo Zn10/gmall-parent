@@ -1,4 +1,4 @@
-package com.zn.gmall.product.controller;
+package com.zn.gmall.product.controller.admin;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.SkuInfo;
