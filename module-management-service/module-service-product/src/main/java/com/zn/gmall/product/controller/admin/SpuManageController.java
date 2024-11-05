@@ -8,6 +8,7 @@ import com.zn.gmall.model.product.SpuInfo;
 import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @Api(tags ="商品SPU接口")
 @RestController // @ResponseBody + @Controller
 @RequestMapping("admin/product")
+@Slf4j
 public class SpuManageController {
 
     @Autowired
@@ -32,6 +34,7 @@ public class SpuManageController {
     @ApiOperation("保存商品SPU数据")
     @PostMapping("saveSpuInfo")
     public Result<Void> saveSpuInfo(@RequestBody SpuInfo spuInfo) {
+        log.info("保存商品SPU数据:{}", spuInfo);
         // 调用服务层的保存方法
         manageService.saveSpuInfo(spuInfo);
         return Result.ok();
@@ -61,8 +64,12 @@ public class SpuManageController {
     @ApiOperation("spu分页查询")
     @GetMapping("{page}/{size}")
     public Result<IPage<SpuInfo>> getSpuInfoPage(@PathVariable Long page,
-                                 @PathVariable Long size,
-                                 SpuInfo spuInfo) {
+                                         @PathVariable Long size,
+                                         SpuInfo spuInfo) {
+        log.info("品牌分页列表:page: {}, size: {}", page, size);
+        if (page == null || size == null) {
+            return Result.<IPage<SpuInfo>>fail().message("页码或页数不能为空");
+        }
         // 创建一个Page 对象
         Page<SpuInfo> spuInfoPage = new Page<>(page, size);
         // 获取数据

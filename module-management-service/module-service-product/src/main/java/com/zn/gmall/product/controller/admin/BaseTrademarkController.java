@@ -7,6 +7,7 @@ import com.zn.gmall.model.product.BaseTrademark;
 import com.zn.gmall.product.service.api.BaseTrademarkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,10 @@ import java.util.List;
 /**
  * 品牌管理控制
  */
-@Api(tags ="品牌管理接口")
+@Api(tags = "品牌管理接口")
 @RestController
 @RequestMapping("admin/product/baseTrademark")
+@Slf4j
 public class BaseTrademarkController {
 
     @Autowired
@@ -45,8 +47,11 @@ public class BaseTrademarkController {
     @ApiOperation(value = "品牌分页列表")
     @GetMapping("{page}/{limit}")
     public Result<IPage<BaseTrademark>> index(@PathVariable Long page,
-                        @PathVariable Long limit) {
-
+                                              @PathVariable Long limit) {
+        log.info("品牌分页列表:page: {}, limit: {}", page, limit);
+        if (page == null || limit == null) {
+            return Result.<IPage<BaseTrademark>>fail().message("页码或页数不能为空");
+        }
         Page<BaseTrademark> pageParam = new Page<>(page, limit);
         IPage<BaseTrademark> pageModel = baseTrademarkService.getPage(pageParam);
         return Result.ok(pageModel);
@@ -61,6 +66,10 @@ public class BaseTrademarkController {
     @ApiOperation(value = "根据品牌id查询该品牌")
     @GetMapping("get/{id}")
     public Result<BaseTrademark> get(@PathVariable String id) {
+        log.info("根据品牌id查询该品牌: id: {}", id);
+        if (id == null) {
+            return Result.<BaseTrademark>fail().message("品牌id不能为空");
+        }
         BaseTrademark baseTrademark = baseTrademarkService.getById(id);
         return Result.ok(baseTrademark);
     }
@@ -73,6 +82,10 @@ public class BaseTrademarkController {
     @ApiOperation(value = "添加品牌")
     @PostMapping("save")
     public Result<Void> save(@RequestBody BaseTrademark banner) {
+        log.info("添加品牌: BaseTrademark: {}", banner);
+        if (banner == null) {
+            return Result.<Void>fail().message("参数不能为空");
+        }
         baseTrademarkService.save(banner);
         return Result.ok();
     }
@@ -85,6 +98,10 @@ public class BaseTrademarkController {
     @ApiOperation(value = "更新品牌")
     @PutMapping("update")
     public Result<Void> updateById(@RequestBody BaseTrademark banner) {
+        log.info("更新品牌: BaseTrademark: {}", banner);
+        if (banner.getId() == null) {
+            return Result.<Void>fail().message("品牌id不能为空");
+        }
         baseTrademarkService.updateById(banner);
         return Result.ok();
     }
@@ -97,6 +114,10 @@ public class BaseTrademarkController {
     @ApiOperation(value = "根据品牌id删除品牌")
     @DeleteMapping("remove/{id}")
     public Result<Void> remove(@PathVariable Long id) {
+        log.info("根据品牌id删除品牌: id: {}", id);
+        if (id == null) {
+            return Result.<Void>fail().message("品牌id不能为空");
+        }
         baseTrademarkService.removeById(id);
         return Result.ok();
     }
