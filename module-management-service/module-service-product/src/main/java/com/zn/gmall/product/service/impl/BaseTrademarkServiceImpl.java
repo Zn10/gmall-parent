@@ -32,15 +32,5 @@ public class BaseTrademarkServiceImpl extends ServiceImpl<BaseTrademarkMapper, B
 
         return baseTrademarkMapper.selectPage(pageParam, queryWrapper);
     }
-
-    /**
-     * 查询所有品牌信息
-     *
-     * @return List<BaseTrademark>
-     */
-    @Override
-    public List<BaseTrademark> getTrademarkList() {
-        return baseTrademarkMapper.selectList(null);
-    }
 }
 

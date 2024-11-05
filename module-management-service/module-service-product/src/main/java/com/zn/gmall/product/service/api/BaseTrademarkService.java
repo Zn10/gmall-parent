@@ -19,12 +19,5 @@ public interface BaseTrademarkService extends IService<BaseTrademark> {
      * @return IPage<BaseTrademark>
      */
     IPage<BaseTrademark> getPage(Page<BaseTrademark> pageParam);
-
-    /**
-     * 品牌列表
-     *
-     * @return List<BaseTrademark>
-     */
-    List<BaseTrademark> getTrademarkList();
 }
 
