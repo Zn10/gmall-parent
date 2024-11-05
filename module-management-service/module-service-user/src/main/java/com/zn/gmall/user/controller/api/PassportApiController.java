@@ -7,6 +7,7 @@ import com.zn.gmall.common.util.IpUtil;
 import com.zn.gmall.model.user.UserInfo;
 import com.zn.gmall.user.service.api.UserService;
 import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 @Api(tags = "认证中心")
 @RestController
 @RequestMapping("/api/user/passport")
+@Slf4j
 public class PassportApiController {
 
     @Autowired
@@ -35,7 +37,10 @@ public class PassportApiController {
 
     @GetMapping("/logout")
     public Result<Void> logout(@RequestHeader("token") String token) {
-
+        log.info("用户退出登录，token:{}", token);
+        if (token == null) {
+            return Result.<Void>fail().message("用户token为空，退出登录失败");
+        }
         // 用户是否登录，以 Redis 中保存的 token 为准
         // 所以执行退出登录，就删除 Redis 的 token
         String tokenKey = RedisConst.USER_LOGIN_KEY_PREFIX + token;
@@ -47,6 +52,10 @@ public class PassportApiController {
     @PostMapping("/login")
     public Result<Map<String, String>> login(
             @RequestBody UserInfo userInfo, HttpServletRequest request) {
+        log.info("用户登录，用户信息:{}", userInfo);
+        if (userInfo == null) {
+            return Result.<Map<String, String>>fail().message("用户信息为空，登录失败");
+        }
 
         // 1、调用 Service 方法验证用户名密码
         UserInfo userInfoLogin = userService.login(userInfo);
