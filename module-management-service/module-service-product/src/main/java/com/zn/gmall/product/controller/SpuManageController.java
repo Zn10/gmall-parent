@@ -7,6 +7,7 @@ import com.zn.gmall.model.product.BaseSaleAttr;
 import com.zn.gmall.model.product.SpuInfo;
 import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class SpuManageController {
      *
      * @param spuInfo 商品SPU实例
      */
+    @ApiOperation("保存商品SPU数据")
     @PostMapping("saveSpuInfo")
     public Result<Void> saveSpuInfo(@RequestBody SpuInfo spuInfo) {
         // 调用服务层的保存方法
@@ -40,11 +42,11 @@ public class SpuManageController {
      *
      * @return List<BaseSaleAttr>
      */
+    @ApiOperation("查询所有的销售属性数据")
     @GetMapping("baseSaleAttrList")
     public Result<List<BaseSaleAttr>> baseSaleAttrList() {
         // 查询所有的销售属性集合
         List<BaseSaleAttr> baseSaleAttrList = manageService.getBaseSaleAttrList();
-
         return Result.ok(baseSaleAttrList);
     }
 
@@ -56,6 +58,7 @@ public class SpuManageController {
      * @param spuInfo 商品列表参数
      * @return IPage<SpuInfo>
      */
+    @ApiOperation("spu分页查询")
     @GetMapping("{page}/{size}")
     public Result<IPage<SpuInfo>> getSpuInfoPage(@PathVariable Long page,
                                  @PathVariable Long size,
