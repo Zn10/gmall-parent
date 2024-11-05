@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@FeignClient(value = "service-cart",fallback = CartDegradeFeignClient.class,path = "/api/cart")
+@FeignClient(contextId = "CartFeignClient", value = "service-cart", fallback = CartDegradeFeignClient.class)
 public interface CartFeignClient {
     //  获取选中购物车列表！
     @GetMapping("/getCartCheckedList/{userId}")

@@ -24,7 +24,6 @@ import java.util.Map;
 @Controller
 public class ListController {
 
-    @Qualifier("listDegradeFeignClient")
     @Autowired
     private ListFeignClient listFeignClient;
 

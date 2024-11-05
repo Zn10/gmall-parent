@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@FeignClient(value = "service-product", fallback = ProductDegradeFeignClient.class)
+@FeignClient(contextId = "ProductFeignClient", value = "service-product", fallback = ProductDegradeFeignClient.class)
 public interface ProductFeignClient {
 
     /**

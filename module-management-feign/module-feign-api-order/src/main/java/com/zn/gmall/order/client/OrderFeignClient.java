@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
 
-@FeignClient(value = "service-cart",fallback = OrderDegradeFeignClient.class,path = "/api/cart")
+@FeignClient(contextId = "OrderFeignClient", value = "service-cart", fallback = OrderDegradeFeignClient.class)
 public interface OrderFeignClient {
 
     @GetMapping("/api/order/auth/trade")

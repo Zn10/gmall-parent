@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Map;
 
-@FeignClient(value = "service-item", fallback = ItemDegradeFeignClient.class)
+@FeignClient(contextId = "ItemFeignClient", value = "service-item", fallback = ItemDegradeFeignClient.class)
 public interface ItemFeignClient {
 
     /**

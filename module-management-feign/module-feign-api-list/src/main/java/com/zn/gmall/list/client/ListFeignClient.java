@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author: 赵念
  * @create-date: 2023/2/10/19:51
  */
-@FeignClient(value = "service-list", fallback = ListDegradeFeignClient.class)
+@FeignClient(contextId = "ListFeignClient", value = "service-list", fallback = ListDegradeFeignClient.class)
 public interface ListFeignClient {
 
     @PostMapping("/api/list/do/search")

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(value = "service-user", fallback = UserDegradeFeignClient.class)
+@FeignClient(contextId = "UserFeignClient", value = "service-user", fallback = UserDegradeFeignClient.class)
 public interface UserFeignClient {
 
     @GetMapping("/api/user/inner/findUserAddressListByUserId/{userId}")

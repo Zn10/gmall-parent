@@ -19,7 +19,6 @@ import java.util.Map;
 @Controller
 public class OrderController {
 
-    @Qualifier("orderDegradeFeignClient")
     @Autowired
     private OrderFeignClient orderFeignClient;
 
