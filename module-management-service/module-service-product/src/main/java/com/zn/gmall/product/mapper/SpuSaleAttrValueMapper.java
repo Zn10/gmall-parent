@@ -3,6 +3,7 @@ package com.zn.gmall.product.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zn.gmall.model.product.SpuSaleAttrValue;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface SpuSaleAttrValueMapper extends BaseMapper<SpuSaleAttrValue> {
      *
      * @param spuSaleAttrValueList SPU销售属性值
      */
-    void batchInsert(List<SpuSaleAttrValue> spuSaleAttrValueList);
+    void batchInsert(@Param("spuSaleAttrValueList") List<SpuSaleAttrValue> spuSaleAttrValueList);
 }

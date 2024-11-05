@@ -3,6 +3,7 @@ package com.zn.gmall.product.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zn.gmall.model.product.SpuImage;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public interface SpuImageMapper extends BaseMapper<SpuImage> {
      *  批量保存SpuImage
      * @param spuImageList 商品图片表
      */
-    void batchInsert(List<SpuImage> spuImageList);
+    void batchInsert(@Param("spuImageList") List<SpuImage> spuImageList);
 }
 

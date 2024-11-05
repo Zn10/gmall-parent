@@ -3,7 +3,7 @@
 <mapper namespace="com.zn.gmall.product.mapper.SpuSaleAttrValueMapper">
     <insert id="batchInsert" parameterType="java.util.List" >
         insert into spu_sale_attr_value (spu_id) values
-        <foreach collection="list" item="item" separator=",">
+        <foreach collection="spuSaleAttrValueList" item="item" separator=",">
             (#{item.spuId})
         </foreach>
     </insert>

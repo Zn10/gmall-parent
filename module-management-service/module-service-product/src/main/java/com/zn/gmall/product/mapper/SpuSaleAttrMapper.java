@@ -33,6 +33,6 @@ public interface SpuSaleAttrMapper extends BaseMapper<SpuSaleAttr> {
      *  批量插入spu销售属性值
      * @param spuSaleAttrList spu销售属性值
      */
-    void batchInsert(List<SpuSaleAttr> spuSaleAttrList);
+    void batchInsert(@Param("spuSaleAttrList") List<SpuSaleAttr> spuSaleAttrList);
 }
 

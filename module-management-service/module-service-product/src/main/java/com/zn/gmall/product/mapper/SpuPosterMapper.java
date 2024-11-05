@@ -3,6 +3,7 @@ package com.zn.gmall.product.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zn.gmall.model.product.SpuPoster;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
  */
 @Mapper
 public interface SpuPosterMapper extends BaseMapper<SpuPoster> {
-    void batchInsert(List<SpuPoster> spuPosterList);
+    void batchInsert(@Param("spuPosterList") List<SpuPoster> spuPosterList);
 }
 

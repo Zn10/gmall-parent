@@ -5,7 +5,7 @@
 
     <insert id="batchInsert" parameterType="java.util.List" >
         insert into spu_image (spu_id,img_name,img_url) values
-        <foreach collection="list" item="item" separator=",">
+        <foreach collection="spuImageList" item="item" separator=",">
             (#{item.spuId},#{item.imgName},${item.imgUrl})
         </foreach>
     </insert>

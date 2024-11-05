@@ -16,7 +16,7 @@
     </sql>
     <insert id="batchInsert" parameterType="java.util.List" >
         insert into spu_sale_attr (spu_id,base_sale_attr_id) values
-        <foreach collection="list" item="item" separator=",">
+        <foreach collection="spuSaleAttrList" item="item" separator=",">
             (#{item.spuId},#{item.baseSaleAttrId})
         </foreach>
     </insert>
