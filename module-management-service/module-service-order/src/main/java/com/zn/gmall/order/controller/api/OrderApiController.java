@@ -15,6 +15,7 @@ import com.zn.gmall.product.client.ProductFeignClient;
 import com.zn.gmall.user.client.UserDegradeFeignClient;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -43,25 +44,20 @@ import java.util.concurrent.ThreadPoolExecutor;
  **/
 @RestController
 @RequestMapping("api/order")
+@Slf4j
 public class OrderApiController {
     @Autowired
     private UserDegradeFeignClient userFeignClient;
-
     @Autowired
     private CartDegradeFeignClient cartFeignClient;
-
     @Resource
     private ProductFeignClient productFeignClient;
     @Resource
     private RedisTemplate<String, String> redisTemplate;
-
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
-
-
     @Autowired
     private OrderService orderService;
-
 
     @ApiOperation("我的订单")
     @GetMapping("auth/{page}/{limit}")
@@ -71,14 +67,16 @@ public class OrderApiController {
             @ApiParam(name = "limit", value = "每页记录数", required = true)
             @PathVariable Long limit,
             HttpServletRequest request) {
+        log.info("订单列表查询,分页参数,{},{}", page, limit);
+        if (page == null || limit == null) {
+            return Result.<IPage<OrderInfo>>fail().message("页码/记录数不能为空");
+        }
         // 获取到用户Id
         String userId = AuthContextHolder.getUserId(request);
-
         Page<OrderInfo> pageParam = new Page<>(page, limit);
         IPage<OrderInfo> pageModel = orderService.getPage(pageParam, userId);
         return Result.ok(pageModel);
     }
-
 
 
     /**
@@ -90,6 +88,10 @@ public class OrderApiController {
      */
     @PostMapping("auth/submitOrder")
     public Result<Object> submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request) {
+        log.info("订单提交,订单信息:{}", orderInfo);
+        if (orderInfo == null) {
+            return Result.fail().message("订单信息不能为空！");
+        }
         // 获取到用户Id
         String userId = AuthContextHolder.getUserId(request);
         orderInfo.setUserId(Long.parseLong(userId));
@@ -119,7 +121,7 @@ public class OrderApiController {
                 if (!result) {
                     errorList.add(orderDetail.getSkuName() + "库存不足！");
                 }
-            },threadPoolExecutor);
+            }, threadPoolExecutor);
             futureList.add(checkStockCompletableFuture);
             CompletableFuture<Void> checkPriceCompletableFuture = CompletableFuture.runAsync(() -> {
                 // 验证价格：
@@ -133,17 +135,16 @@ public class OrderApiController {
                     cartCheckedList.getData().forEach(cartInfo -> {
                         this.redisTemplate.opsForHash().put(RedisConst.USER_KEY_PREFIX + userId + RedisConst.USER_CART_KEY_SUFFIX, cartInfo.getSkuId().toString(), cartInfo);
                     });
-                     errorList.add(orderDetail.getSkuName() + "价格有变动！");
+                    errorList.add(orderDetail.getSkuName() + "价格有变动！");
                 }
-            },threadPoolExecutor);
+            }, threadPoolExecutor);
             futureList.add(checkStockCompletableFuture);
         }
         //合并线程
         CompletableFuture.allOf(futureList.toArray(new CompletableFuture[0])).join();
-        if(!errorList.isEmpty()) {
+        if (!errorList.isEmpty()) {
             return Result.fail().message(StringUtils.join(errorList, ","));
         }
-
 
         // 验证通过，保存订单！
         Long orderId = orderService.saveOrderInfo(orderInfo);
