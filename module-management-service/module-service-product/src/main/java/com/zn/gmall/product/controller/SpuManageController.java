@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 商品列表控制
  */
-@Api("spu商品接口")
+@Api(tags ="商品SPU接口")
 @RestController // @ResponseBody + @Controller
 @RequestMapping("admin/product")
 public class SpuManageController {

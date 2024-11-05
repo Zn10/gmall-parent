@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 /**
  * SPU图片上传管理控制
  */
-@Api("图片上传管理控制")
+@Api(tags ="图片上传管理控制")
 @Slf4j
 @RestController
 @RequestMapping("admin/product")
@@ -69,7 +69,7 @@ public class FileUploadController {
         if (isExist) {
             log.info("文件桶已存在，桶名为:{}", bucketName);
         } else {
-            // 创建一个名为asiatrip的存储桶，用于存储照片的zip文件。
+            // 创建一个名为gmall的存储桶，用于存储照片的zip文件。
             minioClient.makeBucket(MakeBucketArgs.builder()
                     .bucket(bucketName)
                     .build());
@@ -77,7 +77,7 @@ public class FileUploadController {
         //  定义一个文件的名称 : 文件上传的时候，名称不能重复！
         String fileName = System.currentTimeMillis() + UUID.randomUUID().toString();
         // 使用putObject上传一个文件到存储桶中。
-        //  minioClient.putObject("asiatrip","asiaphotos.zip", "/home/user/Photos/asiaphotos.zip");
+        //  minioClient.putObject("gmall","gmall.zip", "/home/user/Photos/gmall.zip");
         minioClient.putObject(
                 PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(
                                 file.getInputStream(), file.getSize(), -1)

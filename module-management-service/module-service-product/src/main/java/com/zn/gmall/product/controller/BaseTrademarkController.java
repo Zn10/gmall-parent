@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 品牌管理控制
  */
-@Api("品牌管理接口")
+@Api(tags ="品牌管理接口")
 @RestController
 @RequestMapping("admin/product/baseTrademark")
 public class BaseTrademarkController {
@@ -33,7 +33,7 @@ public class BaseTrademarkController {
     @ApiOperation("查询所有的品牌信息")
     @GetMapping("getTrademarkList")
     public Result<List<BaseTrademark>> getTrademarkList() {
-        List<BaseTrademark> baseTrademarkList = baseTrademarkService.getTrademarkList();
+        List<BaseTrademark> baseTrademarkList = baseTrademarkService.list();
         return Result.ok(baseTrademarkList);
     }
 

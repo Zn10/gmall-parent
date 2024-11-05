@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 分类品牌列表控制
  */
-@Api("分类品牌列表接口")
+@Api(tags = "分类品牌列表接口")
 @RestController
 @RequestMapping("admin/product/baseCategoryTrademark")
 public class BaseCategoryTrademarkController {
