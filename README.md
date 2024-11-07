@@ -3,7 +3,7 @@
 gmall-parent
 ├── bin -- 启动脚本和打包脚本
 
-├── module-gateway -- 网关模块[90]
+├── module-gateway -- 网关模块[80]
 
 └── module-management-common -- 系统公共模块
      ├── module-common-entity -- 实体模块
