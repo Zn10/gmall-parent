@@ -643,5 +643,15 @@ public class ManageServiceImpl implements ManageService {
     public List<BaseAttrInfo> getAttrInfoList(Long category1Id, Long category2Id, Long category3Id) {
         return baseAttrInfoMapper.selectBaseAttrInfoList(category1Id, category2Id, category3Id);
     }
+
+    @Override
+    public void remove(Long attrId) {
+        // 删除平台属性
+        baseAttrInfoMapper.deleteById(attrId);
+        // 删除平台属性值
+        QueryWrapper<BaseAttrValue> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("attr_id", attrId);
+        baseAttrValueMapper.delete(queryWrapper);
+    }
 }
 

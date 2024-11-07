@@ -55,7 +55,7 @@ public interface ManageService {
      *
      * @param spuId 商品SPUid
      */
-    Map<Object,Object> getSkuValueIdsMap(Long spuId);
+    Map<Object, Object> getSkuValueIdsMap(Long spuId);
 
 
     /**
@@ -226,5 +226,12 @@ public interface ManageService {
      * @return List<BaseAttrInfo>
      */
     List<BaseAttrInfo> getAttrInfoList(Long category1Id, Long category2Id, Long category3Id);
+
+    /**
+     * 删除平台属性和属性值
+     *
+     * @param attrId 属性id
+     */
+    void remove(Long attrId);
 }
 

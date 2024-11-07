@@ -35,7 +35,8 @@
 
         <el-table-column label="操作" width="200" align="center">
           <template slot-scope="scope">
-            <el-button v-if="categoryLevel == scope.row.categoryLevel" type="primary" size="mini" icon="el-icon-edit" @click="editAttrInfoById(scope.row.id, scope.row.attrName)">修改</el-button>
+            <el-button v-if="categoryLevel === scope.row.categoryLevel" type="primary" size="mini" icon="el-icon-edit" @click="editAttrInfoById(scope.row.id, scope.row.attrName)">修改</el-button>
+            <el-button v-if="categoryLevel === scope.row.categoryLevel" type="danger" size="mini" icon="el-icon-edit" @click="deleteAttrInfoById(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -137,7 +138,6 @@ export default {
         category3Id: 0,
         attrValueList: []
       }
-
     }
   },
 
@@ -207,6 +207,31 @@ export default {
       })
       // 显示表单
       this.showAttrInfoForm = true
+    },
+    // 删除属性
+    deleteAttrInfoById(attrId){
+      // debugger
+      this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => { // promise
+        // 点击确定，远程调用ajax
+        return prop.remove(attrId)
+      }).then((response) => {
+        this.getAttrInfoList(this.categoryId, this.categoryLevel)
+        if (response.code) {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
 
     // 删除属性值

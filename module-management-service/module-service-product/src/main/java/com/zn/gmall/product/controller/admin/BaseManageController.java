@@ -32,9 +32,7 @@ public class BaseManageController {
      * @param limit 页码条数
      */
     @GetMapping("/list/{page}/{limit}")
-    public Result<IPage<SkuInfo>> index(
-            @PathVariable Long page,
-            @PathVariable Long limit) {
+    public Result<IPage<SkuInfo>> index(@PathVariable Long page, @PathVariable Long limit) {
         log.info("SKU分页列表:page: {}, limit: {}", page, limit);
         if (page == null || limit == null) {
             return Result.<IPage<SkuInfo>>fail().message("页码或页数不能为空");
@@ -93,6 +91,18 @@ public class BaseManageController {
             baseAttrValueList = baseAttrInfo.getAttrValueList();
         }
         return Result.ok(baseAttrValueList);
+    }
+
+    @ApiOperation("根据attrId，删除属性和属性值")
+    @DeleteMapping("remove/{attrId}")
+    public Result<Void> remove(@PathVariable Long attrId) {
+        log.info("删除关联:attrId:{}", attrId);
+        if (attrId == null) {
+            return Result.<Void>fail().message("属性id不能为空");
+        }
+        //  调用服务层方法
+        manageService.remove(attrId);
+        return Result.ok();
     }
 
     /**
@@ -169,9 +179,7 @@ public class BaseManageController {
      */
     @ApiOperation("根据分类Id 获取平台属性数据")
     @GetMapping("attrInfoList/{category1Id}/{category2Id}/{category3Id}")
-    public Result<List<BaseAttrInfo>> attrInfoList(@PathVariable("category1Id") Long category1Id,
-                                                   @PathVariable("category2Id") Long category2Id,
-                                                   @PathVariable("category3Id") Long category3Id) {
+    public Result<List<BaseAttrInfo>> attrInfoList(@PathVariable("category1Id") Long category1Id, @PathVariable("category2Id") Long category2Id, @PathVariable("category3Id") Long category3Id) {
         log.info("根据分类Id 获取平台属性数据,category1Id:{},category2Id:{},category3Id:{}", category1Id, category2Id, category3Id);
         if (category1Id == null || category2Id == null || category3Id == null) {
             return Result.<List<BaseAttrInfo>>fail().message("分类Id不能为空");

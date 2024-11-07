@@ -59,5 +59,12 @@ export default {
       method: 'post',
       data: attrForm
     })
+  },
+  // 根据属性id删除属性
+  remove(attrId) {
+    return request({
+      url: `${api_name}/remove/${attrId}`,
+      method: 'delete'
+    })
   }
 }
