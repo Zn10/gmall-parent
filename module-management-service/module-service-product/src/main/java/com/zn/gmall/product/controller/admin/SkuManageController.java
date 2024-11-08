@@ -27,6 +27,36 @@ public class SkuManageController {
     private ManageService manageService;
 
     /**
+     * 商品上架
+     *
+     * @param skuId 商品SKUID
+     */
+    @GetMapping("onSale/{skuId}")
+    public Result<Void> onSale(@PathVariable("skuId") Long skuId) {
+        log.info("商品上架,商品id,{}", skuId);
+        if (skuId == null) {
+            return Result.<Void>fail().message("商品id不能为空");
+        }
+        manageService.onSale(skuId);
+        return Result.ok();
+    }
+
+    /**
+     * 商品下架
+     *
+     * @param skuId 商品SKUID
+     */
+    @GetMapping("cancelSale/{skuId}")
+    public Result<Void> cancelSale(@PathVariable("skuId") Long skuId) {
+        log.info("商品下架,商品id,{}", skuId);
+        if (skuId == null) {
+            return Result.<Void>fail().message("商品id不能为空");
+        }
+        manageService.cancelSale(skuId);
+        return Result.ok();
+    }
+
+    /**
      * 保存sku
      *
      * @param skuInfo SKU实例
