@@ -259,7 +259,7 @@ public class ManageServiceImpl implements ManageService {
      */
     @Override
     public BigDecimal getSkuPrice(Long skuId) {
-        RLock lock = redissonClient.getLock(skuId + ":lock");
+        RLock lock = redissonClient.getLock(skuId + RedisConst.SKULOCK_SUFFIX);
         //  上锁
         lock.lock();
         SkuInfo skuInfo;

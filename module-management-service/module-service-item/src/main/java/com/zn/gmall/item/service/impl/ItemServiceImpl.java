@@ -55,16 +55,16 @@ public class ItemServiceImpl implements ItemService {
             return productFeignClient.getCategoryView(category3Id).getData();
         });
 
+        CompletableFuture<BigDecimal> futurePrice = CompletableFuture.supplyAsync(() -> {
+            // 第三步：根据 skuId 查询价格
+            return productFeignClient.getSkuPrice(skuId).getData();
+        }, threadPoolExecutor);
+
         CompletableFuture<List<SpuSaleAttr>> futureSaleAttrList = futureSkuInfo.thenApply((SkuInfo skuInfo) -> {
             // 第四步：根据 skuId 和 spuId 查询 SPU 下的销售属性（经过 SKU 标记的）
             Long spuId = skuInfo.getSpuId();
             return productFeignClient.getSpuSaleAttrListCheckBySku(skuId, spuId).getData();
         });
-
-        CompletableFuture<BigDecimal> futurePrice = CompletableFuture.supplyAsync(() -> {
-            // 第三步：根据 skuId 查询价格
-            return productFeignClient.getSkuPrice(skuId).getData();
-        }, threadPoolExecutor);
 
         CompletableFuture<String> futureValueIdsJSON = futureSkuInfo.thenApply((SkuInfo skuInfo) -> {
             // 第五步：根据 spuId 查询映射关系（从销售属性组合到 skuId）
