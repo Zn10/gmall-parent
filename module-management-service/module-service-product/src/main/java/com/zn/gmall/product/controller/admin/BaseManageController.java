@@ -93,6 +93,12 @@ public class BaseManageController {
         return Result.ok(baseAttrValueList);
     }
 
+    /**
+     * 根据attrId，删除属性和属性值
+     *
+     * @param attrId 属性id
+     * @return
+     */
     @ApiOperation("根据attrId，删除属性和属性值")
     @DeleteMapping("remove/{attrId}")
     public Result<Void> remove(@PathVariable Long attrId) {
