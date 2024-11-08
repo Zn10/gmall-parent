@@ -42,7 +42,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <!-- 服务调用feign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -50,6 +49,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-
 </project>
