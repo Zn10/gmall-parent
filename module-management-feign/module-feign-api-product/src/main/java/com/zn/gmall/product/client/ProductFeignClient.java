@@ -18,11 +18,11 @@ public interface ProductFeignClient {
     /**
      * 根据品牌id查询品牌
      *
-     * @param id 品牌id
+     * @param tmId 品牌id
      * @return BaseTrademark
      */
-    @GetMapping("/admin/product/baseTrademark/get/{id}")
-    Result<BaseTrademark> getTrademarkById(@PathVariable Long id);
+    @GetMapping("/api/product/getTrademark/{tmId}")
+    Result<BaseTrademark> getTrademarkById(@PathVariable("tmId") Long tmId);
 
     /**
      * 根据skuId查询平台属性集合
@@ -96,7 +96,7 @@ public interface ProductFeignClient {
      * @return List<SpuPoster>
      */
     @GetMapping("/api/product/inner/findSpuPosterBySpuId/{spuId}")
-    Result<List<SpuPoster>> getSpuPosterBySpuId(@PathVariable Long spuId);
+    Result<List<SpuPoster>> getSpuPosterBySpuId(@PathVariable("spuId") Long spuId);
 
     /**
      * 通过skuId 集合来查询数据

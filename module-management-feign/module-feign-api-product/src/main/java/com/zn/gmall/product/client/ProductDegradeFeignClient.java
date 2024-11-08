@@ -13,7 +13,7 @@ import java.util.Map;
 public class ProductDegradeFeignClient implements ProductFeignClient {
 
     @Override
-    public Result<BaseTrademark> getTrademarkById(Long id) {
+    public Result<BaseTrademark> getTrademarkById(Long tmId) {
         Result<BaseTrademark> result = Result.fail();
         result.message("服务降级");
         return result;

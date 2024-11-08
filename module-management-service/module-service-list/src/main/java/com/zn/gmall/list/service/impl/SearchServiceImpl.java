@@ -52,7 +52,6 @@ import java.util.stream.Collectors;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-    @Qualifier("productDegradeFeignClient")
     @Autowired
     private ProductFeignClient productFeignClient;
 
@@ -93,11 +92,13 @@ public class SearchServiceImpl implements SearchService {
         SkuInfo skuInfo = skuInfoResult.getData();
         // 查询品牌
         Result<BaseTrademark> baseTrademarkResult = productFeignClient.getTrademarkById(skuInfo.getTmId());
-        BaseTrademark baseTrademark = baseTrademarkResult.getData();
-        if (baseTrademark != null) {
-            goods.setTmId(skuInfo.getTmId());
-            goods.setTmName(baseTrademark.getTmName());
-            goods.setTmLogoUrl(baseTrademark.getLogoUrl());
+        if (baseTrademarkResult != null) {
+            BaseTrademark baseTrademark = baseTrademarkResult.getData();
+            if (baseTrademark != null) {
+                goods.setTmId(skuInfo.getTmId());
+                goods.setTmName(baseTrademark.getTmName());
+                goods.setTmLogoUrl(baseTrademark.getLogoUrl());
+            }
         }
         // 查询分类
         Result<BaseCategoryView> baseCategoryViewResult = productFeignClient.getCategoryView(skuInfo.getCategory3Id());

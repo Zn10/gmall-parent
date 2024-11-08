@@ -26,12 +26,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    @Qualifier("productDegradeFeignClient")
     @Autowired
     private ProductFeignClient productFeignClient;
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
-    @Qualifier("listDegradeFeignClient")
     @Autowired
     private ListFeignClient listFeignClient;
 

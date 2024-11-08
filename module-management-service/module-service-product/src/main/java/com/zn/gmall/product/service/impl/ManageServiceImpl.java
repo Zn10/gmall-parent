@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * 商品汇总实现
  */
 @Slf4j
-@Service("ManageService")
+@Service
 public class ManageServiceImpl implements ManageService {
     @Autowired
     private BaseCategory1Mapper baseCategory1Mapper;
@@ -164,18 +164,16 @@ public class ManageServiceImpl implements ManageService {
     private SkuInfo getSkuInfoFromDatabase(Long skuId) {
         // 查询 SKU 基本信息
         SkuInfo skuInfo = skuInfoMapper.selectById(skuId);
-
-        // 查询 SKU 图片信息
-        List<SkuImage> skuImageList =
-                skuImageMapper.selectList(
-                        new QueryWrapper<SkuImage>()
-                                .eq("sku_id", skuId));
-        // ※由于存在缓存穿透问题，所以一定要判空操作
         if (skuInfo != null) {
+            // 查询 SKU 图片信息
+            List<SkuImage> skuImageList =
+                    skuImageMapper.selectList(
+                            new QueryWrapper<SkuImage>()
+                                    .eq("sku_id", skuId));
+
             // 属性装配
             skuInfo.setSkuImageList(skuImageList);
         }
-
         return skuInfo;
     }
 

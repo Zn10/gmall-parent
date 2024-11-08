@@ -14,7 +14,7 @@ import java.util.List;
 public interface CartFeignClient {
     //  获取选中购物车列表！
     @GetMapping("/getCartCheckedList/{userId}")
-    public Result<List<CartInfo>> getCartCheckedList(@PathVariable String userId);
+    Result<List<CartInfo>> getCartCheckedList(@PathVariable String userId);
 
     @PostMapping("/addToCart/{skuId}/{skuNum}")
     Result<Void> addToCart(

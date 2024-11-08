@@ -41,7 +41,6 @@ public class CartServiceImpl implements CartService {
     @Resource
     private RedisTemplate<String, String> redisTemplate;
 
-    @Qualifier("productDegradeFeignClient")
     @Autowired
     private ProductFeignClient productFeignClient;
 
