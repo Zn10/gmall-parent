@@ -513,7 +513,7 @@ public class ManageServiceImpl implements ManageService {
     public IPage<SpuInfo> getSpuInfoPage(Page<SpuInfo> pageParam, SpuInfo spuInfo) {
         QueryWrapper<SpuInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("category3_id", spuInfo.getCategory3Id());
-        queryWrapper.orderByDesc("id");
+        queryWrapper.orderByDesc("create_time");
         return spuInfoMapper.selectPage(pageParam, queryWrapper);
     }
 

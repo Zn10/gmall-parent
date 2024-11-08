@@ -28,8 +28,7 @@ public class BaseTrademarkServiceImpl extends ServiceImpl<BaseTrademarkMapper, B
     @Override
     public IPage<BaseTrademark> getPage(Page<BaseTrademark> pageParam) {
         QueryWrapper<BaseTrademark> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByAsc("id");
-
+        queryWrapper.orderByAsc("create_time");
         return baseTrademarkMapper.selectPage(pageParam, queryWrapper);
     }
 }
