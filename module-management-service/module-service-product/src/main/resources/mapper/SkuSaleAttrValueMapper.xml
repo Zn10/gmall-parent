@@ -7,8 +7,8 @@
 
     </resultMap>
     <insert id="batchInsert" parameterType="java.util.List" >
-        insert into sku_sale_attr_value
-        (sku_id,spu_id,sale_attr_value_id,sale_attr_id,sale_attr_name,sale_attr_value_name,) values
+        INSERT INTO sku_sale_attr_value
+        (sku_id,spu_id,sale_attr_value_id,sale_attr_id,sale_attr_name,sale_attr_value_name,) VALUES
         <foreach collection="skuSaleAttrValueList" item="saleAttrValue" separator=",">
             (#{saleAttrValue.skuId},${saleAttrValue.spuId},#{saleAttrValue.saleAttrValueId},${saleAttrValue.saleAttrId},#{saleAttrValue.saleAttrName},#{saleAttrValue.saleAttrValueName})
         </foreach>

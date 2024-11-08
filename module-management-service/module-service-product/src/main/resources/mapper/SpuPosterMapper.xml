@@ -4,7 +4,7 @@
 <mapper namespace="com.zn.gmall.product.mapper.SpuPosterMapper">
 
     <insert id="batchInsert" parameterType="java.util.List" >
-        insert into spu_poster (spu_id,img_name,img_url) values
+        INSERT INTO spu_poster (spu_id,img_name,img_url) VALUES
         <foreach collection="spuPosterList" item="item" separator=",">
             (#{item.spuId},#{item.imgName},${item.imgUrl})
         </foreach>
