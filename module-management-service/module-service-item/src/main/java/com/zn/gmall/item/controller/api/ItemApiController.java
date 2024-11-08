@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/item")
+@RequestMapping("/api/item/")
 @Slf4j
 public class ItemApiController {
     @Autowired
@@ -27,7 +27,7 @@ public class ItemApiController {
     public Result<Map<String, Object>> getItem(@PathVariable Long skuId) {
         log.info("获取商品详情信息，skuId:{}", skuId);
         if (skuId == null) {
-            return Result.<Map<String, Object>>fail().message("skuid为空");
+            return Result.<Map<String, Object>>fail().message("skuId为空");
         }
         Map<String, Object> result = itemService.getBySkuId(skuId);
         return Result.ok(result);
