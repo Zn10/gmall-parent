@@ -316,8 +316,7 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public IPage<SkuInfo> getPage(Page<SkuInfo> pageParam) {
         QueryWrapper<SkuInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("id");
-
+        queryWrapper.orderByDesc("create_time");
         return skuInfoMapper.selectPage(pageParam, queryWrapper);
     }
 
@@ -371,8 +370,8 @@ public class ManageServiceImpl implements ManageService {
             // 循环遍历
             for (SkuImage skuImage : skuImageList) {
                 skuImage.setSkuId(skuInfo.getId());
-                skuImageMapper.insert(skuImage);
             }
+            skuImageMapper.batchInsert(skuImageList);
         }
         List<SkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
         // 调用判断集合方法
@@ -380,15 +379,15 @@ public class ManageServiceImpl implements ManageService {
             for (SkuSaleAttrValue skuSaleAttrValue : skuSaleAttrValueList) {
                 skuSaleAttrValue.setSkuId(skuInfo.getId());
                 skuSaleAttrValue.setSpuId(skuInfo.getSpuId());
-                skuSaleAttrValueMapper.insert(skuSaleAttrValue);
             }
+            skuSaleAttrValueMapper.batchInsert(skuSaleAttrValueList);
         }
         List<SkuAttrValue> skuAttrValueList = skuInfo.getSkuAttrValueList();
         if (!CollectionUtils.isEmpty(skuAttrValueList)) {
             for (SkuAttrValue skuAttrValue : skuAttrValueList) {
                 skuAttrValue.setSkuId(skuInfo.getId());
-                skuAttrValueMapper.insert(skuAttrValue);
             }
+            skuAttrValueMapper.batchInsert(skuAttrValueList);
         }
     }
 

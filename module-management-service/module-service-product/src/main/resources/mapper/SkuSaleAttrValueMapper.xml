@@ -6,6 +6,14 @@
     <resultMap id="spuValueIdsMap" type="java.util.Map" autoMapping="true">
 
     </resultMap>
+    <insert id="batchInsert" parameterType="java.util.List" >
+        insert into sku_sale_attr_value
+        (sku_id,spu_id,sale_attr_value_id,sale_attr_id,sale_attr_name,sale_attr_value_name,) values
+        <foreach collection="skuSaleAttrValueList" item="saleAttrValue" separator=",">
+            (#{saleAttrValue.skuId},${saleAttrValue.spuId},#{saleAttrValue.saleAttrValueId},${saleAttrValue.saleAttrId},#{saleAttrValue.saleAttrName},#{saleAttrValue.saleAttrValueName})
+        </foreach>
+    </insert>
+
     <select id="selectSaleAttrValuesBySpu" resultMap="spuValueIdsMap">
   SELECT sku_id  , GROUP_CONCAT(sale_attr_value_id  ORDER BY sp.base_sale_attr_id ASC SEPARATOR '|') value_ids
      FROM  `sku_sale_attr_value` sv

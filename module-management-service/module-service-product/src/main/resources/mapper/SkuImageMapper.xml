@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace 定义接口的全路径-->
+<mapper namespace="com.zn.gmall.product.mapper.SkuImageMapper">
+
+    <insert id="batchInsert" parameterType="java.util.List" >
+        insert into sku_image (sku_id,img_name,img_url,spu_img_id,is_default) values
+        <foreach collection="skuImageList" item="item" separator=",">
+            (#{item.skuId},#{item.imgName},${item.imgUrl},${spuImgId},#{item.isDefault})
+        </foreach>
+    </insert>
+</mapper>
