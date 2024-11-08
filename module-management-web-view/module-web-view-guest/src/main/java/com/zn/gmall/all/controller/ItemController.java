@@ -14,6 +14,7 @@ import java.util.Map;
 @Controller
 public class ItemController {
 
+    @Qualifier("itemDegradeFeignClient")
     @Autowired
     private ItemFeignClient itemFeignClient;
 

@@ -21,9 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class CartController {
 
+    @Qualifier("cartDegradeFeignClient")
     @Autowired
     private CartFeignClient cartFeignClient;
 
+    @Qualifier("productDegradeFeignClient")
     @Autowired
     private ProductFeignClient productFeignClient;
 
