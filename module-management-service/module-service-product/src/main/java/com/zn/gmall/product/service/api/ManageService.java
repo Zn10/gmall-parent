@@ -14,16 +14,6 @@ import java.util.Map;
  * 商品汇总
  */
 public interface ManageService {
-
-    /**
-     * 通过品牌Id 来查询数据
-     *
-     * @param tmId 品牌id
-     * @return BaseTrademark
-     */
-    BaseTrademark getTrademarkByTmId(Long tmId);
-
-
     /**
      * 获取全部分类信息
      *

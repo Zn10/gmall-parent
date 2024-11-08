@@ -87,20 +87,6 @@ public class ManageServiceImpl implements ManageService {
     @Resource
     private RedisTemplate<String, SkuInfo> redisTemplate;
 
-    @Autowired
-    private BaseTrademarkMapper baseTrademarkMapper;
-
-    /**
-     * 通过品牌Id 来查询数据
-     *
-     * @param tmId 品牌id
-     * @return BaseTrademark
-     */
-    @Override
-    public BaseTrademark getTrademarkByTmId(Long tmId) {
-        return baseTrademarkMapper.selectById(tmId);
-    }
-
     /**
      * 获取全部分类信息
      *

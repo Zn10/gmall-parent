@@ -3,6 +3,7 @@ package com.zn.gmall.product.controller.api;
 import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.*;
+import com.zn.gmall.product.service.api.BaseTrademarkService;
 import com.zn.gmall.product.service.api.ManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class ProductApiController {
 
     @Autowired
     private ManageService manageService;
+    @Autowired
+    private BaseTrademarkService baseTrademarkService;
 
     /**
      * 通过品牌Id 集合来查询数据
@@ -35,7 +38,7 @@ public class ProductApiController {
         if (tmId == null) {
             return Result.<BaseTrademark>fail().message("品牌Id不能为空");
         }
-        BaseTrademark baseTrademark = manageService.getTrademarkByTmId(tmId);
+        BaseTrademark baseTrademark = baseTrademarkService.getById(tmId);
         return Result.ok(baseTrademark);
     }
 
