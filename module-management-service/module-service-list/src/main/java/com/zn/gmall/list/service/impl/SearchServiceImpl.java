@@ -8,10 +8,7 @@ import com.zn.gmall.model.list.*;
 import com.zn.gmall.model.list.vo.SearchResponseAttrVo;
 import com.zn.gmall.model.list.vo.SearchResponseTmVo;
 import com.zn.gmall.model.list.vo.SearchResponseVo;
-import com.zn.gmall.model.product.BaseAttrInfo;
-import com.zn.gmall.model.product.BaseCategoryView;
-import com.zn.gmall.model.product.BaseTrademark;
-import com.zn.gmall.model.product.SkuInfo;
+import com.zn.gmall.model.product.*;
 import com.zn.gmall.product.client.ProductFeignClient;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
@@ -46,6 +43,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author: 赵念
@@ -62,10 +60,75 @@ public class SearchServiceImpl implements SearchService {
     private GoodsRepository goodsRepository;
 
     @Resource
-    private RedisTemplate<String,String> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
     private RestHighLevelClient highLevelClient;
+
+    /**
+     * 上架商品列表
+     *
+     * @param skuId 商品skuid
+     */
+    @Override
+    public void upperGoods(Long skuId) {
+        Goods goods = new Goods();
+        //查询sku对应的平台属性
+        Result<List<BaseAttrInfo>> baseAttrInfoResult = productFeignClient.getAttrList(skuId);
+        List<BaseAttrInfo> baseAttrInfoList = baseAttrInfoResult.getData();
+        if (baseAttrInfoList != null) {
+            List<SearchAttr> searchAttrList = baseAttrInfoList.stream().map(baseAttrInfo -> {
+                SearchAttr searchAttr = new SearchAttr();
+                searchAttr.setAttrId(baseAttrInfo.getId());
+                searchAttr.setAttrName(baseAttrInfo.getAttrName());
+                //一个sku只对应一个属性值
+                List<BaseAttrValue> baseAttrValueList = baseAttrInfo.getAttrValueList();
+                searchAttr.setAttrValue(baseAttrValueList.get(0).getValueName());
+                return searchAttr;
+            }).collect(Collectors.toList());
+            goods.setAttrs(searchAttrList);
+        }
+        //查询sku信息
+        Result<SkuInfo> skuInfoResult = productFeignClient.getSkuInfo(skuId);
+        SkuInfo skuInfo = skuInfoResult.getData();
+        // 查询品牌
+        Result<BaseTrademark> baseTrademarkResult = productFeignClient.getTrademarkById(skuInfo.getTmId());
+        BaseTrademark baseTrademark = baseTrademarkResult.getData();
+        if (baseTrademark != null) {
+            goods.setTmId(skuInfo.getTmId());
+            goods.setTmName(baseTrademark.getTmName());
+            goods.setTmLogoUrl(baseTrademark.getLogoUrl());
+        }
+        // 查询分类
+        Result<BaseCategoryView> baseCategoryViewResult = productFeignClient.getCategoryView(skuInfo.getCategory3Id());
+        BaseCategoryView baseCategoryView = baseCategoryViewResult.getData();
+        if (baseCategoryView != null) {
+            goods.setCategory1Id(baseCategoryView.getCategory1Id());
+            goods.setCategory1Name(baseCategoryView.getCategory1Name());
+            goods.setCategory2Id(baseCategoryView.getCategory2Id());
+            goods.setCategory2Name(baseCategoryView.getCategory2Name());
+            goods.setCategory3Id(baseCategoryView.getCategory3Id());
+            goods.setCategory3Name(baseCategoryView.getCategory3Name());
+        }
+
+        goods.setDefaultImg(skuInfo.getSkuDefaultImg());
+        goods.setPrice(skuInfo.getPrice().doubleValue());
+        goods.setId(skuInfo.getId());
+        goods.setTitle(skuInfo.getSkuName());
+        goods.setCreateTime(new Date());
+
+        this.goodsRepository.save(goods);
+    }
+
+    /**
+     * 下架商品列表
+     *
+     * @param skuId 商品skuid
+     */
+    @Override
+    public void lowerGoods(Long skuId) {
+        this.goodsRepository.deleteById(skuId);
+    }
 
     @Override
     public void importGoodsToElasticSearch(Long skuId) {
@@ -275,8 +338,7 @@ public class SearchServiceImpl implements SearchService {
                     attrBoolQuery.must(QueryBuilders.termQuery("attrs.attrValue", attrValue));
 
                     // 对应 DSL 中的结构：filter -> nested
-                    NestedQueryBuilder attrNestedQuery =
-                            QueryBuilders.nestedQuery("attrs", attrBoolQuery, ScoreMode.None);
+                    NestedQueryBuilder attrNestedQuery = QueryBuilders.nestedQuery("attrs", attrBoolQuery, ScoreMode.None);
 
                     // 对应 DSL 中的结构：最外层 query -> bool -> filter
                     boolQueryBuilder.filter(attrNestedQuery);
@@ -322,10 +384,7 @@ public class SearchServiceImpl implements SearchService {
             }
 
             assert orderFieldName != null;
-            searchSourceBuilder.sort(
-                    orderFieldName,
-                    "ASC".equalsIgnoreCase(orderDirection) ? SortOrder.ASC : SortOrder.DESC
-            );
+            searchSourceBuilder.sort(orderFieldName, "ASC".equalsIgnoreCase(orderDirection) ? SortOrder.ASC : SortOrder.DESC);
         }
 
         // 第四步：封装分页数据（对应 DSL 语句中的 from、size 部分）
@@ -353,25 +412,11 @@ public class SearchServiceImpl implements SearchService {
 
         // 第六步：封装聚合信息（对应 DSL 语句中的 aggs 部分）
         // 1、品牌聚合（普通类型数据）
-        TermsAggregationBuilder tmAgg = AggregationBuilders
-                .terms("tmIdAgg")
-                .field("tmId")
-                .subAggregation(AggregationBuilders.terms("tmNameAgg").field("tmName"))
-                .subAggregation(AggregationBuilders.terms("tmLogoUrlAgg").field("tmLogoUrl"));
+        TermsAggregationBuilder tmAgg = AggregationBuilders.terms("tmIdAgg").field("tmId").subAggregation(AggregationBuilders.terms("tmNameAgg").field("tmName")).subAggregation(AggregationBuilders.terms("tmLogoUrlAgg").field("tmLogoUrl"));
         searchSourceBuilder.aggregation(tmAgg);
 
         // 2、平台属性聚合（nested类型数据）
-        NestedAggregationBuilder attrAgg = AggregationBuilders
-                .nested("attrAgg", "attrs")
-                .subAggregation(
-                        AggregationBuilders
-                                .terms("attrIdAgg")
-                                .field("attrs.attrId")
-                                .subAggregation(
-                                        AggregationBuilders.terms("attrNameAgg").field("attrs.attrName"))
-                                .subAggregation(
-                                        AggregationBuilders.terms("attrValueAgg").field("attrs.attrValue"))
-                );
+        NestedAggregationBuilder attrAgg = AggregationBuilders.nested("attrAgg", "attrs").subAggregation(AggregationBuilders.terms("attrIdAgg").field("attrs.attrId").subAggregation(AggregationBuilders.terms("attrNameAgg").field("attrs.attrName")).subAggregation(AggregationBuilders.terms("attrValueAgg").field("attrs.attrValue")));
         searchSourceBuilder.aggregation(attrAgg);
 
         // 第七步：指定查询结果中我们需要哪些字段
@@ -474,22 +519,14 @@ public class SearchServiceImpl implements SearchService {
             searchResponseTmVo.setTmId(tmId);
 
             // 8、获取 tmName 值
-            ParsedStringTerms tmNameAgg =
-                    (ParsedStringTerms) tmIdAggBucket
-                            .getAggregations()
-                            .getAsMap()
-                            .get("tmNameAgg");
+            ParsedStringTerms tmNameAgg = (ParsedStringTerms) tmIdAggBucket.getAggregations().getAsMap().get("tmNameAgg");
 
             // 由于在 tmId 分组的基础上，tmName 肯定是唯一的，所以这里取下标 0
             String tmName = tmNameAgg.getBuckets().get(0).getKeyAsString();
             searchResponseTmVo.setTmName(tmName);
 
             // 9、获取 tmLogoUrl 值
-            ParsedStringTerms tmLogoUrlAgg =
-                    (ParsedStringTerms) tmIdAggBucket
-                            .getAggregations()
-                            .getAsMap()
-                            .get("tmLogoUrlAgg");
+            ParsedStringTerms tmLogoUrlAgg = (ParsedStringTerms) tmIdAggBucket.getAggregations().getAsMap().get("tmLogoUrlAgg");
 
             String tmLogoUrl = tmLogoUrlAgg.getBuckets().get(0).getKeyAsString();
             searchResponseTmVo.setTmLogoUrl(tmLogoUrl);
@@ -563,8 +600,7 @@ public class SearchServiceImpl implements SearchService {
         SearchRequest searchRequest = buildQueryDsl(searchParam);
 
         // 2、基于封装 DSL 语句的 SearchRequest 对象执行搜索
-        SearchResponse searchResponse =
-                highLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        SearchResponse searchResponse = highLevelClient.search(searchRequest, RequestOptions.DEFAULT);
 
         // 3、对 ElasticSearch 返回的响应结果进行解析
         SearchResponseVo searchResponseVo = parseSearchResult(searchResponse);

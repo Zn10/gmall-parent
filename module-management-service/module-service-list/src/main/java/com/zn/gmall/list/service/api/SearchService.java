@@ -10,18 +10,32 @@ import org.elasticsearch.action.search.SearchResponse;
  * @create-date: 2023/2/10/19:35
  */
 public interface SearchService {
+    /**
+     * 上架商品列表
+     *
+     * @param skuId 商品skuid
+     */
+    void upperGoods(Long skuId);
+
+    /**
+     * 下架商品列表
+     *
+     * @param skuId 商品skuid
+     */
+    void lowerGoods(Long skuId);
+
 
     /**
      * 将商品数据导入 ElasticSearch
      *
-     * @param skuId
+     * @param skuId 商品skuid
      */
     void importGoodsToElasticSearch(Long skuId);
 
     /**
      * 将商品数据从 ElasticSearch 移除
      *
-     * @param skuId
+     * @param skuId 商品skuid
      */
     void removeGoodsFromElasticSearch(Long skuId);
 
@@ -30,7 +44,7 @@ public interface SearchService {
      * 在 Redis 中的操作：每次都 +1
      * 在 ElasticSearch 中的操作：隔 10 次执行一次更新
      *
-     * @param skuId
+     * @param skuId 商品skuid
      */
     void incrHotScore(Long skuId);
 

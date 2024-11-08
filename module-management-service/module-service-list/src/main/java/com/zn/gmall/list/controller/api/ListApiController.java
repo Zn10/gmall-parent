@@ -23,6 +23,39 @@ public class ListApiController {
     private SearchService searchService;
 
     /**
+     * 上架商品
+     *
+     * @param skuId
+     * @return
+     */
+    @GetMapping("inner/upperGoods/{skuId}")
+    public Result<Void> upperGoods(@PathVariable("skuId") Long skuId) {
+        log.info("商品上架:{}", skuId);
+        if (skuId == null) {
+            return Result.<Void>fail().message("skuid为空");
+        }
+        searchService.upperGoods(skuId);
+        return Result.ok();
+    }
+
+    /**
+     * 下架商品
+     *
+     * @param skuId
+     * @return
+     */
+    @GetMapping("inner/lowerGoods/{skuId}")
+    public Result<Void> lowerGoods(@PathVariable("skuId") Long skuId) {
+        log.info("商品下架:{}", skuId);
+        if (skuId == null) {
+            return Result.<Void>fail().message("skuid为空");
+        }
+        searchService.lowerGoods(skuId);
+        return Result.ok();
+    }
+
+
+    /**
      * 搜索商品
      *
      * @param searchParam
