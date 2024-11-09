@@ -85,9 +85,17 @@ public class MQProducerAckConfig implements RabbitTemplate.ConfirmCallback, Rabb
 
             //  更新缓存中的数据
             this.redisTemplate.opsForValue().set(gmallCorrelationData.getId(), JSON.toJSONString(gmallCorrelationData), 10, TimeUnit.MINUTES);
-
-            //  调用发送消息方法 表示发送普通消息  发送消息的时候，不能调用 new RabbitService().sendMsg() 这个方法
-            this.rabbitTemplate.convertAndSend(gmallCorrelationData.getExchange(), gmallCorrelationData.getRoutingKey(), gmallCorrelationData.getMessage(), gmallCorrelationData);
+            if (gmallCorrelationData.isDelay()) {
+                //  属于延迟消息
+                this.rabbitTemplate.convertAndSend(gmallCorrelationData.getExchange(), gmallCorrelationData.getRoutingKey(), gmallCorrelationData.getMessage(), message -> {
+                    //  设置延迟时间
+                    message.getMessageProperties().setDelay(gmallCorrelationData.getDelayTime() * 1000);
+                    return message;
+                }, gmallCorrelationData);
+            } else {
+                //  调用发送消息方法 表示发送普通消息  发送消息的时候，不能调用 new RabbitService().sendMsg() 这个方法
+                this.rabbitTemplate.convertAndSend(gmallCorrelationData.getExchange(), gmallCorrelationData.getRoutingKey(), gmallCorrelationData.getMessage(), gmallCorrelationData);
+            }
         }
     }
 }

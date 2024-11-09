@@ -1,11 +1,18 @@
 package com.zn.gmall.mq.controller;
 
 import com.zn.gmall.common.result.Result;
+import com.zn.gmall.mq.config.DeadLetterMqConfig;
+import com.zn.gmall.mq.config.DelayedMqConfig;
 import com.zn.mq.service.RabbitService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @program: gmall-parent
@@ -15,19 +22,30 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequestMapping("/mq")
+@Slf4j
 public class MqController {
     @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
     private RabbitService rabbitService;
+
+    //  基于延迟插件的延迟消息
+    @GetMapping("sendDelay")
+    public Result sendDelay() {
+        this.rabbitService.sendDelayMessage(DelayedMqConfig.exchange_delay, DelayedMqConfig.routing_delay, "iuok", 3);
+        return Result.ok();
+    }
 
 
     /**
      * 消息发送
      */
-    //http://localhost:8282/mq/sendConfirm
-    @GetMapping("sendConfirm")
-    public Result sendConfirm() {
-        rabbitService.sendMessage("exchange.confirm", "routing.confirm", "来人了，开始接客吧！");
+    @GetMapping("sendDeadLettle")
+    public Result sendDeadLettle() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.rabbitTemplate.convertAndSend(DeadLetterMqConfig.exchange_dead, DeadLetterMqConfig.routing_dead_1, "ok");
+        log.info("消息发送成功,时间:{}", sdf.format(new Date()));
         return Result.ok();
     }
-
 }

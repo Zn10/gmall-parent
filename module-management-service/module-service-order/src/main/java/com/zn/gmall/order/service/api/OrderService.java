@@ -58,5 +58,7 @@ public interface OrderService extends IService<OrderInfo> {
      * @return
      */
     Long saveOrderInfo(OrderInfo orderInfo);
+
+    void execExpiredOrder(Long orderId);
 }
 

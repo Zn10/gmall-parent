@@ -11,18 +11,15 @@ import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.order.mapper.OrderDetailMapper;
 import com.zn.gmall.order.mapper.OrderInfoMapper;
 import com.zn.gmall.order.service.api.OrderService;
+import com.zn.mq.constant.MqConst;
+import com.zn.mq.service.RabbitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @program: gmall-parent
@@ -41,6 +38,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
 
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private RabbitService rabbitService;
 
     @Value("${ware.url}")
     private String WARE_URL;
@@ -121,7 +120,25 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
             orderDetail.setOrderId(orderInfo.getId());
             orderDetailMapper.insert(orderDetail);
         }
+        //发送延迟队列，如果定时未支付，取消订单
+        rabbitService.sendDelayMessage(MqConst.EXCHANGE_DIRECT_ORDER_CANCEL, MqConst.ROUTING_ORDER_CANCEL, orderInfo.getId(), MqConst.DELAY_TIME);
+
         return orderInfo.getId();
+    }
+
+    @Override
+    public void execExpiredOrder(Long orderId) {
+        updateOrderStatus(orderId, ProcessStatus.CLOSED);
+    }
+
+    private void updateOrderStatus(Long orderId, ProcessStatus processStatus) {
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setId(orderId);
+        orderInfo.setProcessStatus(processStatus.name());
+        orderInfo.setOrderStatus(processStatus.getOrderStatus().name());
+
+        orderInfoMapper.updateById(orderInfo);
+
     }
 }
 

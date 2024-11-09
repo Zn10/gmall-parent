@@ -27,6 +27,42 @@ public class RabbitService {
     private RedisTemplate redisTemplate;
 
     /**
+     * 封装发送延迟消息方法
+     *
+     * @param exchange
+     * @param routingKey
+     * @param msg
+     * @param delayTime
+     * @return
+     */
+    public Boolean sendDelayMessage(String exchange, String routingKey, Object msg, int delayTime) {
+        //  将发送的消息 赋值到 自定义的实体类
+        GmallCorrelationData gmallCorrelationData = new GmallCorrelationData();
+        //  声明一个correlationId的变量
+        String correlationId = UUID.randomUUID().toString().replaceAll("-", "");
+        gmallCorrelationData.setId(correlationId);
+        gmallCorrelationData.setExchange(exchange);
+        gmallCorrelationData.setRoutingKey(routingKey);
+        gmallCorrelationData.setMessage(msg);
+        gmallCorrelationData.setDelayTime(delayTime);
+        gmallCorrelationData.setDelay(true);
+
+        //  将数据存到缓存
+        this.redisTemplate.opsForValue().set(correlationId, JSON.toJSONString(gmallCorrelationData), 10, TimeUnit.MINUTES);
+
+        //  发送消息
+        this.rabbitTemplate.convertAndSend(exchange, routingKey, msg, message -> {
+            //  设置延迟时间
+            message.getMessageProperties().setDelay(delayTime * 1000);
+            return message;
+        }, gmallCorrelationData);
+
+        //  默认返回
+        return true;
+    }
+
+
+    /**
      * 发送消息
      *
      * @param exchange   交换机
