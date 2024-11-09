@@ -13,6 +13,15 @@ import com.zn.gmall.model.order.OrderInfo;
  **/
 public interface OrderService extends IService<OrderInfo> {
 
+    /**
+     * 根据订单Id 查询订单信息
+     *
+     * @param orderId
+     * @return
+     */
+    OrderInfo getOrderInfo(Long orderId);
+
+
     IPage<OrderInfo> getPage(Page<OrderInfo> pageParam, String userId);
 
     /**

@@ -19,14 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -58,6 +52,23 @@ public class OrderApiController {
     private ThreadPoolExecutor threadPoolExecutor;
     @Autowired
     private OrderService orderService;
+
+    /**
+     * 内部调用获取订单
+     *
+     * @param orderId
+     * @return
+     */
+    @GetMapping("inner/getOrderInfo/{orderId}")
+    public Result<OrderInfo> getOrderInfo(@PathVariable(value = "orderId") Long orderId) {
+        log.info("内部调用获取订单,订单Id:{}", orderId);
+        if (orderId == null) {
+            return Result.<OrderInfo>fail().message("订单Id不能为空");
+        }
+        OrderInfo orderInfo = orderService.getOrderInfo(orderId);
+        return Result.ok(orderInfo);
+    }
+
 
     @ApiOperation("我的订单")
     @GetMapping("auth/{page}/{limit}")

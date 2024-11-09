@@ -9,8 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>module-service-payment</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-order</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+        </dependency>
+    </dependencies>
 
-<!--    <build>
+    <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
@@ -24,7 +35,7 @@
                     </execution>
                 </executions>
             </plugin>
-                        <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
@@ -45,6 +56,6 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 
 </project>

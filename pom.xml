@@ -47,6 +47,7 @@
         <minio.version>8.2.0</minio.version>
         <docker.image>docker_storage</docker.image>
         <logstash.version>5.1</logstash.version>
+        <alipay-sdk-java.version>4.8.73.ALL</alipay-sdk-java.version>
     </properties>
 
     <!--配置dependencyManagement锁定依赖的版本 并不是实际的依赖。-->
@@ -125,6 +126,11 @@
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
                 <version>${logstash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>${alipay-sdk-java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

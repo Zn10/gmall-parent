@@ -1,5 +1,6 @@
 package com.zn.gmall.order.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -44,6 +45,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
     @Value("${ware.url}")
     private String WARE_URL;
 
+
+    @Override
+    public OrderInfo getOrderInfo(Long orderId) {
+        OrderInfo orderInfo = orderInfoMapper.selectById(orderId);
+        QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_id", orderId);
+        List<OrderDetail> orderDetailList = orderDetailMapper.selectList(queryWrapper);
+        orderInfo.setOrderDetailList(orderDetailList);
+        return orderInfo;
+    }
 
     @Override
     public IPage<OrderInfo> getPage(Page<OrderInfo> pageParam, String userId) {

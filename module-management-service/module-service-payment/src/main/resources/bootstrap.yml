@@ -1,0 +1,21 @@
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    application:
+        name: service-payment
+    cloud:
+        nacos:
+            config:
+                file-extension: yaml
+                refresh-enabled: true
+                prefix: ${spring.application.name}-@spring.active@.yaml
+                server-addr: gmall-nacos:8848
+                namespace: gmall
+                timeout: 50000
+                shared-configs:
+                -   data-id: common.yaml
+            discovery:
+                server-addr: gmall-nacos:8848
+                namespace: gmall
+    profiles:
+        active: @spring.active@
