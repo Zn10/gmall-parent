@@ -46,6 +46,7 @@
         <httpclient.version>4.5.13</httpclient.version>
         <minio.version>8.2.0</minio.version>
         <docker.image>docker_storage</docker.image>
+        <logstash.version>5.1</logstash.version>
     </properties>
 
     <!--配置dependencyManagement锁定依赖的版本 并不是实际的依赖。-->
@@ -119,6 +120,11 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
