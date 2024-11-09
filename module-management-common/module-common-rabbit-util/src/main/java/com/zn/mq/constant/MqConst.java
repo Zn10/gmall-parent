@@ -46,4 +46,20 @@ public class MqConst {
     public static final String ROUTING_PAYMENT_CLOSE = "payment.close";
     //队列
     public static final String QUEUE_PAYMENT_CLOSE  = "queue.payment.close";
+    /**
+     * 定时任务
+     */
+    public static final String EXCHANGE_DIRECT_TASK = "exchange.direct.task";
+    public static final String ROUTING_TASK_1 = "seckill.task.1";
+    //队列
+    public static final String QUEUE_TASK_1 = "queue.task.1";
+    /**
+     * 秒杀
+     */
+    public static final String EXCHANGE_DIRECT_SECKILL_USER = "exchange.direct.seckill.user";
+    public static final String ROUTING_SECKILL_USER = "seckill.user";
+    //队列
+    public static final String QUEUE_SECKILL_USER  = "queue.seckill.user";
+
+
 }
