@@ -45,7 +45,6 @@ public class PassportApiController {
         // 所以执行退出登录，就删除 Redis 的 token
         String tokenKey = RedisConst.USER_LOGIN_KEY_PREFIX + token;
         redisTemplate.delete(tokenKey);
-
         return Result.ok();
     }
 

@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
  * 商品汇总实现
  */
+@SuppressWarnings("all")
 @Slf4j
 @Service
 public class ManageServiceImpl implements ManageService {

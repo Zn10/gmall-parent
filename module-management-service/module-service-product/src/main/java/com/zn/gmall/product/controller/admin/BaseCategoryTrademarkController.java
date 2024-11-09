@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("admin/product/baseCategoryTrademark")
 @Slf4j
+@SuppressWarnings("all")
 public class BaseCategoryTrademarkController {
 
     @Autowired

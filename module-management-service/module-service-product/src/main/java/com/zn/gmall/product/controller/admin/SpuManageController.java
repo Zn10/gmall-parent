@@ -21,6 +21,7 @@ import java.util.List;
 @RestController // @ResponseBody + @Controller
 @RequestMapping("admin/product")
 @Slf4j
+@SuppressWarnings("all")
 public class SpuManageController {
 
     @Autowired

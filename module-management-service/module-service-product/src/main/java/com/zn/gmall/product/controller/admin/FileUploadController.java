@@ -24,6 +24,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping("admin/product")
+@SuppressWarnings("all")
 public class FileUploadController {
 
     //  获取文件上传对应的地址

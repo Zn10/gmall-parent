@@ -36,6 +36,10 @@ public class UserServiceImpl implements UserService {
                 .eq("passwd", passwd);
 
         // [2]执行查询并返回结果
-        return userInfoMapper.selectOne(queryWrapper);
+        UserInfo info = userInfoMapper.selectOne(queryWrapper);
+        if (info != null) {
+            return info;
+        }
+        return null;
     }
 }

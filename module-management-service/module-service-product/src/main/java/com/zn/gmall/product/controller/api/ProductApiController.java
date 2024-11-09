@@ -19,6 +19,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/product")
 @Slf4j
+@SuppressWarnings("all")
 public class ProductApiController {
 
     @Autowired

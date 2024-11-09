@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("admin/product")
 @Slf4j
+@SuppressWarnings("all")
 public class SkuManageController {
 
     @Autowired

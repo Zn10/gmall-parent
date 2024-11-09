@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zn.gmall.model.product.BaseTrademark;
 
-import java.util.List;
-
 /**
  * 品牌列表接口
  */
