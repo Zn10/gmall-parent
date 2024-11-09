@@ -6,6 +6,8 @@ import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.model.payment.PaymentInfo;
 import com.zn.gmall.payment.mapper.PaymentInfoMapper;
 import com.zn.gmall.payment.service.api.PaymentService;
+import com.zn.mq.constant.MqConst;
+import com.zn.mq.service.RabbitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -29,6 +31,8 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentInfoMapper paymentInfoMapper;
     @Autowired
     private RedisTemplate redisTemplate;
+    @Autowired
+    private RabbitService rabbitService;
 
     @Override
     public PaymentInfo getPaymentInfo(String outTradeNo, String name) {
@@ -60,6 +64,9 @@ public class PaymentServiceImpl implements PaymentService {
             this.redisTemplate.delete(paramsMap.get("notify_id"));
             e.printStackTrace();
         }
+        //  发送通知：更新订单的状态！
+        this.rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_PAYMENT_PAY, MqConst.ROUTING_PAYMENT_PAY, paymentInfoQuery.getOrderId());
+
     }
 
     @Override
@@ -96,6 +103,20 @@ public class PaymentServiceImpl implements PaymentService {
     public void updatePaymentInfo(String outTradeNo, PaymentInfo paymentInfo) {
         QueryWrapper<PaymentInfo> paymentInfoQueryWrapper = new QueryWrapper<>();
         paymentInfoQueryWrapper.eq("out_trade_no", outTradeNo);
+        paymentInfoMapper.update(paymentInfo, paymentInfoQueryWrapper);
+    }
+
+    @Override
+    public void closePayment(Long orderId) {
+        // 设置关闭交易记录的条件  118
+        QueryWrapper<PaymentInfo> paymentInfoQueryWrapper = new QueryWrapper<>();
+        paymentInfoQueryWrapper.eq("order_id", orderId);
+        // 如果当前的交易记录不存在，则不更新交易记录
+        Integer count = paymentInfoMapper.selectCount(paymentInfoQueryWrapper);
+        if (null == count || count == 0) return;
+        // 在关闭支付宝交易之前。还需要关闭paymentInfo
+        PaymentInfo paymentInfo = new PaymentInfo();
+        paymentInfo.setPaymentStatus(PaymentStatus.CLOSED.name());
         paymentInfoMapper.update(paymentInfo, paymentInfoQueryWrapper);
     }
 }

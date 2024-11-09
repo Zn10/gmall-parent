@@ -3,7 +3,11 @@ package com.zn.gmall.order.service.api;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zn.gmall.model.enums.ProcessStatus;
 import com.zn.gmall.model.order.OrderInfo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @program: gmall-parent
@@ -12,6 +16,8 @@ import com.zn.gmall.model.order.OrderInfo;
  * @create: 2024-05-13 20:51
  **/
 public interface OrderService extends IService<OrderInfo> {
+
+    List<OrderInfo> orderSplit(Long orderId, String wareSkuMap);
 
     /**
      * 根据订单Id 查询订单信息
@@ -69,5 +75,21 @@ public interface OrderService extends IService<OrderInfo> {
     Long saveOrderInfo(OrderInfo orderInfo);
 
     void execExpiredOrder(Long orderId);
+
+    /**
+     * 发送订单消息给库存
+     *
+     * @param orderId
+     */
+    void sendOrderStatus(Long orderId);
+
+    /**
+     * 将orderInfo变为map集合
+     *
+     * @param orderInfo
+     */
+    Map initWareOrder(OrderInfo orderInfo);
+
+    void updateOrderInfoStatus(long orderId, ProcessStatus processStatus);
 }
 

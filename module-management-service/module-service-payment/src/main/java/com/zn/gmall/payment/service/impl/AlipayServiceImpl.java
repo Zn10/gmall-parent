@@ -3,18 +3,23 @@ package com.zn.gmall.payment.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
+import com.alipay.api.request.AlipayTradeCloseRequest;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.request.AlipayTradeRefundRequest;
+import com.alipay.api.response.AlipayTradeCloseResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.enums.PaymentStatus;
 import com.zn.gmall.model.enums.PaymentType;
 import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.model.payment.PaymentInfo;
-import com.zn.gmall.order.client.OrderFeignClient;
 import com.zn.gmall.payment.config.AlipayConfig;
 import com.zn.gmall.payment.service.api.AlipayService;
 import com.zn.gmall.payment.service.api.PaymentService;
+import com.zn.payment.client.OrderFeignClient;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +45,25 @@ public class AlipayServiceImpl implements AlipayService {
 
     @Autowired
     private PaymentService paymentService;
+
+    @SneakyThrows
+    @Override
+    public Boolean checkPayment(Long orderId) {
+        // 根据订单Id 查询订单信息
+        Result<OrderInfo> orderInfoResult = orderFeignClient.getOrderInfo(orderId);
+        OrderInfo orderInfo = orderInfoResult.getData();
+        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("out_trade_no", orderInfo.getOutTradeNo());
+        // 根据out_trade_no 查询交易记录
+        request.setBizContent(JSON.toJSONString(map));
+        AlipayTradeQueryResponse response = alipayClient.execute(request);
+        if (response.isSuccess()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     @Override
@@ -108,5 +132,28 @@ public class AlipayServiceImpl implements AlipayService {
             return false;
         }
     }
+
+    @SneakyThrows
+    @Override
+    public Boolean closePay(Long orderId) {
+        Result<OrderInfo> orderInfoResult = orderFeignClient.getOrderInfo(orderId);
+        OrderInfo orderInfo = orderInfoResult.getData();
+        AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
+        HashMap<String, Object> map = new HashMap<>();
+        // map.put("trade_no",paymentInfo.getTradeNo()); // 从paymentInfo 中获取！
+        map.put("out_trade_no", orderInfo.getOutTradeNo());
+        map.put("operator_id", "YX01");
+        request.setBizContent(JSON.toJSONString(map));
+
+        AlipayTradeCloseResponse response = alipayClient.execute(request);
+        if (response.isSuccess()) {
+            System.out.println("调用成功");
+            return true;
+        } else {
+            System.out.println("调用失败");
+            return false;
+        }
+    }
+
 }
 

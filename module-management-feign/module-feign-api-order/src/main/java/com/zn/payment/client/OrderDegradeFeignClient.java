@@ -1,4 +1,4 @@
-package com.zn.gmall.order.client;
+package com.zn.payment.client;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.order.OrderInfo;

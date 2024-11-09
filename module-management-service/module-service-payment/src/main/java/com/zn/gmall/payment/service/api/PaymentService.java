@@ -56,4 +56,6 @@ public interface PaymentService {
      * @param paymentInfo
      */
     void updatePaymentInfo(String outTradeNo, PaymentInfo paymentInfo);
+
+    void closePayment(Long orderId);
 }

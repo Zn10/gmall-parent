@@ -37,6 +37,35 @@ public class AlipayController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @GetMapping("getPaymentInfo/{outTradeNo}")
+    @ResponseBody
+    public PaymentInfo getPaymentInfo(@PathVariable String outTradeNo) {
+        PaymentInfo paymentInfo = paymentService.getPaymentInfo(outTradeNo, PaymentType.ALIPAY.name());
+        if (null != paymentInfo) {
+            return paymentInfo;
+        }
+        return null;
+    }
+
+
+    // 查看是否有交易记录
+    @RequestMapping("checkPayment/{orderId}")
+    @ResponseBody
+    public Boolean checkPayment(@PathVariable Long orderId) {
+        // 调用退款接口
+        boolean flag = alipayService.checkPayment(orderId);
+        return flag;
+    }
+
+
+    @GetMapping("closePay/{orderId}")
+    @ResponseBody
+    public Boolean closePay(@PathVariable Long orderId) {
+        Boolean aBoolean = alipayService.closePay(orderId);
+        return aBoolean;
+    }
+
+
     @RequestMapping("refund/{orderId}")
     @ResponseBody
     public Result refund(@PathVariable(value = "orderId") Long orderId) {
