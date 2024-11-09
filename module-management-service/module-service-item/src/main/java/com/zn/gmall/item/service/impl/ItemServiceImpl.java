@@ -72,7 +72,11 @@ public class ItemServiceImpl implements ItemService {
         });
 
         // ※附加功能：在异步任务中给 service-list 发送请求执行商品热度值的累加
-        CompletableFuture.runAsync(() -> listFeignClient.incrGoodsHotScore(skuId), threadPoolExecutor);
+        CompletableFuture<Void> incrGoodsHotScoreCompletableFuture = CompletableFuture.runAsync(() -> listFeignClient.incrGoodsHotScore(skuId), threadPoolExecutor);
+
+        // 多个异步任务整合，都成功，才算成功
+        CompletableFuture.allOf(futureSkuInfo, futureCategoryView, futurePrice, futureSaleAttrList, futureValueIdsJSON, incrGoodsHotScoreCompletableFuture).join();
+
         Map<String, Object> finalDataMap = null;
 
         try {
