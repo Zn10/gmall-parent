@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -27,8 +26,8 @@ public class GmallCacheAspect {
     @Autowired
     private RedissonClient redissonClient;
 
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     //  定义一个环绕通知！
     @SneakyThrows
@@ -111,7 +110,7 @@ public class GmallCacheAspect {
     private Object getRedisData(String key, MethodSignature methodSignature) {
         //  在向缓存存储数据的时候，将数据变为Json 字符串了！
         //  通过这个key 获取到缓存的value
-        String strJson = this.redisTemplate.opsForValue().get(key);
+        String strJson = (String) this.redisTemplate.opsForValue().get(key);
         //  判断
         if (!StringUtils.isEmpty(strJson)) {
             //  将字符串转换为对应的数据类型！

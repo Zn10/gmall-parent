@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mq")
 public class MqController {
-
-
     @Autowired
     private RabbitService rabbitService;
 

@@ -58,8 +58,8 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     private GoodsRepository goodsRepository;
 
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private RestHighLevelClient highLevelClient;

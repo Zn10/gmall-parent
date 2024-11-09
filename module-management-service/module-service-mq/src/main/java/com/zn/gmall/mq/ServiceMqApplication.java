@@ -19,5 +19,4 @@ public class ServiceMqApplication {
         SpringApplication.run(ServiceMqApplication.class, args);
         log.info("消息队列服务启动成功");
     }
-
 }

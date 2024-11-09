@@ -39,8 +39,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Value("${ware.url}")
     private String WARE_URL;

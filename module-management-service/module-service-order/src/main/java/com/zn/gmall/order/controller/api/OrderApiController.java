@@ -50,10 +50,10 @@ public class OrderApiController {
     private UserDegradeFeignClient userFeignClient;
     @Autowired
     private CartDegradeFeignClient cartFeignClient;
-    @Resource
+    @Autowired
     private ProductFeignClient productFeignClient;
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
     @Autowired

@@ -38,8 +38,8 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartInfoMapper cartInfoMapper;
 
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private ProductFeignClient productFeignClient;

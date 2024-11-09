@@ -2,6 +2,7 @@ package com.zn.gmall.mq.receiver;
 
 import com.rabbitmq.client.Channel;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
  * @create: 2024-05-13 22:22
  **/
 @Component
+@Slf4j
 public class ConfirmReceiver {
 
     @SneakyThrows
@@ -24,11 +26,8 @@ public class ConfirmReceiver {
             exchange = @Exchange(value = "exchange.confirm", autoDelete = "true"),
             key = {"routing.confirm"}))
     public void process(Message message, Channel channel) {
-        System.out.println("RabbitListener:" + new String(message.getBody()));
-
+        log.info("RabbitListener:{}", new String(message.getBody()));
         // false 确认一个消息，true 批量确认
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-
     }
-
 }

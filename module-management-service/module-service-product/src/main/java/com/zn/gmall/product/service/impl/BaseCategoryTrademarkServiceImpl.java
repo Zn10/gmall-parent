@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 /**
  * 分类品牌实现
  */
-@SuppressWarnings("all")
 @Service
 public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTrademarkMapper, BaseCategoryTrademark> implements BaseCategoryTrademarkService {
 

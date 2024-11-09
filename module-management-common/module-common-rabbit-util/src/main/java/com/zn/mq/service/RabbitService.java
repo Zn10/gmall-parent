@@ -2,12 +2,12 @@ package com.zn.mq.service;
 
 import com.alibaba.fastjson.JSON;
 import com.zn.mq.po.GmallCorrelationData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -18,13 +18,13 @@ import java.util.concurrent.TimeUnit;
  * @create: 2024-05-13 22:05
  **/
 @Service
+@Slf4j
 public class RabbitService {
-
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 发送消息
@@ -33,7 +33,6 @@ public class RabbitService {
      * @param routingKey 路由键
      * @param msg        消息
      */
-//  封装一个发送消息的方法
     public Boolean sendMessage(String exchange, String routingKey, Object msg) {
         //  将发送的消息 赋值到 自定义的实体类
         GmallCorrelationData gmallCorrelationData = new GmallCorrelationData();
@@ -52,6 +51,4 @@ public class RabbitService {
         //  默认返回true
         return true;
     }
-
-
 }

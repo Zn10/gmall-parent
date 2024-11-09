@@ -7,8 +7,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zn.gmall.common.cache.GmallCache;
 import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.model.product.*;
+import com.zn.mq.service.RabbitService;
 import com.zn.gmall.product.mapper.*;
 import com.zn.gmall.product.service.api.ManageService;
+import com.zn.mq.constant.MqConst;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -18,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +30,6 @@ import java.util.stream.Collectors;
 /**
  * 商品汇总实现
  */
-@SuppressWarnings("all")
 @Slf4j
 @Service
 public class ManageServiceImpl implements ManageService {
@@ -84,8 +84,11 @@ public class ManageServiceImpl implements ManageService {
     @Autowired
     private RedissonClient redissonClient;
 
-    @Resource
-    private RedisTemplate<String, SkuInfo> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private RabbitService rabbitService;
 
     /**
      * 获取全部分类信息
@@ -317,6 +320,8 @@ public class ManageServiceImpl implements ManageService {
         skuInfoUp.setId(skuId);
         skuInfoUp.setIsSale(1);
         skuInfoMapper.updateById(skuInfoUp);
+        //  通知mq商品上架
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_GOODS, MqConst.ROUTING_GOODS_UPPER, skuId);
     }
 
     /**
@@ -332,6 +337,8 @@ public class ManageServiceImpl implements ManageService {
         skuInfoUp.setId(skuId);
         skuInfoUp.setIsSale(0);
         skuInfoMapper.updateById(skuInfoUp);
+        //  通知mq商品下架
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_GOODS, MqConst.ROUTING_GOODS_LOWER, skuId);
     }
 
     /**

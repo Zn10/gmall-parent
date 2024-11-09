@@ -4,7 +4,7 @@
     <contextName>logback</contextName>
 
     <!-- 日志的输出目录 -->
-    <property name="log.path" value="${mall.log.path}" />
+    <property name="log.path" value="../logs"/>
 
     <!--控制台日志格式：彩色日志-->
     <!-- magenta:洋红 -->
@@ -17,11 +17,11 @@
 
     <!--文件日志格式-->
     <property name="FILE_LOG_PATTERN"
-              value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n" />
+              value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n"/>
 
     <!--编码-->
     <property name="ENCODING"
-              value="UTF-8" />
+              value="UTF-8"/>
 
 
     <!-- 控制台日志 -->
@@ -77,22 +77,22 @@
     </appender>
 
     <!-- logstash日志 -->
-        <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-            <!-- logstash ip和暴露的端口，logback就是通过这个地址把日志发送给logstash -->
-            <destination>gmall-logstash:5044</destination>
-            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
-        </appender>
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!-- logstash ip和暴露的端口，logback就是通过这个地址把日志发送给logstash -->
+        <destination>gmall-logstash:5044</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
 
 
     <!-- 开发环境 -->
     <springProfile name="dev">
         <!-- com.zn日志记录器：业务程序INFO级别  -->
-        <logger name="com.zn" level="INFO" />
+        <logger name="com.zn" level="INFO"/>
         <!-- 根日志记录器：INFO级别  -->
         <root level="INFO">
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="ROLLING_FILE" />
-            <appender-ref ref="LOGSTASH" />
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ROLLING_FILE"/>
+            <appender-ref ref="LOGSTASH"/>
         </root>
     </springProfile>
 
