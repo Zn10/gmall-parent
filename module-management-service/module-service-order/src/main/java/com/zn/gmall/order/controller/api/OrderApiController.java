@@ -13,7 +13,7 @@ import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.order.service.api.OrderService;
 import com.zn.gmall.product.client.ProductFeignClient;
-import com.zn.gmall.user.client.UserDegradeFeignClient;
+import com.zn.gmall.task.client.UserDegradeFeignClient;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;

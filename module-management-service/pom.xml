@@ -58,6 +58,12 @@
 
         <dependency>
             <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-order</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
             <artifactId>module-feign-api-payment</artifactId>
             <version>1.0</version>
         </dependency>
@@ -132,6 +138,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-common-rabbit-util</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>

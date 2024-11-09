@@ -17,11 +17,6 @@
             <artifactId>module-common-util</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.zn</groupId>
-            <artifactId>module-common-rabbit-util</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
     <build>

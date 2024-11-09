@@ -1,7 +1,7 @@
 package com.zn.gmall.all.controller;
 
 import com.zn.gmall.common.result.Result;
-import com.zn.payment.client.OrderFeignClient;
+import com.zn.gmall.order.OrderFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
