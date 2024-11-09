@@ -13,7 +13,7 @@ gmall-parent
      └── module-common-web-util -- web工具模块
      
 ├── module-management-feign -- feign远程调用模块
-     ├── module-feign-api-activity -- 活动feign模块
+     ├── module-feign-api-activity -- 秒杀活动feign模块
      ├── module-feign-api-cart -- 购物车feign模块
      ├── module-feign-api-item -- 商品详情feign模块
      ├── module-feign-api-list -- 列表feign模块
@@ -23,7 +23,7 @@ gmall-parent
      └── module-feign-api-user -- 用户feign模块
      
 ├── module-management-service -- 服务模块
-     ├── module-service-activity -- 活动模块[8200]
+     ├── module-service-activity -- 秒杀活动模块[8200]
      ├── module-service-cart -- 购物车模块[8201]
      ├── module-service-item -- 商品详情模块[8202]
      ├── module-service-list -- 列表模块[8203]
