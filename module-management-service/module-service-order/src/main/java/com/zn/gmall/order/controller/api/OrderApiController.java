@@ -86,6 +86,7 @@ public class OrderApiController {
      * @param request
      * @return
      */
+    @ApiOperation("提交订单")
     @PostMapping("auth/submitOrder")
     public Result<Object> submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request) {
         log.info("订单提交,订单信息:{}", orderInfo);
@@ -138,10 +139,11 @@ public class OrderApiController {
                     errorList.add(orderDetail.getSkuName() + "价格有变动！");
                 }
             }, threadPoolExecutor);
-            futureList.add(checkStockCompletableFuture);
+            futureList.add(checkPriceCompletableFuture);
         }
         //合并线程
         CompletableFuture.allOf(futureList.toArray(new CompletableFuture[0])).join();
+
         if (!errorList.isEmpty()) {
             return Result.fail().message(StringUtils.join(errorList, ","));
         }
