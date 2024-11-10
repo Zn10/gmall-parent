@@ -2,23 +2,30 @@ package com.zn.gmall.activity.controller.api;
 
 import com.zn.gmall.activity.service.api.SeckillGoodsService;
 import com.zn.gmall.activity.util.CacheHelper;
+import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.result.ResultCodeEnum;
 import com.zn.gmall.common.util.AuthContextHolder;
 import com.zn.gmall.common.util.DateUtil;
 import com.zn.gmall.common.util.MD5;
+import com.zn.gmall.model.activity.OrderRecode;
 import com.zn.gmall.model.activity.SeckillGoods;
 import com.zn.gmall.model.activity.UserRecode;
+import com.zn.gmall.model.order.OrderDetail;
+import com.zn.gmall.model.order.OrderInfo;
+import com.zn.gmall.model.user.UserAddress;
+import com.zn.gmall.order.OrderFeignClient;
 import com.zn.gmall.product.client.ProductFeignClient;
 import com.zn.gmall.task.client.UserFeignClient;
 import com.zn.mq.constant.MqConst;
 import com.zn.mq.service.RabbitService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Package: com.zn.gmall.activity.controller.api
@@ -41,7 +48,82 @@ public class SeckillGoodsApiController {
     private ProductFeignClient productFeignClient;
     @Autowired
     private RabbitService rabbitService;
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
+    private OrderFeignClient orderFeignClient;
 
+    @PostMapping("auth/submitOrder")
+    public Result submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request) {
+        String userId = AuthContextHolder.getUserId(request);
+        orderInfo.setUserId(Long.parseLong(userId));
+
+        Long orderId = orderFeignClient.submitOrder(orderInfo);
+        if (null == orderId) {
+            return Result.fail().message("下单失败，请重新操作");
+        }
+        //删除下单信息
+        redisTemplate.boundHashOps(RedisConst.SECKILL_ORDERS).delete(userId);
+        //下单记录
+        redisTemplate.boundHashOps(RedisConst.SECKILL_ORDERS_USERS).put(userId, orderId.toString());
+
+        return Result.ok(orderId);
+    }
+
+
+    /**
+     * 秒杀确认订单
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping("auth/trade")
+    public Result trade(HttpServletRequest request) {
+        // 获取到用户Id
+        String userId = AuthContextHolder.getUserId(request);
+
+        // 先得到用户想要购买的商品！
+        OrderRecode orderRecode = (OrderRecode) redisTemplate.boundHashOps(RedisConst.SECKILL_ORDERS).get(userId);
+        if (null == orderRecode) {
+            return Result.fail().message("非法操作");
+        }
+        SeckillGoods seckillGoods = orderRecode.getSeckillGoods();
+
+        //获取用户地址
+        Result<List<UserAddress>> userAddressListResult = userFeignClient.findUserAddressListByUserId(userId);
+        List<UserAddress> userAddressList = userAddressListResult.getData();
+
+        // 声明一个集合来存储订单明细
+        ArrayList<OrderDetail> detailArrayList = new ArrayList<>();
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setSkuId(seckillGoods.getSkuId());
+        orderDetail.setSkuName(seckillGoods.getSkuName());
+        orderDetail.setImgUrl(seckillGoods.getSkuDefaultImg());
+        orderDetail.setSkuNum(orderRecode.getNum());
+        orderDetail.setOrderPrice(seckillGoods.getCostPrice());
+        // 添加到集合
+        detailArrayList.add(orderDetail);
+
+        // 计算总金额
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setOrderDetailList(detailArrayList);
+        orderInfo.sumTotalAmount();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("userAddressList", userAddressList);
+        result.put("detailArrayList", detailArrayList);
+        // 保存总金额
+        result.put("totalAmount", orderInfo.getTotalAmount());
+        return Result.ok(result);
+    }
+
+
+    @GetMapping(value = "auth/checkOrder/{skuId}")
+    public Result checkOrder(@PathVariable("skuId") Long skuId, HttpServletRequest request) {
+        //当前登录用户
+        String userId = AuthContextHolder.getUserId(request);
+        return seckillGoodsService.checkOrder(skuId, userId);
+    }
 
     /**
      * 根据用户和商品ID实现秒杀下单

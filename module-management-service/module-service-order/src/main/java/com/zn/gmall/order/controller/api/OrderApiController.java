@@ -53,6 +53,17 @@ public class OrderApiController {
     private ThreadPoolExecutor threadPoolExecutor;
     @Autowired
     private OrderService orderService;
+    /**
+     * 秒杀提交订单，秒杀订单不需要做前置判断，直接下单
+     * @param orderInfo
+     * @return
+     */
+    @PostMapping("inner/seckill/submitOrder")
+    public Long submitOrder(@RequestBody OrderInfo orderInfo) {
+        Long orderId = orderService.saveOrderInfo(orderInfo);
+        return orderId;
+    }
+
 
     /**
      * 拆单业务

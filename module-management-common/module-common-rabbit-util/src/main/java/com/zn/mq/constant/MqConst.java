@@ -60,6 +60,12 @@ public class MqConst {
     public static final String ROUTING_SECKILL_USER = "seckill.user";
     //队列
     public static final String QUEUE_SECKILL_USER  = "queue.seckill.user";
+    /**
+     * 定时任务
+     */
+    public static final String ROUTING_TASK_18 = "seckill.task.18";
+    //队列
+    public static final String QUEUE_TASK_18  = "queue.task.18";
 
 
 }

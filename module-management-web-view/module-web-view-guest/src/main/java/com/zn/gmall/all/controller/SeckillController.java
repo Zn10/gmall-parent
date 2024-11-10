@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * Package: com.zn.gmall.all.controller
@@ -23,6 +24,25 @@ public class SeckillController {
 
     @Autowired
     private ActivityFeignClient activityFeignClient;
+
+    /**
+     * 确认订单
+     * @param model
+     * @return
+     */
+    @GetMapping("seckill/trade.html")
+    public String trade(Model model) {
+        Result<Map<String, Object>> result = activityFeignClient.trade();
+        if(result.isOk()) {
+            model.addAllAttributes(result.getData());
+            return "seckill/trade";
+        } else {
+            model.addAttribute("message",result.getMessage());
+
+            return "seckill/fail";
+        }
+    }
+
 
     @GetMapping("seckill/queue.html")
     public String queue(@RequestParam(name = "skuId") Long skuId,

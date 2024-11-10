@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableScheduling
 @Slf4j
-public class scheduledTask {
+public class ScheduledTask {
     @Autowired
     private RabbitService rabbitService;
 
@@ -31,4 +31,12 @@ public class scheduledTask {
         rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_1, "");
     }
 
+    /**
+     * 每天下午18点执行
+     */
+    //@Scheduled(cron = "0/35 * * * * ?")
+    @Scheduled(cron = "0 0 18 * * ?")
+    public void task18() {
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_18, "");
+    }
 }

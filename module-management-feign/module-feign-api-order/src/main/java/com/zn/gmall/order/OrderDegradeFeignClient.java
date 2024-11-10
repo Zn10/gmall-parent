@@ -10,6 +10,11 @@ import java.util.Map;
 public class OrderDegradeFeignClient implements OrderFeignClient {
 
     @Override
+    public Long submitOrder(OrderInfo orderInfo) {
+        return null;
+    }
+
+    @Override
     public Result<Map<String, Object>> trade() {
         Result<Map<String, Object>> result = Result.fail();
         result.message("服务降级了");
