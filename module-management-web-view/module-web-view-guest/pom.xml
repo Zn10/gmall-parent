@@ -21,7 +21,7 @@
     <description>前台系统用户界面</description>
 
     <build>
-        <finalName>web-all</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
