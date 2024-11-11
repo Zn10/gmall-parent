@@ -7,5 +7,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @author: 赵念
  * @create-date: 2023/2/10/19:34
  */
+@SuppressWarnings("all")
 public interface GoodsRepository extends ElasticsearchRepository<Goods, Long> {
 }

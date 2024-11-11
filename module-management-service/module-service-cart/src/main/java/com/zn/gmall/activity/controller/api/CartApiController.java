@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/cart")
 @Slf4j
+@SuppressWarnings("all")
 public class CartApiController {
 
     @Autowired

@@ -15,6 +15,7 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 @Configuration
 public class RedisChannelConfig {
 

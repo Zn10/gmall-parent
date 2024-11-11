@@ -15,6 +15,7 @@ import com.zn.gmall.order.mapper.OrderInfoMapper;
 import com.zn.gmall.order.service.api.OrderService;
 import com.zn.mq.constant.MqConst;
 import com.zn.mq.service.RabbitService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +31,8 @@ import java.util.*;
  * @author: Mr.Zhao
  * @create: 2024-05-13 20:51
  **/
+@SuppressWarnings("all")
+@Slf4j
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements OrderService {
 

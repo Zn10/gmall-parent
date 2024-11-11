@@ -17,6 +17,7 @@ import java.util.Date;
  */
 @Component
 @Slf4j
+@SuppressWarnings("all")
 public class DelayReceiver {
 
     @RabbitListener(queues = DelayedMqConfig.queue_delay_1)

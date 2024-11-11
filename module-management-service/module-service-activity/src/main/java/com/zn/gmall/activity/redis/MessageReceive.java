@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
  */
 @Component
 @Slf4j
+@SuppressWarnings("all")
 public class MessageReceive {
 
     /**

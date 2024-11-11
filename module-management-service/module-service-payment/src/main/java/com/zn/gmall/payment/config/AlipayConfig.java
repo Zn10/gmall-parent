@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 @Configuration
 public class AlipayConfig {
 

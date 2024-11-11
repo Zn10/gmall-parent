@@ -36,6 +36,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/api/activity/seckill")
+@SuppressWarnings("all")
 public class SeckillGoodsApiController {
 
     @Autowired

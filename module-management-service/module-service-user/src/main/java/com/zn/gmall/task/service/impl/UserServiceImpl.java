@@ -5,6 +5,7 @@ import com.zn.gmall.model.user.UserInfo;
 import com.zn.gmall.task.mapper.UserInfoMapper;
 import com.zn.gmall.task.service.api.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -14,6 +15,8 @@ import org.springframework.util.DigestUtils;
  * @create-date: 2023/2/11/14:10
  */
 @Service
+@SuppressWarnings("all")
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired

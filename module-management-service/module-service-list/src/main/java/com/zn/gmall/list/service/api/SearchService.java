@@ -9,6 +9,7 @@ import org.elasticsearch.action.search.SearchResponse;
  * @author: 赵念
  * @create-date: 2023/2/10/19:35
  */
+@SuppressWarnings("all")
 public interface SearchService {
     /**
      * 上架商品列表

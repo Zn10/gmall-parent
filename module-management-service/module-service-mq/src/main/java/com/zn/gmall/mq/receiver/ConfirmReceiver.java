@@ -24,6 +24,7 @@ import java.util.Date;
 @Configuration
 @Component
 @Slf4j
+@SuppressWarnings("all")
 public class ConfirmReceiver {
 
     @RabbitListener(queues = DeadLetterMqConfig.queue_dead_2)

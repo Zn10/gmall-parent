@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 public class CacheHelper {
 
     /**

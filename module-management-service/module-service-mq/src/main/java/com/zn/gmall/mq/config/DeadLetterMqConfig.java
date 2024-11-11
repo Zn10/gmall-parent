@@ -16,6 +16,7 @@ import java.util.HashMap;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 @Configuration
 public class DeadLetterMqConfig {
     // 声明一些变量

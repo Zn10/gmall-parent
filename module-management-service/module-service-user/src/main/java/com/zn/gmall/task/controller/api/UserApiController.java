@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 @Slf4j
+@SuppressWarnings("all")
 public class UserApiController {
 
     @Autowired

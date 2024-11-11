@@ -23,6 +23,7 @@ import java.util.Date;
 @RestController
 @RequestMapping("/mq")
 @Slf4j
+@SuppressWarnings("all")
 public class MqController {
     @Autowired
     private RabbitTemplate rabbitTemplate;

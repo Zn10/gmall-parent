@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/api/user/passport")
 @Slf4j
+@SuppressWarnings("all")
 public class PassportApiController {
 
     @Autowired

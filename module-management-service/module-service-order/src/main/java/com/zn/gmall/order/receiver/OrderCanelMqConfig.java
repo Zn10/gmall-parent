@@ -19,6 +19,7 @@ import java.util.Map;
  * @author zhaonian
  */
 @Configuration
+@SuppressWarnings("all")
 public class OrderCanelMqConfig {
 
     @Bean

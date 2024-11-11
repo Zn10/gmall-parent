@@ -9,6 +9,7 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.cart.CartInfo;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.product.client.ProductFeignClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.HashOperations;
@@ -30,6 +31,8 @@ import java.util.stream.Collectors;
  * 购物车实现
  */
 @Service
+@SuppressWarnings("all")
+@Slf4j
 @Transactional
 public class CartServiceImpl implements CartService {
 

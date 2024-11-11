@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 @Controller
 @RequestMapping("/api/payment/alipay")
 @Slf4j
+@SuppressWarnings("all")
 public class AlipayController {
 
     @Autowired

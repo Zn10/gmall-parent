@@ -12,6 +12,7 @@ import java.util.Map;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 public interface PaymentService {
 
     /**

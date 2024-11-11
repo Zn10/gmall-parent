@@ -17,6 +17,7 @@ import java.util.Map;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 @Configuration
 public class DelayedMqConfig {
 

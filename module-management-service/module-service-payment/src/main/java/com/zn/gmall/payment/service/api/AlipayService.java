@@ -7,6 +7,7 @@ package com.zn.gmall.payment.service.api;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 public interface AlipayService {
     String createaliPay(Long orderId);
     boolean refund(Long orderId);

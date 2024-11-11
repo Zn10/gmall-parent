@@ -27,6 +27,7 @@ import java.util.Map;
  * @author zhaonian
  */
 @Component
+@SuppressWarnings("all")
 public class OrderReceiver {
 
     @Autowired

@@ -9,6 +9,7 @@ import com.zn.gmall.common.result.ResultCodeEnum;
 import com.zn.gmall.common.util.MD5;
 import com.zn.gmall.model.activity.OrderRecode;
 import com.zn.gmall.model.activity.SeckillGoods;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,8 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
+@Slf4j
 @Service
 public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 

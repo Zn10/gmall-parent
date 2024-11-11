@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@SuppressWarnings("all")
 @Mapper
 public interface CartInfoMapper extends BaseMapper<CartInfo> {
     /**

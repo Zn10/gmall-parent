@@ -4,6 +4,7 @@ import com.zn.gmall.model.user.UserAddress;
 
 import java.util.List;
 
+@SuppressWarnings("all")
 public interface UserAddressService {
     /**
      * 根据用户Id 查询用户的收货地址列表！

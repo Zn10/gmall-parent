@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+@SuppressWarnings("all")
 public class ManageServiceImpl implements ManageService {
     @Autowired
     private BaseCategory1Mapper baseCategory1Mapper;

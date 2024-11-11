@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableScheduling
 @Slf4j
+@SuppressWarnings("all")
 public class ScheduledTask {
     @Autowired
     private RabbitService rabbitService;

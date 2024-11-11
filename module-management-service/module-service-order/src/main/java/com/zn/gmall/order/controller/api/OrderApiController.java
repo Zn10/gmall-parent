@@ -40,6 +40,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @RestController
 @RequestMapping("api/order")
 @Slf4j
+@SuppressWarnings("all")
 public class OrderApiController {
     @Autowired
     private UserDegradeFeignClient userFeignClient;

@@ -8,6 +8,7 @@ import com.zn.gmall.model.product.vo.CategoryTrademarkVo;
 import com.zn.gmall.product.mapper.BaseCategoryTrademarkMapper;
 import com.zn.gmall.product.mapper.BaseTrademarkMapper;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 /**
  * 分类品牌实现
  */
+@SuppressWarnings("all")
+@Slf4j
 @Service
 public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTrademarkMapper, BaseCategoryTrademark> implements BaseCategoryTrademarkService {
 

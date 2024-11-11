@@ -2,6 +2,7 @@ package com.zn.gmall.activity.service.api;
 
 import com.zn.gmall.model.cart.CartInfo;
 
+@SuppressWarnings("all")
 public interface CartAsyncService {
 
     /**

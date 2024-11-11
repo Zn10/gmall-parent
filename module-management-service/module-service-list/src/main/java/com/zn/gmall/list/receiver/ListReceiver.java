@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
  * @author zhaonian
  */
 @Slf4j
+@SuppressWarnings("all")
 @Component
 public class ListReceiver {
     @Autowired

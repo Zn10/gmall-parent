@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * 购物车服务
  */
+@SuppressWarnings("all")
 public interface CartService {
 
     /**

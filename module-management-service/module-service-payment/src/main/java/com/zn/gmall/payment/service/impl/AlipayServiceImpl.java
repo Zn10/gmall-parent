@@ -35,6 +35,7 @@ import java.util.HashMap;
  */
 @Service
 @Slf4j
+@SuppressWarnings("all")
 public class AlipayServiceImpl implements AlipayService {
 
     @Autowired

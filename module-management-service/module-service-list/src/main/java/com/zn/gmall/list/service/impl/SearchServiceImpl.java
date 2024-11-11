@@ -4,19 +4,25 @@ import com.alibaba.fastjson.JSON;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.list.repository.GoodsRepository;
 import com.zn.gmall.list.service.api.SearchService;
-import com.zn.gmall.model.list.*;
+import com.zn.gmall.model.list.Goods;
+import com.zn.gmall.model.list.SearchAttr;
+import com.zn.gmall.model.list.SearchParam;
 import com.zn.gmall.model.list.vo.SearchResponseAttrVo;
 import com.zn.gmall.model.list.vo.SearchResponseTmVo;
 import com.zn.gmall.model.list.vo.SearchResponseVo;
 import com.zn.gmall.model.product.*;
 import com.zn.gmall.product.client.ProductFeignClient;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.text.Text;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.NestedQueryBuilder;
+import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -33,14 +39,12 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -49,6 +53,8 @@ import java.util.stream.Collectors;
  * @author: 赵念
  * @create-date: 2023/2/10/19:35
  */
+@SuppressWarnings("all")
+@Slf4j
 @Service
 public class SearchServiceImpl implements SearchService {
 

@@ -14,6 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/item/")
 @Slf4j
+@SuppressWarnings("all")
 public class ItemApiController {
     @Autowired
     private ItemService itemService;

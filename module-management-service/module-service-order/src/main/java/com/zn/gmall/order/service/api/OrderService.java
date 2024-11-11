@@ -15,6 +15,7 @@ import java.util.Map;
  * @author: Mr.Zhao
  * @create: 2024-05-13 20:51
  **/
+@SuppressWarnings("all")
 public interface OrderService extends IService<OrderInfo> {
 
     List<OrderInfo> orderSplit(Long orderId, String wareSkuMap);

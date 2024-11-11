@@ -4,12 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.task.mapper.UserAddressMapper;
 import com.zn.gmall.task.service.api.UserAddressService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@SuppressWarnings("all")
+@Slf4j
 public class UserAddressServiceImpl implements UserAddressService {
     @Autowired
     private UserAddressMapper userAddressMapper;

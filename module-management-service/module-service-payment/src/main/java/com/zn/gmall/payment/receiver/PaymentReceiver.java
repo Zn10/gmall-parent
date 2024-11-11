@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 @Component
 public class PaymentReceiver {
 

@@ -17,6 +17,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/list")
 @Slf4j
+@SuppressWarnings("all")
 public class ListApiController {
 
     @Autowired

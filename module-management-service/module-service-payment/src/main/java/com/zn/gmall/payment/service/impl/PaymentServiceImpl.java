@@ -25,6 +25,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
+@SuppressWarnings("all")
 public class PaymentServiceImpl implements PaymentService {
 
     @Autowired

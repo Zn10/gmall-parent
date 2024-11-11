@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author zhaonian
  */
+@SuppressWarnings("all")
 public interface SeckillGoodsService {
     /**
      * 返回全部列表
