@@ -46,16 +46,19 @@ public class ItemServiceImpl implements ItemService {
             return productFeignClient.getSkuInfo(skuId).getData();
         }, threadPoolExecutor);
 
+        CompletableFuture<BigDecimal> futurePrice = CompletableFuture.supplyAsync(() -> {
+            // 第三步：根据 skuId 查询价格
+            return productFeignClient.getSkuPrice(skuId).getData();
+        }, threadPoolExecutor);
+
+        // ※附加功能：在异步任务中给 service-list 发送请求执行商品热度值的累加
+        CompletableFuture<Void> incrGoodsHotScoreCompletableFuture = CompletableFuture.runAsync(() -> listFeignClient.incrGoodsHotScore(skuId), threadPoolExecutor);
+
         CompletableFuture<BaseCategoryView> futureCategoryView = futureSkuInfo.thenApply((SkuInfo skuInfo) -> {
             // 第二步：根据 category3Id 查询面包屑功能所需要的分类信息
             Long category3Id = skuInfo.getCategory3Id();
             return productFeignClient.getCategoryView(category3Id).getData();
         });
-
-        CompletableFuture<BigDecimal> futurePrice = CompletableFuture.supplyAsync(() -> {
-            // 第三步：根据 skuId 查询价格
-            return productFeignClient.getSkuPrice(skuId).getData();
-        }, threadPoolExecutor);
 
         CompletableFuture<List<SpuSaleAttr>> futureSaleAttrList = futureSkuInfo.thenApply((SkuInfo skuInfo) -> {
             // 第四步：根据 skuId 和 spuId 查询 SPU 下的销售属性（经过 SKU 标记的）
@@ -70,8 +73,6 @@ public class ItemServiceImpl implements ItemService {
             return JSON.toJSONString(valueIdsMap);
         });
 
-        // ※附加功能：在异步任务中给 service-list 发送请求执行商品热度值的累加
-        CompletableFuture<Void> incrGoodsHotScoreCompletableFuture = CompletableFuture.runAsync(() -> listFeignClient.incrGoodsHotScore(skuId), threadPoolExecutor);
 
         // 多个异步任务整合，都成功，才算成功
         CompletableFuture.allOf(futureSkuInfo, futureCategoryView, futurePrice, futureSaleAttrList, futureValueIdsJSON, incrGoodsHotScoreCompletableFuture).join();
