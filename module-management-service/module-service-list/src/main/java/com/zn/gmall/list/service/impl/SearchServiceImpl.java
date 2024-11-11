@@ -229,8 +229,8 @@ public class SearchServiceImpl implements SearchService {
         Double plusResult = operator.incrementScore(hotScoreKey, zSetMember, 1);
 
         // 2、操作 ElasticSearch
-        // [1]判断累加的结果是否是 10 的整数倍（节约 ElasticSearch 性能）
-        if (plusResult % 10 == 0) {
+        // [1]判断累加的结果是否是 100 的整数倍（节约 ElasticSearch 性能）
+        if (plusResult % 100 == 0) {
 
             // [2]从 ElasticSearch 中查询对应数据
             Optional<Goods> optional = goodsRepository.findById(skuId);
