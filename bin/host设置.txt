@@ -1,16 +1,16 @@
-127.0.0.1 gmal-mysql
-127.0.0.1 gmal-redis
-192.168.200.128 gmal-es
-192.168.200.128 gmal-rocketmq
-192.168.200.128 gmal-rabbitmq
-127.0.0.1 gmal-nacos
-192.168.200.128 gmal-sentinel
-192.168.200.128 gmal-minio
-192.168.200.128 gmal-zipkin
-192.168.200.128 gmal-seata
-192.168.200.128 gmal-logstash
+127.0.0.1 gmall-mysql
+127.0.0.1 gmall-redis
+192.168.200.128 gmall-es
+192.168.200.128 gmall-rocketmq
+192.168.200.128 gmall-rabbitmq
+127.0.0.1 gmall-nacos
+192.168.200.128 gmall-sentinel
+192.168.200.128 gmall-minio
+192.168.200.128 gmall-zipkin
+192.168.200.128 gmall-seata
+192.168.200.128 gmall-logstash
 
 # gmall
-192.168.200.1 file.service.com www.gmall.com item.gmall.com 
-192.168.200.1 activity.gmall.com passport.gmall.com cart.gmall.com list.gmall.com 
+192.168.200.1 file.service.com www.gmall.com item.gmall.com
+192.168.200.1 activity.gmall.com passport.gmall.com cart.gmall.com list.gmall.com
 192.168.200.1 order.gmall.com payment.gmall.com api.gmall.com comment.gmall.com
