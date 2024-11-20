@@ -14,16 +14,16 @@ import com.zn.gmall.model.activity.UserRecode;
 import com.zn.gmall.model.order.OrderDetail;
 import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.model.user.UserAddress;
+import com.zn.gmall.mq.constant.MqConst;
+import com.zn.gmall.mq.service.RabbitService;
 import com.zn.gmall.order.OrderFeignClient;
 import com.zn.gmall.product.client.ProductFeignClient;
 import com.zn.gmall.task.client.UserFeignClient;
-import com.zn.gmall.mq.constant.MqConst;
-import com.zn.gmall.mq.service.RabbitService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -39,19 +39,19 @@ import java.util.*;
 @SuppressWarnings("all")
 public class SeckillGoodsApiController {
 
-    @Autowired
+    @Resource
     private SeckillGoodsService seckillGoodsService;
 
-    @Autowired
+    @Resource
     private UserFeignClient userFeignClient;
 
-    @Autowired
+    @Resource
     private ProductFeignClient productFeignClient;
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
-    @Autowired
+    @Resource
     private OrderFeignClient orderFeignClient;
 
     @PostMapping("auth/submitOrder")

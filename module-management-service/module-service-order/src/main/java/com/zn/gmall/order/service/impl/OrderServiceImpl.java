@@ -10,19 +10,19 @@ import com.zn.gmall.model.enums.OrderStatus;
 import com.zn.gmall.model.enums.ProcessStatus;
 import com.zn.gmall.model.order.OrderDetail;
 import com.zn.gmall.model.order.OrderInfo;
+import com.zn.gmall.mq.constant.MqConst;
+import com.zn.gmall.mq.service.RabbitService;
 import com.zn.gmall.order.mapper.OrderDetailMapper;
 import com.zn.gmall.order.mapper.OrderInfoMapper;
 import com.zn.gmall.order.service.api.OrderService;
-import com.zn.gmall.mq.constant.MqConst;
-import com.zn.gmall.mq.service.RabbitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -36,15 +36,15 @@ import java.util.*;
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements OrderService {
 
-    @Autowired
+    @Resource
     private OrderInfoMapper orderInfoMapper;
 
-    @Autowired
+    @Resource
     private OrderDetailMapper orderDetailMapper;
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
 
     @Value("${ware.url}")

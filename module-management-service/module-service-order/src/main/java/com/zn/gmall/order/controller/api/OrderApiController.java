@@ -18,10 +18,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -42,17 +42,17 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Slf4j
 @SuppressWarnings("all")
 public class OrderApiController {
-    @Autowired
+    @Resource
     private UserDegradeFeignClient userFeignClient;
-    @Autowired
+    @Resource
     private CartDegradeFeignClient cartFeignClient;
-    @Autowired
+    @Resource
     private ProductFeignClient productFeignClient;
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
-    @Autowired
+    @Resource
     private ThreadPoolExecutor threadPoolExecutor;
-    @Autowired
+    @Resource
     private OrderService orderService;
     /**
      * 秒杀提交订单，秒杀订单不需要做前置判断，直接下单

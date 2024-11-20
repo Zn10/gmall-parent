@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zn.gmall.model.enums.PaymentStatus;
 import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.model.payment.PaymentInfo;
-import com.zn.gmall.payment.mapper.PaymentInfoMapper;
-import com.zn.gmall.payment.service.api.PaymentService;
 import com.zn.gmall.mq.constant.MqConst;
 import com.zn.gmall.mq.service.RabbitService;
+import com.zn.gmall.payment.mapper.PaymentInfoMapper;
+import com.zn.gmall.payment.service.api.PaymentService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,11 +28,11 @@ import java.util.Map;
 @SuppressWarnings("all")
 public class PaymentServiceImpl implements PaymentService {
 
-    @Autowired
+    @Resource
     private PaymentInfoMapper paymentInfoMapper;
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
 
     @Override

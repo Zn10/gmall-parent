@@ -10,7 +10,6 @@ import com.zn.gmall.model.cart.CartInfo;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.product.client.ProductFeignClient;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -19,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,16 +36,16 @@ import java.util.stream.Collectors;
 @Transactional
 public class CartServiceImpl implements CartService {
 
-    @Autowired
+    @Resource
     private CartInfoMapper cartInfoMapper;
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
-    @Autowired
+    @Resource
     private ProductFeignClient productFeignClient;
 
-    @Autowired
+    @Resource
     private CartAsyncService cartAsyncService;
 
     /**

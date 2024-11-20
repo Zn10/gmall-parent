@@ -7,9 +7,9 @@ import com.zn.gmall.model.product.SpuSaleAttr;
 import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,7 +24,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class SkuManageController {
 
-    @Autowired
+    @Resource
     private ManageService manageService;
 
     /**

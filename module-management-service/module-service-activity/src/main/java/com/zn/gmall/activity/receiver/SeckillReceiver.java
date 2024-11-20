@@ -16,10 +16,10 @@ import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -34,12 +34,12 @@ import java.util.List;
 @SuppressWarnings("all")
 @Component
 public class SeckillReceiver {
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
-    @Autowired
+    @Resource
     private SeckillGoodsMapper seckillGoodsMapper;
-    @Autowired
+    @Resource
     private SeckillGoodsService seckillGoodsService;
 
     //  监听删除消息！

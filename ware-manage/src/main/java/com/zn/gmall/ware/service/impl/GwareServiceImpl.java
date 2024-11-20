@@ -2,6 +2,7 @@ package com.zn.gmall.ware.service.impl;
 
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zn.gmall.ware.bean.WareInfo;
 import com.zn.gmall.ware.bean.WareOrderTask;
 import com.zn.gmall.ware.bean.WareOrderTaskDetail;
@@ -14,33 +15,32 @@ import com.zn.gmall.ware.mapper.WareOrderTaskMapper;
 import com.zn.gmall.ware.mapper.WareSkuMapper;
 import com.zn.gmall.ware.service.GwareService;
 import com.zn.gmall.ware.util.HttpclientUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 
 @Service
 public class GwareServiceImpl implements GwareService {
 
-    @Autowired
+    @Resource
     private WareSkuMapper wareSkuMapper;
 
-    @Autowired
+    @Resource
     private WareInfoMapper wareInfoMapper;
 
-    @Autowired
+    @Resource
     private WareOrderTaskMapper wareOrderTaskMapper;
 
-    @Autowired
+    @Resource
     private WareOrderTaskDetailMapper wareOrderTaskDetailMapper;
 
-    @Autowired
+    @Resource
     private RabbitTemplate rabbitTemplate;
 
     @Value("${order.split.url}")

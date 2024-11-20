@@ -8,10 +8,10 @@ import com.zn.gmall.model.user.UserInfo;
 import com.zn.gmall.task.service.api.UserService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +29,10 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("all")
 public class PassportApiController {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     @GetMapping("/logout")

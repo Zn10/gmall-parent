@@ -1,6 +1,7 @@
 package com.zn.gmall.ware.mq;
 
 import com.alibaba.fastjson.JSON;
+import com.rabbitmq.client.Channel;
 import com.zn.gmall.ware.bean.WareOrderTask;
 import com.zn.gmall.ware.constant.MqConst;
 import com.zn.gmall.ware.enums.TaskStatus;
@@ -8,16 +9,15 @@ import com.zn.gmall.ware.mapper.WareOrderTaskDetailMapper;
 import com.zn.gmall.ware.mapper.WareOrderTaskMapper;
 import com.zn.gmall.ware.mapper.WareSkuMapper;
 import com.zn.gmall.ware.service.GwareService;
-import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,16 +28,16 @@ import java.util.List;
 @Component
 public class WareConsumer {
 
-    @Autowired
+    @Resource
     private WareOrderTaskMapper wareOrderTaskMapper;
 
-    @Autowired
+    @Resource
     private WareOrderTaskDetailMapper wareOrderTaskDetailMapper;
 
-    @Autowired
+    @Resource
     private WareSkuMapper wareSkuMapper;
 
-    @Autowired
+    @Resource
     private GwareService gwareService;
 
     /**

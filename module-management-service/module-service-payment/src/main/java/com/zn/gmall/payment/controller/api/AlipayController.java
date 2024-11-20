@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -31,11 +32,11 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("all")
 public class AlipayController {
 
-    @Autowired
+    @Resource
     private AlipayService alipayService;
-    @Autowired
+    @Resource
     private PaymentService paymentService;
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     @GetMapping("getPaymentInfo/{outTradeNo}")

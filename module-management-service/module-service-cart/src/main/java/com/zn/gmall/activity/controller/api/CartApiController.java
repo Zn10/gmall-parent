@@ -5,10 +5,10 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.util.AuthContextHolder;
 import com.zn.gmall.model.cart.CartInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("all")
 public class CartApiController {
 
-    @Autowired
+    @Resource
     private CartService cartService;
 
     @GetMapping("/cartList")

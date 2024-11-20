@@ -8,6 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * Package: com.zn.gmall.task.scheduled
  * Description:
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @SuppressWarnings("all")
 public class ScheduledTask {
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
 
     /**

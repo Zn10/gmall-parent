@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 @RestController
@@ -16,7 +17,7 @@ import java.util.Map;
 @Slf4j
 @SuppressWarnings("all")
 public class ItemApiController {
-    @Autowired
+    @Resource
     private ItemService itemService;
 
     /**

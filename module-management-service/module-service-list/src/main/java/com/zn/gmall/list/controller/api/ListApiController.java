@@ -5,9 +5,9 @@ import com.zn.gmall.list.service.api.SearchService;
 import com.zn.gmall.model.list.SearchParam;
 import com.zn.gmall.model.list.vo.SearchResponseVo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -20,7 +20,7 @@ import java.io.IOException;
 @SuppressWarnings("all")
 public class ListApiController {
 
-    @Autowired
+    @Resource
     private SearchService searchService;
 
     /**

@@ -1,14 +1,15 @@
 package com.zn.gmall.task.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zn.gmall.model.user.UserInfo;
 import com.zn.gmall.task.mapper.UserInfoMapper;
 import com.zn.gmall.task.service.api.UserService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import javax.annotation.Resource;
 
 /**
  * @author: 赵念
@@ -19,7 +20,7 @@ import org.springframework.util.DigestUtils;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserInfoMapper userInfoMapper;
 
     @Override

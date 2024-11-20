@@ -6,11 +6,11 @@ import com.zn.gmall.mq.config.DelayedMqConfig;
 import com.zn.gmall.mq.service.RabbitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,10 +25,10 @@ import java.util.Date;
 @Slf4j
 @SuppressWarnings("all")
 public class MqController {
-    @Autowired
+    @Resource
     private RabbitTemplate rabbitTemplate;
 
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
 
     //  基于延迟插件的延迟消息

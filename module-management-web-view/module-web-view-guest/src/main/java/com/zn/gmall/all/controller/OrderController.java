@@ -2,12 +2,11 @@ package com.zn.gmall.all.controller;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.order.OrderFeignClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -19,8 +18,7 @@ import java.util.Map;
 @Controller
 public class OrderController {
 
-    @Qualifier("orderDegradeFeignClient")
-    @Autowired
+    @Resource
     private OrderFeignClient orderFeignClient;
 
     /**

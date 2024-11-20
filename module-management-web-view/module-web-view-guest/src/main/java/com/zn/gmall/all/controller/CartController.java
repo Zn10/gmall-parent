@@ -4,11 +4,11 @@ import com.zn.gmall.cart.client.CartFeignClient;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.product.client.ProductFeignClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,10 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class CartController {
 
-    @Autowired
+    @Resource
     private CartFeignClient cartFeignClient;
 
-    @Autowired
+    @Resource
     private ProductFeignClient productFeignClient;
 
     /**
