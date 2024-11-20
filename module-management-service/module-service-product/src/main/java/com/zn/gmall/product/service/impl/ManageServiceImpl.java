@@ -7,19 +7,19 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zn.gmall.common.cache.GmallCache;
 import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.model.product.*;
-import com.zn.mq.service.RabbitService;
 import com.zn.gmall.product.mapper.*;
 import com.zn.gmall.product.service.api.ManageService;
-import com.zn.mq.constant.MqConst;
+import com.zn.gmall.mq.constant.MqConst;
+import com.zn.gmall.mq.service.RabbitService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,61 +34,61 @@ import java.util.stream.Collectors;
 @Service
 @SuppressWarnings("all")
 public class ManageServiceImpl implements ManageService {
-    @Autowired
+    @Resource
     private BaseCategory1Mapper baseCategory1Mapper;
 
-    @Autowired
+    @Resource
     private BaseCategory2Mapper baseCategory2Mapper;
 
-    @Autowired
+    @Resource
     private BaseCategory3Mapper baseCategory3Mapper;
 
-    @Autowired
+    @Resource
     private BaseAttrInfoMapper baseAttrInfoMapper;
 
-    @Autowired
+    @Resource
     private BaseAttrValueMapper baseAttrValueMapper;
 
-    @Autowired
+    @Resource
     private SpuInfoMapper spuInfoMapper;
 
-    @Autowired
+    @Resource
     private BaseSaleAttrMapper baseSaleAttrMapper;
 
-    @Autowired
+    @Resource
     private SpuImageMapper spuImageMapper;
 
-    @Autowired
+    @Resource
     private SpuSaleAttrMapper spuSaleAttrMapper;
 
-    @Autowired
+    @Resource
     private SpuSaleAttrValueMapper spuSaleAttrValueMapper;
 
-    @Autowired
+    @Resource
     private SpuPosterMapper spuPosterMapper;
 
-    @Autowired
+    @Resource
     private SkuInfoMapper skuInfoMapper;
 
-    @Autowired
+    @Resource
     private SkuImageMapper skuImageMapper;
 
-    @Autowired
+    @Resource
     private SkuSaleAttrValueMapper skuSaleAttrValueMapper;
 
-    @Autowired
+    @Resource
     private SkuAttrValueMapper skuAttrValueMapper;
 
-    @Autowired
+    @Resource
     private BaseCategoryViewMapper baseCategoryViewMapper;
 
-    @Autowired
+    @Resource
     private RedissonClient redissonClient;
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
-    @Autowired
+    @Resource
     private RabbitService rabbitService;
 
     /**
@@ -260,6 +260,8 @@ public class ManageServiceImpl implements ManageService {
             if (skuInfo != null) {
                 price = skuInfo.getPrice();
             }
+            // 给默认值
+            return new BigDecimal(0);
         } catch (Exception e) {
             log.error("exception message", e);
         } finally {

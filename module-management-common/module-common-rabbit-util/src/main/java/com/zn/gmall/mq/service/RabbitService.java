@@ -1,7 +1,7 @@
-package com.zn.mq.service;
+package com.zn.gmall.mq.service;
 
 import com.alibaba.fastjson.JSON;
-import com.zn.mq.po.GmallCorrelationData;
+import com.zn.gmall.mq.po.GmallCorrelationData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,7 @@ import com.rabbitmq.client.Channel;
 import com.zn.gmall.model.enums.ProcessStatus;
 import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.order.service.api.OrderService;
-import com.zn.mq.constant.MqConst;
+import com.zn.gmall.mq.constant.MqConst;
 import lombok.SneakyThrows;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;

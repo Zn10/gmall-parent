@@ -2,7 +2,7 @@ package com.zn.gmall.payment.receiver;
 
 import com.rabbitmq.client.Channel;
 import com.zn.gmall.payment.service.api.PaymentService;
-import com.zn.mq.constant.MqConst;
+import com.zn.gmall.mq.constant.MqConst;
 import lombok.SneakyThrows;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;

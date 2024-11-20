@@ -1,6 +1,6 @@
 package com.zn.gmall.order.receiver;
 
-import com.zn.mq.constant.MqConst;
+import com.zn.gmall.mq.constant.MqConst;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.CustomExchange;

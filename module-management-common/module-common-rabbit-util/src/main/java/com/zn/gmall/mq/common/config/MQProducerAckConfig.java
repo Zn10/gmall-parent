@@ -1,7 +1,7 @@
-package com.zn.mq.common.config;
+package com.zn.gmall.mq.common.config;
 
 import com.alibaba.fastjson.JSON;
-import com.zn.mq.po.GmallCorrelationData;
+import com.zn.gmall.mq.po.GmallCorrelationData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.CorrelationData;

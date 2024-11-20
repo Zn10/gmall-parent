@@ -1,4 +1,4 @@
-package com.zn.mq.po;
+package com.zn.gmall.mq.po;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package com.zn.mq.constant;
+package com.zn.gmall.mq.constant;
 
 public class MqConst {
     /**

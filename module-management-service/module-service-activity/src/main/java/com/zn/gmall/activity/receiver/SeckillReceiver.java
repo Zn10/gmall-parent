@@ -8,7 +8,7 @@ import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.common.util.DateUtil;
 import com.zn.gmall.model.activity.SeckillGoods;
 import com.zn.gmall.model.activity.UserRecode;
-import com.zn.mq.constant.MqConst;
+import com.zn.gmall.mq.constant.MqConst;
 import lombok.SneakyThrows;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Message;

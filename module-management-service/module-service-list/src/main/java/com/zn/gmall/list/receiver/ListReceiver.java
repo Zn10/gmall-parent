@@ -2,7 +2,7 @@ package com.zn.gmall.list.receiver;
 
 import com.rabbitmq.client.Channel;
 import com.zn.gmall.list.service.api.SearchService;
-import com.zn.mq.constant.MqConst;
+import com.zn.gmall.mq.constant.MqConst;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;

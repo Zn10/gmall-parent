@@ -3,7 +3,7 @@ package com.zn.gmall.mq.controller;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.mq.config.DeadLetterMqConfig;
 import com.zn.gmall.mq.config.DelayedMqConfig;
-import com.zn.mq.service.RabbitService;
+import com.zn.gmall.mq.service.RabbitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
