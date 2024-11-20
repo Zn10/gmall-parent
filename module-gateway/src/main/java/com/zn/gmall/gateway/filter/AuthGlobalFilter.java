@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.result.ResultCodeEnum;
 import com.zn.gmall.common.util.IpUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -32,10 +33,11 @@ import java.util.List;
  * @author: 赵念
  * @create-date: 2023/2/11/14:14
  */
+@Slf4j
 @Component
 public class AuthGlobalFilter implements GlobalFilter {
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
@@ -69,12 +71,9 @@ public class AuthGlobalFilter implements GlobalFilter {
 
         // 2、使用指定的模式来和用户请求地址进行匹配
         if (antPathMatcher.match(innerPattern, path)) {
-
             // 3、如果能够匹配上，则返回禁止用户访问的响应
             ServerHttpResponse response = exchange.getResponse();
-
             Mono<Void> mono = out(response, ResultCodeEnum.PERMISSION);
-
             return mono;
         }
 
@@ -135,35 +134,24 @@ public class AuthGlobalFilter implements GlobalFilter {
 
         // 3、设置 userId 对应的请求消息头
         if (isUserIdExists(userId)) {
-            requestObjHasBeanSetHeader =
-                    request.mutate().header("userId", userId).build();
+            requestObjHasBeanSetHeader = request.mutate().header("userId", userId).build();
         }
 
         // 4、设置 userTempId 对应的请求消息头
         if (isUserTempIdExists(userTempId)) {
-            requestObjHasBeanSetHeader =
-                    request.mutate().header("userTempId", userTempId).build();
+            requestObjHasBeanSetHeader = request.mutate().header("userTempId", userTempId).build();
         }
 
         // 5、通过放行请求，把已经设置了请求消息头的请求对象传给后续微服务
-        return chain
-                .filter(
-                        exchange
-                                .mutate()
-                                .request(requestObjHasBeanSetHeader)
-                                .build()
-                );
+        return chain.filter(exchange.mutate().request(requestObjHasBeanSetHeader).build());
     }
 
     private boolean isUserTempIdExists(String userTempId) {
-        return !StringUtils.isEmpty(userTempId) &&
-                !USER_TEMP_ID_NOT_EXISTS.equals(userTempId);
+        return !StringUtils.isEmpty(userTempId) && !USER_TEMP_ID_NOT_EXISTS.equals(userTempId);
     }
 
     private boolean isUserIdExists(String userId) {
-        return !StringUtils.isEmpty(userId) &&
-                !USER_ID_NOT_EXISTS.equals(userId) &&
-                !TOKEN_HAS_BEEN_STOLEN.equals(userId);
+        return !StringUtils.isEmpty(userId) && !USER_ID_NOT_EXISTS.equals(userId) && !TOKEN_HAS_BEEN_STOLEN.equals(userId);
     }
 
     /**
@@ -239,8 +227,7 @@ public class AuthGlobalFilter implements GlobalFilter {
             String userKey = "user:login:" + token;
 
             // 根据这个 key 读取 Redis 缓存数据
-            String userDataJSON
-                    = (String) redisTemplate.opsForValue().get(userKey);
+            String userDataJSON = (String) redisTemplate.opsForValue().get(userKey);
 
             if (!StringUtils.isEmpty(userDataJSON)) {
                 // 解析 JSON 字符串
