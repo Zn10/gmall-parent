@@ -46,7 +46,7 @@
         <httpclient.version>4.5.13</httpclient.version>
         <minio.version>8.2.0</minio.version>
         <docker.image>docker_storage</docker.image>
-        <logstash.version>5.1</logstash.version>
+        <logstash.version>6.6</logstash.version>
         <alipay-sdk-java.version>4.8.73.ALL</alipay-sdk-java.version>
     </properties>
 
