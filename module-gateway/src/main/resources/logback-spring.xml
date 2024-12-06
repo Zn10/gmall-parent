@@ -80,7 +80,9 @@
         <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
             <!-- logstash ip和暴露的端口，logback就是通过这个地址把日志发送给logstash -->
             <destination>gmall-logstash:5044</destination>
-            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
+            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" >
+                <customFields>{"servicename":"module-gateway"}</customFields>
+            </encoder>
         </appender>
 
 
