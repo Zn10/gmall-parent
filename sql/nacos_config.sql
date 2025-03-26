@@ -13,6 +13,9 @@
 
  Date: 12/11/2024 17:25:41
 */
+CREATE DATABASE nacos_config;
+
+USE `nacos_config`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
