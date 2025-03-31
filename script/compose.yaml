@@ -49,9 +49,10 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - redis-conf:/etc/redis
+      - ./redis-conf:/etc/redis
       - redis-data:/data
       - /etc/localtime:/etc/localtime:ro
+    # command: ["redis-server","/etc/redis/redis.conf"]
     command: ["redis-server","/etc/redis/redis.conf"]
     restart: always
     networks:
@@ -140,7 +141,7 @@ services:
       - mall-net
 
   nacos:
-    image: nacos/nacos-server:2.0.2
+    image: nacos/nacos-server:1.4.1
     ports:
       - "8848:8848"
     environment:

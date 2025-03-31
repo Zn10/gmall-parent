@@ -13,7 +13,7 @@
 
  Date: 12/11/2024 17:25:41
 */
-CREATE DATABASE nacos_config;
+CREATE DATABASE IF NOT EXISTS nacos_config;
 
 USE `nacos_config`;
 
@@ -41,7 +41,7 @@ CREATE TABLE `config_info`  (
   `effect` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
-  `encrypted_data_key` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '秘钥',
+  `encrypted_data_key` text CHARACTER SET utf8 COLLATE utf8_bin  COMMENT '秘钥',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
