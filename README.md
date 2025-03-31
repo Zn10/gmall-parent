@@ -2,16 +2,18 @@
 
 gmall-parent
 ├── bin -- 启动脚本和打包脚本
+├── nacos_conf -- nacos 配置文件
+├── script --  环境搭建脚本
+├── sql -- sql脚本
 
 ├── module-gateway -- 网关模块[80]
-
 └── module-management-common -- 系统公共模块
      ├── module-common-entity -- 实体模块
      ├── module-common-rabbit-util --rabbit工具模块
      ├── module-common-service-util --服务所用工具模块
      ├── module-common-util -- 全局异常和全局返回格式工具模块
      └── module-common-web-util -- web工具模块
-     
+
 ├── module-management-feign -- feign远程调用模块
      ├── module-feign-api-activity -- 秒杀活动feign模块
      ├── module-feign-api-cart -- 购物车feign模块

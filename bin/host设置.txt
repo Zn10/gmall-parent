@@ -1,9 +1,9 @@
-127.0.0.1 gmall-mysql
-127.0.0.1 gmall-redis
+192.168.200.128 gmall-mysql
+192.168.200.128 gmall-redis
 192.168.200.128 gmall-es
 192.168.200.128 gmall-rocketmq
 192.168.200.128 gmall-rabbitmq
-127.0.0.1 gmall-nacos
+192.168.200.128 gmall-nacos
 192.168.200.128 gmall-sentinel
 192.168.200.128 gmall-minio
 192.168.200.128 gmall-zipkin

@@ -1,0 +1,223 @@
+services:
+  mysql-01:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql01-log:/var/log/mysql
+      - mysql01-data:/var/lib/mysql
+      - mysql01-conf:/etc/mysql/conf.d
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    restart: always
+    networks:
+      - mall-net
+  
+  mysql-02:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql02-log:/var/log/mysql
+      - mysql02-data:/var/lib/mysql
+      - mysql02-conf:/etc/mysql/conf.d
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    restart: always
+    networks:
+      - mall-net
+  
+  mysql-03:
+    image: mysql:5.7
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql03-log:/var/log/mysql
+      - mysql03-data:/var/lib/mysql
+      - mysql03-conf:/etc/mysql/conf.d
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    restart: always
+    networks:
+      - mall-net
+
+  redis:
+    image: redis:6.2.5
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-conf:/etc/redis
+      - redis-data:/data
+      - /etc/localtime:/etc/localtime:ro
+    command: ["redis-server","/etc/redis/redis.conf"]
+    restart: always
+    networks:
+      - mall-net
+
+  elasticsearch:
+    image: elasticsearch:7.13.4
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - "bootstrap.memory_lock=true"
+    volumes:
+      - es-config:/usr/share/elasticsearch/config
+      - es-data:/usr/share/elasticsearch/data
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65535
+        hard: 65535       
+    networks:
+      - mall-net
+
+  kibana:
+    image: kibana:7.13.4
+    ports:
+      - "5601:5601"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+    restart: always
+    networks:
+      - mall-net
+
+  filebeat:
+    image: elastic/filebeat:7.13.4
+    volumes:
+      - filebeat-conf:/usr/share/filebeat
+      - /var/log/messages:/log/messages
+      - /var/lib/docker/containers:/log/containers
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    networks:
+      - mall-net
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    hostname: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+      - rabbit-conf:/etc/rabbitmq
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    networks:
+      - mall-net
+
+  zipkin:
+    image: openzipkin/zipkin:2
+    ports:
+      - "9411:9411"
+    restart: always
+    networks:
+      - mall-net
+  
+  sentinel:
+    image: leifengyang/sentinel:1.8.2
+    ports:
+      - "8858:8080"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    networks:
+      - mall-net
+
+  nacos:
+    image: nacos/nacos-server:2.0.2
+    ports:
+      - "8848:8848"
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=mysql-01
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_DB_NAME=nacos_config
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=123456
+      - JVM_XMX=256m
+      - JVM_XMS=256m
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    networks:
+      - mall-net
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+      - minio-conf:/root/.minio
+      - /etc/localtime:/etc/localtime:ro
+    command: server --console-address ":9001" /data
+    environment:
+      - MINIO_ACCESS_KEY=admin
+      - MINIO_SECRET_KEY=admin123456
+    restart: always
+    networks:
+      - mall-net
+  
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - nginx-conf:/etc/nginx
+      - nginx-html:/usr/share/nginx/html
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    networks:
+      - mall-net
+
+volumes:
+  mysql01-log:
+  mysql01-data:
+  mysql01-conf:
+  mysql02-log:
+  mysql02-data:
+  mysql02-conf:
+  mysql03-log:
+  mysql03-data:
+  mysql03-conf:
+  redis-conf:
+  redis-data:
+  es-config:
+  es-data:
+  filebeat-conf:
+  rabbit-data:
+  rabbit-conf:
+  minio-data:
+  minio-conf:
+  nginx-conf:
+  nginx-html:
+
+
+
+
+networks:
+  mall-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "188.188.0.0/16"
+
+    
