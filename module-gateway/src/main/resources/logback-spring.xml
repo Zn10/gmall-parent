@@ -12,9 +12,6 @@
     <springProperty scope="context" name="LEVEL" source="mall.log.level" defaultValue="info"/>
     <springProperty scope="context" name="MAX_FILE_SIZE" source="mall.log.maxFileSize" defaultValue="50MB"/>
 
-    <property name="FILE_LOG_PATTERN"
-              value="%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}) - TRACE_ID=%X{TRACE_ID} %msg%n"/>
-
     <springProfile name="local">
         <!-- 定义控制台输出 -->
         <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
