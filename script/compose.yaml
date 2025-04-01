@@ -26,6 +26,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: always
+    depends_on:
+      - mysql-01
     networks:
       - mall-net
   
@@ -41,6 +43,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: always
+    depends_on:
+      - mysql-01
     networks:
       - mall-net
 
