@@ -50,9 +50,6 @@ public class BaseTrademarkController {
     public Result<IPage<BaseTrademark>> index(@PathVariable Long page,
                                               @PathVariable Long limit) {
         log.info("品牌分页列表:page: {}, limit: {}", page, limit);
-        if (page == null || limit == null) {
-            return Result.<IPage<BaseTrademark>>fail().message("页码或页数不能为空");
-        }
         Page<BaseTrademark> pageParam = new Page<>(page, limit);
         IPage<BaseTrademark> pageModel = baseTrademarkService.getPage(pageParam);
         return Result.ok(pageModel);

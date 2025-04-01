@@ -23,7 +23,6 @@ import java.util.List;
 @Slf4j
 @SuppressWarnings("all")
 public class SpuManageController {
-
     @Resource
     private ManageService manageService;
 
@@ -68,9 +67,6 @@ public class SpuManageController {
                                          @PathVariable Long size,
                                          SpuInfo spuInfo) {
         log.info("品牌分页列表:page: {}, size: {}", page, size);
-        if (page == null || size == null) {
-            return Result.<IPage<SpuInfo>>fail().message("页码或页数不能为空");
-        }
         // 创建一个Page 对象
         Page<SpuInfo> spuInfoPage = new Page<>(page, size);
         // 获取数据

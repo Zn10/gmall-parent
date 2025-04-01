@@ -6,6 +6,7 @@ import com.zn.gmall.model.product.SpuImage;
 import com.zn.gmall.model.product.SpuSaleAttr;
 import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,7 @@ public class SkuManageController {
      *
      * @param skuId 商品SKUID
      */
+    @ApiOperation("根据skuid，进行商品上架")
     @GetMapping("onSale/{skuId}")
     public Result<Void> onSale(@PathVariable("skuId") Long skuId) {
         log.info("商品上架,商品id,{}", skuId);
@@ -47,6 +49,7 @@ public class SkuManageController {
      *
      * @param skuId 商品SKUID
      */
+    @ApiOperation("根据skuid，进行商品下架")
     @GetMapping("cancelSale/{skuId}")
     public Result<Void> cancelSale(@PathVariable("skuId") Long skuId) {
         log.info("商品下架,商品id,{}", skuId);
@@ -62,6 +65,7 @@ public class SkuManageController {
      *
      * @param skuInfo SKU实例
      */
+    @ApiOperation("保存sku商品")
     @PostMapping("saveSkuInfo")
     public Result<Void> saveSkuInfo(@RequestBody SkuInfo skuInfo) {
         log.info("保存sku信息:{}", skuInfo);
@@ -79,6 +83,7 @@ public class SkuManageController {
      * @param spuId 商品SPUID
      * @return List<SpuSaleAttr>
      */
+    @ApiOperation("根据spuId 查询销售属性集合")
     @GetMapping("spuSaleAttrList/{spuId}")
     public Result<List<SpuSaleAttr>> getSpuSaleAttrList(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询销售属性集合:{}", spuId);
@@ -95,6 +100,7 @@ public class SkuManageController {
      * @param spuId 商品SPUID
      * @return List<SpuImage>
      */
+    @ApiOperation("根据spuId 查询spuImageList")
     @GetMapping("spuImageList/{spuId}")
     public Result<List<SpuImage>> getSpuImageList(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询spuImageList:{}", spuId);

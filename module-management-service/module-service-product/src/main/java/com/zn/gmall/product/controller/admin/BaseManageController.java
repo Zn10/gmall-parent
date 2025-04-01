@@ -32,12 +32,10 @@ public class BaseManageController {
      * @param page  页码页数
      * @param limit 页码条数
      */
+    @ApiOperation("SKU分页列表")
     @GetMapping("/list/{page}/{limit}")
     public Result<IPage<SkuInfo>> index(@PathVariable Long page, @PathVariable Long limit) {
         log.info("SKU分页列表:page: {}, limit: {}", page, limit);
-        if (page == null || limit == null) {
-            return Result.<IPage<SkuInfo>>fail().message("页码或页数不能为空");
-        }
         Page<SkuInfo> pageParam = new Page<>(page, limit);
         IPage<SkuInfo> pageModel = manageService.getPage(pageParam);
         return Result.ok(pageModel);
