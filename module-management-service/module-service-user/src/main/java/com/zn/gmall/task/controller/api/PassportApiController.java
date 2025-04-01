@@ -7,6 +7,7 @@ import com.zn.gmall.common.util.IpUtil;
 import com.zn.gmall.model.user.UserInfo;
 import com.zn.gmall.task.service.api.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class PassportApiController {
     @Resource
     private RedisTemplate redisTemplate;
 
+    @ApiOperation("用户登出")
     @GetMapping("/logout")
     public Result<Void> logout(@RequestHeader("token") String token) {
         log.info("用户退出登录，token:{}", token);
@@ -48,6 +50,7 @@ public class PassportApiController {
         return Result.ok();
     }
 
+    @ApiOperation("用户登录")
     @PostMapping("/login")
     public Result<Map<String, String>> login(
             @RequestBody UserInfo userInfo, HttpServletRequest request) {
