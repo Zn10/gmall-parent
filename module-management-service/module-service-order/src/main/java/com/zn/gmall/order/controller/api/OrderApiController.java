@@ -59,7 +59,7 @@ public class OrderApiController {
      * @param orderInfo
      * @return
      */
-    @PostMapping("inner/seckill/submitOrder")
+    @RequestMapping("inner/seckill/submitOrder")
     public Long submitOrder(@RequestBody OrderInfo orderInfo) {
         Long orderId = orderService.saveOrderInfo(orderInfo);
         return orderId;
@@ -97,7 +97,7 @@ public class OrderApiController {
      * @param orderId
      * @return
      */
-    @GetMapping("inner/getOrderInfo/{orderId}")
+    @RequestMapping("inner/getOrderInfo/{orderId}")
     public Result<OrderInfo> getOrderInfo(@PathVariable(value = "orderId") Long orderId) {
         log.info("内部调用获取订单,订单Id:{}", orderId);
         if (orderId == null) {
@@ -109,7 +109,7 @@ public class OrderApiController {
 
 
     @ApiOperation("我的订单")
-    @GetMapping("auth/{page}/{limit}")
+    @RequestMapping("auth/{page}/{limit}")
     public Result<IPage<OrderInfo>> index(
             @ApiParam(name = "page", value = "当前页码", required = true)
             @PathVariable Long page,
@@ -136,7 +136,7 @@ public class OrderApiController {
      * @return
      */
     @ApiOperation("提交订单")
-    @PostMapping("auth/submitOrder")
+    @RequestMapping("auth/submitOrder")
     public Result<Object> submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request) {
         log.info("订单提交,订单信息:{}", orderInfo);
         if (orderInfo == null) {
@@ -210,7 +210,7 @@ public class OrderApiController {
      * @param request
      * @return
      */
-    @GetMapping("auth/trade")
+    @RequestMapping("auth/trade")
     public Result<Map<String, Object>> trade(HttpServletRequest request) {
         // 获取到用户Id
         String userId = AuthContextHolder.getUserId(request);

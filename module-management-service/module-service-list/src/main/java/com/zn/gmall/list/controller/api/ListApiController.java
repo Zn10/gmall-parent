@@ -29,7 +29,7 @@ public class ListApiController {
      * @param skuId
      * @return
      */
-    @GetMapping("inner/upperGoods/{skuId}")
+    @RequestMapping("inner/upperGoods/{skuId}")
     public Result<Void> upperGoods(@PathVariable("skuId") Long skuId) {
         log.info("商品上架:{}", skuId);
         if (skuId == null) {
@@ -45,7 +45,7 @@ public class ListApiController {
      * @param skuId
      * @return
      */
-    @GetMapping("inner/lowerGoods/{skuId}")
+    @RequestMapping("inner/lowerGoods/{skuId}")
     public Result<Void> lowerGoods(@PathVariable("skuId") Long skuId) {
         log.info("商品下架:{}", skuId);
         if (skuId == null) {
@@ -62,14 +62,14 @@ public class ListApiController {
      * @param searchParam
      * @throws IOException
      */
-    @PostMapping("/do/search")
+    @RequestMapping("/do/search")
     public Result<SearchResponseVo> list(@RequestBody SearchParam searchParam) throws Throwable {
         log.info("搜索参数:{}", searchParam);
         SearchResponseVo response = searchService.search(searchParam);
         return Result.ok(response);
     }
 
-    @GetMapping("/inner/incr/goods/hot/score/{skuId}")
+    @RequestMapping("/inner/incr/goods/hot/score/{skuId}")
     public Result<Void> incrGoodsHotScore(@PathVariable("skuId") Long skuId) {
         log.info("商品热度评分增加:{}", skuId);
         if (skuId == null) {
@@ -79,7 +79,7 @@ public class ListApiController {
         return Result.ok();
     }
 
-    @GetMapping("/remove/goods/from/elastic/search/{skuId}")
+    @RequestMapping("/remove/goods/from/elastic/search/{skuId}")
     public Result<Void> removeGoodsFromElasticSearch(@PathVariable("skuId") Long skuId) {
         log.info("商品从es中删除:{}", skuId);
         if (skuId == null) {
@@ -89,7 +89,7 @@ public class ListApiController {
         return Result.ok();
     }
 
-    @GetMapping("/inner/import/sku/to/elastic/search/{skuId}")
+    @RequestMapping("/inner/import/sku/to/elastic/search/{skuId}")
     public Result<Void> importSkuToElasticSearch(@PathVariable("skuId") Long skuId) {
         log.info("商品导入es:{}", skuId);
         if (skuId == null) {

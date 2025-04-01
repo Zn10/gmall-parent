@@ -54,7 +54,7 @@ public class SeckillGoodsApiController {
     @Resource
     private OrderFeignClient orderFeignClient;
 
-    @PostMapping("auth/submitOrder")
+    @RequestMapping("auth/submitOrder")
     public Result submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request) {
         String userId = AuthContextHolder.getUserId(request);
         orderInfo.setUserId(Long.parseLong(userId));
@@ -78,7 +78,7 @@ public class SeckillGoodsApiController {
      * @param request
      * @return
      */
-    @GetMapping("auth/trade")
+    @RequestMapping("auth/trade")
     public Result trade(HttpServletRequest request) {
         // 获取到用户Id
         String userId = AuthContextHolder.getUserId(request);
@@ -119,7 +119,7 @@ public class SeckillGoodsApiController {
     }
 
 
-    @GetMapping(value = "auth/checkOrder/{skuId}")
+    @RequestMapping(value = "auth/checkOrder/{skuId}")
     public Result checkOrder(@PathVariable("skuId") Long skuId, HttpServletRequest request) {
         //当前登录用户
         String userId = AuthContextHolder.getUserId(request);
@@ -132,7 +132,7 @@ public class SeckillGoodsApiController {
      * @param skuId
      * @return
      */
-    @PostMapping("auth/seckillOrder/{skuId}")
+    @RequestMapping("auth/seckillOrder/{skuId}")
     public Result seckillOrder(@PathVariable("skuId") Long skuId, HttpServletRequest request) throws Exception {
         //校验下单码（抢购码规则可以自定义）
         String userId = AuthContextHolder.getUserId(request);
@@ -164,7 +164,7 @@ public class SeckillGoodsApiController {
     }
 
 
-    @GetMapping("auth/getSeckillSkuIdStr/{skuId}")
+    @RequestMapping("auth/getSeckillSkuIdStr/{skuId}")
     public Result getSeckillSkuIdStr(@PathVariable("skuId") Long skuId, HttpServletRequest request) {
         String userId = AuthContextHolder.getUserId(request);
         SeckillGoods seckillGoods = seckillGoodsService.getSeckillGoods(skuId);
@@ -185,7 +185,7 @@ public class SeckillGoodsApiController {
      *
      * @return
      */
-    @GetMapping("/findAll")
+    @RequestMapping("/findAll")
     public Result findAll() {
         return Result.ok(seckillGoodsService.findAll());
     }
@@ -196,7 +196,7 @@ public class SeckillGoodsApiController {
      * @param skuId
      * @return
      */
-    @GetMapping("/getSeckillGoods/{skuId}")
+    @RequestMapping("/getSeckillGoods/{skuId}")
     public Result getSeckillGoods(@PathVariable("skuId") Long skuId) {
         return Result.ok(seckillGoodsService.getSeckillGoods(skuId));
     }
