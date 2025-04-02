@@ -21,6 +21,11 @@ target/
 .springBeans
 .vscode
 jrebel*.jar
+*.zip
+*.rar
+*.7z
+*.gz
+*.tar
 
 ### IntelliJ IDEA ###
 .idea
