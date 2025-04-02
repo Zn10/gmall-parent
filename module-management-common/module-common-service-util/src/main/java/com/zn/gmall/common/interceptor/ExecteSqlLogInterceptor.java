@@ -1,11 +1,14 @@
 package com.zn.gmall.common.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.executor.statement.StatementHandler;
+import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ParameterMapping;
-import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Intercepts;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
@@ -17,8 +20,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import org.apache.ibatis.executor.Executor;
 
 /**
  * Package: com.zn.gmall.common.interceptor
@@ -36,8 +37,6 @@ import org.apache.ibatis.executor.Executor;
 @Slf4j
 @Component
 public class ExecteSqlLogInterceptor implements Interceptor {
-
-
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
@@ -61,7 +60,7 @@ public class ExecteSqlLogInterceptor implements Interceptor {
         long time = end - start;
         if (time > 1) {
             String exexcSql = getSql(configuration, sqlId, time, boundSql);
-            log.info("完整exexcSql执行: {}", exexcSql);
+            log.info("完整SQL执行，以及耗时: {}", exexcSql);
         }
         return returnValue;
     }
