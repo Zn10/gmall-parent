@@ -11,6 +11,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: always
+    container_name: mysql-01
     networks:
       - mall-net
   
@@ -26,6 +27,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: always
+    container_name: mysql-02
     depends_on:
       - mysql-01
     networks:
@@ -43,6 +45,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: always
+    container_name: mysql-03
     depends_on:
       - mysql-01
     networks:
@@ -59,6 +62,7 @@ services:
     # command: ["redis-server","/etc/redis/redis.conf"]
     command: ["redis-server","/etc/redis/redis.conf"]
     restart: always
+    container_name: redis
     networks:
       - mall-net
 
@@ -76,6 +80,7 @@ services:
       - es-data:/usr/share/elasticsearch/data
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    container_name: elasticsearch
     ulimits:
       memlock:
         soft: -1
@@ -95,6 +100,7 @@ services:
     environment:
       - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
     restart: always
+    container_name: kibana
     networks:
       - mall-net
 
@@ -106,6 +112,7 @@ services:
       - /var/lib/docker/containers:/log/containers
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    container_name: filebeat
     networks:
       - mall-net
 
@@ -123,6 +130,7 @@ services:
       - rabbit-conf:/etc/rabbitmq
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    container_name: rabbitmq
     networks:
       - mall-net
 
@@ -131,6 +139,7 @@ services:
     ports:
       - "9411:9411"
     restart: always
+    container_name: zipkin
     networks:
       - mall-net
   
@@ -141,6 +150,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    container_name: sentinel
     networks:
       - mall-net
 
@@ -161,6 +171,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    container_name: nacos
     networks:
       - mall-net
 
@@ -178,6 +189,7 @@ services:
       - MINIO_ACCESS_KEY=admin
       - MINIO_SECRET_KEY=admin123456
     restart: always
+    container_name: minio
     networks:
       - mall-net
   
@@ -190,6 +202,7 @@ services:
       - nginx-html:/usr/share/nginx/html
       - /etc/localtime:/etc/localtime:ro
     restart: always
+    container_name: nginx
     networks:
       - mall-net
 
