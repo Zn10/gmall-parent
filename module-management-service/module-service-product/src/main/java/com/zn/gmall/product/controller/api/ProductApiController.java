@@ -7,7 +7,6 @@ import com.zn.gmall.product.service.api.BaseTrademarkService;
 import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +34,7 @@ public class ProductApiController {
      * @return BaseTrademark
      */
     @ApiOperation("通过tmId，查询品牌数据")
-    @GetMapping("getTrademark/{tmId}")
+    @RequestMapping("getTrademark/{tmId}")
     public Result<BaseTrademark> getTrademarkById(@PathVariable("tmId") Long tmId) {
         log.info("通过品牌Id 集合来查询数据,{}", tmId);
         if (tmId == null) {
@@ -49,7 +48,7 @@ public class ProductApiController {
      * 获取全部分类信息
      */
     @ApiOperation("获取全部分类信息")
-    @GetMapping("getBaseCategoryList")
+    @RequestMapping("getBaseCategoryList")
     public Result<List<JSONObject>> getBaseCategoryList() {
         List<JSONObject> list = manageService.getBaseCategoryList();
         return Result.ok(list);
@@ -63,7 +62,7 @@ public class ProductApiController {
      * @return List<BaseAttrInfo>
      */
     @ApiOperation("通过skuId 集合来查询数据")
-    @GetMapping("inner/getAttrList/{skuId}")
+    @RequestMapping("inner/getAttrList/{skuId}")
     public Result<List<BaseAttrInfo>> getAttrList(@PathVariable("skuId") Long skuId) {
         log.info("通过skuId 集合来查询数据,{}", skuId);
         if (skuId == null) {
@@ -80,7 +79,7 @@ public class ProductApiController {
      * @return List<SpuPoster>
      */
     @ApiOperation("根据spuId 获取海报数据")
-    @GetMapping("inner/findSpuPosterBySpuId/{spuId}")
+    @RequestMapping("inner/findSpuPosterBySpuId/{spuId}")
     public Result<List<SpuPoster>> findSpuPosterBySpuId(@PathVariable Long spuId) {
         log.info("根据spuId 获取海报数据,{}", spuId);
         if (spuId == null) {
@@ -97,7 +96,7 @@ public class ProductApiController {
      * @return BigDecimal
      */
     @ApiOperation("根据skuId 查询价格")
-    @GetMapping("inner/getPrice/{skuId}")
+    @RequestMapping("inner/getPrice/{skuId}")
     public Result<BigDecimal> getSkuPrice(@PathVariable Long skuId) {
         log.info("根据skuId 获取价格,{}", skuId);
         if (skuId == null) {
@@ -113,7 +112,7 @@ public class ProductApiController {
      * @param spuId 商品SPUID
      */
     @ApiOperation("根据spuId 查询map 集合属性")
-    @GetMapping("inner/getSkuValueIdsMap/{spuId}")
+    @RequestMapping("inner/getSkuValueIdsMap/{spuId}")
     public Result<Map<Object, Object>> getSkuValueIdsMap(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询map 集合属性,{}", spuId);
         if (spuId == null) {
@@ -131,7 +130,7 @@ public class ProductApiController {
      * @return List<SpuSaleAttr>
      */
     @ApiOperation("根据spuId，skuId 查询销售属性集合")
-    @GetMapping("inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
+    @RequestMapping("inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
     public Result<List<SpuSaleAttr>> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId) {
         log.info("根据spuId，skuId 查询销售属性集合,{},{}", skuId, spuId);
         if (skuId == null || spuId == null) {
@@ -148,7 +147,7 @@ public class ProductApiController {
      * @return SkuInfo
      */
     @ApiOperation("根据skuId获取sku信息")
-    @GetMapping("inner/getSkuInfo/{skuId}")
+    @RequestMapping("inner/getSkuInfo/{skuId}")
     public Result<SkuInfo> getAttrValueList(@PathVariable("skuId") Long skuId) {
         log.info("根据skuId获取sku信息,{}", skuId);
         if (skuId == null) {
@@ -165,7 +164,7 @@ public class ProductApiController {
      * @return BaseCategoryView
      */
     @ApiOperation("通过三级分类id查询分类信息")
-    @GetMapping("inner/getCategoryView/{category3Id}")
+    @RequestMapping("inner/getCategoryView/{category3Id}")
     public Result<BaseCategoryView> getCategoryView(@PathVariable("category3Id") Long category3Id) {
         log.info("通过三级分类id查询分类信息,{}", category3Id);
         if (category3Id == null) {

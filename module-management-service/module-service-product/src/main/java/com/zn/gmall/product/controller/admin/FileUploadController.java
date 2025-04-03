@@ -9,7 +9,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +47,7 @@ public class FileUploadController {
      * @throws Exception
      */
     @ApiOperation("文件上传控制器")
-    @PostMapping("fileUpload")
+    @RequestMapping("fileUpload")
     public Result<String> fileUpload(@RequestPart("file") MultipartFile file) throws Exception {
         if (file.isEmpty()) {
             return Result.<String>fail().message("请不要上传空的文件！");

@@ -34,7 +34,7 @@ public class SkuManageController {
      * @param skuId 商品SKUID
      */
     @ApiOperation("根据skuid，进行商品上架")
-    @GetMapping("onSale/{skuId}")
+    @RequestMapping("onSale/{skuId}")
     public Result<Void> onSale(@PathVariable("skuId") Long skuId) {
         log.info("商品上架,商品id,{}", skuId);
         if (skuId == null) {
@@ -50,7 +50,7 @@ public class SkuManageController {
      * @param skuId 商品SKUID
      */
     @ApiOperation("根据skuid，进行商品下架")
-    @GetMapping("cancelSale/{skuId}")
+    @RequestMapping("cancelSale/{skuId}")
     public Result<Void> cancelSale(@PathVariable("skuId") Long skuId) {
         log.info("商品下架,商品id,{}", skuId);
         if (skuId == null) {
@@ -66,7 +66,7 @@ public class SkuManageController {
      * @param skuInfo SKU实例
      */
     @ApiOperation("保存sku商品")
-    @PostMapping("saveSkuInfo")
+    @RequestMapping("saveSkuInfo")
     public Result<Void> saveSkuInfo(@RequestBody SkuInfo skuInfo) {
         log.info("保存sku信息:{}", skuInfo);
         if (skuInfo == null) {
@@ -84,7 +84,7 @@ public class SkuManageController {
      * @return List<SpuSaleAttr>
      */
     @ApiOperation("根据spuId 查询销售属性集合")
-    @GetMapping("spuSaleAttrList/{spuId}")
+    @RequestMapping("spuSaleAttrList/{spuId}")
     public Result<List<SpuSaleAttr>> getSpuSaleAttrList(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询销售属性集合:{}", spuId);
         if (spuId == null) {
@@ -101,7 +101,7 @@ public class SkuManageController {
      * @return List<SpuImage>
      */
     @ApiOperation("根据spuId 查询spuImageList")
-    @GetMapping("spuImageList/{spuId}")
+    @RequestMapping("spuImageList/{spuId}")
     public Result<List<SpuImage>> getSpuImageList(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询spuImageList:{}", spuId);
         if (spuId == null) {

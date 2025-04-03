@@ -32,7 +32,7 @@ public class SpuManageController {
      * @param spuInfo 商品SPU实例
      */
     @ApiOperation("保存商品SPU数据")
-    @PostMapping("saveSpuInfo")
+    @RequestMapping("saveSpuInfo")
     public Result<Void> saveSpuInfo(@RequestBody SpuInfo spuInfo) {
         log.info("保存商品SPU数据:{}", spuInfo);
         // 调用服务层的保存方法
@@ -46,7 +46,7 @@ public class SpuManageController {
      * @return List<BaseSaleAttr>
      */
     @ApiOperation("查询所有的销售属性数据")
-    @GetMapping("baseSaleAttrList")
+    @RequestMapping("baseSaleAttrList")
     public Result<List<BaseSaleAttr>> baseSaleAttrList() {
         // 查询所有的销售属性集合
         List<BaseSaleAttr> baseSaleAttrList = manageService.getBaseSaleAttrList();
@@ -62,7 +62,7 @@ public class SpuManageController {
      * @return IPage<SpuInfo>
      */
     @ApiOperation("spu分页查询")
-    @GetMapping("{page}/{size}")
+    @RequestMapping("{page}/{size}")
     public Result<IPage<SpuInfo>> getSpuInfoPage(@PathVariable Long page,
                                          @PathVariable Long size,
                                          SpuInfo spuInfo) {

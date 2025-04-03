@@ -33,7 +33,7 @@ public class BaseManageController {
      * @param limit 页码条数
      */
     @ApiOperation("SKU分页列表")
-    @GetMapping("/list/{page}/{limit}")
+    @RequestMapping("/list/{page}/{limit}")
     public Result<IPage<SkuInfo>> index(@PathVariable Long page, @PathVariable Long limit) {
         log.info("SKU分页列表:page: {}, limit: {}", page, limit);
         Page<SkuInfo> pageParam = new Page<>(page, limit);
@@ -49,7 +49,7 @@ public class BaseManageController {
      * @return BaseAttrInfo
      */
     @ApiOperation("根据attrId 查询平台属性对象")
-    @GetMapping("getAttrValueList/{attrId}")
+    @RequestMapping("getAttrValueList/{attrId}")
     public Result<List<BaseAttrValue>> getAttrValueList(@PathVariable("attrId") Long attrId) {
         log.info("根据属性id 查询平台属性对象,attrId:{}", attrId);
         if (attrId == null) {
@@ -70,7 +70,7 @@ public class BaseManageController {
      * @return
      */
     @ApiOperation("根据attrId，删除属性和属性值")
-    @DeleteMapping("remove/{attrId}")
+    @RequestMapping("remove/{attrId}")
     public Result<Void> remove(@PathVariable Long attrId) {
         log.info("删除关联:attrId:{}", attrId);
         if (attrId == null) {
@@ -87,7 +87,7 @@ public class BaseManageController {
      * @param baseAttrInfo 平台属性实例
      */
     @ApiOperation("保存平台属性")
-    @PostMapping("saveAttrInfo")
+    @RequestMapping("saveAttrInfo")
     public Result<Void> saveAttrInfo(@RequestBody BaseAttrInfo baseAttrInfo) {
         log.info("保存平台属性,baseAttrInfo:{}", baseAttrInfo);
         if (baseAttrInfo == null) {
@@ -105,7 +105,7 @@ public class BaseManageController {
      * @return List<BaseCategory1>
      */
     @ApiOperation("查询所有的一级分类信息")
-    @GetMapping("getCategory1")
+    @RequestMapping("getCategory1")
     public Result<List<BaseCategory1>> getCategory1() {
         List<BaseCategory1> baseCategory1List = manageService.getCategory1();
         return Result.ok(baseCategory1List);
@@ -118,7 +118,7 @@ public class BaseManageController {
      * @return List<BaseCategory2>
      */
     @ApiOperation("根据一级分类Id 查询二级分类数据")
-    @GetMapping("getCategory2/{category1Id}")
+    @RequestMapping("getCategory2/{category1Id}")
     public Result<List<BaseCategory2>> getCategory2(@PathVariable("category1Id") Long category1Id) {
         log.info("根据一级分类Id 查询二级分类数据,category1Id:{}", category1Id);
         if (category1Id == null) {
@@ -135,7 +135,7 @@ public class BaseManageController {
      * @return List<BaseCategory3>
      */
     @ApiOperation("根据二级分类Id 查询三级分类数据")
-    @GetMapping("getCategory3/{category2Id}")
+    @RequestMapping("getCategory3/{category2Id}")
     public Result<List<BaseCategory3>> getCategory3(@PathVariable("category2Id") Long category2Id) {
         log.info("根据二级分类Id 查询三级分类数据,category2Id:{}", category2Id);
         if (category2Id == null) {
@@ -154,7 +154,7 @@ public class BaseManageController {
      * @return List<BaseAttrInfo>
      */
     @ApiOperation("根据分类Id 获取平台属性数据")
-    @GetMapping("attrInfoList/{category1Id}/{category2Id}/{category3Id}")
+    @RequestMapping("attrInfoList/{category1Id}/{category2Id}/{category3Id}")
     public Result<List<BaseAttrInfo>> attrInfoList(@PathVariable("category1Id") Long category1Id, @PathVariable("category2Id") Long category2Id, @PathVariable("category3Id") Long category3Id) {
         log.info("根据分类Id 获取平台属性数据,category1Id:{},category2Id:{},category3Id:{}", category1Id, category2Id, category3Id);
         if (category1Id == null || category2Id == null || category3Id == null) {

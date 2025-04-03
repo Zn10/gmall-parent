@@ -32,7 +32,7 @@ public class BaseTrademarkController {
      * @return List<BaseTrademark>
      */
     @ApiOperation("查询所有的品牌信息")
-    @GetMapping("getTrademarkList")
+    @RequestMapping("getTrademarkList")
     public Result<List<BaseTrademark>> getTrademarkList() {
         List<BaseTrademark> baseTrademarkList = baseTrademarkService.list();
         return Result.ok(baseTrademarkList);
@@ -46,7 +46,7 @@ public class BaseTrademarkController {
      * @return IPage<BaseTrademark>
      */
     @ApiOperation(value = "品牌分页列表")
-    @GetMapping("{page}/{limit}")
+    @RequestMapping("{page}/{limit}")
     public Result<IPage<BaseTrademark>> index(@PathVariable Long page,
                                               @PathVariable Long limit) {
         log.info("品牌分页列表:page: {}, limit: {}", page, limit);
@@ -62,7 +62,7 @@ public class BaseTrademarkController {
      * @return BaseTrademark
      */
     @ApiOperation(value = "根据品牌id查询该品牌")
-    @GetMapping("get/{id}")
+    @RequestMapping("get/{id}")
     public Result<BaseTrademark> get(@PathVariable String id) {
         log.info("根据品牌id查询该品牌: id: {}", id);
         if (id == null) {
@@ -78,7 +78,7 @@ public class BaseTrademarkController {
      * @param banner 品牌实例
      */
     @ApiOperation(value = "添加品牌")
-    @PostMapping("save")
+    @RequestMapping("save")
     public Result<Void> save(@RequestBody BaseTrademark banner) {
         log.info("添加品牌: BaseTrademark: {}", banner);
         if (banner == null) {
@@ -94,7 +94,7 @@ public class BaseTrademarkController {
      * @param banner 品牌实例
      */
     @ApiOperation(value = "更新品牌")
-    @PutMapping("update")
+    @RequestMapping("update")
     public Result<Void> updateById(@RequestBody BaseTrademark banner) {
         log.info("更新品牌: BaseTrademark: {}", banner);
         if (banner.getId() == null) {
@@ -110,7 +110,7 @@ public class BaseTrademarkController {
      * @param id 品牌id
      */
     @ApiOperation(value = "根据品牌id删除品牌")
-    @DeleteMapping("remove/{id}")
+    @RequestMapping("remove/{id}")
     public Result<Void> remove(@PathVariable Long id) {
         log.info("根据品牌id删除品牌: id: {}", id);
         if (id == null) {

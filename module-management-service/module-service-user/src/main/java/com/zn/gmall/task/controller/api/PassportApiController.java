@@ -37,7 +37,7 @@ public class PassportApiController {
     private RedisTemplate redisTemplate;
 
     @ApiOperation("用户登出")
-    @GetMapping("/logout")
+    @RequestMapping("/logout")
     public Result<Void> logout(@RequestHeader("token") String token) {
         log.info("用户退出登录，token:{}", token);
         if (token == null) {
@@ -51,7 +51,7 @@ public class PassportApiController {
     }
 
     @ApiOperation("用户登录")
-    @PostMapping("/login")
+    @RequestMapping("/login")
     public Result<Map<String, String>> login(
             @RequestBody UserInfo userInfo, HttpServletRequest request) {
         log.info("用户登录，用户信息:{}", userInfo);

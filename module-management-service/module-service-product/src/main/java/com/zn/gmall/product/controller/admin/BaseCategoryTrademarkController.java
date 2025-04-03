@@ -31,7 +31,7 @@ public class BaseCategoryTrademarkController {
      * @param categoryTrademarkVo 封装分类与品牌VO
      */
     @ApiOperation("保存分类与品牌关联")
-    @PostMapping("save")
+    @RequestMapping("save")
     public Result<Void> save(@RequestBody CategoryTrademarkVo categoryTrademarkVo) {
         log.info("保存分类与品牌关联:{}", categoryTrademarkVo);
         if (categoryTrademarkVo == null) {
@@ -49,7 +49,7 @@ public class BaseCategoryTrademarkController {
      * @param trademarkId 关联id
      */
     @ApiOperation("删除关联")
-    @DeleteMapping("remove/{category3Id}/{trademarkId}")
+    @RequestMapping("remove/{category3Id}/{trademarkId}")
     public Result<Void> remove(@PathVariable Long category3Id, @PathVariable Long trademarkId) {
         log.info("删除关联:category3Id:{},trademarkId:{}", category3Id, trademarkId);
         if (category3Id == null || trademarkId == null) {
@@ -67,7 +67,7 @@ public class BaseCategoryTrademarkController {
      * @return List<BaseTrademark>
      */
     @ApiOperation("根据三级分类获取品牌")
-    @GetMapping("findTrademarkList/{category3Id}")
+    @RequestMapping("findTrademarkList/{category3Id}")
     public Result<List<BaseTrademark>> findTrademarkList(@PathVariable Long category3Id) {
         log.info("根据三级分类获取品牌:category3Id:{}", category3Id);
         if (category3Id == null) {
@@ -86,7 +86,7 @@ public class BaseCategoryTrademarkController {
      * @return List<BaseTrademark>
      */
     @ApiOperation("获取当前未被三级分类关联的所有品牌")
-    @GetMapping("findCurrentTrademarkList/{category3Id}")
+    @RequestMapping("findCurrentTrademarkList/{category3Id}")
     public Result<List<BaseTrademark>> findCurrentTrademarkList(@PathVariable Long category3Id) {
         log.info("获取当前未被三级分类关联的所有品牌:category3Id:{}", category3Id);
         if (category3Id == null) {

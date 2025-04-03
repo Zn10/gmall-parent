@@ -5,7 +5,6 @@ import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.task.service.api.UserAddressService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +28,7 @@ public class UserApiController {
      * @return
      */
     @ApiOperation("根据用户id，获取用户地址")
-    @GetMapping("inner/findUserAddressListByUserId/{userId}")
+    @RequestMapping("inner/findUserAddressListByUserId/{userId}")
     public Result<List<UserAddress>> findUserAddressListByUserId(@PathVariable("userId") String userId) {
         log.info("获取用户地址，用户id：{}", userId);
         if (userId == null) {
