@@ -66,7 +66,7 @@ public class FileUploadController {
         // 检查存储桶是否已经存在
         boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
         if (isExist) {
-            log.info("文件桶已存在，桶名为:{}", bucketName);
+            log.error("文件桶已存在，桶名为:{}", bucketName);
         } else {
             // 创建一个名为gmall的存储桶，用于存储照片的zip文件。
             minioClient.makeBucket(MakeBucketArgs.builder()
@@ -82,11 +82,9 @@ public class FileUploadController {
                                 file.getInputStream(), file.getSize(), -1)
                         .contentType(file.getContentType())
                         .build());
-        //  System.out.println("/home/user/Photos/asiaphotos.zip is successfully uploaded as asiaphotos.zip to `asiatrip` bucket.");
-        //  文件上传之后的路径： http://39.99.159.121:9000/gmall/xxxxxx
         url = endpointUrl + "/" + bucketName + "/" + fileName;
 
-        log.info("url:\t{}", url);
+        log.info("图片地址url:\t{}", url);
         //  将文件上传之后的路径返回给页面！
         return Result.ok(url);
     }
