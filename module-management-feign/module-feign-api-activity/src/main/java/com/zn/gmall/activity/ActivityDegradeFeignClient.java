@@ -18,17 +18,23 @@ public class ActivityDegradeFeignClient implements ActivityFeignClient {
 
     @Override
     public Result<Map<String, Object>> trade() {
-        return Result.fail();
+        Result<Map<String, Object>> result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 
     @Override
     public Result findAll() {
-        return Result.fail();
+        Result result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 
     @Override
     public Result getSeckillGoods(Long skuId) {
-        return Result.fail();
+        Result result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 }
 
