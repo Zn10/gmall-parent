@@ -1,4 +1,4 @@
-package com.zn.gmall.cart.client;
+package com.zn.gmall.activity.client;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.cart.CartInfo;
