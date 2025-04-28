@@ -51,70 +51,71 @@ services:
     networks:
       - mall-net
 
+# 需要在脚本目录创建自定义redis.conf文件
+
   redis:
     image: redis:6.2.5
     ports:
       - "6379:6379"
     volumes:
-      - redis-conf:/etc/redis
+      - ./redis.conf:/etc/redis/redis.conf
       - redis-data:/data
       - /etc/localtime:/etc/localtime:ro
-    # command: ["redis-server","/etc/redis/redis.conf"]
     command: ["redis-server","/etc/redis/redis.conf"]
     restart: always
     container_name: redis
     networks:
       - mall-net
 
-  elasticsearch:
-    image: elasticsearch:7.13.4
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    environment:
-      - "discovery.type=single-node"
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
-      - "bootstrap.memory_lock=true"
-    volumes:
-      - es-config:/usr/share/elasticsearch/config
-      - es-data:/usr/share/elasticsearch/data
-      - /etc/localtime:/etc/localtime:ro
-    restart: always
-    container_name: elasticsearch
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65535
-        hard: 65535       
-    networks:
-      - mall-net
-
-  kibana:
-    image: kibana:7.13.4
-    ports:
-      - "5601:5601"
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-    environment:
-      - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
-    restart: always
-    container_name: kibana
-    networks:
-      - mall-net
-
-  filebeat:
-    image: elastic/filebeat:7.13.4
-    volumes:
-      - filebeat-conf:/usr/share/filebeat
-      - /var/log/messages:/log/messages
-      - /var/lib/docker/containers:/log/containers
-      - /etc/localtime:/etc/localtime:ro
-    restart: always
-    container_name: filebeat
-    networks:
-      - mall-net
+#  elasticsearch:
+#    image: elasticsearch:7.13.4
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    environment:
+#      - "discovery.type=single-node"
+#      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+#      - "bootstrap.memory_lock=true"
+#    volumes:
+#      - es-config:/usr/share/elasticsearch/config
+#      - es-data:/usr/share/elasticsearch/data
+#      - /etc/localtime:/etc/localtime:ro
+#    restart: always
+#    container_name: elasticsearch
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#      nofile:
+#        soft: 65535
+#        hard: 65535
+#    networks:
+#      - mall-net
+#
+#  kibana:
+#    image: kibana:7.13.4
+#    ports:
+#      - "5601:5601"
+#    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+#    environment:
+#      - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+#    restart: always
+#    container_name: kibana
+#    networks:
+#      - mall-net
+#
+#  filebeat:
+#    image: elastic/filebeat:7.13.4
+#    volumes:
+#      - filebeat-conf:/usr/share/filebeat
+#      - /var/log/messages:/log/messages
+#      - /var/lib/docker/containers:/log/containers
+#      - /etc/localtime:/etc/localtime:ro
+#    restart: always
+#    container_name: filebeat
+#    networks:
+#      - mall-net
 
   rabbitmq:
     image: rabbitmq:3.8-management
