@@ -1,11 +1,11 @@
-package com.zn.gmall.task.controller.api;
+package com.zn.gmall.user.controller.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.util.IpUtil;
 import com.zn.gmall.model.user.UserInfo;
-import com.zn.gmall.task.service.api.UserService;
+import com.zn.gmall.user.service.api.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

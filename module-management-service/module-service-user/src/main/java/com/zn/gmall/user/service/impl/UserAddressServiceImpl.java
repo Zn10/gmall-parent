@@ -1,11 +1,10 @@
-package com.zn.gmall.task.service.impl;
+package com.zn.gmall.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zn.gmall.model.user.UserAddress;
-import com.zn.gmall.task.mapper.UserAddressMapper;
-import com.zn.gmall.task.service.api.UserAddressService;
+import com.zn.gmall.user.mapper.UserAddressMapper;
+import com.zn.gmall.user.service.api.UserAddressService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

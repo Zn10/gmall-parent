@@ -1,4 +1,4 @@
-package com.zn.gmall.task.service.api;
+package com.zn.gmall.user.service.api;
 
 import com.zn.gmall.model.user.UserInfo;
 

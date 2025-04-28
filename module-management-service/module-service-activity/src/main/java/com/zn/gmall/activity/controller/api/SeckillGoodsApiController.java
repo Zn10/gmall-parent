@@ -18,7 +18,7 @@ import com.zn.gmall.mq.constant.MqConst;
 import com.zn.gmall.mq.service.RabbitService;
 import com.zn.gmall.order.OrderFeignClient;
 import com.zn.gmall.product.client.ProductFeignClient;
-import com.zn.gmall.task.client.UserFeignClient;
+import com.zn.gmall.user.client.UserFeignClient;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;

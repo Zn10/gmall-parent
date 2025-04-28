@@ -1,4 +1,4 @@
-package com.zn.gmall.task;
+package com.zn.gmall.user;
 
 
 import lombok.extern.slf4j.Slf4j;

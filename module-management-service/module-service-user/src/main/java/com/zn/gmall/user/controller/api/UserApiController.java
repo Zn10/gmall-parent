@@ -1,8 +1,8 @@
-package com.zn.gmall.task.controller.api;
+package com.zn.gmall.user.controller.api;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.user.UserAddress;
-import com.zn.gmall.task.service.api.UserAddressService;
+import com.zn.gmall.user.service.api.UserAddressService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;

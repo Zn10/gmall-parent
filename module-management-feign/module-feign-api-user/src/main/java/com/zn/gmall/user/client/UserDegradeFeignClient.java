@@ -1,4 +1,4 @@
-package com.zn.gmall.task.client;
+package com.zn.gmall.user.client;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.user.UserAddress;

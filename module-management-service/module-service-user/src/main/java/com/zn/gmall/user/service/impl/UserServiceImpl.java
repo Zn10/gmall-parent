@@ -1,10 +1,10 @@
-package com.zn.gmall.task.service.impl;
+package com.zn.gmall.user.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zn.gmall.model.user.UserInfo;
-import com.zn.gmall.task.mapper.UserInfoMapper;
-import com.zn.gmall.task.service.api.UserService;
+import com.zn.gmall.user.mapper.UserInfoMapper;
+import com.zn.gmall.user.service.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
