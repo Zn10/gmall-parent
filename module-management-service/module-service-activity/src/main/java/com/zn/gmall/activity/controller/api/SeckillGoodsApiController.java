@@ -16,7 +16,7 @@ import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.mq.constant.MqConst;
 import com.zn.gmall.mq.service.RabbitService;
-import com.zn.gmall.order.OrderFeignClient;
+import com.zn.gmall.order.client.OrderFeignClient;
 import com.zn.gmall.product.client.ProductFeignClient;
 import com.zn.gmall.user.client.UserFeignClient;
 import org.springframework.data.redis.core.RedisTemplate;

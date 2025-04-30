@@ -1,4 +1,4 @@
-package com.zn.gmall.activity.service.api;
+package com.zn.gmall.cart.service.api;
 
 import com.zn.gmall.model.cart.CartInfo;
 

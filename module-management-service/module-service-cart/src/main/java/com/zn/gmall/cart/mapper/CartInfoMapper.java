@@ -1,4 +1,4 @@
-package com.zn.gmall.activity.mapper;
+package com.zn.gmall.cart.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zn.gmall.model.cart.CartInfo;

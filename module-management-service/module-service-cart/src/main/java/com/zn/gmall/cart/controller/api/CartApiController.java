@@ -1,6 +1,6 @@
-package com.zn.gmall.activity.controller.api;
+package com.zn.gmall.cart.controller.api;
 
-import com.zn.gmall.activity.service.api.CartService;
+import com.zn.gmall.cart.service.api.CartService;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.util.AuthContextHolder;
 import com.zn.gmall.model.cart.CartInfo;

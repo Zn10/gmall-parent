@@ -1,6 +1,6 @@
 package com.zn.gmall.all.controller;
 
-import com.zn.gmall.activity.client.CartFeignClient;
+import com.zn.gmall.cart.client.CartFeignClient;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.product.client.ProductFeignClient;

@@ -2,7 +2,7 @@ package com.zn.gmall.all.controller;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.order.OrderInfo;
-import com.zn.gmall.order.OrderFeignClient;
+import com.zn.gmall.order.client.OrderFeignClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

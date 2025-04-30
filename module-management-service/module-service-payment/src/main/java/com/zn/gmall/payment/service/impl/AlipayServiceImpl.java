@@ -15,7 +15,7 @@ import com.zn.gmall.model.enums.PaymentStatus;
 import com.zn.gmall.model.enums.PaymentType;
 import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.model.payment.PaymentInfo;
-import com.zn.gmall.order.OrderFeignClient;
+import com.zn.gmall.order.client.OrderFeignClient;
 import com.zn.gmall.payment.config.AlipayConfig;
 import com.zn.gmall.payment.service.api.AlipayService;
 import com.zn.gmall.payment.service.api.PaymentService;

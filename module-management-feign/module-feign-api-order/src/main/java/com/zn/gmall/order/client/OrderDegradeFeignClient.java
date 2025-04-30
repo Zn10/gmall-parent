@@ -1,4 +1,4 @@
-package com.zn.gmall.order;
+package com.zn.gmall.order.client;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.order.OrderInfo;

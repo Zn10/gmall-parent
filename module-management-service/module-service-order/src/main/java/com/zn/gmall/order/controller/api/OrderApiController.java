@@ -3,7 +3,7 @@ package com.zn.gmall.order.controller.api;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zn.gmall.activity.client.CartDegradeFeignClient;
+import com.zn.gmall.cart.client.CartDegradeFeignClient;
 import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.util.AuthContextHolder;
