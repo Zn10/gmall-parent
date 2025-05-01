@@ -1,0 +1,56 @@
+[client]
+default-character-set=utf8mb4
+
+[mysql]
+default-character-set=utf8mb4
+
+[mysqld]
+init_connect='SET collation_connection = utf8mb4_unicode_ci'
+init_connect='SET NAMES utf8mb4'
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+skip-character-set-client-handshake
+skip-name-resolve
+
+server-id=1
+log-bin=mysql-bin
+
+binlog-ignore-db=information_schema
+binlog-ignore-db=mysql
+binlog-ignore-db=performance_schema
+binlog-ignore-db=sys
+
+
+
+=========================从机器配置
+[mysqld]
+server-id=2
+relay_log=relay-log
+read_only=1
+
+
+
+
+
+
+
+
+===================================配置主从
+===================================配置主机
+CREATE USER 'slave'@'%' IDENTIFIED BY '123456';
+GRANT REPLICATION SLAVE ON *.* TO 'slave'@'%' IDENTIFIED BY '123456';
+flush privileges;
+
+#查询master的状态
+show master status;
+
+
+========================================配置从机
+-- 指定主机位置，与从哪个文件开始同步
+CHANGE MASTER TO MASTER_HOST='mysql-01', MASTER_PORT=3306, MASTER_USER='slave', MASTER_PASSWORD='123456', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=0;
+
+-- 开始同步
+start slave;
+
+--检查状态
+show slave status;
