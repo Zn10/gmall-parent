@@ -1,6 +1,7 @@
 services:
   mysql-01:
     image: mysql:5.7
+    mem_limit: 1g
     ports:
       - "3306:3306"
     volumes:
@@ -17,6 +18,7 @@ services:
   
   mysql-02:
     image: mysql:5.7
+    mem_limit: 1g
     ports:
       - "3307:3306"
     volumes:
@@ -35,6 +37,7 @@ services:
   
   mysql-03:
     image: mysql:5.7
+    mem_limit: 1g
     ports:
       - "3308:3306"
     volumes:
@@ -55,6 +58,7 @@ services:
 
   redis:
     image: redis:6.2.5
+    mem_limit: 1g
     ports:
       - "6379:6379"
     volumes:
@@ -119,6 +123,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.8-management
+    mem_limit: 1g
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -137,6 +142,7 @@ services:
 
   zipkin:
     image: openzipkin/zipkin:2
+    mem_limit: 1g
     ports:
       - "9411:9411"
     restart: always
@@ -146,6 +152,7 @@ services:
   
   sentinel:
     image: leifengyang/sentinel:1.8.2
+    mem_limit: 1g
     ports:
       - "8858:8080"
     volumes:
@@ -157,6 +164,7 @@ services:
 
   nacos:
     image: nacos/nacos-server:1.4.1
+    mem_limit: 1g
     ports:
       - "8848:8848"
     environment:
@@ -178,6 +186,7 @@ services:
 
   minio:
     image: minio/minio
+    mem_limit: 1g
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -196,6 +205,7 @@ services:
   
   nginx:
     image: nginx
+    mem_limit: 1g
     ports:
       - "80:80"
     volumes:
