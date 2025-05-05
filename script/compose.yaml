@@ -181,6 +181,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: always
     container_name: nacos
+    depends_on:
+      - mysql-01
     networks:
       - mall-net
 
