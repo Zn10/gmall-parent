@@ -24,7 +24,7 @@ public class RabbitService {
     private RabbitTemplate rabbitTemplate;
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Object> redisTemplate;
 
     /**
      * 封装发送延迟消息方法

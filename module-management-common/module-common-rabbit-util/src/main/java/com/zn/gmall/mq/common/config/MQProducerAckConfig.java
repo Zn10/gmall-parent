@@ -26,7 +26,7 @@ public class MQProducerAckConfig implements RabbitTemplate.ConfirmCallback, Rabb
     @Resource
     private RabbitTemplate rabbitTemplate;
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Object> redisTemplate;
 
     // 修饰一个非静态的void（）方法,在服务器加载Servlet的时候运行，并且只会被服务器执行一次在构造函数之后执行，init（）方法之前执行。
     @PostConstruct
@@ -40,7 +40,7 @@ public class MQProducerAckConfig implements RabbitTemplate.ConfirmCallback, Rabb
         if (ack) {
             log.info("消息发送成功：{}", JSON.toJSONString(correlationData));
         } else {
-            log.info("消息发送失败：{} 数据：{}", cause, JSON.toJSONString(correlationData));
+            log.error("消息发送失败：{} 数据：{}", cause, JSON.toJSONString(correlationData));
         }
     }
 
