@@ -30,6 +30,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GmallException.class)
     @ResponseBody
     public Result<String> error(GmallException e) {
+        log.error("exception message", e);
         return Result.fail(e.getMessage());
     }
 }
