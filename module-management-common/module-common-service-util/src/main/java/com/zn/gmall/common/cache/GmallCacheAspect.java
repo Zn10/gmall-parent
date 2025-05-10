@@ -27,7 +27,7 @@ public class GmallCacheAspect {
     private RedissonClient redissonClient;
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Object> redisTemplate;
 
     //  定义一个环绕通知！
     @SneakyThrows
@@ -87,7 +87,7 @@ public class GmallCacheAspect {
                         Thread.sleep(100);
                         return gmallCacheAspectMethod(point);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        log.error("exception message", e);
                     }
                 }
             } else {
