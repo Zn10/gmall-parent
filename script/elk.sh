@@ -53,6 +53,7 @@ es_install(){
 		-v $esPath/data:/usr/share/elasticsearch/data \
 		-v $esPath/plugins:/usr/share/elasticsearch/plugins \
 		-v $esPath/logs:/usr/share/elasticsearch/logs \
+		-m 2G \
 		elasticsearch:$esVersion
 	fi
 }
