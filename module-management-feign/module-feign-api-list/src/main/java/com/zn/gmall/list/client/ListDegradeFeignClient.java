@@ -12,21 +12,29 @@ import org.springframework.stereotype.Component;
 public class ListDegradeFeignClient implements ListFeignClient {
     @Override
     public Result list(SearchParam searchParam) throws Throwable {
-        return Result.<Void>fail().message("服务降级了！");
+        Result<Void> result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 
     @Override
     public Result<Void> importSkuToElasticSearch(Long skuId) {
-        return Result.<Void>fail().message("服务降级了！");
+        Result<Void> result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 
     @Override
     public Result<Void> removeGoodsFromElasticSearch(Long skuId) {
-        return Result.<Void>fail().message("服务降级了！");
+        Result<Void> result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 
     @Override
     public Result<Void> incrGoodsHotScore(Long skuId) {
-        return Result.<Void>fail().message("服务降级了！");
+        Result<Void> result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 }
