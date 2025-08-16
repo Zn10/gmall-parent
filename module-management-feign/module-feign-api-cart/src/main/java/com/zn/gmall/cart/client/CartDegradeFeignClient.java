@@ -18,11 +18,15 @@ public class CartDegradeFeignClient implements CartFeignClient {
 
     @Override
     public Result<Void> addToCart(Long skuId, Long skuNum) {
-        return Result.<Void>fail().message("服务降级了！");
+        Result<Void> result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 
     @Override
     public Result<Void> deleteAllCheckedCart() {
-        return Result.<Void>fail().message("服务降级了！");
+        Result<Void> result = Result.fail();
+        result.message("服务降级了");
+        return result;
     }
 }
