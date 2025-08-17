@@ -34,9 +34,9 @@
         <cloud.version>Hoxton.SR8</cloud.version>
         <alibaba.version>2.2.5.RELEASE</alibaba.version>
         <gmall.version>1.0</gmall.version>
-        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
         <mysql.version>5.1.46</mysql.version>
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>3.0.0</swagger.version>
         <swagger.annotations.version>1.5.21</swagger.annotations.version>
         <swagger.models.version>1.5.21</swagger.models.version>
         <lombok.version>1.18.10</lombok.version>
