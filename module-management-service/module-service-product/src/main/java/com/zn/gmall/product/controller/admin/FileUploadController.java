@@ -16,10 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
+
 /**
  * SPU图片上传管理控制
  */
-@Api(tags ="图片上传管理控制")
+@Api(tags = "图片上传管理控制")
 @Slf4j
 @RestController
 @RequestMapping("admin/product")
@@ -53,39 +54,33 @@ public class FileUploadController {
             return Result.<String>fail().message("请不要上传空的文件！");
         }
 
-        //  准备获取到上传的文件路径！
         String url;
+        MinioClient minioClient = MinioClient.builder()
+                .endpoint(endpointUrl)
+                .credentials(accessKey, secreKey)
+                .build();
 
-        // 使用MinIO服务的URL，端口，Access key和Secret key创建一个MinioClient对象
-        // MinioClient minioClient = new MinioClient("https://play.min.io", "Q3AM3UQ867SPQQA43P2F", "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
-        MinioClient minioClient =
-                MinioClient.builder()
-                        .endpoint(endpointUrl)
-                        .credentials(accessKey, secreKey)
-                        .build();
-        // 检查存储桶是否已经存在
         boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
-        if (isExist) {
-            log.error("文件桶已存在，桶名为:{}", bucketName);
-        } else {
-            // 创建一个名为gmall的存储桶，用于存储照片的zip文件。
+        if (!isExist) {
             minioClient.makeBucket(MakeBucketArgs.builder()
                     .bucket(bucketName)
                     .build());
+            log.info("成功创建存储桶: {}", bucketName);
+        } else {
+            log.warn("存储桶已存在: {}", bucketName);
         }
-        //  定义一个文件的名称 : 文件上传的时候，名称不能重复！
-        String fileName = System.currentTimeMillis() + UUID.randomUUID().toString();
-        // 使用putObject上传一个文件到存储桶中。
-        //  minioClient.putObject("gmall","gmall.zip", "/home/user/Photos/gmall.zip");
+
+        String fileName = System.currentTimeMillis() + "_" + UUID.randomUUID().toString();
         minioClient.putObject(
-                PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(
-                                file.getInputStream(), file.getSize(), -1)
+                PutObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(fileName)
+                        .stream(file.getInputStream(), file.getSize(), -1)
                         .contentType(file.getContentType())
                         .build());
-        url = endpointUrl + "/" + bucketName + "/" + fileName;
 
-        log.info("图片地址url:\t{}", url);
-        //  将文件上传之后的路径返回给页面！
+        url = endpointUrl + "/" + bucketName + "/" + fileName;
+        log.info("文件访问地址: {}", url);
         return Result.ok(url);
     }
 }
