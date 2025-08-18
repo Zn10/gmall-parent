@@ -6,7 +6,6 @@ spring:
     cloud:
         nacos:
             config:
-                refresh-enabled: true
                 file-extension: yaml
                 prefix: ${spring.application.name}-@spring.active@.yaml
                 server-addr: gmall-nacos:8848
@@ -14,6 +13,9 @@ spring:
                 timeout: 50000
                 shared-configs:
                 -   data-id: common.yaml
+                    refresh: true
+                -   data-id: ${spring.application.name}-@spring.active@.yaml
+                    refresh: true
             discovery:
                 server-addr: gmall-nacos:8848
                 namespace: gmall
