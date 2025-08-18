@@ -185,6 +185,7 @@
 
     <build>
         <resources>
+            <!-- Step 1: 排除基础配置文件 -->
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
@@ -195,19 +196,20 @@
                 </excludes>
             </resource>
 
+            <!-- Step 2: 仅包含环境化配置文件 -->
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
                 <includes>
-                    <include>bootstrap.yml</include>
-                    <include>application.yml</include>
-                    <include>bootstrap.properties</include>
-                    <include>application.properties</include>
-                    <include>application-${spring.active}.properties</include>
-                    <include>bootstrap-${spring.active}.properties</include>
-                    <include>application-${spring.active}.yml</include>
-                    <include>bootstrap-${spring.active}.yml</include>
+                    <include>bootstrap.yml</include>          <!-- 全局默认启动配置 -->
+                    <include>application.yml</include>         <!-- 全局默认应用配置 -->
+                    <include>bootstrap.properties</include>    <!-- 旧版全局启动配置 -->
+                    <include>application.properties</include> <!-- 旧版全局应用配置 -->
+                    <include>application-${spring.active}.properties</include> <!-- 环境化应用配置 -->
+                    <include>bootstrap-${spring.active}.properties</include>   <!-- 环境化启动配置 -->
+                    <include>application-${spring.active}.yml</include>       <!-- 环境化应用配置 -->
+                    <include>bootstrap-${spring.active}.yml</include>        <!-- 环境化启动配置 -->
                 </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
         <finalName>${project.artifactId}</finalName>
