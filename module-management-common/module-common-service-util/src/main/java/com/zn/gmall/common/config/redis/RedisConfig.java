@@ -1,4 +1,4 @@
-package com.zn.gmall.common.config;
+package com.zn.gmall.common.config.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

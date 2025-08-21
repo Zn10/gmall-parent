@@ -1,5 +1,6 @@
 package com.zn.gmall.product;
 
+import com.zn.gmall.common.config.minio.EnableMinio;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @Slf4j
 @RefreshScope
+@EnableMinio
 @MapperScan("com.zn.gmall.*.mapper")
 public class ServiceProductApplication {
 

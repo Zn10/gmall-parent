@@ -1,4 +1,4 @@
-package com.zn.gmall.common.config;
+package com.zn.gmall.common.config.redis;
 
 import lombok.Data;
 import org.redisson.Redisson;
