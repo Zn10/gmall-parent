@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [信息] 下载依赖文件。
+echo install
 echo.
 
 %~d0
