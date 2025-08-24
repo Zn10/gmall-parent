@@ -123,7 +123,7 @@
                             </div>
                             <div class="fr remark">
                                 <i>累计评价</i>
-                                <em>500万+</em>
+                                <em>11111</em>
                             </div>
                         </div>
                         <div class="summary-wrap" v-if="couponInfoList !== undefined && couponInfoList.length > 0">
@@ -429,7 +429,7 @@
                             </li>
                             <li>
                                 <a href="#four" data-toggle="tab">
-                                    <span>商品评价({{ commentCount.count }})</span>
+                                    <span>商品评价</span>
                                 </a>
                             </li>
                             <li>
@@ -441,17 +441,30 @@
                         <div class="clearfix"></div>
                         <div class="tab-content tab-wraped">
                             <div id="one" class="tab-pane active">
+                                <ul class="goods-intro unstyled">
+                                    <li>分辨率：1920*1080(FHD)</li>
+                                    <li>后置摄像头：1200万像素</li>
+                                    <li>前置摄像头：500万像素</li>
+                                    <li>核 数：其他</li>
+                                    <li>频 率：以官网信息为准</li>
+                                    <li>品牌： Apple</li>
+                                    <li>商品名称：APPLEiPhone 6s Plus</li>
+                                    <li>商品编号：1861098</li>
+                                    <li>商品毛重：0.51kg</li>
+                                    <li>商品产地：中国大陆</li>
+                                    <li>热点：指纹识别，Apple Pay，金属机身，拍照神器</li>
+                                    <li>系统：苹果（IOS）</li>
+                                    <li>像素：1000-1600万</li>
+                                    <li>机身内存：64GB</li>
+                                </ul>
                                 <div class="intro-detail">
-                                    <img th:each="spuPoster: ${spuPosterList}" th:src="${spuPoster.imgUrl}" th:bimg="${spuPoster.imgUrl}"/>
+                                    <img src="./img/_/intro01.png"/>
+                                    <img src="./img/_/intro02.png"/>
+                                    <img src="./img/_/intro03.png"/>
                                 </div>
                             </div>
                             <div id="two" class="tab-pane">
                                 <p>规格与包装</p>
-                                <ul class="goods-intro unstyled">
-                                    <li th:each="skuAttr: ${skuAttrList}">
-                                        <span th:text="${skuAttr.attrName}"></span>：<span th:text="${skuAttr.attrValue}"></span>
-                                    </li>
-                                </ul>
                             </div>
                             <div id="three" class="tab-pane">
                                 <p>售后保障</p>
@@ -461,28 +474,28 @@
                                     <div class="com-tit">商品评价</div>
                                     <div class="com-percent">
                                         <p>好评度
-                                            <span class="percent">{{ commentCount.rate }}</span>
+                                            <span class="percent">96%</span>
                                         </p>
                                     </div>
                                     <div class="com-tab-type">
                                         <ul class="type">
                                             <li class="current">
-                                                <a href="javascript:;">全部评价({{ commentCount.count }})</a>
-                                            </li>
-<!--                                            <li>-->
-<!--                                                <a href="javascript:;">晒图(500)</a>-->
-<!--                                            </li>-->
-<!--                                            <li>-->
-<!--                                                <a href="javascript:;">追评(500)</a>-->
-<!--                                            </li>-->
-                                            <li>
-                                                <a href="javascript:;">好评({{ commentCount.count3 }})</a>
+                                                <a href="javascript:;">全部评价(123456)</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:;">中评({{ commentCount.count2 }})</a>
+                                                <a href="javascript:;">晒图(500)</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:;">差评({{ commentCount.count1 }})</a>
+                                                <a href="javascript:;">追评(500)</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">好评(500)</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">中评(500)</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">差评(500)</a>
                                             </li>
                                         </ul>
                                         <div class="content">
@@ -494,16 +507,12 @@
                                                     <div class="usernum">品享值258698</div>
                                                 </div>
                                                 <div class="user-info">
-                                                    <div>
-                                                        <i :class="commentInfo.appraise >= 1 ? 'sui-icon icon-tb-favorfill' : 'sui-icon icon-tb-favor'"></i>
-                                                        <i :class="commentInfo.appraise >= 2 ? 'sui-icon icon-tb-favorfill' : 'sui-icon icon-tb-favor'"></i>
-                                                        <i :class="commentInfo.appraise >= 3 ? 'sui-icon icon-tb-favorfill' : 'sui-icon icon-tb-favor'"></i>
-                                                        <i :class="commentInfo.appraise >= 4 ? 'sui-icon icon-tb-favorfill' : 'sui-icon icon-tb-favor'"></i>
-                                                        <i :class="commentInfo.appraise >= 5 ? 'sui-icon icon-tb-favorfill' : 'sui-icon icon-tb-favor'"></i>
-                                                    </div>
+                                                    <div class="stars star4"></div>
                                                     <p>{{ commentInfo.commentTxt }}</p>
                                                     <div class="guige">
                                                         <ul class="mini">
+                                                            <li>玫瑰金</li>
+                                                            <li>标配版</li>
                                                             <li>{{ commentInfo.createTime }}</li>
                                                         </ul>
                                                         <div class="operate">
@@ -514,39 +523,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="choose-order">
-                                                <div class="sui-pagination pagination-large top-pages">
-                                                    <ul>
-                                                        <li class="prev disabled"
-                                                            :class="{disabled: pageNo == 1}"
-                                                            @click.prevent="getCommentPageList(pageNo - 1)"
-                                                        >
-                                                            <a href="javascript:">«上一页</a>
-                                                        </li>
-                                                        <li
-                                                                v-for="page in pages"
-                                                                :key="page"
-                                                                :class="{active: pageNo == page, disabled: pageNo == page}"
-                                                                :title="'第'+page+'页'"
-                                                                @click.prevent="getCommentPageList(page)"
-                                                        >
-                                                            <a href="javascript:">{{ page }}</a>
-                                                        </li>
-
-                                                        <li class="prev disabled"
-                                                            :class="{disabled: pageNo == pages}"
-                                                            @click.prevent="getCommentPageList(pageNo + 1)"
-                                                        >
-                                                            <a href="javascript:">下一页»</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div>
-                                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;共{{pages}}页&nbsp;</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
 
                                         </div>
                                     </div>
@@ -914,220 +890,190 @@
 <script src="/js/api/activity.js"></script>
 <script src="/js/api/favorInfo.js"></script>
 <script src="/js/api/comment.js"></script>
-<script src="/js/api/cart.js"></script>
 <script th:inline="javascript">
-var item = new Vue({
-    el: '#itemArray',
-    data: {
-        skuId: [[${skuInfo.id}]],
-        spuId: [[${skuInfo.spuId}]],
-        valuesSku: '',
-        skuNum: 1,
+    var item = new Vue({
+        el: '#itemArray',
+        data: {
+            skuId: [[${skuInfo.id}]],
+            spuId: [[${skuInfo.spuId}]],
+            valuesSku: '',
+            skuNum: 1,
 
-        selectValuesSkus: [],
-        isAddCart: true,
+            selectValuesSkus: [],
+            isAddCart: true,
 
-        spuSaleAttrList: [[${spuSaleAttrList}]],
-        valuesSkuJson: [[${valuesSkuJson}]],
-        activityRuleList: [],
-        couponInfoList: [],
+            spuSaleAttrList: [[${spuSaleAttrList}]],
+            valuesSkuJson: [[${valuesSkuJson}]],
+            activityRuleList: [],
+            couponInfoList: [],
 
-        coupon: {
-            more: 0, // 0：隐藏  1：显示
+            coupon: {
+                more: 0, // 0：隐藏  1：显示
+            },
+
+            favorLable: '关注',
+
+            commentList: [], // 列表
+            total: 0, // 数据库中的总记录数
+            page: 1, // 默认页码
+            limit: 10 // 每页记录数
         },
 
-        favorLable: '关注',
-
-        commentList: [], // 列表
-        pageNo: 1,
-        pageSize:10,
-        pages: 1,
-
-        commentCount: {
-            count: 0,
-            count1: 0,
-            count2: 0,
-            count3: 0,
-            rate: '100%'
-        }
-    },
-
-    created() {
-        this.init()
-    },
-
-    methods: {
-        init() {
-            this.spuSaleAttrList.forEach((spuSaleAttr, index) => {
-                spuSaleAttr.index = index
-                spuSaleAttr.spuSaleAttrValueList.forEach((spuSaleAttrValue) => {
-                    if (spuSaleAttrValue.isChecked == 1) {
-                        this.selectValuesSkus.push(spuSaleAttrValue.id)
-                    }
-                })
-            })
-            console.log('this.valuesSku:' + this.valuesSku)
-
-            //初始化促销活动与优惠券
-            this.findActivityAndCoupon()
-
-            //是否关注
-            this.isFavor()
-
-            //评论列表
-            this.getCommentPageList(1)
-            this.countBySpuId()
+        created() {
+            this.init()
         },
 
-        addToCart() {
-            // 判断是否登录和是否存在临时用户，如果都没有，添加临时用户
-            if(!auth.isTokenExist() && !auth.isUserTempIdExist()) {
-                auth.setUserTempId()
-            }
-
-            // 获取来源信息
-            var sourceType = 'query'
-            var key = 'sourceType_'+this.skuId
-            if(auth.isExist(key)) {
-                sourceType = auth.getCookie(key)
-                auth.removeCookie(key)
-            }
-
-            cart.addToCart(this.skuId, this.skuNum).then(response => {
-                // if (response.code==200){
-                // }
-                //  window.location.href = 'http://cart.gmall.com/addCart.html'
-                window.location.href = 'http://cart.gmall.com/addCart.html?skuId=' + this.skuId + '&skuNum=' + this.skuNum + '&sourceType=' + sourceType
-                // window.location.href = 'http://cart.gmall.com/addCart.html?skuId=' + this.skuId + '&skuNum=' + this.skuNum
-            })
-        },
-
-        spuSaleAttrFun(index, spuSaleAttrValueId) {
-            debugger
-            console.log('spuSaleAttrValueId:' + spuSaleAttrValueId)
-            this.isAddCart = true
-            //  JSON.parse() : Json 字符串转换为对象！ {"115|117":"44","114|117":"45"}
-            var valuesSkuJson = JSON.parse(this.valuesSkuJson);
-
-            //根据索引替换已选中的spuSaleAttrValueId
-            this.selectValuesSkus[index] = spuSaleAttrValueId // 115|117
-
-            var valuesSku = this.selectValuesSkus.join('|')
-            //  3716|3718
-            console.log('valuesSku:' + valuesSku)
-
-            //查看新组装的数据是否存在skuId，如果存在跳到该页面，如果不存在控制选中状态
-            // 44 = valuesSkuJson["115|117"]
-            //  {"3716|3718":"18","3717|3718":"17"}
-            var curSkuId = valuesSkuJson[valuesSku]
-            //  17
-            if (curSkuId) {
-                if(curSkuId != this.skuId) {
-                    window.location.href = '/' + curSkuId + '.html'
-                } else {
-                    this.isAddCart = true
-                }
-            } else {
-                //控制购物车是否可选
-                this.isAddCart = false
-            }
-
-            //控制销售属性是否选中
-            this.spuSaleAttrList.forEach((spuSaleAttr, i) => {
-                spuSaleAttr.spuSaleAttrValueList.forEach((spuSaleAttrValue) => {
-                    if (item == i) {
-                        if (spuSaleAttrValueId == spuSaleAttrValue.id) {
-                            spuSaleAttrValue.isChecked = 1
-                        } else {
-                            spuSaleAttrValue.isChecked = 0
+        methods: {
+            init() {
+                this.spuSaleAttrList.forEach((spuSaleAttr, index) => {
+                    spuSaleAttr.index = index
+                    spuSaleAttr.spuSaleAttrValueList.forEach((spuSaleAttrValue) => {
+                        if (spuSaleAttrValue.isChecked == 1) {
+                            this.selectValuesSkus.push(spuSaleAttrValue.id)
                         }
-                    }
+                    })
                 })
-            })
-        },
+                console.log('this.valuesSku:' + this.valuesSku)
 
-        add() {
-            this.skuNum += 1
-        },
+                //初始化促销活动与优惠券
+                this.findActivityAndCoupon()
 
-        down() {
-            if (this.skuNum > 1) {
-                this.skuNum -= 1
-            }
-        },
+                //是否关注
+                this.isFavor()
 
-        compare(val1,val2){
-            return val1-val2;
-        },
+                //评论列表
+                this.getCommentPageList(1)
+            },
 
-        couponMore() {
-            if(this.coupon.more == 0) {
-                this.coupon.more = 1
-
-                //动态设置右侧浮动层高度为浏览器可见区域高度，更多出现滚动条
-                $(".jt-history-wrap").css("height", $(window).height()-5)
-            } else {
-                this.coupon.more = 0
-            }
-        },
-
-        findActivityAndCoupon() {
-            activity.findActivityAndCoupon(this.skuId).then(response => {
-                this.activityRuleList = response.data.data.activityRuleList
-                this.couponInfoList = response.data.data.couponInfoList
-            })
-        },
-
-        getCouponInfo(couponId) {
-            activity.getCouponInfo(couponId).then(response => {
-                this.couponInfoList.forEach(item => {
-                    if(couponId == item.id) {
-                        // 已领取
-                        item.isGet = 1
-                        // 未使用
-                        item.couponStatus = 'NOT_USED'
-                    }
-                })
-            })
-        },
-
-        isFavor() {
-            favorInfo.isFavor(this.skuId).then(response => {
-                if(response.data.data) {
-                    this.favorLable = '已关注'
+            addToCart() {
+                // 判断是否登录和是否存在临时用户，如果都没有，添加临时用户
+                if(!auth.isTokenExist() && !auth.isUserTempIdExist()) {
+                    auth.setUserTempId()
                 }
-            })
-        },
 
-        addFavor() {
-            var param = {
-                spuId: this.spuId,
-                skuId: this.skuId
+                // 获取来源信息
+                var sourceType = 'query'
+                var key = 'sourceType_'+this.skuId
+                if(auth.isExist(key)) {
+                    sourceType = auth.getCookie(key)
+                    auth.removeCookie(key)
+                }
+
+                window.location.href = 'http://cart.gmall.com/addCart.html?skuId=' + this.skuId + '&skuNum=' + this.skuNum + '&sourceType=' + sourceType
+            },
+
+            spuSaleAttrFun(index, spuSaleAttrValueId) {
+                //  debugger
+                this.isAddCart = true
+                //  JSON.parse() : Json 字符串转换为对象！ {"115|117":"44","114|117":"45"}
+                var valuesSkuJson = JSON.parse(this.valuesSkuJson);
+
+                //根据索引替换已选中的spuSaleAttrValueId
+                this.selectValuesSkus[index] = spuSaleAttrValueId  // 115|117
+
+                var valuesSku = this.selectValuesSkus.join('|')
+                //查看新组装的数据是否存在skuId，如果存在跳到该页面，如果不存在控制选中状态
+                // 44 = valuesSkuJson["115|117"]
+                var curSkuId = valuesSkuJson[valuesSku]
+
+                if (curSkuId) {
+                    if(curSkuId != this.skuId) {
+                        window.location.href = '/' + curSkuId + '.html'
+                    } else {
+                        this.isAddCart = true
+                    }
+                } else {
+                    //控制购物车是否可选
+                    this.isAddCart = false
+                }
+
+                //控制销售属性是否选中
+                this.spuSaleAttrList.forEach((spuSaleAttr, i) => {
+                    spuSaleAttr.spuSaleAttrValueList.forEach((spuSaleAttrValue) => {
+                        if (index == i) {
+                            if (spuSaleAttrValueId == spuSaleAttrValue.id) {
+                                spuSaleAttrValue.isChecked = 1
+                            } else {
+                                spuSaleAttrValue.isChecked = 0
+                            }
+                        }
+                    })
+                })
+            },
+
+            add() {
+                this.skuNum += 1
+            },
+
+            down() {
+                if (this.skuNum > 1) {
+                    this.skuNum -= 1
+                }
+            },
+
+            compare(val1,val2){
+                return val1-val2;
+            },
+
+            couponMore() {
+                if(this.coupon.more == 0) {
+                    this.coupon.more = 1
+
+                    //动态设置右侧浮动层高度为浏览器可见区域高度，更多出现滚动条
+                    $(".jt-history-wrap").css("height", $(window).height()-5)
+                } else {
+                    this.coupon.more = 0
+                }
+            },
+
+            findActivityAndCoupon() {
+                activity.findActivityAndCoupon(this.skuId).then(response => {
+                    this.activityRuleList = response.data.data.activityRuleList
+                    this.couponInfoList = response.data.data.couponInfoList
+                })
+            },
+
+            getCouponInfo(couponId) {
+                activity.getCouponInfo(couponId).then(response => {
+                    this.couponInfoList.forEach(item => {
+                        if(couponId == item.id) {
+                            // 已领取
+                            item.isGet = 1
+                            // 未使用
+                            item.couponStatus = 'NOT_USED'
+                        }
+                    })
+                })
+            },
+
+            isFavor() {
+                favorInfo.isFavor(this.skuId).then(response => {
+                    if(response.data.data) {
+                        this.favorLable = '已关注'
+                    }
+                })
+            },
+
+            addFavor() {
+                var param = {
+                    spuId: this.spuId,
+                    skuId: this.skuId
+                }
+                favorInfo.add(param).then(response => {
+                    this.favorLable = '已关注'
+                })
+            },
+
+            getCommentPageList(page = 1) {
+                this.page = page
+                comment.getPageList(this.skuId, this.page, this.limit).then(response => {
+                    this.commentList = response.data.data.records
+                    this.total = response.data.data.total
+                })
             }
-            favorInfo.add(param).then(response => {
-                this.favorLable = '已关注'
-            })
-        },
 
-        getCommentPageList(page = 1) {
-            this.pageNo = page
-            if(this.pageNo < 1) this.pageNo = 1
-            if(this.pageNo >= this.pages) this.pageNo = this.pages
-
-            comment.getPageList(this.spuId, this.pageNo, this.pageSize).then(response => {
-                this.commentList = response.data.data.records
-                this.pages = response.data.data.pages
-            })
-        },
-
-        countBySpuId() {
-            comment.countBySpuId(this.spuId).then(response => {
-                this.commentCount = response.data.data
-            })
         }
-
-    }
-})
+    })
 </script>
 </body>
 </html>

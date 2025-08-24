@@ -10,16 +10,9 @@ var comment = {
         })
     },
 
-    getPageList(spuId, page, limit) {
+    getPageList(skuId, page, limit) {
         return request({
-            url: this.api_name + `/${spuId}/${page}/${limit}`,
-            method: 'get'
-        })
-    },
-
-    countBySpuId(spuId) {
-        return request({
-            url: this.api_name + `/countBySpuId/${spuId}`,
+            url: this.api_name + `/${skuId}/${page}/${limit}`,
             method: 'get'
         })
     }

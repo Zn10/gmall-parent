@@ -6,7 +6,7 @@ var cart = {
   addToCart(skuId, skuNum) {
     return request({
       url: this.api_name + '/addToCart/' + skuId + '/' + skuNum,
-      method: 'get'
+      method: 'post'
     })
   },
 
