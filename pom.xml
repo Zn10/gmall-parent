@@ -48,7 +48,21 @@
         <docker.image>docker_storage</docker.image>
         <logstash.version>5.3</logstash.version>
         <alipay-sdk-java.version>4.8.73.ALL</alipay-sdk-java.version>
+        <jsoup.version>1.15.3</jsoup.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <!--配置dependencyManagement锁定依赖的版本 并不是实际的依赖。-->
     <dependencyManagement>
