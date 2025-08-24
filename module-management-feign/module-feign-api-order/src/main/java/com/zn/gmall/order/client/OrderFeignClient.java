@@ -3,10 +3,7 @@ package com.zn.gmall.order.client;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.order.OrderInfo;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -17,11 +14,11 @@ public interface OrderFeignClient {
      * @param orderInfo
      * @return
      */
-    @PostMapping("/api/order/inner/seckill/submitOrder")
+    @RequestMapping("/api/order/inner/seckill/submitOrder")
     Long submitOrder(@RequestBody OrderInfo orderInfo);
 
 
-    @GetMapping("/api/order/auth/trade")
+    @RequestMapping("/api/order/auth/trade")
     Result<Map<String, Object>> trade();
 
     /**
@@ -30,7 +27,7 @@ public interface OrderFeignClient {
      * @param orderId
      * @return
      */
-    @GetMapping("/api/order/inner/getOrderInfo/{orderId}")
+    @RequestMapping("/api/order/inner/getOrderInfo/{orderId}")
     Result<OrderInfo> getOrderInfo(@PathVariable(value = "orderId") Long orderId);
 
 

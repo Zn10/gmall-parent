@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public interface ItemFeignClient {
      * @param skuId 商品SKUID
      * @return Map<String, Object>
      */
-    @GetMapping("/api/item/{skuId}")
+    @RequestMapping("/api/item/{skuId}")
     Result<Map<String, Object>> getItem(@PathVariable("skuId") Long skuId);
 
 }

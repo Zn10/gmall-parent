@@ -4,6 +4,7 @@ import com.zn.gmall.model.payment.PaymentInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Package: com.zn.payment.client
@@ -15,13 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(value = "service-payment", fallback = PaymentDegradeFeignClient.class)
 public interface PaymentFeignClient {
 
-    @GetMapping("api/payment/alipay/closePay/{orderId}")
+    @RequestMapping("api/payment/alipay/closePay/{orderId}")
     Boolean closePay(@PathVariable Long orderId);
 
-    @GetMapping("api/payment/alipay/checkPayment/{orderId}")
+    @RequestMapping("api/payment/alipay/checkPayment/{orderId}")
     Boolean checkPayment(@PathVariable Long orderId);
 
-    @GetMapping("api/payment/alipay/getPaymentInfo/{outTradeNo}")
+    @RequestMapping("api/payment/alipay/getPaymentInfo/{outTradeNo}")
     PaymentInfo getPaymentInfo(@PathVariable String outTradeNo);
 
 }

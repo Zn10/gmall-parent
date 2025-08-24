@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,7 +21,7 @@ public interface ProductFeignClient {
      * @param tmId 品牌id
      * @return BaseTrademark
      */
-    @GetMapping("/api/product/getTrademark/{tmId}")
+    @RequestMapping("/api/product/getTrademark/{tmId}")
     Result<BaseTrademark> getTrademarkById(@PathVariable("tmId") Long tmId);
 
     /**
@@ -30,7 +30,7 @@ public interface ProductFeignClient {
      * @param skuId 商品SKUID
      * @return List<BaseAttrInfo>
      */
-    @GetMapping("/api/product/inner/getAttrList/{skuId}")
+    @RequestMapping("/api/product/inner/getAttrList/{skuId}")
     Result<List<BaseAttrInfo>> getBaseAttrInfoBySkuId(@PathVariable("skuId") Long skuId);
 
     /**
@@ -38,7 +38,7 @@ public interface ProductFeignClient {
      *
      * @return List<JSONObject>
      */
-    @GetMapping("/api/product/getBaseCategoryList")
+    @RequestMapping("/api/product/getBaseCategoryList")
     Result<List<JSONObject>> getBaseCategoryList();
 
 
@@ -48,7 +48,7 @@ public interface ProductFeignClient {
      * @param skuId 商品SKUID
      * @return SkuInfo
      */
-    @GetMapping("/api/product/inner/getSkuInfo/{skuId}")
+    @RequestMapping("/api/product/inner/getSkuInfo/{skuId}")
     Result<SkuInfo> getSkuInfo(@PathVariable("skuId") Long skuId);
 
 
@@ -58,7 +58,7 @@ public interface ProductFeignClient {
      * @param category3Id 三级分类id
      * @return BaseCategoryView
      */
-    @GetMapping("/api/product/inner/getCategoryView/{category3Id}")
+    @RequestMapping("/api/product/inner/getCategoryView/{category3Id}")
     Result<BaseCategoryView> getCategoryView(@PathVariable("category3Id") Long category3Id);
 
     /**
@@ -67,7 +67,7 @@ public interface ProductFeignClient {
      * @param skuId 商品SKUID
      * @return BigDecimal
      */
-    @GetMapping("/api/product/inner/getSkuPrice/{skuId}")
+    @RequestMapping("/api/product/inner/getSkuPrice/{skuId}")
     Result<BigDecimal> getSkuPrice(@PathVariable(value = "skuId") Long skuId);
 
     /**
@@ -77,7 +77,7 @@ public interface ProductFeignClient {
      * @param spuId 商品SPUID
      * @return List<SpuSaleAttr>
      */
-    @GetMapping("/api/product/inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
+    @RequestMapping("/api/product/inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
     Result<List<SpuSaleAttr>> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId);
 
     /**
@@ -86,7 +86,7 @@ public interface ProductFeignClient {
      * @param spuId 商品SPUID
      * @return Map<String, Object>
      */
-    @GetMapping("/api/product/inner/getSkuValueIdsMap/{spuId}")
+    @RequestMapping("/api/product/inner/getSkuValueIdsMap/{spuId}")
     Result<Map<String, Object>> getSkuValueIdsMap(@PathVariable("spuId") Long spuId);
 
     /**
@@ -95,7 +95,7 @@ public interface ProductFeignClient {
      * @param spuId 商品SPUID
      * @return List<SpuPoster>
      */
-    @GetMapping("/api/product/inner/findSpuPosterBySpuId/{spuId}")
+    @RequestMapping("/api/product/inner/findSpuPosterBySpuId/{spuId}")
     Result<List<SpuPoster>> getSpuPosterBySpuId(@PathVariable("spuId") Long spuId);
 
     /**
@@ -104,6 +104,6 @@ public interface ProductFeignClient {
      * @param skuId 商品SKUID
      * @return List<BaseAttrInfo>
      */
-    @GetMapping("/api/product/inner/getAttrList/{skuId}")
+    @RequestMapping("/api/product/inner/getAttrList/{skuId}")
     Result<List<BaseAttrInfo>> getAttrList(@PathVariable("skuId") Long skuId);
 }
