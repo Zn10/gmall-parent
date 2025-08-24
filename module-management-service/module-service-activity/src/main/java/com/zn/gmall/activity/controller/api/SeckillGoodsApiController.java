@@ -19,11 +19,11 @@ import com.zn.gmall.mq.service.RabbitService;
 import com.zn.gmall.order.client.OrderFeignClient;
 import com.zn.gmall.product.client.ProductFeignClient;
 import com.zn.gmall.user.client.UserFeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -39,22 +39,22 @@ import java.util.*;
 @SuppressWarnings("all")
 public class SeckillGoodsApiController {
 
-    @Resource
+    @Autowired
     private SeckillGoodsService seckillGoodsService;
 
-    @Resource
+    @Autowired
     private UserFeignClient userFeignClient;
 
-    @Resource
+    @Autowired
     private ProductFeignClient productFeignClient;
-    @Resource
+    @Autowired
     private RabbitService rabbitService;
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
-    @Resource
+    @Autowired
     private OrderFeignClient orderFeignClient;
 
-    @RequestMapping("auth/submitOrder")
+    @PostMapping("auth/submitOrder")
     public Result submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request) {
         String userId = AuthContextHolder.getUserId(request);
         orderInfo.setUserId(Long.parseLong(userId));
@@ -78,7 +78,7 @@ public class SeckillGoodsApiController {
      * @param request
      * @return
      */
-    @RequestMapping("auth/trade")
+    @GetMapping("auth/trade")
     public Result trade(HttpServletRequest request) {
         // 获取到用户Id
         String userId = AuthContextHolder.getUserId(request);
@@ -119,7 +119,7 @@ public class SeckillGoodsApiController {
     }
 
 
-    @RequestMapping(value = "auth/checkOrder/{skuId}")
+    @GetMapping(value = "auth/checkOrder/{skuId}")
     public Result checkOrder(@PathVariable("skuId") Long skuId, HttpServletRequest request) {
         //当前登录用户
         String userId = AuthContextHolder.getUserId(request);
@@ -132,7 +132,7 @@ public class SeckillGoodsApiController {
      * @param skuId
      * @return
      */
-    @RequestMapping("auth/seckillOrder/{skuId}")
+    @GetMapping("auth/seckillOrder/{skuId}")
     public Result seckillOrder(@PathVariable("skuId") Long skuId, HttpServletRequest request) throws Exception {
         //校验下单码（抢购码规则可以自定义）
         String userId = AuthContextHolder.getUserId(request);
@@ -164,7 +164,7 @@ public class SeckillGoodsApiController {
     }
 
 
-    @RequestMapping("auth/getSeckillSkuIdStr/{skuId}")
+    @GetMapping("auth/getSeckillSkuIdStr/{skuId}")
     public Result getSeckillSkuIdStr(@PathVariable("skuId") Long skuId, HttpServletRequest request) {
         String userId = AuthContextHolder.getUserId(request);
         SeckillGoods seckillGoods = seckillGoodsService.getSeckillGoods(skuId);
@@ -185,7 +185,7 @@ public class SeckillGoodsApiController {
      *
      * @return
      */
-    @RequestMapping("/findAll")
+    @GetMapping("/findAll")
     public Result findAll() {
         return Result.ok(seckillGoodsService.findAll());
     }
@@ -196,7 +196,7 @@ public class SeckillGoodsApiController {
      * @param skuId
      * @return
      */
-    @RequestMapping("/getSeckillGoods/{skuId}")
+    @GetMapping("/getSeckillGoods/{skuId}")
     public Result getSeckillGoods(@PathVariable("skuId") Long skuId) {
         return Result.ok(seckillGoodsService.getSeckillGoods(skuId));
     }

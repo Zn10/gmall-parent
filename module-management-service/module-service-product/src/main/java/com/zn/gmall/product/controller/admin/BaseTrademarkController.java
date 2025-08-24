@@ -8,9 +8,9 @@ import com.zn.gmall.product.service.api.BaseTrademarkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class BaseTrademarkController {
 
-    @Resource
+    @Autowired
     private BaseTrademarkService baseTrademarkService;
 
     /**
@@ -32,7 +32,8 @@ public class BaseTrademarkController {
      * @return List<BaseTrademark>
      */
     @ApiOperation("查询所有的品牌信息")
-    @RequestMapping("getTrademarkList")
+    @GetMapping("getTrademarkList")
+    @ResponseBody
     public Result<List<BaseTrademark>> getTrademarkList() {
         List<BaseTrademark> baseTrademarkList = baseTrademarkService.list();
         return Result.ok(baseTrademarkList);
@@ -46,7 +47,8 @@ public class BaseTrademarkController {
      * @return IPage<BaseTrademark>
      */
     @ApiOperation(value = "品牌分页列表")
-    @RequestMapping("{page}/{limit}")
+    @GetMapping("{page}/{limit}")
+    @ResponseBody
     public Result<IPage<BaseTrademark>> index(@PathVariable Long page,
                                               @PathVariable Long limit) {
         log.info("品牌分页列表:page: {}, limit: {}", page, limit);
@@ -62,7 +64,8 @@ public class BaseTrademarkController {
      * @return BaseTrademark
      */
     @ApiOperation(value = "根据品牌id查询该品牌")
-    @RequestMapping("get/{id}")
+    @GetMapping("get/{id}")
+    @ResponseBody
     public Result<BaseTrademark> get(@PathVariable String id) {
         log.info("根据品牌id查询该品牌: id: {}", id);
         if (id == null) {
@@ -78,7 +81,8 @@ public class BaseTrademarkController {
      * @param banner 品牌实例
      */
     @ApiOperation(value = "添加品牌")
-    @RequestMapping("save")
+    @PostMapping("save")
+    @ResponseBody
     public Result<Void> save(@RequestBody BaseTrademark banner) {
         log.info("添加品牌: BaseTrademark: {}", banner);
         if (banner == null) {
@@ -94,7 +98,8 @@ public class BaseTrademarkController {
      * @param banner 品牌实例
      */
     @ApiOperation(value = "更新品牌")
-    @RequestMapping("update")
+    @PostMapping("update")
+    @ResponseBody
     public Result<Void> updateById(@RequestBody BaseTrademark banner) {
         log.info("更新品牌: BaseTrademark: {}", banner);
         if (banner.getId() == null) {
@@ -110,7 +115,8 @@ public class BaseTrademarkController {
      * @param id 品牌id
      */
     @ApiOperation(value = "根据品牌id删除品牌")
-    @RequestMapping("remove/{id}")
+    @GetMapping("remove/{id}")
+    @ResponseBody
     public Result<Void> remove(@PathVariable Long id) {
         log.info("根据品牌id删除品牌: id: {}", id);
         if (id == null) {

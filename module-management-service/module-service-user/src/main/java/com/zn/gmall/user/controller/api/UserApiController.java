@@ -5,11 +5,12 @@ import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.user.service.api.UserAddressService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class UserApiController {
 
-    @Resource
+    @Autowired
     private UserAddressService userAddressService;
 
     /**
@@ -28,7 +29,7 @@ public class UserApiController {
      * @return
      */
     @ApiOperation("根据用户id，获取用户地址")
-    @RequestMapping("inner/findUserAddressListByUserId/{userId}")
+    @GetMapping("inner/findUserAddressListByUserId/{userId}")
     public Result<List<UserAddress>> findUserAddressListByUserId(@PathVariable("userId") String userId) {
         log.info("获取用户地址，用户id：{}", userId);
         if (userId == null) {

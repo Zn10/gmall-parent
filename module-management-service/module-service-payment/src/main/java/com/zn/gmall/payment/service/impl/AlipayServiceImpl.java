@@ -21,9 +21,9 @@ import com.zn.gmall.payment.service.api.AlipayService;
 import com.zn.gmall.payment.service.api.PaymentService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 
 /**
@@ -38,13 +38,13 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class AlipayServiceImpl implements AlipayService {
 
-    @Resource
+    @Autowired
     private AlipayClient alipayClient;
 
-    @Resource
+    @Autowired
     private OrderFeignClient orderFeignClient;
 
-    @Resource
+    @Autowired
     private PaymentService paymentService;
 
     @SneakyThrows

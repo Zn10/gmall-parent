@@ -17,12 +17,12 @@ import com.zn.gmall.order.mapper.OrderInfoMapper;
 import com.zn.gmall.order.service.api.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -36,15 +36,15 @@ import java.util.*;
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements OrderService {
 
-    @Resource
+    @Autowired
     private OrderInfoMapper orderInfoMapper;
 
-    @Resource
+    @Autowired
     private OrderDetailMapper orderDetailMapper;
 
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
-    @Resource
+    @Autowired
     private RabbitService rabbitService;
 
     @Value("${ware.url}")

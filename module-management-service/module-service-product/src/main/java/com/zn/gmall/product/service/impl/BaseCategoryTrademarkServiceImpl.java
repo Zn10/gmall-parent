@@ -9,11 +9,11 @@ import com.zn.gmall.product.mapper.BaseCategoryTrademarkMapper;
 import com.zn.gmall.product.mapper.BaseTrademarkMapper;
 import com.zn.gmall.product.service.api.BaseCategoryTrademarkService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 @Service
 public class BaseCategoryTrademarkServiceImpl extends ServiceImpl<BaseCategoryTrademarkMapper, BaseCategoryTrademark> implements BaseCategoryTrademarkService {
 
-    @Resource
+    @Autowired
     private BaseTrademarkMapper baseTrademarkMapper;
 
-    @Resource
+    @Autowired
     private BaseCategoryTrademarkMapper baseCategoryTrademarkMapper;
 
     /**

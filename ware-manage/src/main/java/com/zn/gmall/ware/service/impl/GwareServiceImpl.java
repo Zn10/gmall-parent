@@ -16,31 +16,31 @@ import com.zn.gmall.ware.mapper.WareSkuMapper;
 import com.zn.gmall.ware.service.GwareService;
 import com.zn.gmall.ware.util.HttpclientUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 
 @Service
 public class GwareServiceImpl implements GwareService {
 
-    @Resource
+    @Autowired
     private WareSkuMapper wareSkuMapper;
 
-    @Resource
+    @Autowired
     private WareInfoMapper wareInfoMapper;
 
-    @Resource
+    @Autowired
     private WareOrderTaskMapper wareOrderTaskMapper;
 
-    @Resource
+    @Autowired
     private WareOrderTaskDetailMapper wareOrderTaskDetailMapper;
 
-    @Resource
+    @Autowired
     private RabbitTemplate rabbitTemplate;
 
     @Value("${order.split.url}")

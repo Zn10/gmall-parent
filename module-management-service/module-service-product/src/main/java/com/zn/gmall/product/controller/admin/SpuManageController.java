@@ -9,9 +9,9 @@ import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @SuppressWarnings("all")
 public class SpuManageController {
-    @Resource
+    @Autowired
     private ManageService manageService;
 
     /**
@@ -32,7 +32,8 @@ public class SpuManageController {
      * @param spuInfo 商品SPU实例
      */
     @ApiOperation("保存商品SPU数据")
-    @RequestMapping("saveSpuInfo")
+    @PostMapping("saveSpuInfo")
+    @ResponseBody
     public Result<Void> saveSpuInfo(@RequestBody SpuInfo spuInfo) {
         log.info("保存商品SPU数据:{}", spuInfo);
         // 调用服务层的保存方法
@@ -46,7 +47,8 @@ public class SpuManageController {
      * @return List<BaseSaleAttr>
      */
     @ApiOperation("查询所有的销售属性数据")
-    @RequestMapping("baseSaleAttrList")
+    @GetMapping("baseSaleAttrList")
+    @ResponseBody
     public Result<List<BaseSaleAttr>> baseSaleAttrList() {
         // 查询所有的销售属性集合
         List<BaseSaleAttr> baseSaleAttrList = manageService.getBaseSaleAttrList();
@@ -62,7 +64,8 @@ public class SpuManageController {
      * @return IPage<SpuInfo>
      */
     @ApiOperation("spu分页查询")
-    @RequestMapping("{page}/{size}")
+    @GetMapping("{page}/{size}")
+    @ResponseBody
     public Result<IPage<SpuInfo>> getSpuInfoPage(@PathVariable Long page,
                                          @PathVariable Long size,
                                          SpuInfo spuInfo) {

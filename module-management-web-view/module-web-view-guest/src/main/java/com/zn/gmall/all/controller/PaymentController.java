@@ -3,11 +3,11 @@ package com.zn.gmall.all.controller;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.order.OrderInfo;
 import com.zn.gmall.order.client.OrderFeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,11 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class PaymentController {
 
-    @Resource
-    private OrderFeignClient orderFeignClient;
+    @Autowired
+    OrderFeignClient orderFeignClient;
 
     /**
      * 支付成功页
+     *
      * @return
      */
     @GetMapping("pay/success.html")

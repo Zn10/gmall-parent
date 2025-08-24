@@ -4,11 +4,11 @@ import com.zn.gmall.cart.client.CartFeignClient;
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.product.client.ProductFeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,23 +20,25 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class CartController {
 
-    @Resource
-    private CartFeignClient cartFeignClient;
+    @Autowired
+    CartFeignClient cartFeignClient;
 
-    @Resource
-    private ProductFeignClient productFeignClient;
+    @Autowired
+    ProductFeignClient productFeignClient;
 
     /**
      * 查看购物车
+     *
      * @return
      */
     @RequestMapping("cart.html")
-    public String index(){
+    public String index() {
         return "cart/index";
     }
 
     /**
      * 添加购物车
+     *
      * @param skuId
      * @param skuNum
      * @param request
@@ -45,10 +47,10 @@ public class CartController {
     @RequestMapping("addCart.html")
     public String addCart(@RequestParam(name = "skuId") Long skuId,
                           @RequestParam(name = "skuNum") Integer skuNum,
-                          HttpServletRequest request){
+                          HttpServletRequest request) {
         Result<SkuInfo> skuInfo = productFeignClient.getSkuInfo(skuId);
-        request.setAttribute("skuInfo",skuInfo);
-        request.setAttribute("skuNum",skuNum);
+        request.setAttribute("skuInfo", skuInfo);
+        request.setAttribute("skuNum", skuNum);
         return "cart/addCart";
     }
 

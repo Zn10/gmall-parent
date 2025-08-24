@@ -10,9 +10,9 @@ import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.model.product.SpuSaleAttr;
 import com.zn.gmall.product.client.ProductFeignClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +25,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 @SuppressWarnings("all")
 public class ItemServiceImpl implements ItemService {
 
-    @Resource
+    @Autowired
     private ProductFeignClient productFeignClient;
-    @Resource
+    @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
-    @Resource
+    @Autowired
     private ListFeignClient listFeignClient;
 
     /**

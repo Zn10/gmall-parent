@@ -12,10 +12,10 @@ import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ import java.util.Map;
 @SuppressWarnings("all")
 public class OrderReceiver {
 
-    @Resource
+    @Autowired
     private OrderService orderService;
 
     /**

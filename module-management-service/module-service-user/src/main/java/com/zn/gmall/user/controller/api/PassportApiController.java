@@ -9,10 +9,10 @@ import com.zn.gmall.user.service.api.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,14 +30,14 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("all")
 public class PassportApiController {
 
-    @Resource
+    @Autowired
     private UserService userService;
 
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
 
     @ApiOperation("用户登出")
-    @RequestMapping("/logout")
+    @PostMapping("/logout")
     public Result<Void> logout(@RequestHeader("token") String token) {
         log.info("用户退出登录，token:{}", token);
         if (token == null) {
@@ -51,7 +51,7 @@ public class PassportApiController {
     }
 
     @ApiOperation("用户登录")
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public Result<Map<String, String>> login(
             @RequestBody UserInfo userInfo, HttpServletRequest request) {
         log.info("用户登录，用户信息:{}", userInfo);

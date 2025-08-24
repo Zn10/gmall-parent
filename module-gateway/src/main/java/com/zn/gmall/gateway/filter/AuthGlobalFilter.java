@@ -6,6 +6,7 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.result.ResultCodeEnum;
 import com.zn.gmall.common.util.IpUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -24,7 +25,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -37,7 +37,7 @@ import java.util.List;
 @Component
 public class AuthGlobalFilter implements GlobalFilter {
 
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();

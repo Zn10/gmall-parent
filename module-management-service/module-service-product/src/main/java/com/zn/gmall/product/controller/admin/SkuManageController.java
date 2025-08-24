@@ -8,9 +8,9 @@ import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,7 +25,7 @@ import java.util.List;
 @SuppressWarnings("all")
 public class SkuManageController {
 
-    @Resource
+    @Autowired
     private ManageService manageService;
 
     /**
@@ -34,7 +34,8 @@ public class SkuManageController {
      * @param skuId 商品SKUID
      */
     @ApiOperation("根据skuid，进行商品上架")
-    @RequestMapping("onSale/{skuId}")
+    @GetMapping("onSale/{skuId}")
+    @ResponseBody
     public Result<Void> onSale(@PathVariable("skuId") Long skuId) {
         log.info("商品上架,商品id,{}", skuId);
         if (skuId == null) {
@@ -50,7 +51,8 @@ public class SkuManageController {
      * @param skuId 商品SKUID
      */
     @ApiOperation("根据skuid，进行商品下架")
-    @RequestMapping("cancelSale/{skuId}")
+    @GetMapping("cancelSale/{skuId}")
+    @ResponseBody
     public Result<Void> cancelSale(@PathVariable("skuId") Long skuId) {
         log.info("商品下架,商品id,{}", skuId);
         if (skuId == null) {
@@ -66,7 +68,8 @@ public class SkuManageController {
      * @param skuInfo SKU实例
      */
     @ApiOperation("保存sku商品")
-    @RequestMapping("saveSkuInfo")
+    @PostMapping("saveSkuInfo")
+    @ResponseBody
     public Result<Void> saveSkuInfo(@RequestBody SkuInfo skuInfo) {
         log.info("保存sku信息:{}", skuInfo);
         if (skuInfo == null) {
@@ -84,7 +87,8 @@ public class SkuManageController {
      * @return List<SpuSaleAttr>
      */
     @ApiOperation("根据spuId 查询销售属性集合")
-    @RequestMapping("spuSaleAttrList/{spuId}")
+    @GetMapping("spuSaleAttrList/{spuId}")
+    @ResponseBody
     public Result<List<SpuSaleAttr>> getSpuSaleAttrList(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询销售属性集合:{}", spuId);
         if (spuId == null) {
@@ -101,7 +105,8 @@ public class SkuManageController {
      * @return List<SpuImage>
      */
     @ApiOperation("根据spuId 查询spuImageList")
-    @RequestMapping("spuImageList/{spuId}")
+    @GetMapping("spuImageList/{spuId}")
+    @ResponseBody
     public Result<List<SpuImage>> getSpuImageList(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询spuImageList:{}", spuId);
         if (spuId == null) {

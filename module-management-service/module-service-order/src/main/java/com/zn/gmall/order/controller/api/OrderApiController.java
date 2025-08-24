@@ -18,10 +18,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -42,24 +42,24 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Slf4j
 @SuppressWarnings("all")
 public class OrderApiController {
-    @Resource
+    @Autowired
     private UserDegradeFeignClient userFeignClient;
-    @Resource
+    @Autowired
     private CartDegradeFeignClient cartFeignClient;
-    @Resource
+    @Autowired
     private ProductFeignClient productFeignClient;
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
-    @Resource
+    @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
-    @Resource
+    @Autowired
     private OrderService orderService;
     /**
      * 秒杀提交订单，秒杀订单不需要做前置判断，直接下单
      * @param orderInfo
      * @return
      */
-    @RequestMapping("inner/seckill/submitOrder")
+    @PostMapping("inner/seckill/submitOrder")
     public Long submitOrder(@RequestBody OrderInfo orderInfo) {
         Long orderId = orderService.saveOrderInfo(orderInfo);
         return orderId;
@@ -72,7 +72,7 @@ public class OrderApiController {
      * @param request
      * @return
      */
-    @RequestMapping("orderSplit")
+    @GetMapping("orderSplit")
     public String orderSplit(HttpServletRequest request) {
         String orderId = request.getParameter("orderId");
         String wareSkuMap = request.getParameter("wareSkuMap");
@@ -97,7 +97,7 @@ public class OrderApiController {
      * @param orderId
      * @return
      */
-    @RequestMapping("inner/getOrderInfo/{orderId}")
+    @GetMapping("inner/getOrderInfo/{orderId}")
     public Result<OrderInfo> getOrderInfo(@PathVariable(value = "orderId") Long orderId) {
         log.info("内部调用获取订单,订单Id:{}", orderId);
         if (orderId == null) {
@@ -109,7 +109,7 @@ public class OrderApiController {
 
 
     @ApiOperation("我的订单")
-    @RequestMapping("auth/{page}/{limit}")
+    @GetMapping("auth/{page}/{limit}")
     public Result<IPage<OrderInfo>> index(
             @ApiParam(name = "page", value = "当前页码", required = true)
             @PathVariable Long page,
@@ -136,7 +136,7 @@ public class OrderApiController {
      * @return
      */
     @ApiOperation("提交订单")
-    @RequestMapping("auth/submitOrder")
+    @PostMapping("auth/submitOrder")
     public Result<Object> submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request) {
         log.info("订单提交,订单信息:{}", orderInfo);
         if (orderInfo == null) {
@@ -210,7 +210,7 @@ public class OrderApiController {
      * @param request
      * @return
      */
-    @RequestMapping("auth/trade")
+    @GetMapping("auth/trade")
     public Result<Map<String, Object>> trade(HttpServletRequest request) {
         // 获取到用户Id
         String userId = AuthContextHolder.getUserId(request);

@@ -54,6 +54,24 @@
         </dependency>
 
         <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-payment</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-product</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-user</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

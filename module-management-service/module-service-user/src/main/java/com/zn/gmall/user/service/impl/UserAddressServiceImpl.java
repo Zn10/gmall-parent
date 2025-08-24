@@ -5,16 +5,16 @@ import com.zn.gmall.model.user.UserAddress;
 import com.zn.gmall.user.mapper.UserAddressMapper;
 import com.zn.gmall.user.service.api.UserAddressService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 @SuppressWarnings("all")
 @Slf4j
 public class UserAddressServiceImpl implements UserAddressService {
-    @Resource
+    @Autowired
     private UserAddressMapper userAddressMapper;
 
     @Override

@@ -9,10 +9,10 @@ import com.zn.gmall.mq.service.RabbitService;
 import com.zn.gmall.payment.mapper.PaymentInfoMapper;
 import com.zn.gmall.payment.service.api.PaymentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,11 +28,11 @@ import java.util.Map;
 @SuppressWarnings("all")
 public class PaymentServiceImpl implements PaymentService {
 
-    @Resource
+    @Autowired
     private PaymentInfoMapper paymentInfoMapper;
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
-    @Resource
+    @Autowired
     private RabbitService rabbitService;
 
     @Override

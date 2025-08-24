@@ -5,10 +5,13 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.common.util.AuthContextHolder;
 import com.zn.gmall.model.cart.CartInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,10 +22,10 @@ import java.util.stream.Collectors;
 @SuppressWarnings("all")
 public class CartApiController {
 
-    @Resource
+    @Autowired
     private CartService cartService;
 
-    @RequestMapping("/cartList")
+    @GetMapping("/cartList")
     public Result<List<CartInfo>> getCartInfoList(HttpServletRequest request) {
         String userId = AuthContextHolder.getUserId(request);
         String userTempId = AuthContextHolder.getUserTempId(request);
@@ -30,7 +33,7 @@ public class CartApiController {
         return Result.ok(cartList);
     }
 
-    @RequestMapping("/addToCart/{skuId}/{skuNum}")
+    @GetMapping("/addToCart/{skuId}/{skuNum}")
     public Result<Void> addToCart(
             @PathVariable("skuId") Long skuId,
             @PathVariable("skuNum") Integer skuNum,
@@ -55,7 +58,7 @@ public class CartApiController {
         return Result.ok();
     }
 
-    @RequestMapping("/checkCart/{skuId}/{isChecked}")
+    @GetMapping("/checkCart/{skuId}/{isChecked}")
     public Result<Void> modifyCartCheckStatus(
             @PathVariable("skuId") Long skuId,
             @PathVariable("isChecked") Integer isChecked,
@@ -77,7 +80,7 @@ public class CartApiController {
         return Result.ok();
     }
 
-    @RequestMapping("/deleteCart/{skuId}")
+    @GetMapping("/deleteCart/{skuId}")
     public Result<Void> removeCartItem(
             @PathVariable("skuId") Long skuId,
             HttpServletRequest request) {
@@ -99,7 +102,7 @@ public class CartApiController {
         return Result.ok();
     }
 
-    @RequestMapping("/inner/get/cart/checked/{userId}")
+    @GetMapping("/inner/get/cart/checked/{userId}")
     public Result<List<CartInfo>> getCheckedCartList(@PathVariable("userId") String userId) {
         log.info("获取购物车中选中的商品列表: userId={}", userId);
         if (StringUtils.isEmpty(userId)) {
@@ -123,7 +126,7 @@ public class CartApiController {
         return Result.ok(checkedCartList);
     }
 
-    @RequestMapping("/inner/get/cart/list/from/db/to/cache/{userId}")
+    @GetMapping("/inner/get/cart/list/from/db/to/cache/{userId}")
     public Result<Void> getCartListFromDBToCache(@PathVariable("userId") String userId) {
         log.info("从数据库中获取购物车数据并同步到 Redis 中: userId={}", userId);
         if (StringUtils.isEmpty(userId)) {
@@ -133,7 +136,7 @@ public class CartApiController {
         return Result.ok();
     }
 
-    @RequestMapping("/inner/clear/checked/cart/{userId}")
+    @GetMapping("/inner/clear/checked/cart/{userId}")
     public Result<Void> clearCheckedCartItem(@PathVariable("userId") String userId) {
         log.info("清空购物车中选中的商品: userId={}", userId);
         if (StringUtils.isEmpty(userId)) {

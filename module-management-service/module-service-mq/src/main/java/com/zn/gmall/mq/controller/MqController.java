@@ -6,10 +6,11 @@ import com.zn.gmall.mq.config.DelayedMqConfig;
 import com.zn.gmall.mq.service.RabbitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,14 +25,14 @@ import java.util.Date;
 @Slf4j
 @SuppressWarnings("all")
 public class MqController {
-    @Resource
+    @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Resource
+    @Autowired
     private RabbitService rabbitService;
 
     //  基于延迟插件的延迟消息
-    @RequestMapping("sendDelay")
+    @GetMapping("sendDelay")
     public Result sendDelay() {
         this.rabbitService.sendDelayMessage(DelayedMqConfig.exchange_delay, DelayedMqConfig.routing_delay, "iuok", 3);
         return Result.ok();
@@ -41,7 +42,7 @@ public class MqController {
     /**
      * 消息发送
      */
-    @RequestMapping("sendDeadLettle")
+    @GetMapping("sendDeadLettle")
     public Result sendDeadLettle() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.rabbitTemplate.convertAndSend(DeadLetterMqConfig.exchange_dead, DeadLetterMqConfig.routing_dead_1, "ok");

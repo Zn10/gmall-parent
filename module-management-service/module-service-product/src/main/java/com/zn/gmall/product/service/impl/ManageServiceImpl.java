@@ -7,19 +7,19 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zn.gmall.common.cache.GmallCache;
 import com.zn.gmall.common.constant.RedisConst;
 import com.zn.gmall.model.product.*;
-import com.zn.gmall.product.mapper.*;
-import com.zn.gmall.product.service.api.ManageService;
 import com.zn.gmall.mq.constant.MqConst;
 import com.zn.gmall.mq.service.RabbitService;
+import com.zn.gmall.product.mapper.*;
+import com.zn.gmall.product.service.api.ManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,61 +34,61 @@ import java.util.stream.Collectors;
 @Service
 @SuppressWarnings("all")
 public class ManageServiceImpl implements ManageService {
-    @Resource
+    @Autowired
     private BaseCategory1Mapper baseCategory1Mapper;
 
-    @Resource
+    @Autowired
     private BaseCategory2Mapper baseCategory2Mapper;
 
-    @Resource
+    @Autowired
     private BaseCategory3Mapper baseCategory3Mapper;
 
-    @Resource
+    @Autowired
     private BaseAttrInfoMapper baseAttrInfoMapper;
 
-    @Resource
+    @Autowired
     private BaseAttrValueMapper baseAttrValueMapper;
 
-    @Resource
+    @Autowired
     private SpuInfoMapper spuInfoMapper;
 
-    @Resource
+    @Autowired
     private BaseSaleAttrMapper baseSaleAttrMapper;
 
-    @Resource
+    @Autowired
     private SpuImageMapper spuImageMapper;
 
-    @Resource
+    @Autowired
     private SpuSaleAttrMapper spuSaleAttrMapper;
 
-    @Resource
+    @Autowired
     private SpuSaleAttrValueMapper spuSaleAttrValueMapper;
 
-    @Resource
+    @Autowired
     private SpuPosterMapper spuPosterMapper;
 
-    @Resource
+    @Autowired
     private SkuInfoMapper skuInfoMapper;
 
-    @Resource
+    @Autowired
     private SkuImageMapper skuImageMapper;
 
-    @Resource
+    @Autowired
     private SkuSaleAttrValueMapper skuSaleAttrValueMapper;
 
-    @Resource
+    @Autowired
     private SkuAttrValueMapper skuAttrValueMapper;
 
-    @Resource
+    @Autowired
     private BaseCategoryViewMapper baseCategoryViewMapper;
 
-    @Resource
+    @Autowired
     private RedissonClient redissonClient;
 
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
 
-    @Resource
+    @Autowired
     private RabbitService rabbitService;
 
     /**

@@ -10,11 +10,11 @@ import com.zn.gmall.payment.service.api.AlipayService;
 import com.zn.gmall.payment.service.api.PaymentService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -32,15 +32,15 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("all")
 public class AlipayController {
 
-    @Resource
+    @Autowired
     private AlipayService alipayService;
-    @Resource
+    @Autowired
     private PaymentService paymentService;
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
 
     @ApiOperation("根据订单id查询支付记录")
-    @RequestMapping("getPaymentInfo/{outTradeNo}")
+    @GetMapping("getPaymentInfo/{outTradeNo}")
     @ResponseBody
     public PaymentInfo getPaymentInfo(@PathVariable String outTradeNo) {
         PaymentInfo paymentInfo = paymentService.getPaymentInfo(outTradeNo, PaymentType.ALIPAY.name());
@@ -53,7 +53,7 @@ public class AlipayController {
 
     // 查看是否有交易记录
     @ApiOperation("查看是否有交易记录")
-    @RequestMapping("checkPayment/{orderId}")
+    @GetMapping("checkPayment/{orderId}")
     @ResponseBody
     public Boolean checkPayment(@PathVariable Long orderId) {
         // 调用退款接口
@@ -63,7 +63,7 @@ public class AlipayController {
 
 
     @ApiOperation("关闭交易记录")
-    @RequestMapping("closePay/{orderId}")
+    @GetMapping("closePay/{orderId}")
     @ResponseBody
     public Boolean closePay(@PathVariable Long orderId) {
         Boolean aBoolean = alipayService.closePay(orderId);
@@ -72,7 +72,7 @@ public class AlipayController {
 
 
     @ApiOperation("支付宝退款")
-    @RequestMapping("refund/{orderId}")
+    @GetMapping("refund/{orderId}")
     @ResponseBody
     public Result refund(@PathVariable(value = "orderId") Long orderId) {
 
@@ -83,7 +83,7 @@ public class AlipayController {
 
 
     @ApiOperation("支付宝回调")
-    @RequestMapping("/callback/notify")
+    @PostMapping("/callback/notify")
     @ResponseBody
     public String callbackNotify(@RequestParam Map<String, String> paramsMap) {
         // Map<String, String> paramsMap = ... // 将异步通知中收到的所有参数都存放到map中
@@ -138,7 +138,8 @@ public class AlipayController {
      * @return
      */
     @ApiOperation("支付宝回调")
-    @RequestMapping("callback/return")
+    @GetMapping("callback/return")
+    @ResponseBody
     public String callBack() {
         // 同步回调给用户展示信息
         return "redirect:" + AlipayConfig.return_order_url;
@@ -146,7 +147,7 @@ public class AlipayController {
 
 
     @ApiOperation("支付宝支付")
-    @RequestMapping("submit/{orderId}")
+    @GetMapping("submit/{orderId}")
     @ResponseBody
     public String submitOrder(@PathVariable Long orderId) {
         log.info("orderId:{}", orderId);

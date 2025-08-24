@@ -15,9 +15,9 @@ import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,16 +28,16 @@ import java.util.List;
 @Component
 public class WareConsumer {
 
-    @Resource
+    @Autowired
     private WareOrderTaskMapper wareOrderTaskMapper;
 
-    @Resource
+    @Autowired
     private WareOrderTaskDetailMapper wareOrderTaskDetailMapper;
 
-    @Resource
+    @Autowired
     private WareSkuMapper wareSkuMapper;
 
-    @Resource
+    @Autowired
     private GwareService gwareService;
 
     /**

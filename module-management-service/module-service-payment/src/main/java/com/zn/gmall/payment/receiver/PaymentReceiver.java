@@ -9,9 +9,8 @@ import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * Package: com.zn.gmall.payment.receiver
@@ -24,7 +23,7 @@ import javax.annotation.Resource;
 @Component
 public class PaymentReceiver {
 
-    @Resource
+    @Autowired
     private PaymentService paymentService;
 
     @SneakyThrows

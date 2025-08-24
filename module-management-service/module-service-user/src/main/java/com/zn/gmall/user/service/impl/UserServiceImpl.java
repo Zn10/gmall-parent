@@ -6,10 +6,9 @@ import com.zn.gmall.model.user.UserInfo;
 import com.zn.gmall.user.mapper.UserInfoMapper;
 import com.zn.gmall.user.service.api.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-
-import javax.annotation.Resource;
 
 /**
  * @author: 赵念
@@ -20,7 +19,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    @Resource
+    @Autowired
     private UserInfoMapper userInfoMapper;
 
     @Override

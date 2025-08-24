@@ -67,6 +67,13 @@
             <artifactId>module-feign-api-payment</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.zn</groupId>
+            <artifactId>module-feign-api-activity</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!--依赖服务的工具类-->
         <dependency>
             <groupId>com.zn</groupId>

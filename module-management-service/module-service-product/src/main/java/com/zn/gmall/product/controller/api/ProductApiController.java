@@ -7,11 +7,12 @@ import com.zn.gmall.product.service.api.BaseTrademarkService;
 import com.zn.gmall.product.service.api.ManageService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +23,9 @@ import java.util.Map;
 @SuppressWarnings("all")
 public class ProductApiController {
 
-    @Resource
+    @Autowired
     private ManageService manageService;
-    @Resource
+    @Autowired
     private BaseTrademarkService baseTrademarkService;
 
     /**
@@ -34,7 +35,7 @@ public class ProductApiController {
      * @return BaseTrademark
      */
     @ApiOperation("通过tmId，查询品牌数据")
-    @RequestMapping("getTrademark/{tmId}")
+    @GetMapping("/getTrademark/{tmId}")
     public Result<BaseTrademark> getTrademarkById(@PathVariable("tmId") Long tmId) {
         log.info("通过品牌Id 集合来查询数据,{}", tmId);
         if (tmId == null) {
@@ -48,12 +49,11 @@ public class ProductApiController {
      * 获取全部分类信息
      */
     @ApiOperation("获取全部分类信息")
-    @RequestMapping("getBaseCategoryList")
+    @GetMapping("/getBaseCategoryList")
     public Result<List<JSONObject>> getBaseCategoryList() {
         List<JSONObject> list = manageService.getBaseCategoryList();
         return Result.ok(list);
     }
-
 
     /**
      * 通过skuId 集合来查询数据
@@ -62,7 +62,7 @@ public class ProductApiController {
      * @return List<BaseAttrInfo>
      */
     @ApiOperation("通过skuId 集合来查询数据")
-    @RequestMapping("inner/getAttrList/{skuId}")
+    @GetMapping("/inner/getAttrList/{skuId}")
     public Result<List<BaseAttrInfo>> getAttrList(@PathVariable("skuId") Long skuId) {
         log.info("通过skuId 集合来查询数据,{}", skuId);
         if (skuId == null) {
@@ -79,7 +79,7 @@ public class ProductApiController {
      * @return List<SpuPoster>
      */
     @ApiOperation("根据spuId 获取海报数据")
-    @RequestMapping("inner/findSpuPosterBySpuId/{spuId}")
+    @GetMapping("/inner/findSpuPosterBySpuId/{spuId}")
     public Result<List<SpuPoster>> findSpuPosterBySpuId(@PathVariable Long spuId) {
         log.info("根据spuId 获取海报数据,{}", spuId);
         if (spuId == null) {
@@ -96,7 +96,7 @@ public class ProductApiController {
      * @return BigDecimal
      */
     @ApiOperation("根据skuId 查询价格")
-    @RequestMapping("inner/getPrice/{skuId}")
+    @GetMapping("/inner/getPrice/{skuId}")
     public Result<BigDecimal> getSkuPrice(@PathVariable Long skuId) {
         log.info("根据skuId 获取价格,{}", skuId);
         if (skuId == null) {
@@ -112,7 +112,7 @@ public class ProductApiController {
      * @param spuId 商品SPUID
      */
     @ApiOperation("根据spuId 查询map 集合属性")
-    @RequestMapping("inner/getSkuValueIdsMap/{spuId}")
+    @GetMapping("/inner/getSkuValueIdsMap/{spuId}")
     public Result<Map<Object, Object>> getSkuValueIdsMap(@PathVariable("spuId") Long spuId) {
         log.info("根据spuId 查询map 集合属性,{}", spuId);
         if (spuId == null) {
@@ -130,7 +130,7 @@ public class ProductApiController {
      * @return List<SpuSaleAttr>
      */
     @ApiOperation("根据spuId，skuId 查询销售属性集合")
-    @RequestMapping("inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
+    @GetMapping("/inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
     public Result<List<SpuSaleAttr>> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId) {
         log.info("根据spuId，skuId 查询销售属性集合,{},{}", skuId, spuId);
         if (skuId == null || spuId == null) {
@@ -147,7 +147,7 @@ public class ProductApiController {
      * @return SkuInfo
      */
     @ApiOperation("根据skuId获取sku信息")
-    @RequestMapping("inner/getSkuInfo/{skuId}")
+    @GetMapping("/inner/getSkuInfo/{skuId}")
     public Result<SkuInfo> getAttrValueList(@PathVariable("skuId") Long skuId) {
         log.info("根据skuId获取sku信息,{}", skuId);
         if (skuId == null) {
@@ -164,7 +164,7 @@ public class ProductApiController {
      * @return BaseCategoryView
      */
     @ApiOperation("通过三级分类id查询分类信息")
-    @RequestMapping("inner/getCategoryView/{category3Id}")
+    @GetMapping("/inner/getCategoryView/{category3Id}")
     public Result<BaseCategoryView> getCategoryView(@PathVariable("category3Id") Long category3Id) {
         log.info("通过三级分类id查询分类信息,{}", category3Id);
         if (category3Id == null) {

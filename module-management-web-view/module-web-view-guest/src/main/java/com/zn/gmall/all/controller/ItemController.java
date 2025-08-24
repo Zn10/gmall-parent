@@ -2,19 +2,19 @@ package com.zn.gmall.all.controller;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.item.client.ItemFeignClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Controller
 public class ItemController {
 
-    @Resource
-    private ItemFeignClient itemFeignClient;
+    @Autowired
+    ItemFeignClient itemFeignClient;
 
     /**
      * sku详情页面

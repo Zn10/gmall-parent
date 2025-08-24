@@ -10,9 +10,8 @@ import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * Package: com.zn.gmall.list.receiver
@@ -25,7 +24,7 @@ import javax.annotation.Resource;
 @SuppressWarnings("all")
 @Component
 public class ListReceiver {
-    @Resource
+    @Autowired
     private SearchService searchService;
 
     //  开启消息监听 监听商品上架！

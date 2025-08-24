@@ -10,11 +10,11 @@ import com.zn.gmall.common.util.MD5;
 import com.zn.gmall.model.activity.OrderRecode;
 import com.zn.gmall.model.activity.SeckillGoods;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -32,9 +32,9 @@ import java.util.concurrent.locks.ReentrantLock;
 @Service
 public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
-    @Resource
+    @Autowired
     private RedisTemplate redisTemplate;
-    @Resource
+    @Autowired
     private SeckillGoodsMapper seckillGoodsMapper;
 
 
