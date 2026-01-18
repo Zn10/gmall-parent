@@ -11,6 +11,15 @@ import java.util.List;
 public interface CartService {
 
     /**
+     * 根据用户Id 查询购物车列表
+     *
+     * @param userId
+     * @return
+     */
+    List<CartInfo> getCartCheckedList(String userId);
+
+
+    /**
      * 查询购物车数据时，考虑两种 id 是否存在的情况。
      * 上层 Controller 方法调用的就是这个方法
      * @param userId

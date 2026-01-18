@@ -25,6 +25,19 @@ public class CartApiController {
     @Autowired
     private CartService cartService;
 
+    /**
+     * 根据用户Id 查询购物车列表
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("getCartCheckedList/{userId}")
+    public Result<List<CartInfo>> getCartCheckedList(@PathVariable(value = "userId") String userId) {
+        List<CartInfo> cartInfoList = cartService.getCartCheckedList(userId);
+        return Result.ok(cartInfoList);
+    }
+
+
     @GetMapping("/cartList")
     public Result<List<CartInfo>> getCartInfoList(HttpServletRequest request) {
         String userId = AuthContextHolder.getUserId(request);

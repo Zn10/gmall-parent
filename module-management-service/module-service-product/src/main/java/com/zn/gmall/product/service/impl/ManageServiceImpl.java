@@ -549,7 +549,7 @@ public class ManageServiceImpl implements ManageService {
      * @param baseAttrInfo 平台属性实例
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(readOnly = false)
     public void saveAttrInfo(BaseAttrInfo baseAttrInfo) {
         // 什么情况下 是添加，什么情况下是更新，修改 根据baseAttrInfo 的Id
         // baseAttrInfo
