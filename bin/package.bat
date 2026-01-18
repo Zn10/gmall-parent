@@ -7,6 +7,6 @@ echo.
 cd %~dp0
 
 cd ..
-call mvn clean package -P dev -Dmaven.test.skip=true
+call mvn -T 6C clean package -P local -Dmaven.test.skip=true
 
 pause

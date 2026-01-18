@@ -7,6 +7,6 @@ echo.
 cd %~dp0
 
 cd ..
-call mvn   install -P dev -Dmaven.test.skip=true
+call mvn -T 6C   install -P local -Dmaven.test.skip=true
 
 pause

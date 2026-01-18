@@ -12,7 +12,11 @@
  File Encoding         : 65001
 
  Date: 28/04/2025 23:59:27
-*/
+ */
+ 
+CREATE DATABASE  IF NOT EXISTS`nacos_config`  DEFAULT CHARACTER SET utf8;
+
+USE `nacos_config`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
