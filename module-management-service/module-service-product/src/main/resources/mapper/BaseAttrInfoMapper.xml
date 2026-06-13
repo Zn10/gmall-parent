@@ -34,16 +34,19 @@
         base_attr_info bai
         INNER JOIN base_attr_value bav ON bai.id = bav.attr_id
         <where>
+            AND bai.is_deleted = 0
+            AND (
             <if test="category1Id != null and category1Id != 0">
-                OR (bai.category_id = #{category1Id} AND bai.category_level = 1)
+                (bai.category_id = #{category1Id} AND bai.category_level = 1) OR
             </if>
             <if test="category2Id != null and category2Id != 0">
-                OR (bai.category_id = #{category2Id} AND bai.category_level = 2)
+                (bai.category_id = #{category2Id} AND bai.category_level = 2) OR
             </if>
             <if test="category3Id != null and category3Id != 0">
-                OR (bai.category_id = #{category3Id} AND bai.category_level = 3)
+                (bai.category_id = #{category3Id} AND bai.category_level = 3) OR
             </if>
-             AND bai.is_deleted = 0
+            1 = 0  <!-- 防止所有条件都为空时括号内为空 -->
+            )
         </where>
         ORDER BY bai.category_level, bai.id
     </select>
@@ -57,9 +60,9 @@
     bav.value_name,
     bav.attr_id
     FROM
-    base_attr_info bai
-    INNER JOIN base_attr_value bav ON bai.id = bav.attr_id
-    INNER JOIN sku_attr_value sav ON sav.value_id = bav.id
+    sku_attr_value sav
+    INNER JOIN base_attr_value bav ON sav.value_id = bav.id
+    INNER JOIN base_attr_info bai ON bav.attr_id = bai.id
     WHERE
     sav.sku_id = #{skuId}
     </select>
