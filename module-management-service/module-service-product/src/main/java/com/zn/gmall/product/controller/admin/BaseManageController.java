@@ -9,8 +9,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ import java.util.List;
 @Api(tags = "商品基础属性接口")
 @RestController
 @RequestMapping("admin/product")
+@Validated
 @Slf4j
 @SuppressWarnings("all")
 public class BaseManageController {
@@ -125,11 +128,8 @@ public class BaseManageController {
     @ApiOperation("根据一级分类Id 查询二级分类数据")
     @GetMapping("getCategory2/{category1Id}")
     @ResponseBody
-    public Result<List<BaseCategory2>> getCategory2(@PathVariable("category1Id") Long category1Id) {
+    public Result<List<BaseCategory2>> getCategory2(@PathVariable("category1Id") @NotNull(message = "分类1 ID不能为空") Long category1Id) {
         log.info("根据一级分类Id 查询二级分类数据,category1Id:{}", category1Id);
-        if (category1Id == null) {
-            return Result.<List<BaseCategory2>>fail().message("一级分类Id不能为空");
-        }
         List<BaseCategory2> baseCategory2List = manageService.getCategory2(category1Id);
         return Result.ok(baseCategory2List);
     }
@@ -143,11 +143,8 @@ public class BaseManageController {
     @ApiOperation("根据二级分类Id 查询三级分类数据")
     @GetMapping("getCategory3/{category2Id}")
     @ResponseBody
-    public Result<List<BaseCategory3>> getCategory3(@PathVariable("category2Id") Long category2Id) {
+    public Result<List<BaseCategory3>> getCategory3(@PathVariable("category2Id") @NotNull(message = "分类2 ID不能为空") Long category2Id) {
         log.info("根据二级分类Id 查询三级分类数据,category2Id:{}", category2Id);
-        if (category2Id == null) {
-            return Result.<List<BaseCategory3>>fail().message("二级分类Id不能为空");
-        }
         List<BaseCategory3> baseCategory3List = manageService.getCategory3(category2Id);
         return Result.ok(baseCategory3List);
     }
@@ -163,11 +160,13 @@ public class BaseManageController {
     @ApiOperation("根据分类Id 获取平台属性数据")
     @GetMapping("attrInfoList/{category1Id}/{category2Id}/{category3Id}")
     @ResponseBody
-    public Result<List<BaseAttrInfo>> attrInfoList(@PathVariable("category1Id") Long category1Id, @PathVariable("category2Id") Long category2Id, @PathVariable("category3Id") Long category3Id) {
+    public Result<List<BaseAttrInfo>> attrInfoList(
+            @PathVariable("category1Id") @NotNull(message = "分类1 ID不能为空") Long category1Id,
+            @PathVariable("category2Id") @NotNull(message = "分类2 ID不能为空") Long category2Id,
+            @PathVariable("category3Id") @NotNull(message = "分类3 ID不能为空") Long category3Id) {
+
         log.info("根据分类Id 获取平台属性数据,category1Id:{},category2Id:{},category3Id:{}", category1Id, category2Id, category3Id);
-        if (category1Id == null || category2Id == null || category3Id == null) {
-            return Result.<List<BaseAttrInfo>>fail().message("分类Id不能为空");
-        }
+
         List<BaseAttrInfo> baseAttrInfoList = manageService.getAttrInfoList(category1Id, category2Id, category3Id);
         return Result.ok(baseAttrInfoList);
     }
