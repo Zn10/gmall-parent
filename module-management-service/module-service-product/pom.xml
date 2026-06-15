@@ -11,11 +11,6 @@
     <artifactId>module-service-product</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
-            <version>${minio.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.jsoup</groupId>

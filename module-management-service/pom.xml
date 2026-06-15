@@ -88,12 +88,6 @@
             <version>1.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-        </dependency>
-
-
         <!--web 需要启动项目-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -117,11 +111,13 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+
         <!-- 服务配置-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
+
         <!-- 服务调用feign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -132,13 +128,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-
-        <!--开发者工具-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!--链路追踪-->
@@ -152,6 +141,7 @@
             <artifactId>module-common-rabbit-util</artifactId>
             <version>1.0</version>
         </dependency>
+
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
