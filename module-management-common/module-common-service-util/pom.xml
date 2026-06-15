@@ -16,6 +16,7 @@
             <groupId>com.zn</groupId>
             <artifactId>module-common-util</artifactId>
             <version>1.0</version>
+          <scope>compile</scope>
         </dependency>
         <!-- redis -->
         <dependency>

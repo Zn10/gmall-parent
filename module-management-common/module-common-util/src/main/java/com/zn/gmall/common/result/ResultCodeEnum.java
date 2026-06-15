@@ -15,6 +15,7 @@ public enum ResultCodeEnum {
     SERVICE_ERROR(2012, "服务异常"),
     ILLEGAL_REQUEST(204, "非法请求"),
     PAY_RUN(205, "支付中"),
+    INVAILD_PARAM(206, "无效参数"),
 
     LOGIN_AUTH(208, "未登陆"),
     PERMISSION(209, "没有权限"),
