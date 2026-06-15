@@ -24,6 +24,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -49,7 +50,7 @@ public class SeckillGoodsApiController {
     private ProductFeignClient productFeignClient;
     @Autowired
     private RabbitService rabbitService;
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
     @Autowired
     private OrderFeignClient orderFeignClient;

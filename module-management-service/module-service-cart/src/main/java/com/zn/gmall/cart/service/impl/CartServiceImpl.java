@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -39,7 +40,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartInfoMapper cartInfoMapper;
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     @Autowired

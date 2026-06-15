@@ -10,6 +10,11 @@ spring:
                 timeout: 50000
                 namespace: gmall
                 refresh-enabled: true
+                shared-configs:
+                    - data-id: common.yaml
+                      refresh: true
+                    - data-id: ${spring.application.name}.yaml
+                      refresh: true
             discovery:
                 server-addr: gmall-nacos:8848
                 namespace: gmall

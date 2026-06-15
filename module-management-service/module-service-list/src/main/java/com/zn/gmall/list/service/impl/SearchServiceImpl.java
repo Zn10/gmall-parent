@@ -45,6 +45,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -64,7 +65,7 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     private GoodsRepository goodsRepository;
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     @Autowired

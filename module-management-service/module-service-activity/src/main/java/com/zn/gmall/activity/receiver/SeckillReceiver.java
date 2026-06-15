@@ -35,7 +35,7 @@ import java.util.List;
 @SuppressWarnings("all")
 @Component
 public class SeckillReceiver {
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     @Autowired

@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class OrderApiController {
     private CartDegradeFeignClient cartFeignClient;
     @Autowired
     private ProductFeignClient productFeignClient;
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;

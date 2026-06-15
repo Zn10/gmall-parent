@@ -23,6 +23,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -42,7 +43,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
     @Autowired
     private RabbitService rabbitService;

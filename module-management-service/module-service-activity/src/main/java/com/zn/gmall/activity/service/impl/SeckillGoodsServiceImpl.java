@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -32,7 +33,7 @@ import java.util.concurrent.locks.ReentrantLock;
 @Service
 public class SeckillGoodsServiceImpl implements SeckillGoodsService {
 
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
     @Autowired
     private SeckillGoodsMapper seckillGoodsMapper;

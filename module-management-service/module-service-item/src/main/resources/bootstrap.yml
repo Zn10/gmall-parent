@@ -13,7 +13,7 @@ spring:
                 shared-configs:
                 -   data-id: common.yaml
                     refresh: true
-                -   data-id: ${spring.application.name}-@spring.active@.yaml
+                -   data-id: ${spring.application.name}.yaml
                     refresh: true
                 namespace: gmall
             discovery:
