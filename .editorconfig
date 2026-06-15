@@ -1,10 +1,10 @@
-# .editorconfig 文件适用于整个 Flutter 项目
+# .editorconfig 文件适用于整个 JAVA 项目
 root = true
 
 # 通用设置（适用于所有文件类型）
 [*]
 indent_style = space              # 使用空格缩进
-indent_size = 2                   # Flutter 项目通常使用 2 空格缩进
+indent_size = 2                   # JAVA 项目通常使用 2 空格缩进
 charset = utf-8                   # 文件编码为 UTF-8
 end_of_line = lf                  # 换行符使用 LF（适用于跨平台开发）
 trim_trailing_whitespace = true   # 自动移除行尾空白字符
