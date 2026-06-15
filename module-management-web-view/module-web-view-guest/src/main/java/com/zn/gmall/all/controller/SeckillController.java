@@ -3,6 +3,7 @@ package com.zn.gmall.all.controller;
 import com.zn.gmall.activity.ActivityFeignClient;
 import com.zn.gmall.common.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import java.util.Map;
 @Controller
 public class SeckillController {
 
+    @Qualifier("com.zn.gmall.activity.ActivityFeignClient")
     @Autowired
     ActivityFeignClient activityFeignClient;
 

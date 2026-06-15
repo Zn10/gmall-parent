@@ -5,6 +5,7 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.product.client.ProductFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,6 +22,7 @@ import java.util.List;
 @Controller
 @Slf4j
 public class IndexController {
+    @Qualifier("com.zn.gmall.product.client.ProductFeignClient")
     @Autowired
     ProductFeignClient productFeignClient;
 

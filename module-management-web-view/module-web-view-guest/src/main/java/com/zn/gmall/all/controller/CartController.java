@@ -5,6 +5,7 @@ import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.product.SkuInfo;
 import com.zn.gmall.product.client.ProductFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class CartController {
 
+    @Qualifier("com.zn.gmall.cart.client.CartFeignClient")
     @Autowired
     CartFeignClient cartFeignClient;
 
+    @Qualifier("com.zn.gmall.product.client.ProductFeignClient")
     @Autowired
     ProductFeignClient productFeignClient;
 

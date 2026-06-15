@@ -6,6 +6,7 @@ import com.zn.gmall.model.list.SearchParam;
 import com.zn.gmall.model.list.vo.SearchResponseVo;
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -23,6 +24,7 @@ import java.util.Map;
 @Controller
 public class ListController {
 
+    @Qualifier("com.zn.gmall.list.client.ListFeignClient")
     @Autowired
     ListFeignClient listFeignClient;
 
