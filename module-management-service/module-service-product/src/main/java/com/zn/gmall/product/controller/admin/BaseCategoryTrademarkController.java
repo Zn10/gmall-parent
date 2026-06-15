@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -52,11 +53,8 @@ public class BaseCategoryTrademarkController {
     @ApiOperation("删除关联")
     @DeleteMapping("remove/{category3Id}/{trademarkId}")
     @ResponseBody
-    public Result<Void> remove(@PathVariable Long category3Id, @PathVariable Long trademarkId) {
+    public Result<Void> remove(@PathVariable @NotNull(message = "三级分类id不能为空") Long category3Id, @PathVariable @NotNull(message = "品牌关联ID不能为空") Long trademarkId) {
         log.info("删除关联:category3Id:{},trademarkId:{}", category3Id, trademarkId);
-        if (category3Id == null || trademarkId == null) {
-            return Result.<Void>fail().message("品牌id/三级分类id不能为空");
-        }
         //  调用服务层方法
         baseCategoryTrademarkService.remove(category3Id, trademarkId);
         return Result.ok();
@@ -71,11 +69,8 @@ public class BaseCategoryTrademarkController {
     @ApiOperation("根据三级分类获取品牌")
     @GetMapping("findTrademarkList/{category3Id}")
     @ResponseBody
-    public Result<List<BaseTrademark>> findTrademarkList(@PathVariable Long category3Id) {
+    public Result<List<BaseTrademark>> findTrademarkList(@PathVariable @NotNull(message = "三级分类id不能为空") Long category3Id) {
         log.info("根据三级分类获取品牌:category3Id:{}", category3Id);
-        if (category3Id == null) {
-            return Result.<List<BaseTrademark>>fail().message("三级分类id不能为空");
-        }
         //  select * from base_trademark
         List<BaseTrademark> list = baseCategoryTrademarkService.findTrademarkList(category3Id);
         //  返回
@@ -91,11 +86,8 @@ public class BaseCategoryTrademarkController {
     @ApiOperation("获取当前未被三级分类关联的所有品牌")
     @GetMapping("findCurrentTrademarkList/{category3Id}")
     @ResponseBody
-    public Result<List<BaseTrademark>> findCurrentTrademarkList(@PathVariable Long category3Id) {
+    public Result<List<BaseTrademark>> findCurrentTrademarkList(@PathVariable @NotNull(message = "三级分类id不能为空") Long category3Id) {
         log.info("获取当前未被三级分类关联的所有品牌:category3Id:{}", category3Id);
-        if (category3Id == null) {
-            return Result.<List<BaseTrademark>>fail().message("三级分类id不能为空");
-        }
         List<BaseTrademark> list = baseCategoryTrademarkService.findCurrentTrademarkList(category3Id);
         //  返回
         return Result.ok(list);

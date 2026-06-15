@@ -55,11 +55,8 @@ public class BaseManageController {
     @ApiOperation("根据attrId 查询平台属性对象")
     @GetMapping("getAttrValueList/{attrId}")
     @ResponseBody
-    public Result<List<BaseAttrValue>> getAttrValueList(@PathVariable("attrId") Long attrId) {
+    public Result<List<BaseAttrValue>> getAttrValueList(@PathVariable("attrId") @NotNull(message = "属性 ID不能为空") Long attrId) {
         log.info("根据属性id 查询平台属性对象,attrId:{}", attrId);
-        if (attrId == null) {
-            return Result.<List<BaseAttrValue>>fail().message("属性id不能为空");
-        }
         BaseAttrInfo baseAttrInfo = manageService.getAttrInfo(attrId);
         List<BaseAttrValue> baseAttrValueList = null;
         if (baseAttrInfo != null) {
@@ -77,11 +74,8 @@ public class BaseManageController {
     @ApiOperation("根据attrId，删除属性和属性值")
     @DeleteMapping("remove/{attrId}")
     @ResponseBody
-    public Result<Void> remove(@PathVariable Long attrId) {
+    public Result<Void> remove(@PathVariable @NotNull(message = "属性ID不能为空") Long attrId) {
         log.info("删除关联:attrId:{}", attrId);
-        if (attrId == null) {
-            return Result.<Void>fail().message("属性id不能为空");
-        }
         //  调用服务层方法
         manageService.remove(attrId);
         return Result.ok();
@@ -97,9 +91,6 @@ public class BaseManageController {
     @ResponseBody
     public Result<Void> saveAttrInfo(@RequestBody BaseAttrInfo baseAttrInfo) {
         log.info("保存平台属性,baseAttrInfo:{}", baseAttrInfo);
-        if (baseAttrInfo == null) {
-            return Result.<Void>fail().message("参数不能为空");
-        }
         // 前台数据都被封装到该对象中baseAttrInfo
         manageService.saveAttrInfo(baseAttrInfo);
         return Result.ok();

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -36,11 +37,8 @@ public class ProductApiController {
      */
     @ApiOperation("通过tmId，查询品牌数据")
     @GetMapping("/getTrademark/{tmId}")
-    public Result<BaseTrademark> getTrademarkById(@PathVariable("tmId") Long tmId) {
+    public Result<BaseTrademark> getTrademarkById(@PathVariable("tmId") @NotNull(message = "品牌id不能为空") Long tmId) {
         log.info("通过品牌Id 集合来查询数据,{}", tmId);
-        if (tmId == null) {
-            return Result.<BaseTrademark>fail().message("品牌Id不能为空");
-        }
         BaseTrademark baseTrademark = baseTrademarkService.getById(tmId);
         return Result.ok(baseTrademark);
     }
@@ -63,11 +61,8 @@ public class ProductApiController {
      */
     @ApiOperation("通过skuId 集合来查询数据")
     @GetMapping("/inner/getAttrList/{skuId}")
-    public Result<List<BaseAttrInfo>> getAttrList(@PathVariable("skuId") Long skuId) {
+    public Result<List<BaseAttrInfo>> getAttrList(@PathVariable("skuId") @NotNull(message = "SKUID不能为空") Long skuId) {
         log.info("通过skuId 集合来查询数据,{}", skuId);
-        if (skuId == null) {
-            return Result.<List<BaseAttrInfo>>fail().message("skuId不能为空");
-        }
         List<BaseAttrInfo> attrList = manageService.getAttrList(skuId);
         return Result.ok(attrList);
     }
@@ -80,11 +75,8 @@ public class ProductApiController {
      */
     @ApiOperation("根据spuId 获取海报数据")
     @GetMapping("/inner/findSpuPosterBySpuId/{spuId}")
-    public Result<List<SpuPoster>> findSpuPosterBySpuId(@PathVariable Long spuId) {
+    public Result<List<SpuPoster>> findSpuPosterBySpuId(@PathVariable @NotNull(message = "SPUID不能为空") Long spuId) {
         log.info("根据spuId 获取海报数据,{}", spuId);
-        if (spuId == null) {
-            return Result.<List<SpuPoster>>fail().message("spuId不能为空");
-        }
         List<SpuPoster> spuPosterBySpuId = manageService.findSpuPosterBySpuId(spuId);
         return Result.ok(spuPosterBySpuId);
     }
@@ -97,11 +89,8 @@ public class ProductApiController {
      */
     @ApiOperation("根据skuId 查询价格")
     @GetMapping("/inner/getPrice/{skuId}")
-    public Result<BigDecimal> getSkuPrice(@PathVariable Long skuId) {
+    public Result<BigDecimal> getSkuPrice(@PathVariable @NotNull(message = "SKUID不能为空") Long skuId) {
         log.info("根据skuId 获取价格,{}", skuId);
-        if (skuId == null) {
-            return Result.<BigDecimal>fail().message("skuId不能为空");
-        }
         BigDecimal price = manageService.getSkuPrice(skuId);
         return Result.ok(price);
     }
@@ -113,11 +102,8 @@ public class ProductApiController {
      */
     @ApiOperation("根据spuId 查询map 集合属性")
     @GetMapping("/inner/getSkuValueIdsMap/{spuId}")
-    public Result<Map<Object, Object>> getSkuValueIdsMap(@PathVariable("spuId") Long spuId) {
+    public Result<Map<Object, Object>> getSkuValueIdsMap(@PathVariable("spuId") @NotNull(message = "SPUID不能为空") Long spuId) {
         log.info("根据spuId 查询map 集合属性,{}", spuId);
-        if (spuId == null) {
-            return Result.<Map<Object, Object>>fail().message("spuId不能为空");
-        }
         Map<Object, Object> skuValueIdsMap = manageService.getSkuValueIdsMap(spuId);
         return Result.ok(skuValueIdsMap);
     }
@@ -131,11 +117,8 @@ public class ProductApiController {
      */
     @ApiOperation("根据spuId，skuId 查询销售属性集合")
     @GetMapping("/inner/getSpuSaleAttrListCheckBySku/{skuId}/{spuId}")
-    public Result<List<SpuSaleAttr>> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") Long skuId, @PathVariable("spuId") Long spuId) {
+    public Result<List<SpuSaleAttr>> getSpuSaleAttrListCheckBySku(@PathVariable("skuId") @NotNull(message = "SkUID不能为空") Long skuId, @PathVariable("spuId") @NotNull(message = "SPUID不能为空") Long spuId) {
         log.info("根据spuId，skuId 查询销售属性集合,{},{}", skuId, spuId);
-        if (skuId == null || spuId == null) {
-            return Result.<List<SpuSaleAttr>>fail().message("skuId或spuId不能为空");
-        }
         List<SpuSaleAttr> spuSaleAttrListCheckBySku = manageService.getSpuSaleAttrListCheckBySku(skuId, spuId);
         return Result.ok(spuSaleAttrListCheckBySku);
     }
@@ -148,11 +131,8 @@ public class ProductApiController {
      */
     @ApiOperation("根据skuId获取sku信息")
     @GetMapping("/inner/getSkuInfo/{skuId}")
-    public Result<SkuInfo> getAttrValueList(@PathVariable("skuId") Long skuId) {
+    public Result<SkuInfo> getAttrValueList(@PathVariable("skuId") @NotNull(message = "SKUID不能为空") Long skuId) {
         log.info("根据skuId获取sku信息,{}", skuId);
-        if (skuId == null) {
-            return Result.<SkuInfo>fail().message("skuId不能为空");
-        }
         SkuInfo skuInfo = manageService.getSkuInfo(skuId);
         return Result.ok(skuInfo);
     }
@@ -165,11 +145,8 @@ public class ProductApiController {
      */
     @ApiOperation("通过三级分类id查询分类信息")
     @GetMapping("/inner/getCategoryView/{category3Id}")
-    public Result<BaseCategoryView> getCategoryView(@PathVariable("category3Id") Long category3Id) {
+    public Result<BaseCategoryView> getCategoryView(@PathVariable("category3Id") @NotNull(message = "三级分类id不能为空") Long category3Id) {
         log.info("通过三级分类id查询分类信息,{}", category3Id);
-        if (category3Id == null) {
-            return Result.<BaseCategoryView>fail().message("category3Id不能为空");
-        }
         BaseCategoryView baseCategoryView = manageService.getCategoryViewByCategory3Id(category3Id);
         return Result.ok(baseCategoryView);
     }

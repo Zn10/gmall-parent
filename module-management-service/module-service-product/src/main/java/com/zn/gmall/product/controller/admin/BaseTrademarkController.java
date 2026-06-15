@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -66,11 +67,8 @@ public class BaseTrademarkController {
     @ApiOperation(value = "根据品牌id查询该品牌")
     @GetMapping("get/{id}")
     @ResponseBody
-    public Result<BaseTrademark> get(@PathVariable String id) {
+    public Result<BaseTrademark> get(@PathVariable @NotNull(message = "品牌id不能为空") String id) {
         log.info("根据品牌id查询该品牌: id: {}", id);
-        if (id == null) {
-            return Result.<BaseTrademark>fail().message("品牌id不能为空");
-        }
         BaseTrademark baseTrademark = baseTrademarkService.getById(id);
         return Result.ok(baseTrademark);
     }
@@ -102,9 +100,6 @@ public class BaseTrademarkController {
     @ResponseBody
     public Result<Void> updateById(@RequestBody BaseTrademark banner) {
         log.info("更新品牌: BaseTrademark: {}", banner);
-        if (banner.getId() == null) {
-            return Result.<Void>fail().message("品牌id不能为空");
-        }
         baseTrademarkService.updateById(banner);
         return Result.ok();
     }
@@ -117,11 +112,8 @@ public class BaseTrademarkController {
     @ApiOperation(value = "根据品牌id删除品牌")
     @GetMapping("remove/{id}")
     @ResponseBody
-    public Result<Void> remove(@PathVariable Long id) {
+    public Result<Void> remove(@PathVariable @NotNull(message = "品牌id不能为空") Long id) {
         log.info("根据品牌id删除品牌: id: {}", id);
-        if (id == null) {
-            return Result.<Void>fail().message("品牌id不能为空");
-        }
         baseTrademarkService.removeById(id);
         return Result.ok();
     }

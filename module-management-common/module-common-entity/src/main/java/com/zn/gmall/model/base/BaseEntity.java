@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.internal.NotNull;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class BaseEntity implements Serializable {
 
     @ApiModelProperty(value = "id")
     @TableId(type = IdType.AUTO)
+    @NotNull
     private Long id;
 
     @ApiModelProperty(value = "创建时间")

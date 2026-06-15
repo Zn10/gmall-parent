@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -36,11 +37,8 @@ public class SkuManageController {
     @ApiOperation("根据skuid，进行商品上架")
     @GetMapping("onSale/{skuId}")
     @ResponseBody
-    public Result<Void> onSale(@PathVariable("skuId") Long skuId) {
+    public Result<Void> onSale(@PathVariable("skuId") @NotNull(message = "SKUID不能为空") Long skuId) {
         log.info("商品上架,商品id,{}", skuId);
-        if (skuId == null) {
-            return Result.<Void>fail().message("商品id不能为空");
-        }
         manageService.onSale(skuId);
         return Result.ok();
     }
@@ -53,11 +51,8 @@ public class SkuManageController {
     @ApiOperation("根据skuid，进行商品下架")
     @GetMapping("cancelSale/{skuId}")
     @ResponseBody
-    public Result<Void> cancelSale(@PathVariable("skuId") Long skuId) {
+    public Result<Void> cancelSale(@PathVariable("skuId") @NotNull(message = "SKUID不能为空") Long skuId) {
         log.info("商品下架,商品id,{}", skuId);
-        if (skuId == null) {
-            return Result.<Void>fail().message("商品id不能为空");
-        }
         manageService.cancelSale(skuId);
         return Result.ok();
     }
@@ -89,11 +84,8 @@ public class SkuManageController {
     @ApiOperation("根据spuId 查询销售属性集合")
     @GetMapping("spuSaleAttrList/{spuId}")
     @ResponseBody
-    public Result<List<SpuSaleAttr>> getSpuSaleAttrList(@PathVariable("spuId") Long spuId) {
+    public Result<List<SpuSaleAttr>> getSpuSaleAttrList(@PathVariable("spuId") @NotNull(message = "SPUID不能为空") Long spuId) {
         log.info("根据spuId 查询销售属性集合:{}", spuId);
-        if (spuId == null) {
-            return Result.<List<SpuSaleAttr>>fail().message("spuId不能为空");
-        }
         List<SpuSaleAttr> spuSaleAttrList = manageService.getSpuSaleAttrList(spuId);
         return Result.ok(spuSaleAttrList);
     }
@@ -107,11 +99,8 @@ public class SkuManageController {
     @ApiOperation("根据spuId 查询spuImageList")
     @GetMapping("spuImageList/{spuId}")
     @ResponseBody
-    public Result<List<SpuImage>> getSpuImageList(@PathVariable("spuId") Long spuId) {
+    public Result<List<SpuImage>> getSpuImageList(@PathVariable("spuId") @NotNull(message = "SPUID不能为空") Long spuId) {
         log.info("根据spuId 查询spuImageList:{}", spuId);
-        if (spuId == null) {
-            return Result.<List<SpuImage>>fail().message("spuId不能为空");
-        }
         List<SpuImage> spuImageList = manageService.getSpuImageList(spuId);
         return Result.ok(spuImageList);
     }
