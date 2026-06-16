@@ -43,7 +43,7 @@ public class ListReceiver {
                 searchService.upperGoods(skuId);
             }
         } catch (Exception e) {
-            //  写入日志或将这条消息写入数据库，短信接口
+            //todo  写入日志或将这条消息写入数据库，短信接口
             e.printStackTrace();
         }
         //  确认消费者消费消息！
@@ -66,7 +66,7 @@ public class ListReceiver {
                 searchService.lowerGoods(skuId);
             }
         } catch (Exception e) {
-            //  写入日志或将这条消息写入数据库，短信接口
+            //todo  写入日志或将这条消息写入数据库，短信接口
             e.printStackTrace();
         }
         //  消息确认
