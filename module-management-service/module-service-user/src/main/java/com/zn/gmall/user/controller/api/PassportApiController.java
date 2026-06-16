@@ -40,9 +40,6 @@ public class PassportApiController {
     @PostMapping("/logout")
     public Result<Void> logout(@RequestHeader("token") String token) {
         log.info("用户退出登录，token:{}", token);
-        if (token == null) {
-            return Result.<Void>fail().message("用户token为空，退出登录失败");
-        }
         // 用户是否登录，以 Redis 中保存的 token 为准
         // 所以执行退出登录，就删除 Redis 的 token
         String tokenKey = RedisConst.USER_LOGIN_KEY_PREFIX + token;
@@ -55,9 +52,6 @@ public class PassportApiController {
     public Result<Map<String, String>> login(
             @RequestBody UserInfo userInfo, HttpServletRequest request) {
         log.info("用户登录，用户信息:{}", userInfo);
-        if (userInfo == null) {
-            return Result.<Map<String, String>>fail().message("用户信息为空，登录失败");
-        }
 
         // 1、调用 Service 方法验证用户名密码
         UserInfo userInfoLogin = userService.login(userInfo);

@@ -32,9 +32,6 @@ public class UserApiController {
     @GetMapping("inner/findUserAddressListByUserId/{userId}")
     public Result<List<UserAddress>> findUserAddressListByUserId(@PathVariable("userId") String userId) {
         log.info("获取用户地址，用户id：{}", userId);
-        if (userId == null) {
-            return Result.<List<UserAddress>>fail().message("用户id不能为空");
-        }
         List<UserAddress> userAddressList = userAddressService.findUserAddressListByUserId(userId);
         return Result.ok(userAddressList);
     }
