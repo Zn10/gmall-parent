@@ -21,7 +21,16 @@ import java.util.Map;
 @Slf4j
 public class GlobalExceptionHandler {
 
+
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public Result<String> handleNullPointerException(NullPointerException e) {
+        log.error("全局空指针异常", e);
+        return Result.fail(e.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
     public Result handleMethodArgumentNotValidException(MethodArgumentNotValidException exception){
 
         //1、从这个异常中拿到校验结果
