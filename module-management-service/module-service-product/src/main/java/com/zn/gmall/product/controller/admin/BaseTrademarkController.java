@@ -96,7 +96,7 @@ public class BaseTrademarkController {
      * @param banner 品牌实例
      */
     @ApiOperation(value = "更新品牌")
-    @PostMapping("update")
+    @RequestMapping(value = "update", method = {RequestMethod.POST, RequestMethod.PUT})
     @ResponseBody
     public Result<Void> updateById(@RequestBody BaseTrademark banner) {
         log.info("更新品牌: BaseTrademark: {}", banner);
