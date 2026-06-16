@@ -2,6 +2,7 @@ package com.zn.gmall.list.client;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.list.SearchParam;
+import com.zn.gmall.model.list.vo.SearchResponseVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public interface ListFeignClient {
 
     @RequestMapping("/api/list/do/search")
-    Result list(@RequestBody SearchParam searchParam) throws Throwable;
+    Result<SearchResponseVo> list(@RequestBody SearchParam searchParam) throws Throwable;
 
     @RequestMapping("/api/list/inner/import/sku/to/elastic/search/{skuId}")
     Result<Void> importSkuToElasticSearch(@PathVariable("skuId") Long skuId);

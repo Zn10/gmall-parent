@@ -33,7 +33,7 @@ public class ListController {
     public String doSearch(SearchParam searchParam, Model model) throws Throwable {
 
         // 1、调用远程接口获取搜索结果数据
-        SearchResponseVo searchResponseVo = (SearchResponseVo) listFeignClient.list(searchParam).getData();
+        SearchResponseVo searchResponseVo = listFeignClient.list(searchParam).getData();
 
         // 2、把搜索结果数据转换为 Map
         String jsonSearchResponseVo = JSONObject.toJSONString(searchResponseVo);

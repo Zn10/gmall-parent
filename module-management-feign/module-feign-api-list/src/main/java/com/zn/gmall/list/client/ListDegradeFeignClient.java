@@ -2,6 +2,7 @@ package com.zn.gmall.list.client;
 
 import com.zn.gmall.common.result.Result;
 import com.zn.gmall.model.list.SearchParam;
+import com.zn.gmall.model.list.vo.SearchResponseVo;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ListDegradeFeignClient implements ListFeignClient {
     @Override
-    public Result list(SearchParam searchParam) throws Throwable {
-        Result<Void> result = Result.fail();
+    public Result<SearchResponseVo> list(SearchParam searchParam) throws Throwable {
+        Result result = Result.fail();
         result.message("服务降级了");
         return result;
     }
