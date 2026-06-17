@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "minio")
 @Data
 public class MinioProperties {
+    private Boolean enable = false;
     private String endpointUrl;
     private String accessKey;
     private String secreKey;

@@ -1,20 +1,26 @@
 package com.zn.gmall.common.config.minio;
 
 import io.minio.MinioClient;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties(MinioProperties.class)
+@ConditionalOnClass(MinioClient.class)
+@ConditionalOnProperty(prefix = "minio", name = "enable", havingValue = "true", matchIfMissing = false)
 public class MinioAutoConfiguration {
+    private final MinioProperties minioProperties;
+
+    public MinioAutoConfiguration(MinioProperties minioProperties) {
+        this.minioProperties = minioProperties;
+    }
 
     @Bean
-    public MinioClient minioClient(@Qualifier("minio-com.zn.gmall.common.config.minio.MinioProperties") MinioProperties properties) throws Exception {
+    public MinioClient minioClient(MinioProperties properties) throws Exception {
         return MinioClient.builder()
-                .endpoint(properties.getEndpointUrl())
-                .credentials(properties.getAccessKey(), properties.getSecreKey())
-                .build();
+            .endpoint(properties.getEndpointUrl())
+            .credentials(properties.getAccessKey(), properties.getSecreKey())
+            .build();
     }
 }
